@@ -1,0 +1,639 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		40226DA92940CE4D00E9489D /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40226DA82940CE4C00E9489D /* NavView.swift */; };
+		40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40226DAA2940DEA500E9489D /* AddBranchViewController.swift */; };
+		4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023A957292D45D5007FD5D5 /* AppDelegate.swift */; };
+		4023A95A292D45D5007FD5D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023A959292D45D5007FD5D5 /* SceneDelegate.swift */; };
+		4023A961292D45D7007FD5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4023A960292D45D7007FD5D5 /* Assets.xcassets */; };
+		4023A964292D45D7007FD5D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4023A962292D45D7007FD5D5 /* LaunchScreen.storyboard */; };
+		4023A96C292D4627007FD5D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4023A96B292D4627007FD5D5 /* GoogleService-Info.plist */; };
+		4023A96E292D4D24007FD5D5 /* English.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4023A96D292D4D24007FD5D5 /* English.strings */; };
+		4023A970292D4D3B007FD5D5 /* Russian.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4023A96F292D4D3B007FD5D5 /* Russian.strings */; };
+		4023A972292D4D48007FD5D5 /* Uzbek.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4023A971292D4D48007FD5D5 /* Uzbek.strings */; };
+		4037170D2941FE9E0053CCF2 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037170C2941FE9E0053CCF2 /* TextField.swift */; };
+		4037170F294200B50053CCF2 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037170E294200B50053CCF2 /* Button.swift */; };
+		4037171129421BDF0053CCF2 /* BranchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037171029421BDF0053CCF2 /* BranchViewController.swift */; };
+		40371717294222350053CCF2 /* TeacherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40371716294222350053CCF2 /* TeacherViewController.swift */; };
+		4037171D294229F70053CCF2 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037171C294229F70053CCF2 /* GroupViewController.swift */; };
+		4037171F29422B320053CCF2 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037171E29422B320053CCF2 /* ListTableViewCell.swift */; };
+		4037172329422FC90053CCF2 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037172229422FC90053CCF2 /* AddViewController.swift */; };
+		40371725294233A40053CCF2 /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40371724294233A40053CCF2 /* StudentListViewController.swift */; };
+		406996FC292F6D3E00090507 /* AuthUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FB292F6D3E00090507 /* AuthUserViewController.swift */; };
+		406996FE292F77DE00090507 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FD292F77DE00090507 /* UITextField.swift */; };
+		4088F962292E779F0006614C /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088F961292E779F0006614C /* FirebaseManager.swift */; };
+		40C9DE39293DF32E00CC4BFA /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE38293DF32E00CC4BFA /* MainTabViewController.swift */; };
+		40C9DE3B293DF6A700CC4BFA /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */; };
+		40C9DE3E293DFAAA00CC4BFA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE3D293DFAAA00CC4BFA /* MainViewController.swift */; };
+		40C9DE40293DFAB500CC4BFA /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE3F293DFAB500CC4BFA /* PaymentViewController.swift */; };
+		40C9DE42293DFABF00CC4BFA /* StudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE41293DFABF00CC4BFA /* StudentsViewController.swift */; };
+		40C9DE44293DFAC800CC4BFA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE43293DFAC800CC4BFA /* SettingsViewController.swift */; };
+		40D2977C29423AF20084D579 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D2977B29423AF20084D579 /* Database.swift */; };
+		40D2977E294240B10084D579 /* MonthlyPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */; };
+		40FE3789292E1A290012706F /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE3788292E1A290012706F /* UserViewController.swift */; };
+		40FE378B292E1AF50012706F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378A292E1AF50012706F /* BaseViewController.swift */; };
+		40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378C292E26BD0012706F /* PasswordViewController.swift */; };
+		40FE3795292E4DAB0012706F /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE3794292E4DAB0012706F /* UIDevice.swift */; };
+		F19C06A60EEE8D1FD60DF186 /* Pods_Express_IELTS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B534BC954900D6483140CBE /* Pods_Express_IELTS.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		40226DA82940CE4C00E9489D /* NavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
+		40226DAA2940DEA500E9489D /* AddBranchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBranchViewController.swift; sourceTree = "<group>"; };
+		4023A954292D45D4007FD5D5 /* Express IELTS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Express IELTS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4023A957292D45D5007FD5D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4023A959292D45D5007FD5D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		4023A960292D45D7007FD5D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4023A963292D45D7007FD5D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4023A965292D45D7007FD5D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4023A96B292D4627007FD5D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4023A96D292D4D24007FD5D5 /* English.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = English.strings; sourceTree = "<group>"; };
+		4023A96F292D4D3B007FD5D5 /* Russian.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Russian.strings; sourceTree = "<group>"; };
+		4023A971292D4D48007FD5D5 /* Uzbek.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Uzbek.strings; sourceTree = "<group>"; };
+		4037170C2941FE9E0053CCF2 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		4037170E294200B50053CCF2 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		4037171029421BDF0053CCF2 /* BranchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchViewController.swift; sourceTree = "<group>"; };
+		40371716294222350053CCF2 /* TeacherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherViewController.swift; sourceTree = "<group>"; };
+		4037171C294229F70053CCF2 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
+		4037171E29422B320053CCF2 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		4037172229422FC90053CCF2 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		40371724294233A40053CCF2 /* StudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
+		406996FB292F6D3E00090507 /* AuthUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserViewController.swift; sourceTree = "<group>"; };
+		406996FD292F77DE00090507 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		4088F961292E779F0006614C /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		40C9DE38293DF32E00CC4BFA /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
+		40C9DE3D293DFAAA00CC4BFA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		40C9DE3F293DFAB500CC4BFA /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		40C9DE41293DFABF00CC4BFA /* StudentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsViewController.swift; sourceTree = "<group>"; };
+		40C9DE43293DFAC800CC4BFA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		40D2977B29423AF20084D579 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPaymentViewController.swift; sourceTree = "<group>"; };
+		40FE3788292E1A290012706F /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		40FE378A292E1AF50012706F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		40FE378C292E26BD0012706F /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		40FE3794292E4DAB0012706F /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		9B534BC954900D6483140CBE /* Pods_Express_IELTS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Express_IELTS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4DEC3821F68C64C920B57DB /* Pods-Express IELTS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Express IELTS.release.xcconfig"; path = "Target Support Files/Pods-Express IELTS/Pods-Express IELTS.release.xcconfig"; sourceTree = "<group>"; };
+		F6C83EB19D0501A21968ECA5 /* Pods-Express IELTS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Express IELTS.debug.xcconfig"; path = "Target Support Files/Pods-Express IELTS/Pods-Express IELTS.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4023A951292D45D4007FD5D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F19C06A60EEE8D1FD60DF186 /* Pods_Express_IELTS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		40226DA72940CE0A00E9489D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */,
+				40226DA82940CE4C00E9489D /* NavView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		40226DAC2940E0D800E9489D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4037171E29422B320053CCF2 /* ListTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		4023A94B292D45D4007FD5D5 = {
+			isa = PBXGroup;
+			children = (
+				4023A956292D45D5007FD5D5 /* Express IELTS */,
+				4023A955292D45D4007FD5D5 /* Products */,
+				DBCB7B8E31F2C5D998A83612 /* Pods */,
+				A016E43FBEDFCEED1D715BB5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4023A955292D45D4007FD5D5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4023A954292D45D4007FD5D5 /* Express IELTS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4023A956292D45D5007FD5D5 /* Express IELTS */ = {
+			isa = PBXGroup;
+			children = (
+				40FE378E292E34970012706F /* Models */,
+				40FE3790292E34A50012706F /* ViewControllers */,
+				40FE378F292E349F0012706F /* Protocols */,
+				40FE3793292E4D960012706F /* Extensions */,
+				4088F960292E77860006614C /* FireBase */,
+				4023A965292D45D7007FD5D5 /* Info.plist */,
+				4023A96B292D4627007FD5D5 /* GoogleService-Info.plist */,
+				40FE3792292E34E70012706F /* AppConfigs */,
+				40FE3791292E34CC0012706F /* Localization */,
+			);
+			path = "Express IELTS";
+			sourceTree = "<group>";
+		};
+		4037170A2941FE750053CCF2 /* Customs */ = {
+			isa = PBXGroup;
+			children = (
+				4037170B2941FE850053CCF2 /* TextFiels */,
+				40226DAC2940E0D800E9489D /* Cells */,
+				40226DA72940CE0A00E9489D /* Views */,
+			);
+			path = Customs;
+			sourceTree = "<group>";
+		};
+		4037170B2941FE850053CCF2 /* TextFiels */ = {
+			isa = PBXGroup;
+			children = (
+				4037170C2941FE9E0053CCF2 /* TextField.swift */,
+				4037170E294200B50053CCF2 /* Button.swift */,
+			);
+			path = TextFiels;
+			sourceTree = "<group>";
+		};
+		4088F960292E77860006614C /* FireBase */ = {
+			isa = PBXGroup;
+			children = (
+				4088F961292E779F0006614C /* FirebaseManager.swift */,
+			);
+			path = FireBase;
+			sourceTree = "<group>";
+		};
+		40C9DE37293DF2C600CC4BFA /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				40FE3788292E1A290012706F /* UserViewController.swift */,
+				40FE378C292E26BD0012706F /* PasswordViewController.swift */,
+				406996FB292F6D3E00090507 /* AuthUserViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		40C9DE3C293DFA9200CC4BFA /* TabViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				40C9DE3D293DFAAA00CC4BFA /* MainViewController.swift */,
+				40C9DE3F293DFAB500CC4BFA /* PaymentViewController.swift */,
+				40C9DE41293DFABF00CC4BFA /* StudentsViewController.swift */,
+				40C9DE43293DFAC800CC4BFA /* SettingsViewController.swift */,
+			);
+			path = TabViewControllers;
+			sourceTree = "<group>";
+		};
+		40FE378E292E34970012706F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		40FE378F292E349F0012706F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		40FE3790292E34A50012706F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				40C9DE37293DF2C600CC4BFA /* Auth */,
+				40C9DE3C293DFA9200CC4BFA /* TabViewControllers */,
+				4037170A2941FE750053CCF2 /* Customs */,
+				40FE378A292E1AF50012706F /* BaseViewController.swift */,
+				40C9DE38293DF32E00CC4BFA /* MainTabViewController.swift */,
+				40226DAA2940DEA500E9489D /* AddBranchViewController.swift */,
+				4037171029421BDF0053CCF2 /* BranchViewController.swift */,
+				40371716294222350053CCF2 /* TeacherViewController.swift */,
+				4037171C294229F70053CCF2 /* GroupViewController.swift */,
+				4037172229422FC90053CCF2 /* AddViewController.swift */,
+				40371724294233A40053CCF2 /* StudentListViewController.swift */,
+				40D2977B29423AF20084D579 /* Database.swift */,
+				40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		40FE3791292E34CC0012706F /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				4023A96D292D4D24007FD5D5 /* English.strings */,
+				4023A96F292D4D3B007FD5D5 /* Russian.strings */,
+				4023A971292D4D48007FD5D5 /* Uzbek.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		40FE3792292E34E70012706F /* AppConfigs */ = {
+			isa = PBXGroup;
+			children = (
+				4023A957292D45D5007FD5D5 /* AppDelegate.swift */,
+				4023A959292D45D5007FD5D5 /* SceneDelegate.swift */,
+				4023A960292D45D7007FD5D5 /* Assets.xcassets */,
+				4023A962292D45D7007FD5D5 /* LaunchScreen.storyboard */,
+			);
+			path = AppConfigs;
+			sourceTree = "<group>";
+		};
+		40FE3793292E4D960012706F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				40FE3794292E4DAB0012706F /* UIDevice.swift */,
+				406996FD292F77DE00090507 /* UITextField.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A016E43FBEDFCEED1D715BB5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B534BC954900D6483140CBE /* Pods_Express_IELTS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DBCB7B8E31F2C5D998A83612 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F6C83EB19D0501A21968ECA5 /* Pods-Express IELTS.debug.xcconfig */,
+				C4DEC3821F68C64C920B57DB /* Pods-Express IELTS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4023A953292D45D4007FD5D5 /* Express IELTS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4023A968292D45D7007FD5D5 /* Build configuration list for PBXNativeTarget "Express IELTS" */;
+			buildPhases = (
+				9AEDC60911A878316EFF2C23 /* [CP] Check Pods Manifest.lock */,
+				4023A950292D45D4007FD5D5 /* Sources */,
+				4023A951292D45D4007FD5D5 /* Frameworks */,
+				4023A952292D45D4007FD5D5 /* Resources */,
+				AA5222AAC10F87AAC59BC761 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Express IELTS";
+			productName = "Express IELTS";
+			productReference = 4023A954292D45D4007FD5D5 /* Express IELTS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4023A94C292D45D4007FD5D5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					4023A953292D45D4007FD5D5 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 4023A94F292D45D4007FD5D5 /* Build configuration list for PBXProject "Express IELTS" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4023A94B292D45D4007FD5D5;
+			productRefGroup = 4023A955292D45D4007FD5D5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4023A953292D45D4007FD5D5 /* Express IELTS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4023A952292D45D4007FD5D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4023A972292D4D48007FD5D5 /* Uzbek.strings in Resources */,
+				4023A964292D45D7007FD5D5 /* LaunchScreen.storyboard in Resources */,
+				4023A96C292D4627007FD5D5 /* GoogleService-Info.plist in Resources */,
+				4023A970292D4D3B007FD5D5 /* Russian.strings in Resources */,
+				4023A96E292D4D24007FD5D5 /* English.strings in Resources */,
+				4023A961292D45D7007FD5D5 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9AEDC60911A878316EFF2C23 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Express IELTS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA5222AAC10F87AAC59BC761 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Express IELTS/Pods-Express IELTS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Express IELTS/Pods-Express IELTS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Express IELTS/Pods-Express IELTS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4023A950292D45D4007FD5D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40371725294233A40053CCF2 /* StudentListViewController.swift in Sources */,
+				40C9DE3B293DF6A700CC4BFA /* TabItemView.swift in Sources */,
+				40C9DE40293DFAB500CC4BFA /* PaymentViewController.swift in Sources */,
+				4037172329422FC90053CCF2 /* AddViewController.swift in Sources */,
+				40D2977E294240B10084D579 /* MonthlyPaymentViewController.swift in Sources */,
+				4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */,
+				40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */,
+				40FE3795292E4DAB0012706F /* UIDevice.swift in Sources */,
+				40C9DE3E293DFAAA00CC4BFA /* MainViewController.swift in Sources */,
+				406996FE292F77DE00090507 /* UITextField.swift in Sources */,
+				4088F962292E779F0006614C /* FirebaseManager.swift in Sources */,
+				40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */,
+				40226DA92940CE4D00E9489D /* NavView.swift in Sources */,
+				40C9DE44293DFAC800CC4BFA /* SettingsViewController.swift in Sources */,
+				4037170D2941FE9E0053CCF2 /* TextField.swift in Sources */,
+				40C9DE39293DF32E00CC4BFA /* MainTabViewController.swift in Sources */,
+				40FE378B292E1AF50012706F /* BaseViewController.swift in Sources */,
+				40FE3789292E1A290012706F /* UserViewController.swift in Sources */,
+				40371717294222350053CCF2 /* TeacherViewController.swift in Sources */,
+				4037171D294229F70053CCF2 /* GroupViewController.swift in Sources */,
+				4037170F294200B50053CCF2 /* Button.swift in Sources */,
+				4023A95A292D45D5007FD5D5 /* SceneDelegate.swift in Sources */,
+				4037171F29422B320053CCF2 /* ListTableViewCell.swift in Sources */,
+				4037171129421BDF0053CCF2 /* BranchViewController.swift in Sources */,
+				40C9DE42293DFABF00CC4BFA /* StudentsViewController.swift in Sources */,
+				40D2977C29423AF20084D579 /* Database.swift in Sources */,
+				406996FC292F6D3E00090507 /* AuthUserViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4023A962292D45D7007FD5D5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4023A963292D45D7007FD5D5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4023A966292D45D7007FD5D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4023A967292D45D7007FD5D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4023A969292D45D7007FD5D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6C83EB19D0501A21968ECA5 /* Pods-Express IELTS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8QLM8W63CU;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Express IELTS/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "demo.Express-IELTS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		4023A96A292D45D7007FD5D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4DEC3821F68C64C920B57DB /* Pods-Express IELTS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8QLM8W63CU;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Express IELTS/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "demo.Express-IELTS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4023A94F292D45D4007FD5D5 /* Build configuration list for PBXProject "Express IELTS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4023A966292D45D7007FD5D5 /* Debug */,
+				4023A967292D45D7007FD5D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4023A968292D45D7007FD5D5 /* Build configuration list for PBXNativeTarget "Express IELTS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4023A969292D45D7007FD5D5 /* Debug */,
+				4023A96A292D45D7007FD5D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4023A94C292D45D4007FD5D5 /* Project object */;
+}

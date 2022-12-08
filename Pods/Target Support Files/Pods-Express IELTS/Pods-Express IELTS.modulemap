@@ -1,0 +1,6 @@
+framework module Pods_Express_IELTS {
+  umbrella header "Pods-Express IELTS-umbrella.h"
+
+  export *
+  module * { export * }
+}
