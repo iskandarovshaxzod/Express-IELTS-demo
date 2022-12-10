@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PaymentViewController: BaseViewController {
     
@@ -59,15 +60,10 @@ extension PaymentViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if indexPath.row == 4 {
-            let vc = TeacherViewController()
-            vc.teacherName = "teacher name \(indexPath.row + 1)"
-            navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(MonthlyPaymentViewController(), animated: true)
         } else {
-            let vc = TeacherViewController()
-            vc.teacherName = "teacher name \(indexPath.row + 1)"
-            navigationController?.pushViewController(vc, animated: true)
+            
         }
     }
 }

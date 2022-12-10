@@ -26,7 +26,7 @@
 		4037172329422FC90053CCF2 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037172229422FC90053CCF2 /* AddViewController.swift */; };
 		40371725294233A40053CCF2 /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40371724294233A40053CCF2 /* StudentListViewController.swift */; };
 		406996FC292F6D3E00090507 /* AuthUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FB292F6D3E00090507 /* AuthUserViewController.swift */; };
-		406996FE292F77DE00090507 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FD292F77DE00090507 /* UITextField.swift */; };
+		406996FE292F77DE00090507 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FD292F77DE00090507 /* UITextField+Extension.swift */; };
 		4088F962292E779F0006614C /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088F961292E779F0006614C /* FirebaseManager.swift */; };
 		40C9DE39293DF32E00CC4BFA /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE38293DF32E00CC4BFA /* MainTabViewController.swift */; };
 		40C9DE3B293DF6A700CC4BFA /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */; };
@@ -39,7 +39,9 @@
 		40FE3789292E1A290012706F /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE3788292E1A290012706F /* UserViewController.swift */; };
 		40FE378B292E1AF50012706F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378A292E1AF50012706F /* BaseViewController.swift */; };
 		40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378C292E26BD0012706F /* PasswordViewController.swift */; };
-		40FE3795292E4DAB0012706F /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE3794292E4DAB0012706F /* UIDevice.swift */; };
+		40FE3795292E4DAB0012706F /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE3794292E4DAB0012706F /* UIDevice+Extension.swift */; };
+		40FF834929448E40000ABBBE /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF834629448E3F000ABBBE /* UIColor+Extension.swift */; };
+		40FF834B29448E40000ABBBE /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF834829448E3F000ABBBE /* PieChart.swift */; };
 		F19C06A60EEE8D1FD60DF186 /* Pods_Express_IELTS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B534BC954900D6483140CBE /* Pods_Express_IELTS.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +67,7 @@
 		4037172229422FC90053CCF2 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		40371724294233A40053CCF2 /* StudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
 		406996FB292F6D3E00090507 /* AuthUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserViewController.swift; sourceTree = "<group>"; };
-		406996FD292F77DE00090507 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		406996FD292F77DE00090507 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		4088F961292E779F0006614C /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		40C9DE38293DF32E00CC4BFA /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
@@ -78,7 +80,9 @@
 		40FE3788292E1A290012706F /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		40FE378A292E1AF50012706F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		40FE378C292E26BD0012706F /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
-		40FE3794292E4DAB0012706F /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		40FE3794292E4DAB0012706F /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
+		40FF834629448E3F000ABBBE /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		40FF834829448E3F000ABBBE /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
 		9B534BC954900D6483140CBE /* Pods_Express_IELTS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Express_IELTS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4DEC3821F68C64C920B57DB /* Pods-Express IELTS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Express IELTS.release.xcconfig"; path = "Target Support Files/Pods-Express IELTS/Pods-Express IELTS.release.xcconfig"; sourceTree = "<group>"; };
 		F6C83EB19D0501A21968ECA5 /* Pods-Express IELTS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Express IELTS.debug.xcconfig"; path = "Target Support Files/Pods-Express IELTS/Pods-Express IELTS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 		4023A956292D45D5007FD5D5 /* Express IELTS */ = {
 			isa = PBXGroup;
 			children = (
+				40FF834529448E29000ABBBE /* PieChart */,
 				40FE378E292E34970012706F /* Models */,
 				40FE3790292E34A50012706F /* ViewControllers */,
 				40FE378F292E349F0012706F /* Protocols */,
@@ -253,10 +258,19 @@
 		40FE3793292E4D960012706F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				40FE3794292E4DAB0012706F /* UIDevice.swift */,
-				406996FD292F77DE00090507 /* UITextField.swift */,
+				40FE3794292E4DAB0012706F /* UIDevice+Extension.swift */,
+				406996FD292F77DE00090507 /* UITextField+Extension.swift */,
+				40FF834629448E3F000ABBBE /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		40FF834529448E29000ABBBE /* PieChart */ = {
+			isa = PBXGroup;
+			children = (
+				40FF834829448E3F000ABBBE /* PieChart.swift */,
+			);
+			path = PieChart;
 			sourceTree = "<group>";
 		};
 		A016E43FBEDFCEED1D715BB5 /* Frameworks */ = {
@@ -401,9 +415,11 @@
 				40D2977E294240B10084D579 /* MonthlyPaymentViewController.swift in Sources */,
 				4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */,
 				40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */,
-				40FE3795292E4DAB0012706F /* UIDevice.swift in Sources */,
+				40FF834929448E40000ABBBE /* UIColor+Extension.swift in Sources */,
+				40FF834B29448E40000ABBBE /* PieChart.swift in Sources */,
+				40FE3795292E4DAB0012706F /* UIDevice+Extension.swift in Sources */,
 				40C9DE3E293DFAAA00CC4BFA /* MainViewController.swift in Sources */,
-				406996FE292F77DE00090507 /* UITextField.swift in Sources */,
+				406996FE292F77DE00090507 /* UITextField+Extension.swift in Sources */,
 				4088F962292E779F0006614C /* FirebaseManager.swift in Sources */,
 				40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */,
 				40226DA92940CE4D00E9489D /* NavView.swift in Sources */,
@@ -565,9 +581,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Express IELTS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -576,6 +592,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "demo.Express-IELTS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -595,9 +614,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Express IELTS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -606,6 +625,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "demo.Express-IELTS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
