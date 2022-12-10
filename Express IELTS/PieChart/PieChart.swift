@@ -15,21 +15,19 @@ struct PieChartDataSet {
 class PieChart: UIView {
     
     private let animationDuration: CGFloat = 1.0
-    var chartContainer: UIView!
-    private var currentValue: CGFloat = 0.0
-    private var layers : [CAShapeLayer]! = [CAShapeLayer]()
-    private var currentAnimationIndex  = 0
-    public var lineWidth : CGFloat = 1.0 // change value from 0 to 1
+    private var chartContainer: UIView!
+    private var currentValue: CGFloat      = 0.0
+    private var layers : [CAShapeLayer]!   = [CAShapeLayer]()
+    private var currentAnimationIndex      = 0
+    public var lineWidth : CGFloat         = 1.0 // change value from 0 to 1
     
     private var data: [PieChartDataSet]!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.initialize()
-    }
+    private let width  = UIScreen.main.bounds.width / 1.2
+    private let height = UIScreen.main.bounds.width / 1.2
     
     init(){
-        super.init(frame: CGRect())
+        super.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
         initialize()
     }
     
@@ -39,17 +37,8 @@ class PieChart: UIView {
     }
     
     private func initialize(){
-        self.chartContainer = UIView(frame: self.bounds)
+        chartContainer = UIView(frame: self.bounds)
         addSubview(chartContainer)
-    }
-    
-    private func initializea(){
-//        self.chartContainer = UIView(frame: self.bounds)
-        addSubview(chartContainer)
-        chartContainer.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.height.equalTo(300)
-        }
     }
     
     func addChartData(data: [PieChartDataSet]!){
@@ -58,7 +47,6 @@ class PieChart: UIView {
         self.data = self.data.map { return PieChartDataSet(percent: $0.percent / totalValue, colors: $0.colors) }
         drawChart()
         animateChart()
-        
     }
     
     private func drawChart(){
@@ -106,7 +94,6 @@ class PieChart: UIView {
             self.layers.append(arcLayer)
             arcLayer.isHidden = true
             
-            
         }
         
     }
@@ -122,7 +109,6 @@ class PieChart: UIView {
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         self.layers[currentAnimationIndex].isHidden = false
         self.layers[currentAnimationIndex].add(animation, forKey: animation.keyPath)
-        
     }
     
     

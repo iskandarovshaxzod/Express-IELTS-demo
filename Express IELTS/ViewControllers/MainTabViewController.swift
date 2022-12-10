@@ -80,7 +80,7 @@ class MainTabViewController: BaseViewController {
             make.right.left.equalToSuperview()
             make.height.equalTo(1)
         }
-        lineView.backgroundColor = .black
+        lineView.backgroundColor = .gray
         
         
         view.addSubview(subView)
