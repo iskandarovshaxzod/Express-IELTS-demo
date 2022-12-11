@@ -34,12 +34,7 @@ class PaymentViewController: BaseViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate   = self
         tableView.dataSource = self
-        
-        
     }
-    
-    
-    
 }
 
 extension PaymentViewController: UITableViewDelegate, UITableViewDataSource{
@@ -63,7 +58,9 @@ extension PaymentViewController: UITableViewDelegate, UITableViewDataSource{
         if indexPath.row == 4 {
             navigationController?.pushViewController(MonthlyPaymentViewController(), animated: true)
         } else {
-            
+            let vc = BranchRevenueViewController()
+            vc.branchName = "branch name \(indexPath.row + 1)"
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

@@ -1,13 +1,13 @@
 //
-//  BranchViewController.swift
+//  BranchRevenueViewController.swift
 //  Express IELTS
 //
-//  Created by Iskandarov shaxzod on 08.12.2022.
+//  Created by Iskandarov shaxzod on 11.12.2022.
 //
 
 import UIKit
 
-class BranchViewController: BaseViewController {
+class BranchRevenueViewController: BaseViewController {
     
     let subView = UIView()
     
@@ -21,9 +21,6 @@ class BranchViewController: BaseViewController {
     
     override func configureNavBar() {
         title = branchName
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                            target: self, action: #selector(addTapped))
-        
     }
     
     override func initViews() {
@@ -42,23 +39,11 @@ class BranchViewController: BaseViewController {
         tableView.delegate   = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
-        
-        
-        
     }
-    
-    @objc func addTapped(){
-        let vc = AddViewController()
-        vc.navTitle   = "New Teacher"
-        vc.buttonText = "Add"
-        vc.nameText   = "New teacher name"
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
+
 }
 
-extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
-    
+extension BranchRevenueViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
@@ -76,8 +61,7 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let vc = TeacherViewController()
+        let vc = TeacherRevenueViewController()
         vc.teacherName = "teacher name \(indexPath.row + 1)"
         navigationController?.pushViewController(vc, animated: true)
     }

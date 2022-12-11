@@ -38,6 +38,7 @@ class PieChart: UIView {
     
     private func initialize(){
         chartContainer = UIView(frame: self.bounds)
+//        chartContainer.backgroundColor = .systemPink
         addSubview(chartContainer)
     }
     
@@ -79,15 +80,26 @@ class PieChart: UIView {
             arcLayer.path = path.cgPath
             //}
             
+//            let text = CATextLayer()
+//            text.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+//            text.alignmentMode = .center
+//            text.isWrapped = true
+//            text.truncationMode = .end
+//            text.backgroundColor = UIColor.white.cgColor
+//            text.foregroundColor = UIColor.systemPink.cgColor
+//            text.string = "12"
+            
             arcLayer.fillColor = nil
             arcLayer.strokeColor = UIColor.green.cgColor
             arcLayer.lineWidth =  radius * lineWidth
             arcLayer.strokeEnd = 1
             
             let gradientLayer = CAGradientLayer()
-            gradientLayer.frame = CGRect(x: 0, y: 0, width: chartContainer.bounds.size.width, height: chartContainer.bounds.size.height)
+            gradientLayer.frame = CGRect(x: 0, y: 0, width:  chartContainer.bounds.size.width,
+                                                     height: chartContainer.bounds.size.height)
             gradientLayer.colors = item.colors.map({ return $0.cgColor }).reversed()
             gradientLayer.locations = [0.0,0.65]
+//            gradientLayer.addSublayer(text)
             chartContainer.layer.addSublayer(gradientLayer)
             gradientLayer.mask = arcLayer
             currentValue += item.percent

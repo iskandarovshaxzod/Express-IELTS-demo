@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		400EC15C2945E1A400F120E4 /* BranchRevenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400EC15B2945E1A400F120E4 /* BranchRevenueViewController.swift */; };
+		400EC15E2945E3BB00F120E4 /* TeacherRevenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400EC15D2945E3BB00F120E4 /* TeacherRevenueViewController.swift */; };
 		40226DA92940CE4D00E9489D /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40226DA82940CE4C00E9489D /* NavView.swift */; };
 		40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40226DAA2940DEA500E9489D /* AddBranchViewController.swift */; };
 		4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023A957292D45D5007FD5D5 /* AppDelegate.swift */; };
@@ -25,6 +27,7 @@
 		4037171F29422B320053CCF2 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037171E29422B320053CCF2 /* ListTableViewCell.swift */; };
 		4037172329422FC90053CCF2 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037172229422FC90053CCF2 /* AddViewController.swift */; };
 		40371725294233A40053CCF2 /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40371724294233A40053CCF2 /* StudentListViewController.swift */; };
+		405912422945A70F00620278 /* TotalRevenueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405912412945A70F00620278 /* TotalRevenueView.swift */; };
 		406996FC292F6D3E00090507 /* AuthUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FB292F6D3E00090507 /* AuthUserViewController.swift */; };
 		406996FE292F77DE00090507 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FD292F77DE00090507 /* UITextField+Extension.swift */; };
 		4088F962292E779F0006614C /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088F961292E779F0006614C /* FirebaseManager.swift */; };
@@ -46,6 +49,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		400EC15B2945E1A400F120E4 /* BranchRevenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchRevenueViewController.swift; sourceTree = "<group>"; };
+		400EC15D2945E3BB00F120E4 /* TeacherRevenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherRevenueViewController.swift; sourceTree = "<group>"; };
 		40226DA82940CE4C00E9489D /* NavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
 		40226DAA2940DEA500E9489D /* AddBranchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBranchViewController.swift; sourceTree = "<group>"; };
 		4023A954292D45D4007FD5D5 /* Express IELTS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Express IELTS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +71,7 @@
 		4037171E29422B320053CCF2 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		4037172229422FC90053CCF2 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		40371724294233A40053CCF2 /* StudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
+		405912412945A70F00620278 /* TotalRevenueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRevenueView.swift; sourceTree = "<group>"; };
 		406996FB292F6D3E00090507 /* AuthUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserViewController.swift; sourceTree = "<group>"; };
 		406996FD292F77DE00090507 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		4088F961292E779F0006614C /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 			children = (
 				40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */,
 				40226DA82940CE4C00E9489D /* NavView.swift */,
+				405912412945A70F00620278 /* TotalRevenueView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +237,8 @@
 				40371724294233A40053CCF2 /* StudentListViewController.swift */,
 				40D2977B29423AF20084D579 /* Database.swift */,
 				40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */,
+				400EC15B2945E1A400F120E4 /* BranchRevenueViewController.swift */,
+				400EC15D2945E3BB00F120E4 /* TeacherRevenueViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -416,6 +425,7 @@
 				4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */,
 				40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */,
 				40FF834929448E40000ABBBE /* UIColor+Extension.swift in Sources */,
+				405912422945A70F00620278 /* TotalRevenueView.swift in Sources */,
 				40FF834B29448E40000ABBBE /* PieChart.swift in Sources */,
 				40FE3795292E4DAB0012706F /* UIDevice+Extension.swift in Sources */,
 				40C9DE3E293DFAAA00CC4BFA /* MainViewController.swift in Sources */,
@@ -433,6 +443,8 @@
 				4037170F294200B50053CCF2 /* Button.swift in Sources */,
 				4023A95A292D45D5007FD5D5 /* SceneDelegate.swift in Sources */,
 				4037171F29422B320053CCF2 /* ListTableViewCell.swift in Sources */,
+				400EC15E2945E3BB00F120E4 /* TeacherRevenueViewController.swift in Sources */,
+				400EC15C2945E1A400F120E4 /* BranchRevenueViewController.swift in Sources */,
 				4037171129421BDF0053CCF2 /* BranchViewController.swift in Sources */,
 				40C9DE42293DFABF00CC4BFA /* StudentsViewController.swift in Sources */,
 				40D2977C29423AF20084D579 /* Database.swift in Sources */,
