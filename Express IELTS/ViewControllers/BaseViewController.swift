@@ -59,6 +59,15 @@ class BaseViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    func showActionAlert(title: String, message: String, actions: [String], handler: @escaping (UIAlertAction) -> ()) {
+        let c = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        actions.forEach { str in
+            c.addAction(UIAlertAction(title: str, style: .default, handler: handler))
+        }
+        c.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(c, animated: true)
+    }
+    
     @objc func keyboardWillShow(_ notification: Notification){
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             keyboardHeight = keyboardFrame.cgRectValue.height

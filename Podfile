@@ -8,5 +8,6 @@ target 'Express IELTS' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'SnapKit'
+  pod 'lottie-ios'
 
 end

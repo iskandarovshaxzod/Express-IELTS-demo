@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = UserViewController()
         window?.makeKeyAndVisible()
         
+        configureNavigationBar()
+        
         //MARK: Firebase configs
         FirebaseApp.configure()
         
@@ -38,6 +40,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    
+    // MARK: Methods
+    
+    func configureNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = .lightGray.withAlphaComponent(0.1)
+//        appearance.backgroundColor = UIColor(red: 2/255, green: 3/255, blue: 148/255, alpha: 0.1)
+        appearance.backgroundEffect = UIBlurEffect(style: .systemChromeMaterialLight) // or dark
+        
+        let scrollingAppearance = UINavigationBarAppearance()
+        scrollingAppearance.configureWithTransparentBackground()
+        scrollingAppearance.backgroundColor = .lightGray.withAlphaComponent(0.1)
+//        scrollingAppearance.backgroundColor = UIColor(red: 2/255, green: 3/255, blue: 148/255, alpha: 0.1)
+        scrollingAppearance.backgroundEffect = UIBlurEffect(style: .systemChromeMaterialLight)
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = scrollingAppearance
+        UINavigationBar.appearance().compactAppearance = scrollingAppearance
+    }
 }
 

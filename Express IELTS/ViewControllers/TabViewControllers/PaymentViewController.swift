@@ -23,7 +23,7 @@ class PaymentViewController: BaseViewController {
         subView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        subView.backgroundColor = .blue
+        subView.backgroundColor = .white
         
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in

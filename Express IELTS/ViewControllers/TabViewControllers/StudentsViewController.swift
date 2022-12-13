@@ -15,7 +15,7 @@ class StudentsViewController: BaseViewController {
     
 
     override func initViews() {
-        view.backgroundColor = .gray
+        view.backgroundColor = .orange
     }
 
 }

@@ -39,6 +39,11 @@
 		40C9DE44293DFAC800CC4BFA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE43293DFAC800CC4BFA /* SettingsViewController.swift */; };
 		40D2977C29423AF20084D579 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D2977B29423AF20084D579 /* Database.swift */; };
 		40D2977E294240B10084D579 /* MonthlyPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */; };
+		40E1E02A294731B7007ED9A2 /* HeaderMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E029294731B7007ED9A2 /* HeaderMonthView.swift */; };
+		40E1E02C29473621007ED9A2 /* MonthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E02B29473621007ED9A2 /* MonthCollectionViewCell.swift */; };
+		40E1E02E294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */; };
+		40E1E03029476337007ED9A2 /* HeaderMonthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E02F29476337007ED9A2 /* HeaderMonthTableViewCell.swift */; };
+		40E1E05129479326007ED9A2 /* trash-can.json in Resources */ = {isa = PBXBuildFile; fileRef = 40E1E05029479326007ED9A2 /* trash-can.json */; };
 		40FE3789292E1A290012706F /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE3788292E1A290012706F /* UserViewController.swift */; };
 		40FE378B292E1AF50012706F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378A292E1AF50012706F /* BaseViewController.swift */; };
 		40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378C292E26BD0012706F /* PasswordViewController.swift */; };
@@ -83,6 +88,11 @@
 		40C9DE43293DFAC800CC4BFA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		40D2977B29423AF20084D579 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPaymentViewController.swift; sourceTree = "<group>"; };
+		40E1E029294731B7007ED9A2 /* HeaderMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMonthView.swift; sourceTree = "<group>"; };
+		40E1E02B29473621007ED9A2 /* MonthCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCollectionViewCell.swift; sourceTree = "<group>"; };
+		40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+Extension.swift"; sourceTree = "<group>"; };
+		40E1E02F29476337007ED9A2 /* HeaderMonthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMonthTableViewCell.swift; sourceTree = "<group>"; };
+		40E1E05029479326007ED9A2 /* trash-can.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "trash-can.json"; sourceTree = "<group>"; };
 		40FE3788292E1A290012706F /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		40FE378A292E1AF50012706F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		40FE378C292E26BD0012706F /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +122,7 @@
 				40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */,
 				40226DA82940CE4C00E9489D /* NavView.swift */,
 				405912412945A70F00620278 /* TotalRevenueView.swift */,
+				40E1E029294731B7007ED9A2 /* HeaderMonthView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -120,6 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				4037171E29422B320053CCF2 /* ListTableViewCell.swift */,
+				40E1E02B29473621007ED9A2 /* MonthCollectionViewCell.swift */,
+				40E1E02F29476337007ED9A2 /* HeaderMonthTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -145,6 +158,7 @@
 		4023A956292D45D5007FD5D5 /* Express IELTS */ = {
 			isa = PBXGroup;
 			children = (
+				40E1E04F294792B7007ED9A2 /* Animations */,
 				40FF834529448E29000ABBBE /* PieChart */,
 				40FE378E292E34970012706F /* Models */,
 				40FE3790292E34A50012706F /* ViewControllers */,
@@ -205,6 +219,14 @@
 				40C9DE43293DFAC800CC4BFA /* SettingsViewController.swift */,
 			);
 			path = TabViewControllers;
+			sourceTree = "<group>";
+		};
+		40E1E04F294792B7007ED9A2 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				40E1E05029479326007ED9A2 /* trash-can.json */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		40FE378E292E34970012706F /* Models */ = {
@@ -270,6 +292,7 @@
 				40FE3794292E4DAB0012706F /* UIDevice+Extension.swift */,
 				406996FD292F77DE00090507 /* UITextField+Extension.swift */,
 				40FF834629448E3F000ABBBE /* UIColor+Extension.swift */,
+				40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -361,6 +384,7 @@
 			files = (
 				4023A972292D4D48007FD5D5 /* Uzbek.strings in Resources */,
 				4023A964292D45D7007FD5D5 /* LaunchScreen.storyboard in Resources */,
+				40E1E05129479326007ED9A2 /* trash-can.json in Resources */,
 				4023A96C292D4627007FD5D5 /* GoogleService-Info.plist in Resources */,
 				4023A970292D4D3B007FD5D5 /* Russian.strings in Resources */,
 				4023A96E292D4D24007FD5D5 /* English.strings in Resources */,
@@ -420,8 +444,10 @@
 				40371725294233A40053CCF2 /* StudentListViewController.swift in Sources */,
 				40C9DE3B293DF6A700CC4BFA /* TabItemView.swift in Sources */,
 				40C9DE40293DFAB500CC4BFA /* PaymentViewController.swift in Sources */,
+				40E1E03029476337007ED9A2 /* HeaderMonthTableViewCell.swift in Sources */,
 				4037172329422FC90053CCF2 /* AddViewController.swift in Sources */,
 				40D2977E294240B10084D579 /* MonthlyPaymentViewController.swift in Sources */,
+				40E1E02E294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift in Sources */,
 				4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */,
 				40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */,
 				40FF834929448E40000ABBBE /* UIColor+Extension.swift in Sources */,
@@ -442,8 +468,10 @@
 				4037171D294229F70053CCF2 /* GroupViewController.swift in Sources */,
 				4037170F294200B50053CCF2 /* Button.swift in Sources */,
 				4023A95A292D45D5007FD5D5 /* SceneDelegate.swift in Sources */,
+				40E1E02C29473621007ED9A2 /* MonthCollectionViewCell.swift in Sources */,
 				4037171F29422B320053CCF2 /* ListTableViewCell.swift in Sources */,
 				400EC15E2945E3BB00F120E4 /* TeacherRevenueViewController.swift in Sources */,
+				40E1E02A294731B7007ED9A2 /* HeaderMonthView.swift in Sources */,
 				400EC15C2945E1A400F120E4 /* BranchRevenueViewController.swift in Sources */,
 				4037171129421BDF0053CCF2 /* BranchViewController.swift in Sources */,
 				40C9DE42293DFABF00CC4BFA /* StudentsViewController.swift in Sources */,
