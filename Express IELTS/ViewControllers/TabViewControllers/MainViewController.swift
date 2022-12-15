@@ -36,11 +36,11 @@ class MainViewController: BaseViewController {
         tableView.delegate   = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
-        tableView.isEditing = true
+        tableView.separatorStyle = .none
     }
     
     private func handleMoveToTrash(index: Int) {
-        showActionAlert(title: "Warning", message: "Are you sure that you want to delete a branch", actions: ["Yes", "No"]){ [weak self] action in
+        showActionAlert(title: "Warning", message: "Are you sure that you want to delete a branch?", actions: ["Yes", "No"]){ [weak self] action in
             if action.title == "Yes" {
                 self?.ind -= 1
                 self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
@@ -86,8 +86,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
         delete.image = UIImage(named: "ic_trash")?.withTintColor(.white)
         let c = UISwipeActionsConfiguration(actions: [delete])
         c.performsFirstActionWithFullSwipe = false
-        return c
+        return (Database.isAdmin ? c : nil)
     }
-
-    
 }

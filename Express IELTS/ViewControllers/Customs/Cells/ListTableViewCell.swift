@@ -22,11 +22,13 @@ class ListTableViewCell: UITableViewCell {
             make.top.equalToSuperview().offset(10)
             make.bottom.equalToSuperview().offset(-10)
         }
-        subView.layer.cornerRadius = 20
-        subView.backgroundColor = .white
-        subView.layer.borderWidth = 1
-        subView.layer.borderColor = UIColor(red: 2/255, green: 3/255, blue: 148/255, alpha: 1).cgColor
-        
+        subView.layer.cornerRadius  = 20
+        subView.backgroundColor     = .white //UIColor(red: 253/255, green: 255/255, blue: 245/255, alpha: 0.6)
+        subView.layer.shadowColor   = UIColor(red: 2/255, green: 3/255, blue: 148/255, alpha: 1.0).cgColor
+        subView.layer.shadowOpacity = 0.6
+        subView.layer.shadowOffset  = .zero
+        subView.layer.shadowRadius  = 2
+
         subView.addSubview(label)
         label.snp.makeConstraints { make in
             make.left.top.equalToSuperview().offset(5)

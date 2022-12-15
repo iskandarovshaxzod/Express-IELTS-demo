@@ -18,8 +18,8 @@ class MonthCollectionViewCell: UICollectionViewCell {
         addSubview(subView)
         subView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
-            make.left.equalToSuperview().offset(15)
-            make.right.equalToSuperview().offset(-15)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
         }
         subView.layer.cornerRadius = 20
         subView.backgroundColor = UIColor(red: 2/255, green: 3/255, blue: 148/255, alpha: 1.0)

@@ -5,3 +5,13 @@
   Created by Iskandarov shaxzod on 22.11.2022.
   
 */
+
+// Tab Items
+"main"     = "Главный";
+"payment"  = "Оплата";
+"students" = "Ученики";
+"settings" = "Настройки";
+
+// Navigation Titles
+"all_payment"  = "Все платежи";
+"all_students" = "Все студенты";

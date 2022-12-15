@@ -1,27 +1,26 @@
 //
-//  TeacherRevenueViewController.swift
+//  StudentsInBranchViewController.swift
 //  Express IELTS
 //
-//  Created by Iskandarov shaxzod on 11.12.2022.
+//  Created by Iskandarov shaxzod on 15.12.2022.
 //
 
 import UIKit
 
-
-class TeacherRevenueViewController: BaseViewController {
+class StudentsInBranchViewController: BaseViewController {
     
     let subView = UIView()
     
     let tableView = UITableView()
     
-    var teacherName = ""
+    var branchName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func configureNavBar() {
-        title = teacherName
+        title = branchName
     }
     
     override func initViews() {
@@ -44,7 +43,7 @@ class TeacherRevenueViewController: BaseViewController {
 
 }
 
-extension TeacherRevenueViewController: UITableViewDelegate, UITableViewDataSource {
+extension StudentsInBranchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
@@ -65,7 +64,7 @@ extension TeacherRevenueViewController: UITableViewDelegate, UITableViewDataSour
             cell = tableCell
         } else {
 //            cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
-            cell.textLabel?.text = "hello world" + "\(indexPath.row + 1)"
+            cell.textLabel?.text = "student name " + "\(indexPath.row + 1)"
         }
         return cell
     }

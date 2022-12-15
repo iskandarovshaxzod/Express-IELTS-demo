@@ -19,6 +19,11 @@ class MonthlyPaymentViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateChartUI()
+    }
+    
     override func configureNavBar() {
         title = "Monthly payment"
     }
@@ -53,8 +58,6 @@ class MonthlyPaymentViewController: BaseViewController {
         
         totalView.updateTexts(text: "Total revenue of all branches",  sum: "1 000 200 200")
         branchView.updateTexts(text: "Total revenue of a ... branch", sum: "0")
-        
-        animateChartUI()
     }
     
     func animateChartUI() {

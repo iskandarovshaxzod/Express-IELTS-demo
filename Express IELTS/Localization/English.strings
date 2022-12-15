@@ -5,3 +5,13 @@
   Created by Iskandarov shaxzod on 22.11.2022.
   
 */
+
+// Tab Items
+"main"     = "Main";
+"payment"  = "Payment";
+"students" = "Students";
+"settings" = "Settings";
+
+// Navigation Titles
+"all_payment"  = "All Payment";
+"all_students" = "All Students";

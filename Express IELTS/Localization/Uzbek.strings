@@ -6,3 +6,12 @@
   
 */
 
+// Tab Items
+"main"     = "Asosiy";
+"payment"  = "To'lov";
+"students" = "O'quvchilar";
+"settings" = "Sozlamalar";
+
+// Navigation Titles
+"all_payment"  = "Barcha to'lovlar";
+"all_students" = "Barcha O'quvchilar";

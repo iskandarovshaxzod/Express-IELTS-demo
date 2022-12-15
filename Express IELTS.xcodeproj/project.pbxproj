@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		400EC15C2945E1A400F120E4 /* BranchRevenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400EC15B2945E1A400F120E4 /* BranchRevenueViewController.swift */; };
 		400EC15E2945E3BB00F120E4 /* TeacherRevenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400EC15D2945E3BB00F120E4 /* TeacherRevenueViewController.swift */; };
+		4011F255294B41390000B596 /* StudentsInBranchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4011F254294B41390000B596 /* StudentsInBranchViewController.swift */; };
 		40226DA92940CE4D00E9489D /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40226DA82940CE4C00E9489D /* NavView.swift */; };
 		40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40226DAA2940DEA500E9489D /* AddBranchViewController.swift */; };
 		4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023A957292D45D5007FD5D5 /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 		40E1E02E294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */; };
 		40E1E03029476337007ED9A2 /* HeaderMonthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E02F29476337007ED9A2 /* HeaderMonthTableViewCell.swift */; };
 		40E1E05129479326007ED9A2 /* trash-can.json in Resources */ = {isa = PBXBuildFile; fileRef = 40E1E05029479326007ED9A2 /* trash-can.json */; };
+		40E4C6C82949C240003F8A56 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E4C6C72949C240003F8A56 /* String+Extension.swift */; };
 		40FE3789292E1A290012706F /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE3788292E1A290012706F /* UserViewController.swift */; };
 		40FE378B292E1AF50012706F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378A292E1AF50012706F /* BaseViewController.swift */; };
 		40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378C292E26BD0012706F /* PasswordViewController.swift */; };
@@ -56,6 +58,7 @@
 /* Begin PBXFileReference section */
 		400EC15B2945E1A400F120E4 /* BranchRevenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchRevenueViewController.swift; sourceTree = "<group>"; };
 		400EC15D2945E3BB00F120E4 /* TeacherRevenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherRevenueViewController.swift; sourceTree = "<group>"; };
+		4011F254294B41390000B596 /* StudentsInBranchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsInBranchViewController.swift; sourceTree = "<group>"; };
 		40226DA82940CE4C00E9489D /* NavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
 		40226DAA2940DEA500E9489D /* AddBranchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBranchViewController.swift; sourceTree = "<group>"; };
 		4023A954292D45D4007FD5D5 /* Express IELTS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Express IELTS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +96,7 @@
 		40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+Extension.swift"; sourceTree = "<group>"; };
 		40E1E02F29476337007ED9A2 /* HeaderMonthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMonthTableViewCell.swift; sourceTree = "<group>"; };
 		40E1E05029479326007ED9A2 /* trash-can.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "trash-can.json"; sourceTree = "<group>"; };
+		40E4C6C72949C240003F8A56 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		40FE3788292E1A290012706F /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		40FE378A292E1AF50012706F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		40FE378C292E26BD0012706F /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
@@ -261,6 +265,7 @@
 				40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */,
 				400EC15B2945E1A400F120E4 /* BranchRevenueViewController.swift */,
 				400EC15D2945E3BB00F120E4 /* TeacherRevenueViewController.swift */,
+				4011F254294B41390000B596 /* StudentsInBranchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				406996FD292F77DE00090507 /* UITextField+Extension.swift */,
 				40FF834629448E3F000ABBBE /* UIColor+Extension.swift */,
 				40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */,
+				40E4C6C72949C240003F8A56 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -474,7 +480,9 @@
 				40E1E02A294731B7007ED9A2 /* HeaderMonthView.swift in Sources */,
 				400EC15C2945E1A400F120E4 /* BranchRevenueViewController.swift in Sources */,
 				4037171129421BDF0053CCF2 /* BranchViewController.swift in Sources */,
+				4011F255294B41390000B596 /* StudentsInBranchViewController.swift in Sources */,
 				40C9DE42293DFABF00CC4BFA /* StudentsViewController.swift in Sources */,
+				40E4C6C82949C240003F8A56 /* String+Extension.swift in Sources */,
 				40D2977C29423AF20084D579 /* Database.swift in Sources */,
 				406996FC292F6D3E00090507 /* AuthUserViewController.swift in Sources */,
 			);

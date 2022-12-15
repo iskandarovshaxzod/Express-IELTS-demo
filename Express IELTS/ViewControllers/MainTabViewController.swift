@@ -13,8 +13,8 @@ class MainTabViewController: BaseViewController {
     let tabView  = UIView()
     let lineView = UIView()
     
-    let mainItem     = TabItemView(image: UIImage(named: "ic_menu"), lbl: "Main")
-    let paymentItem  = TabItemView(image: UIImage(named: "ic_payment"), lbl: "Payment")
+    let mainItem     = TabItemView(image: UIImage(named: "ic_menu"),     lbl: "Main")
+    let paymentItem  = TabItemView(image: UIImage(named: "ic_payment"),  lbl: "Payment")
     let studentsItem = TabItemView(image: UIImage(named: "ic_students"), lbl: "Students")
     let settingsItem = TabItemView(image: UIImage(named: "ic_settings"), lbl: "Settings")
     
@@ -68,11 +68,10 @@ class MainTabViewController: BaseViewController {
         
         view.addSubview(tabView)
         tabView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-btmPadding)
-            make.height.equalTo(60)
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(60 + btmPadding)
         }
-        tabView.backgroundColor = .white
+        tabView.backgroundColor = .lightGray.withAlphaComponent(0.1)
         
         view.addSubview(lineView)
         lineView.snp.makeConstraints { make in
@@ -121,7 +120,7 @@ class MainTabViewController: BaseViewController {
     func configureTabItems() {
         tabView.addSubview(mainItem)
         mainItem.snp.makeConstraints { make in
-            make.left.equalToSuperview()
+            make.left.top.equalToSuperview()
             make.width.equalTo(isAdmin ? width / 4 : width / 3)
         }
         mainItem.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tabItemTapped)))
@@ -129,12 +128,14 @@ class MainTabViewController: BaseViewController {
         tabView.addSubview(paymentItem)
         paymentItem.snp.makeConstraints { make in
             make.left.equalTo(mainItem.snp.right)
+            make.top.equalToSuperview()
             make.width.equalTo(isAdmin ? width / 4 : width / 3)
         }
         paymentItem.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tabItemTapped)))
         
         tabView.addSubview(settingsItem)
         settingsItem.snp.makeConstraints { make in
+            make.top.equalToSuperview()
             make.width.equalTo(isAdmin ? width / 4 : width / 3)
         }
         settingsItem.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tabItemTapped(_:))))
@@ -143,7 +144,8 @@ class MainTabViewController: BaseViewController {
             tabView.addSubview(studentsItem)
             studentsItem.snp.makeConstraints { make in
                 make.left.equalTo(paymentItem.snp.right)
-                make.width.equalTo(isAdmin ? width / 4 : width / 3)
+                make.top.equalToSuperview()
+                make.width.equalTo(width / 4)
             }
             studentsItem.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tabItemTapped)))
             

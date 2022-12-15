@@ -9,18 +9,22 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
-    let width  = UIScreen.main.bounds.width
-    let height = UIScreen.main.bounds.height
+    let width      = UIScreen.main.bounds.width
+    let height     = UIScreen.main.bounds.height
     let btmPadding = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
     let topPadding = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
+    
+    let loadingView = UIView()
+    let spinnerView = UIView()
+    let spinner     = UIActivityIndicatorView()
     
     var keyboardHeight = 0.0
     var iskeyboardActive = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initViews()
         configureNavBar()
+        initViews()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardDidShowNotification, object: nil)
     }
@@ -33,18 +37,59 @@ class BaseViewController: UIViewController {
         iskeyboardActive = false
     }
     
+    //MARK: Methods for initialization
     
+    func configureNavBar(){}
     func initViews(){}
     func setUpViews(){}
-    func configureNavBar(){}
+    
+    //MARK: Methods
     
     func vibrate(){
         UIDevice.vibrate()
     }
-
-    func showLoading(){}
     
-    func hideLoading(){}
+    func vibrate(for type: UINotificationFeedbackGenerator.FeedbackType) {
+        HapticsManager.vibrate(for: type)
+    }
+
+    func showLoading(){
+        view.addSubview(loadingView)
+        loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        loadingView.backgroundColor = .gray.withAlphaComponent(0.6)
+        loadingView.isUserInteractionEnabled = true
+        loadingView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                action: #selector(loadingViewTapped)))
+        
+        loadingView.addSubview(spinnerView)
+        spinnerView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(100)
+        }
+        spinnerView.backgroundColor = .white
+        spinnerView.layer.cornerRadius = 15
+        
+        spinnerView.addSubview(spinner)
+        spinner.style = .large
+        spinner.hidesWhenStopped = true
+        spinner.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        spinner.startAnimating()
+    }
+    
+    func hideLoading(){
+        spinner.stopAnimating()
+        loadingView.removeFromSuperview()
+    }
+    
+    @objc func loadingViewTapped() {
+        hideLoading()
+    }
+    
+    //MARK: Methods for showing ALERTS
     
     func showMessage(title: String, message: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -76,6 +121,8 @@ class BaseViewController: UIViewController {
             openKeyboard()
         }
     }
+    
+    
     
     @objc func keyboardWillHide(){
         closeKeyboard()

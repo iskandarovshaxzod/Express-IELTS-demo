@@ -99,9 +99,14 @@ class AuthUserViewController: BaseViewController {
 //            UIApplication.shared.windows.first?.rootViewController = nc
 ////            backTapped()
 //        }
-        
-        let vc = MainTabViewController()
-        UIApplication.shared.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
+        showLoading()
+        //TODO: Remove DispatchQueue
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2){
+            self.hideLoading()
+            self.vibrate(for: .success)
+            let vc = MainTabViewController()
+            UIApplication.shared.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
+        }
     }
     
     @objc func backTapped(){
