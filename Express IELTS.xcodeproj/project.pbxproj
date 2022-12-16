@@ -17,9 +17,6 @@
 		4023A961292D45D7007FD5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4023A960292D45D7007FD5D5 /* Assets.xcassets */; };
 		4023A964292D45D7007FD5D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4023A962292D45D7007FD5D5 /* LaunchScreen.storyboard */; };
 		4023A96C292D4627007FD5D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4023A96B292D4627007FD5D5 /* GoogleService-Info.plist */; };
-		4023A96E292D4D24007FD5D5 /* English.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4023A96D292D4D24007FD5D5 /* English.strings */; };
-		4023A970292D4D3B007FD5D5 /* Russian.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4023A96F292D4D3B007FD5D5 /* Russian.strings */; };
-		4023A972292D4D48007FD5D5 /* Uzbek.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4023A971292D4D48007FD5D5 /* Uzbek.strings */; };
 		4037170D2941FE9E0053CCF2 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037170C2941FE9E0053CCF2 /* TextField.swift */; };
 		4037170F294200B50053CCF2 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037170E294200B50053CCF2 /* Button.swift */; };
 		4037171129421BDF0053CCF2 /* BranchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037171029421BDF0053CCF2 /* BranchViewController.swift */; };
@@ -40,6 +37,9 @@
 		40C9DE44293DFAC800CC4BFA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE43293DFAC800CC4BFA /* SettingsViewController.swift */; };
 		40D2977C29423AF20084D579 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D2977B29423AF20084D579 /* Database.swift */; };
 		40D2977E294240B10084D579 /* MonthlyPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */; };
+		40DE637E294C53D8001E82B0 /* UserMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DE637D294C53D8001E82B0 /* UserMode.swift */; };
+		40DE6382294C93EA001E82B0 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DE6381294C93EA001E82B0 /* Language.swift */; };
+		40DE638F294C9B2D001E82B0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40DE638E294C9B2D001E82B0 /* Localizable.strings */; };
 		40E1E02A294731B7007ED9A2 /* HeaderMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E029294731B7007ED9A2 /* HeaderMonthView.swift */; };
 		40E1E02C29473621007ED9A2 /* MonthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E02B29473621007ED9A2 /* MonthCollectionViewCell.swift */; };
 		40E1E02E294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */; };
@@ -68,9 +68,6 @@
 		4023A963292D45D7007FD5D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4023A965292D45D7007FD5D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4023A96B292D4627007FD5D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4023A96D292D4D24007FD5D5 /* English.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = English.strings; sourceTree = "<group>"; };
-		4023A96F292D4D3B007FD5D5 /* Russian.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Russian.strings; sourceTree = "<group>"; };
-		4023A971292D4D48007FD5D5 /* Uzbek.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Uzbek.strings; sourceTree = "<group>"; };
 		4037170C2941FE9E0053CCF2 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		4037170E294200B50053CCF2 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		4037171029421BDF0053CCF2 /* BranchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +88,9 @@
 		40C9DE43293DFAC800CC4BFA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		40D2977B29423AF20084D579 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPaymentViewController.swift; sourceTree = "<group>"; };
+		40DE637D294C53D8001E82B0 /* UserMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMode.swift; sourceTree = "<group>"; };
+		40DE6381294C93EA001E82B0 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		40DE638E294C9B2D001E82B0 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		40E1E029294731B7007ED9A2 /* HeaderMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMonthView.swift; sourceTree = "<group>"; };
 		40E1E02B29473621007ED9A2 /* MonthCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCollectionViewCell.swift; sourceTree = "<group>"; };
 		40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+Extension.swift"; sourceTree = "<group>"; };
@@ -167,12 +167,14 @@
 				40FE378E292E34970012706F /* Models */,
 				40FE3790292E34A50012706F /* ViewControllers */,
 				40FE378F292E349F0012706F /* Protocols */,
+				40DE637C294C53CE001E82B0 /* Enums */,
 				40FE3793292E4D960012706F /* Extensions */,
 				4088F960292E77860006614C /* FireBase */,
 				4023A965292D45D7007FD5D5 /* Info.plist */,
 				4023A96B292D4627007FD5D5 /* GoogleService-Info.plist */,
 				40FE3792292E34E70012706F /* AppConfigs */,
 				40FE3791292E34CC0012706F /* Localization */,
+				40DE638E294C9B2D001E82B0 /* Localizable.strings */,
 			);
 			path = "Express IELTS";
 			sourceTree = "<group>";
@@ -225,6 +227,15 @@
 			path = TabViewControllers;
 			sourceTree = "<group>";
 		};
+		40DE637C294C53CE001E82B0 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				40DE637D294C53D8001E82B0 /* UserMode.swift */,
+				40DE6381294C93EA001E82B0 /* Language.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		40E1E04F294792B7007ED9A2 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,9 +284,6 @@
 		40FE3791292E34CC0012706F /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				4023A96D292D4D24007FD5D5 /* English.strings */,
-				4023A96F292D4D3B007FD5D5 /* Russian.strings */,
-				4023A971292D4D48007FD5D5 /* Uzbek.strings */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -388,12 +396,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4023A972292D4D48007FD5D5 /* Uzbek.strings in Resources */,
+				40DE638F294C9B2D001E82B0 /* Localizable.strings in Resources */,
 				4023A964292D45D7007FD5D5 /* LaunchScreen.storyboard in Resources */,
 				40E1E05129479326007ED9A2 /* trash-can.json in Resources */,
 				4023A96C292D4627007FD5D5 /* GoogleService-Info.plist in Resources */,
-				4023A970292D4D3B007FD5D5 /* Russian.strings in Resources */,
-				4023A96E292D4D24007FD5D5 /* English.strings in Resources */,
 				4023A961292D45D7007FD5D5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,9 +470,11 @@
 				406996FE292F77DE00090507 /* UITextField+Extension.swift in Sources */,
 				4088F962292E779F0006614C /* FirebaseManager.swift in Sources */,
 				40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */,
+				40DE637E294C53D8001E82B0 /* UserMode.swift in Sources */,
 				40226DA92940CE4D00E9489D /* NavView.swift in Sources */,
 				40C9DE44293DFAC800CC4BFA /* SettingsViewController.swift in Sources */,
 				4037170D2941FE9E0053CCF2 /* TextField.swift in Sources */,
+				40DE6382294C93EA001E82B0 /* Language.swift in Sources */,
 				40C9DE39293DF32E00CC4BFA /* MainTabViewController.swift in Sources */,
 				40FE378B292E1AF50012706F /* BaseViewController.swift in Sources */,
 				40FE3789292E1A290012706F /* UserViewController.swift in Sources */,
@@ -506,6 +514,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -566,6 +575,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

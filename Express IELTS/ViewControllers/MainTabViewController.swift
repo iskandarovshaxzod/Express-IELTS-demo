@@ -23,7 +23,7 @@ class MainTabViewController: BaseViewController {
     var studentsController = StudentsViewController()
     var settingsController = SettingsViewController()
 
-    var isAdmin = Database.isAdmin
+    var isAdmin = Database.shared.isAdmin
     var currentTab = 1
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class MainTabViewController: BaseViewController {
                 navigationItem.title = "Express IELTS"
                 navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                                     target: self, action: #selector(addTapped))
-                if !Database.isAdmin{
+                if !Database.shared.isAdmin{
                     navigationItem.rightBarButtonItem = nil
                 }
 //            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "logo"),
@@ -71,15 +71,15 @@ class MainTabViewController: BaseViewController {
             make.left.right.bottom.equalToSuperview()
             make.height.equalTo(60 + btmPadding)
         }
-        tabView.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        tabView.backgroundColor = "cl_main_back".color //.lightGray.withAlphaComponent(0.1)
         
         view.addSubview(lineView)
         lineView.snp.makeConstraints { make in
             make.bottom.equalTo(tabView.snp.top)
             make.right.left.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
         }
-        lineView.backgroundColor = .gray
+        lineView.backgroundColor = UIColor(red: 146/255, green: 146/255, blue: 152/255, alpha: 1.0) //.lightGray.withAlphaComponent(0.5)
         
         
         view.addSubview(subView)

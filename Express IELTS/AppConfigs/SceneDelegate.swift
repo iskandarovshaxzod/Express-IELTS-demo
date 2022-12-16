@@ -11,6 +11,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
+    var blurEffect = UIBlurEffect(style: .light)
+    
     let visualEffectView = UIVisualEffectView()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -64,7 +66,7 @@ extension SceneDelegate {
     func showBlur() {
         if let window{
             if !visualEffectView.isDescendant(of: window) {
-                visualEffectView.effect = UIBlurEffect(style: .light)
+                visualEffectView.effect = blurEffect
                 visualEffectView.frame = window.bounds
                 window.addSubview(visualEffectView)
             }

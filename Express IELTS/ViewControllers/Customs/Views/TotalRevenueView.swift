@@ -23,6 +23,7 @@ class TotalRevenueView: UIView {
         }
         subView.backgroundColor = UIColor(red: 2/255, green: 3/255, blue: 148/255, alpha: 1.0)
         subView.layer.cornerRadius = 15
+        subView.backgroundColor = "cl_text_blue".color
         
         subView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in

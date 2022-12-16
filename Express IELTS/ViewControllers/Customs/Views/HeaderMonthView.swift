@@ -26,7 +26,7 @@ class HeaderMonthView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init(txt: String) {
+    init() {
         super.init(frame: CGRect())
         
         addSubview(subView)

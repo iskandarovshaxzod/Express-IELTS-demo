@@ -29,6 +29,17 @@ class BaseViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardDidShowNotification, object: nil)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        switch traitCollection.userInterfaceStyle{
+            case .light, .unspecified:
+                Database.shared.userMode = .light
+            case .dark:
+                Database.shared.userMode = .dark
+            default: break
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         iskeyboardActive = true
     }
@@ -68,7 +79,7 @@ class BaseViewController: UIViewController {
             make.center.equalToSuperview()
             make.width.height.equalTo(100)
         }
-        spinnerView.backgroundColor = .white
+        spinnerView.backgroundColor = "cl_cell_back".color
         spinnerView.layer.cornerRadius = 15
         
         spinnerView.addSubview(spinner)

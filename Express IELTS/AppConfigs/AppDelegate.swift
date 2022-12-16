@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    var blurStyle: UIBlurEffect.Style = .prominent //(Database.shared.userMode == .light ? .light : .dark)
+    
     let visualEffectView = UIVisualEffectView()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -76,16 +78,18 @@ extension AppDelegate {
     func configureNavigationBar() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = .lightGray.withAlphaComponent(0.1)
-        appearance.backgroundEffect = UIBlurEffect(style: .systemChromeMaterialLight)
+        appearance.backgroundColor  = "cl_main_back".color //.lightGray.withAlphaComponent(0.1)
+        appearance.backgroundEffect = UIBlurEffect(style: .light)
         
         let scrollingAppearance = UINavigationBarAppearance()
         scrollingAppearance.configureWithTransparentBackground()
-        scrollingAppearance.backgroundColor = .lightGray.withAlphaComponent(0.1)
-        scrollingAppearance.backgroundEffect = UIBlurEffect(style: .systemChromeMaterialLight)
+        scrollingAppearance.backgroundColor  = "cl_main_back".color //.lightGray.withAlphaComponent(0.1)
+        scrollingAppearance.backgroundEffect = UIBlurEffect(style: .light)
         
-        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().standardAppearance   = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = scrollingAppearance
-        UINavigationBar.appearance().compactAppearance = scrollingAppearance
+        UINavigationBar.appearance().compactAppearance    = scrollingAppearance
+        UINavigationBar.appearance().isTranslucent        = false
+//        UINavigationBar.appearance().
     }
 }

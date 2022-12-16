@@ -25,7 +25,7 @@ class UserViewController: BaseViewController {
         subView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        subView.backgroundColor = .white
+        subView.backgroundColor = "cl_main_back".color
         
         subView.addSubview(adminBtn)
         adminBtn.snp.makeConstraints { make in
@@ -70,9 +70,9 @@ class UserViewController: BaseViewController {
     @objc func tapped(_ button: UIButton){
         button.layer.borderColor = UIColor.red.withAlphaComponent(0.6).cgColor
         let vc = AuthUserViewController()
-        Database.isAdmin = false
+        Database.shared.isAdmin = false
         if button == adminBtn{
-            Database.isAdmin = true
+            Database.shared.isAdmin = true
         }
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)

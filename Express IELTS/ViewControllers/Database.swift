@@ -6,9 +6,28 @@
 //
 
 import Foundation
+import UIKit
 
 struct Database {
-    static var isAdmin = false
+    static var shared = Database()
+    var isAdmin  = false
+    var userMode: Usermode = .light{
+        didSet{
+            userModeChanged()
+        }
+    }
+  
+    func userModeChanged() {
+        if let scene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            print("delegate: scene")
+            scene.blurEffect = UIBlurEffect(style: userMode == .light ? .light : .dark)
+        }
+        if let myDelegate = UIApplication.shared.delegate as? AppDelegate {
+            print("delegate: app")
+            myDelegate.blurStyle = (userMode == .light ? .light : .dark)
+            myDelegate.configureNavigationBar()
+        }
+    }
 }
 
 /*

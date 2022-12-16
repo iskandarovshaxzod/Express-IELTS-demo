@@ -28,13 +28,13 @@ class BranchRevenueViewController: BaseViewController {
         subView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        subView.backgroundColor = .white
+        subView.backgroundColor = "cl_main_back".color
         
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = "cl_main_back".color
         tableView.register(ListTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate   = self
         tableView.dataSource = self

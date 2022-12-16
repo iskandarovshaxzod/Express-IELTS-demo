@@ -38,7 +38,6 @@ class PieChart: UIView {
     
     private func initialize(){
         chartContainer = UIView(frame: self.bounds)
-//        chartContainer.backgroundColor = .systemPink
         addSubview(chartContainer)
     }
     

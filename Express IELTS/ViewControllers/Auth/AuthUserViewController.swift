@@ -30,7 +30,7 @@ class AuthUserViewController: BaseViewController {
         subView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        subView.backgroundColor = .white
+        subView.backgroundColor = "cl_main_back".color
         subView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
         
         subView.addSubview(btnBack)
@@ -48,9 +48,9 @@ class AuthUserViewController: BaseViewController {
             make.top.equalToSuperview().offset(width / 4)
             make.centerX.equalToSuperview()
         }
-        userLabel.text = (Database.isAdmin ? "Admin" : "Reception")
+        userLabel.text = (Database.shared.isAdmin ? "Admin" : "Reception")
         userLabel.font = userLabel.font.withSize(50)
-        userLabel.textColor = UIColor(red: 2/255, green: 3/255, blue: 148/255, alpha: 1.0)
+        userLabel.textColor = "cl_text_blue".color
         
         subView.addSubview(emailfield)
         emailfield.snp.makeConstraints { make in

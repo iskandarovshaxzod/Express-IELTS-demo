@@ -39,8 +39,8 @@ class TabItemView: UIView {
             make.centerX.equalToSuperview()
         }
         imageView.image = image
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .black
+        imageView.contentMode = .scaleAspectFit//59 130 247
+        imageView.tintColor = UIColor(red: 146/255, green: 146/255, blue: 152/255, alpha: 1.0)
         
         subView.addSubview(label)
         label.snp.makeConstraints { make in
@@ -49,16 +49,16 @@ class TabItemView: UIView {
             make.centerX.equalToSuperview()
         }
         label.text = lbl
-        label.textColor = .black
+        label.textColor = UIColor(red: 146/255, green: 146/255, blue: 152/255, alpha: 1.0)
     }
     
     func changed(){
         if isSelected{
-            imageView.tintColor = .red
-            label.textColor     = .red
+            imageView.tintColor = "cl_text_blue".color
+            label.textColor     = "cl_text_blue".color //146 146 152
         } else {
-            imageView.tintColor = .black
-            label.textColor     = .black
+            imageView.tintColor = UIColor(red: 146/255, green: 146/255, blue: 152/255, alpha: 1.0) //.black
+            label.textColor     = UIColor(red: 146/255, green: 146/255, blue: 152/255, alpha: 1.0) //.black
         }
     }
     

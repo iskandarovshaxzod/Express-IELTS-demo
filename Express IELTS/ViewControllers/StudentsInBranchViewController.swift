@@ -9,7 +9,8 @@ import UIKit
 
 class StudentsInBranchViewController: BaseViewController {
     
-    let subView = UIView()
+    let subView   = UIView()
+    let monthView = HeaderMonthView()
     
     let tableView = UITableView()
     
@@ -28,14 +29,19 @@ class StudentsInBranchViewController: BaseViewController {
         subView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        subView.backgroundColor = .white
+        subView.backgroundColor = "cl_main_back".color
+        
+        subView.addSubview(monthView)
+        monthView.snp.makeConstraints { make in
+            make.left.top.right.equalToSuperview()
+        }
         
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(monthView.snp.bottom)
+            make.left.bottom.right.equalToSuperview()
         }
-        tableView.backgroundColor = .white
-        tableView.register(HeaderMonthTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.backgroundColor = "cl_main_back".color
         tableView.delegate   = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
@@ -50,22 +56,13 @@ extension StudentsInBranchViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 50
-        }
         return 60
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell()
-        if indexPath.row == 0 {
-            let tableCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HeaderMonthTableViewCell
-            tableCell.initViews()
-            cell = tableCell
-        } else {
-//            cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
-            cell.textLabel?.text = "student name " + "\(indexPath.row + 1)"
-        }
+        let cell = UITableViewCell()
+        cell.textLabel?.text = "student name " + "\(indexPath.row + 1)"
+        cell.backgroundColor = "cl_cell_back".color
         return cell
     }
 }

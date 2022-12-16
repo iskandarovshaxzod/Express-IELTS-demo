@@ -33,17 +33,17 @@ class MonthlyPaymentViewController: BaseViewController {
         subView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        subView.backgroundColor = .white
+        subView.backgroundColor = "cl_main_back".color
         
         subView.addSubview(pieChart)
         pieChart.snp.makeConstraints { make in
+            make.top.equalToSuperview()
             make.left.equalToSuperview().offset(width/2 - width/2.4)
-            make.top.equalToSuperview().offset(topPadding + 35)
         }
         
         subView.addSubview(totalView)
         totalView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(width / 1.2 + topPadding + 35)
+            make.top.equalToSuperview().offset(width / 1.2)
             make.left.equalToSuperview().offset(20)
             make.width.equalTo(width / 2 + 20)
         }

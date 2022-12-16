@@ -6,9 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     var localized: String {
-        return ""//NSLocalizedString(<#T##key: String##String#>, comment: <#T##String#>)
+        return NSLocalizedString(self, tableName: "Localizable", bundle: .main, value: self, comment: self)
+    }
+    
+    var color: UIColor {
+        return UIColor(named: self) ?? .white
     }
 }

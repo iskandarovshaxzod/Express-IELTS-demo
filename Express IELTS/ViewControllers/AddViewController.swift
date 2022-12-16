@@ -31,7 +31,7 @@ class AddViewController: BaseViewController {
         subView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        subView.backgroundColor = .white
+        subView.backgroundColor = "cl_main_back".color
         subView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
         
         subView.addSubview(nameField)
