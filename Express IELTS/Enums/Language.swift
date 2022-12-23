@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum Language {
-    case english
-    case russian
-    case uzbek
+enum Language: String {
+    case english = "en"
+    case russian = "ru"
+    case uzbek   = "uz"
 }

@@ -15,11 +15,11 @@ class AuthUserViewController: BaseViewController {
     let emailLabel = UILabel()
     let userLabel  = UILabel()
     
-    let emailfield = TextField(placeHolder: "Email")
-    let passfield  = TextField(placeHolder: "Password")
+    let emailfield = TextField(placeHolder: "email".localized)
+    let passfield  = TextField(placeHolder: "password".localized)
     
     let btnBack = UIButton()
-    let btnSubmit = Button(text: "Submit")
+    let btnSubmit = Button(text: "enter".localized)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class AuthUserViewController: BaseViewController {
             make.top.equalToSuperview().offset(width / 4)
             make.centerX.equalToSuperview()
         }
-        userLabel.text = (Database.shared.isAdmin ? "Admin" : "Reception")
+        userLabel.text = (Database.shared.isAdmin ? "admin".localized : "reception".localized)
         userLabel.font = userLabel.font.withSize(50)
         userLabel.textColor = "cl_text_blue".color
         

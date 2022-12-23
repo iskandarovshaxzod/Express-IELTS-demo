@@ -13,10 +13,10 @@ class MainTabViewController: BaseViewController {
     let tabView  = UIView()
     let lineView = UIView()
     
-    let mainItem     = TabItemView(image: UIImage(named: "ic_menu"),     lbl: "Main")
-    let paymentItem  = TabItemView(image: UIImage(named: "ic_payment"),  lbl: "Payment")
-    let studentsItem = TabItemView(image: UIImage(named: "ic_students"), lbl: "Students")
-    let settingsItem = TabItemView(image: UIImage(named: "ic_settings"), lbl: "Settings")
+    let mainItem     = TabItemView(image: UIImage(named: "ic_menu"),     lbl: "main".localized)
+    let paymentItem  = TabItemView(image: UIImage(named: "ic_payment"),  lbl: "payment".localized)
+    let studentsItem = TabItemView(image: UIImage(named: "ic_students"), lbl: "students".localized)
+    let settingsItem = TabItemView(image: UIImage(named: "ic_settings"), lbl: "settings".localized)
     
     var mainController     = MainViewController()
     var paymentController  = PaymentViewController()
@@ -33,15 +33,32 @@ class MainTabViewController: BaseViewController {
     override func configureNavBar() {
         switch currentTab{
             case 1:
-                navigationItem.title = "Express IELTS"
-                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                                    target: self, action: #selector(addTapped))
-                if !Database.shared.isAdmin{
-                    navigationItem.rightBarButtonItem = nil
-                }
+            navigationItem.title = "Express IELTS"
+            var menuItems: [UIAction] {
+                return [
+                    UIAction(title: "new_branch".localized, image: UIImage(systemName: "plus.app"),
+                             handler: { [weak self] (_) in
+                        self?.addTapped()
+                    }),
+                    UIAction(title: "edit".localized, image: UIImage(systemName: "pencil"),
+                             handler: { [weak self] (_) in
+                        print("hello 2")
+                    })
+                ]
+            }
+
+            var demoMenu: UIMenu {
+                return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
+            }
+                
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "ellipsis"), primaryAction: nil, menu: demoMenu)
+    
+            if !Database.shared.isAdmin{
+                navigationItem.rightBarButtonItem = nil
+            }
 //            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "logo"),
 //                                                               style: .done,
-//                                                               target: self, action: #selector(addTapped))
+//                                                               target: self, action: #selector(add))
 //            let logo = UIImageView(image: UIImage(named: "logo"))
 //            logo.frame = CGRect(x: 100, y: 100, width: 40, height: 40)
 ////            logo.frame.size = CGSize(width: 30, height: 30)
@@ -49,16 +66,16 @@ class MainTabViewController: BaseViewController {
 //            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: logo)
             
             case 2:
-                navigationItem.title = "All Payments"
-                navigationItem.rightBarButtonItem = nil
+            navigationItem.title = "all_payment".localized
+            navigationItem.rightBarButtonItem = nil
             case 3:
-                navigationItem.title = "All Students"
-                navigationItem.rightBarButtonItem = nil
+            navigationItem.title = "all_students".localized
+            navigationItem.rightBarButtonItem = nil
             case 4:
-                navigationItem.title = "Settings"
-                navigationItem.rightBarButtonItem = nil
+            navigationItem.title = "settings".localized
+            navigationItem.rightBarButtonItem = nil
             default:
-                break
+            break
         }
     }
     
@@ -159,6 +176,11 @@ class MainTabViewController: BaseViewController {
             }
         }
         
+        mainItem.backgroundColor     = .red
+        paymentItem.backgroundColor  = .gray
+        studentsItem.backgroundColor = .green
+        settingsItem.backgroundColor = .purple
+        
         changeTab()
     }
     
@@ -192,9 +214,9 @@ class MainTabViewController: BaseViewController {
         settingsController.view.isHidden = (currentTab != 4)
     }
     
-    @objc func addTapped(){
+    func addTapped(){
         navigationController?.pushViewController(AddBranchViewController(), animated: true)
     }
 
-    
+    @objc func add(){}
 }

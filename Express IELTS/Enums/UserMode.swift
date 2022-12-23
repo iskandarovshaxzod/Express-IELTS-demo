@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum Usermode{
-    case light
-    case dark
+enum Usermode: Int {
+    case system = 0
+    case dark   = 1
+    case light  = 2
 }

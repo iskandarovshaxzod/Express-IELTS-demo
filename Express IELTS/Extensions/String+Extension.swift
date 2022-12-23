@@ -10,7 +10,12 @@ import UIKit
 
 extension String {
     var localized: String {
-        return NSLocalizedString(self, tableName: "Localizable", bundle: .main, value: self, comment: self)
+        if let path = Bundle.main.path(forResource: Database.shared.language.rawValue, ofType: "lproj"){
+            if let bundle = Bundle(path: path){
+                return NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
+            }
+        }
+        return ""
     }
     
     var color: UIColor {

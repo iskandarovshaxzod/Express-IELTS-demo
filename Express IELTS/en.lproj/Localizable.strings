@@ -1,0 +1,61 @@
+/* 
+  Localizable.strings
+  Express IELTS
+
+  Created by Iskandarov shaxzod on 17.12.2022.
+  
+*/
+
+// General
+"add"    = "Add";
+"delete" = "Delete";
+"edit"   = "Edit";
+
+// AUTH
+"admin"     = "Admin";
+"reception" = "Reception";
+"email"     = "Email";
+"password"  = "Password";
+"enter"     = "Enter";
+
+// Tab items
+"main"     = "Main";
+"payment"  = "Payment";
+"students" = "Students";
+"settings" = "Settings";
+
+// Nav titles
+"all_payment"  = "All Payment";
+"all_students" = "All Students";
+
+// Adding a new branch
+"new_branch"      = "New Branch";
+"new_branch_mail" = "New branch's email";
+"new_branch_pass" = "New branch's password";
+"new_branch_add"  = "Add New Branch";
+
+// Adding a new teacher
+"new_teacher"      = "New Teacher";
+"new_teacher_name" = "New teacher's name";
+
+// Adding a new teacher config
+"new_teacher_config"      = "New teacher config";
+"new_teacher_config_name" = "New config name";
+
+// Adding a new group
+"new_group"      = "New Group";
+"new_group_name" = "New group's name";
+
+// Adding a new student
+"new_student"      = "New Student";
+"new_student_name" = "New student's name";
+
+// Monthly payment
+"monthly_payment"        = "Monthly payment";
+"monthly_rev_all_branch" = "Total revenue of all branches";
+"monthly_rev_a_branch"   = "Total revenue of a ... branch";
+
+// Settings
+"change_pass" = "Change password";
+"user_mode"   = "User mode";
+"language"    = "Language";

@@ -25,7 +25,7 @@ class MonthlyPaymentViewController: BaseViewController {
     }
     
     override func configureNavBar() {
-        title = "Monthly payment"
+        title = "monthly_payment".localized
     }
     
     override func initViews() {
@@ -56,8 +56,8 @@ class MonthlyPaymentViewController: BaseViewController {
         }
 
         
-        totalView.updateTexts(text: "Total revenue of all branches",  sum: "1 000 200 200")
-        branchView.updateTexts(text: "Total revenue of a ... branch", sum: "0")
+        totalView.updateTexts(text: "monthly_rev_all_branch".localized,  sum: "1 000 200 200")
+        branchView.updateTexts(text: "monthly_rev_a_branch".localized,   sum: "0")
     }
     
     func animateChartUI() {

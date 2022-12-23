@@ -34,7 +34,7 @@ class UserViewController: BaseViewController {
             make.centerY.equalToSuperview()
             make.height.equalTo(70)
         }
-        adminBtn.setTitle("Admin", for: .normal)
+        adminBtn.setTitle("admin".localized, for: .normal)
         adminBtn.setTitleColor(.red, for: .normal)
         adminBtn.setTitleColor(.red.withAlphaComponent(0.6), for: .highlighted)
         adminBtn.layer.borderWidth = 2
@@ -53,7 +53,7 @@ class UserViewController: BaseViewController {
             make.centerY.equalToSuperview()
             make.height.equalTo(70)
         }
-        recBtn.setTitle("Reception", for: .normal)
+        recBtn.setTitle("reception".localized, for: .normal)
         recBtn.setTitleColor(.red, for: .normal)
         recBtn.setTitleColor(.red.withAlphaComponent(0.6), for: .highlighted)
         recBtn.layer.borderWidth = 2

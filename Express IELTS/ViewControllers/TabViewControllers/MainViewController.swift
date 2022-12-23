@@ -40,8 +40,9 @@ class MainViewController: BaseViewController {
     }
     
     private func handleMoveToTrash(index: Int) {
-        showActionAlert(title: "Warning", message: "Are you sure that you want to delete a branch?", actions: ["Yes", "No"]){ [weak self] action in
-            if action.title == "Yes" {
+        showActionAlert(title: "Are you sure that you want to delete a branch?", message: nil,
+                        actions: ["delete".localized, "No"]) { [weak self] action in
+            if action.title == "delete".localized {
                 self?.ind -= 1
                 self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
             }

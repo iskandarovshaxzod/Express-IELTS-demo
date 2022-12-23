@@ -10,14 +10,13 @@ import UIKit
 class SettingsViewController: BaseViewController {
     
     let subView   = UIView()
-    
     let tableView = UITableView()
     
-    let texts = ["Change password", "User mode", "Language"]
+    let texts = ["change_pass".localized, "user_mode".localized, "language".localized]
+    let icons = ["lock", "paperclip", "paperclip"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        edgesForExtendedLayout = []
     }
     
     override func initViews() {
@@ -40,7 +39,7 @@ class SettingsViewController: BaseViewController {
         tableView.layer.cornerRadius = 10
         tableView.isScrollEnabled    = false
     }
-
+    
 }
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -56,21 +55,32 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell()
         cell.textLabel?.text = texts[indexPath.row]
         cell.backgroundColor = "cl_cell_back".color
-        cell.imageView?.image = UIImage(systemName: "paperclip")
+        cell.imageView?.image = UIImage(systemName: icons[indexPath.row])
         cell.accessoryType   = .disclosureIndicator
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if texts[indexPath.row] == "Change password" {
+        if indexPath.row == 0 {
             if Database.shared.isAdmin {
                 // Let admin change password
             } else {
                 // Show some animation
             }
+        } else if indexPath.row == 1 {
+            let vc = ChangeSettingsViewController()
+            vc.texts = ["System", "Dark", "Light"]
+            vc.icons = ["iphone.smartbatterycase.gen2", "moon.fill", "sun.max"]
+            vc.isLan = false
+            present(vc, animated: true)
+        } else {
+            let vc = ChangeSettingsViewController()
+            vc.texts = ["English", "Russian", "Uzbek"]
+            vc.icons = ["paperclip", "paperclip", "paperclip"]
+            vc.isLan = true
+            present(vc, animated: true)
         }
     }
     
 }
-//59 130 247

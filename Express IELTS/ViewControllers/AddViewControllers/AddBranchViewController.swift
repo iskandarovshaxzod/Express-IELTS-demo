@@ -11,17 +11,17 @@ class AddBranchViewController: BaseViewController {
     
     let subView = UIView()
     
-    let emailfield = TextField(placeHolder: "New branch's email")
-    let passfield  = TextField(placeHolder: "New branch's password")
+    let emailfield = TextField(placeHolder: "new_branch_mail".localized)
+    let passfield  = TextField(placeHolder: "new_branch_pass".localized)
 
-    let addButton  = Button(text: "Add New Branch")
+    let addButton  = Button(text: "new_branch_add".localized)
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     override func configureNavBar() {
-        title = "New Branch"
+        title = "new_branch".localized
     }
 
     override func initViews() {

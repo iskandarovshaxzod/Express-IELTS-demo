@@ -1,0 +1,61 @@
+/* 
+  Localizable.strings
+  Express IELTS
+
+  Created by Iskandarov shaxzod on 17.12.2022.
+  
+*/
+
+// General
+"add"    = "Добавлять";
+"delete" = "Удалить";
+"edit"   = "Редактировать";
+
+// AUTH
+"admin"     = "Админ";
+"reception" = "Reception";
+"email"     = "Email";
+"password"  = "Пароль";
+"enter"     = "Войти";
+
+// Tab items
+"main"     = "Главный";
+"payment"  = "Оплата";
+"students" = "Ученики";
+"settings" = "Настройки";
+
+// Nav titles
+"all_payment"  = "Все Платежи";
+"all_students" = "Все Cтуденты";
+
+// Adding a new branch
+"new_branch"      = "Новый Филиал";
+"new_branch_mail" = "Электронная почта нового филиала";
+"new_branch_pass" = "Пароль нового филиала";
+"new_branch_add"  = "Добавить новый филиал";
+
+// Adding a new teacher
+"new_teacher"      = "Новый учитель";
+"new_teacher_name" = "Имя нового учителя";
+
+// Adding a new teacher config
+"new_teacher_config"      = "Новая конфигурация учителя";
+"new_teacher_config_name" = "Новое имя конфигурации";
+
+// Adding a new group
+"new_group"      = "Новая группа";
+"new_group_name" = "Название новой группы";
+
+// Adding a new student
+"new_student"      = "Новый студент";
+"new_student_name" = "Имя нового ученика";
+
+// Monthly payment
+"monthly_payment"        = "Ежемесячно оплата";
+"monthly_rev_all_branch" = "Общий доход всех филиалов";
+"monthly_rev_a_branch"   = "Общий доход филиала ...";
+
+// Settings
+"change_pass" = "Изменить пароль";
+"user_mode"   = "Пользовательский режим";
+"language"    = "Язык";

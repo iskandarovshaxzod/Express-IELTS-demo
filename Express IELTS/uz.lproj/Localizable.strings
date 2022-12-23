@@ -1,0 +1,61 @@
+/* 
+  Localizable.strings
+  Express IELTS
+
+  Created by Iskandarov shaxzod on 17.12.2022.
+  
+*/
+
+// General
+"add"    = "Qo'shish";
+"delete" = "O'chirish";
+"edit"   = "Tahrirlash";
+
+// AUTH
+"admin"     = "Admin";
+"reception" = "Reception";
+"email"     = "Email";
+"password"  = "Parol";
+"enter"     = "Kirish";
+
+// Tab items
+"main"     = "Asosiy";
+"payment"  = "To'lov";
+"students" = "Talabalar";
+"settings" = "Sozlamalar";
+
+// Nav titles
+"all_payment"  = "Barcha to'lovlar";
+"all_students" = "Barcha studentlar";
+
+// Adding a new branch
+"new_branch"      = "Yangi filial";
+"new_branch_mail" = "Yangi filialning emali";
+"new_branch_pass" = "Yangi filialning paroli";
+"new_branch_add"  = "Yangi filialni qo'shish";
+
+// Adding a new teacher
+"new_teacher"      = "Yangi O'qituvchi";
+"new_teacher_name" = "Yangi o'qituvchining ismi";
+
+// Adding a new teacher config
+"new_teacher_config"      = "Yangi O'qituvchining konf";
+"new_teacher_config_name" = "Yangi konfiguratsiya nomi";
+
+// Adding a new group
+"new_group"      = "Yangi guruh";
+"new_group_name" = "Yangi guruhning ismi";
+
+// Adding a new student
+"new_student"      = "Yangi talaba";
+"new_student_name" = "Yangi talabaning ismi";
+
+// Monthly payment
+"monthly_payment"        = "Oylik to'lovlar";
+"monthly_rev_all_branch" = "Barcha filiallarning umumiy daromadi";
+"monthly_rev_a_branch"   = "... filialining umumiy daromadi";
+
+// Settings
+"change_pass" = "Parolni o'zgartirish";
+"user_mode"   = "Foydalanuvchi rejimi";
+"language"    = "Til";

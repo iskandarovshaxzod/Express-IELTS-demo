@@ -29,16 +29,16 @@ class BaseViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardDidShowNotification, object: nil)
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        switch traitCollection.userInterfaceStyle{
-            case .light, .unspecified:
-                Database.shared.userMode = .light
-            case .dark:
-                Database.shared.userMode = .dark
-            default: break
-        }
-    }
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        super.traitCollectionDidChange(previousTraitCollection)
+//        switch traitCollection.userInterfaceStyle{
+//            case .light, .unspecified:
+//                Database.shared.userMode = .light
+//            case .dark:
+//                Database.shared.userMode = .dark
+//            default: break
+//        }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         iskeyboardActive = true
@@ -79,7 +79,7 @@ class BaseViewController: UIViewController {
             make.center.equalToSuperview()
             make.width.height.equalTo(100)
         }
-        spinnerView.backgroundColor = "cl_cell_back".color
+        spinnerView.backgroundColor    = "cl_cell_back".color
         spinnerView.layer.cornerRadius = 15
         
         spinnerView.addSubview(spinner)
@@ -115,10 +115,15 @@ class BaseViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    func showActionAlert(title: String, message: String, actions: [String], handler: @escaping (UIAlertAction) -> ()) {
+    func showActionAlert(title: String?, message: String?, actions: [String],
+                         handler: @escaping (UIAlertAction) -> ()) {
         let c = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         actions.forEach { str in
-            c.addAction(UIAlertAction(title: str, style: .default, handler: handler))
+            if str == "delete".localized {
+                c.addAction(UIAlertAction(title: str, style: .destructive, handler: handler))
+            } else {
+                c.addAction(UIAlertAction(title: str, style: .default, handler: handler))
+            }
         }
         c.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(c, animated: true)

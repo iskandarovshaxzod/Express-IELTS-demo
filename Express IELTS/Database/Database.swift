@@ -10,12 +10,17 @@ import UIKit
 
 struct Database {
     static var shared = Database()
-    var isAdmin  = false
+    var isAdmin       = false
     var userMode: Usermode = .light{
         didSet{
+            print("mode: \(userMode.rawValue)")
             userModeChanged()
         }
     }
+    var language: Language = .english
+    
+    
+    //MARK: Methods
   
     func userModeChanged() {
         if let scene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
@@ -25,7 +30,6 @@ struct Database {
         if let myDelegate = UIApplication.shared.delegate as? AppDelegate {
             print("delegate: app")
             myDelegate.blurStyle = (userMode == .light ? .light : .dark)
-            myDelegate.configureNavigationBar()
         }
     }
 }
