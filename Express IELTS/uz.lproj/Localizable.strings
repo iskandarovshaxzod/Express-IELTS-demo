@@ -10,6 +10,11 @@
 "add"    = "Qo'shish";
 "delete" = "O'chirish";
 "edit"   = "Tahrirlash";
+"cancel" = "Bekor qilish";
+"yes"    = "Ha";
+"no"     = "Yo'q";
+"branches" = "Filiallar";
+"back"     = "Orqaga";
 
 // AUTH
 "admin"     = "Admin";
@@ -33,6 +38,7 @@
 "new_branch_mail" = "Yangi filialning emali";
 "new_branch_pass" = "Yangi filialning paroli";
 "new_branch_add"  = "Yangi filialni qo'shish";
+"new_branch_add_info"  = "Yangi filial qo'shmoqchi ekanligingizga ishonchingiz komilmi ?";
 
 // Adding a new teacher
 "new_teacher"      = "Yangi O'qituvchi";
@@ -53,9 +59,28 @@
 // Monthly payment
 "monthly_payment"        = "Oylik to'lovlar";
 "monthly_rev_all_branch" = "Barcha filiallarning umumiy daromadi";
-"monthly_rev_a_branch"   = "... filialining umumiy daromadi";
+"monthly_rev_a_branch"   = "%@ filialining umumiy daromadi";
 
 // Settings
 "change_pass" = "Parolni o'zgartirish";
 "user_mode"   = "Foydalanuvchi rejimi";
 "language"    = "Til";
+
+// Change password
+"old_pass" = "Eski Parol";
+"new_pass" = "Yangi Parol";
+"enter_new_pass" = "Yangi parolni kiriting";
+"update_pass"    = "Parolni yangilash";
+
+// User mode
+"system" = "Tizimli";
+"dark"   = "Qorong'i";
+"light"  = "Yorug'";
+
+// Language
+"english" = "Inglizcha";
+"russian" = "Ruscha";
+"uzbek"   = "O'zbekcha";
+
+// Make sure info
+"add_info" = "%@ ni qo'shmoqchi ekanligingizga ishonchingiz komilmi ?";

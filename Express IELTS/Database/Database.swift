@@ -11,25 +11,18 @@ import UIKit
 struct Database {
     static var shared = Database()
     var isAdmin       = false
-    var userMode: Usermode = .light{
-        didSet{
-            print("mode: \(userMode.rawValue)")
-            userModeChanged()
+    var currentBranch = ""
+
+    var language: Language {
+        get{
+            let lan = Defaults.defaults.string(forKey: "language") ?? "en"
+            return Language(rawValue: lan) ?? .english
         }
     }
-    var language: Language = .english
-    
-    
-    //MARK: Methods
-  
-    func userModeChanged() {
-        if let scene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            print("delegate: scene")
-            scene.blurEffect = UIBlurEffect(style: userMode == .light ? .light : .dark)
-        }
-        if let myDelegate = UIApplication.shared.delegate as? AppDelegate {
-            print("delegate: app")
-            myDelegate.blurStyle = (userMode == .light ? .light : .dark)
+    var userMode: Usermode {
+        get{
+            let mode = Defaults.defaults.integer(forKey: "user_mode")
+            return Usermode(rawValue: mode) ?? .system
         }
     }
 }

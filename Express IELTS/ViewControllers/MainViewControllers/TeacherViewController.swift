@@ -9,15 +9,19 @@ import UIKit
 
 class TeacherViewController: BaseViewController {
     
+    let presenter = TeacherConfigListPresenter()
+    
     let subView = UIView()
     
     let tableView = UITableView()
     
     var teacherName = ""
-    var ind = 10
+    var configs = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setDelegate(delegate: self)
+        presenter.getAllTeachers(teacherName: teacherName)
     }
 
     override func configureNavBar() {
@@ -57,7 +61,7 @@ class TeacherViewController: BaseViewController {
         tableView.delegate   = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
-        
+        tableView.separatorStyle = .none
     }
     
     @objc func addTapped() {
@@ -72,9 +76,14 @@ class TeacherViewController: BaseViewController {
         showActionAlert(title: "Are you sure that you want to delete a branch?", message: nil,
                         actions: ["delete".localized]){ [weak self] action in
             if action.title == "delete".localized {
-                self?.ind -= 1
                 self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
             }
+        }
+    }
+    
+    private func reloadData(){
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
         }
     }
 }
@@ -82,12 +91,12 @@ class TeacherViewController: BaseViewController {
 extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ind
+        return configs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-        cell.text = "config \(indexPath.row + 1)"
+        cell.text = configs[indexPath.row]
         cell.initViews()
         cell.selectionStyle = .none
         return cell
@@ -99,22 +108,32 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = GroupViewController()
-        vc.configName = "Config name \(indexPath.row + 1)"
+        vc.configName = configs[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: - Swipe Actions
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let delete = UIContextualAction(style: .normal, title: "Delete") { [weak self] (_, _, completionHandler) in
+        let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
             self?.handleMoveToTrash(index: indexPath.row)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed
-        delete.image = UIImage(named: "ic_trash")?.withTintColor(.white)
-        let c = UISwipeActionsConfiguration(actions: [delete])
-        c.performsFirstActionWithFullSwipe = false
-        return (Database.shared.isAdmin ? c : nil)
+        delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
+        let configs = UISwipeActionsConfiguration(actions: [delete])
+        configs.performsFirstActionWithFullSwipe = false
+        return configs
+    }
+}
+
+extension TeacherViewController: TeacherConfigListDelegate {
+    func onSuccessGetAllTeacherConfigs(configs: [String]) {
+        self.configs = configs
+        reloadData()
+    }
+    
+    func onErrorGetAllTeacherConfigs(error: String?) {
+        showErrorMessage(title: error)
     }
 }

@@ -34,7 +34,7 @@ class AddBranchViewController: BaseViewController {
 
         subView.addSubview(emailfield)
         emailfield.snp.updateConstraints { make in
-            make.top.equalToSuperview().offset(width / 3)
+            make.top.equalToSuperview().offset(width / 10)
             make.left.equalToSuperview().offset(30)
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
@@ -47,6 +47,7 @@ class AddBranchViewController: BaseViewController {
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
         }
+        
 
         subView.addSubview(addButton)
         addButton.snp.makeConstraints { make in
@@ -61,8 +62,16 @@ class AddBranchViewController: BaseViewController {
     }
 
     @objc func addTapped(){
-        showSureInfo(title: "Continue ???", message: "Are you sure that you want to add a new branch ?") { [weak self] alertAction in
-            self?.navigationController?.popViewController(animated: true)
+        showSureInfo(title: "new_branch_add_info".localized) { [weak self] alertAction in
+            self?.showLoading()
+            FirebaseManager.shared.addNewBranch(email: "novza", password: "123456") { err in
+                self?.hideLoading()
+                if err != nil {
+                    self?.showErrorMessage(title: err?.localizedDescription)
+                } else {
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            }
         }
     }
 

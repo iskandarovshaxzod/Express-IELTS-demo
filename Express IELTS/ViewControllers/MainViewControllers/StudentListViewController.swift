@@ -9,20 +9,25 @@ import UIKit
 
 class StudentListViewController: BaseViewController {
     
+    let presenter = StudentListPresenter()
+    
     let subView   = UIView()
     let monthView = HeaderMonthView()
     
     let tableView = UITableView()
     
-    var configName = ""
-    var ind = 10
+    var groupName = ""
+    var students = [StudentCheckModel]()
+    var canEdit = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setDelegate(delegate: self)
+        presenter.getAllStudents(teacherName: "hello 2", configName: "every day", groupName: groupName)
     }
     
     override func configureNavBar() {
-        title = configName
+        title = groupName
         
         var menuItems: [UIAction] {
             return [
@@ -30,9 +35,11 @@ class StudentListViewController: BaseViewController {
                          handler: { [weak self] (_) in
                     self?.addTapped()
                 }),
-                UIAction(title: "edit".localized, image: UIImage(systemName: "pencil"),
+                UIAction(title: canEdit ? "done" : "edit".localized,
+                         image: canEdit ? UIImage(systemName: "checkmark") : UIImage(systemName: "pencil"),
                          handler: { [weak self] (_) in
-                    print("hello 2")
+                             self?.canEdit.toggle()
+                             self?.configureNavBar()
                 })
             ]
         }
@@ -60,10 +67,11 @@ class StudentListViewController: BaseViewController {
             make.left.bottom.right.equalToSuperview()
         }
         tableView.backgroundColor = "cl_main_back".color
-        tableView.register(ListTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(StudentCheckTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate   = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .singleLine
     }
     
     @objc func addTapped() {
@@ -78,21 +86,27 @@ class StudentListViewController: BaseViewController {
         showActionAlert(title: "Are you sure that you want to delete a branch?",
                         message: nil, actions: ["delete".localized]){ [weak self] action in
             if action.title == "delete".localized {
-                self?.ind -= 1
                 self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
             }
+        }
+    }
+    
+    private func reloadData(){
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
         }
     }
 }
 
 extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ind
+        return students.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-        cell.text = "Student name \(indexPath.row + 1)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StudentCheckTableViewCell
+        cell.nameLabel.text = students[indexPath.row].studentName
+        print(students[indexPath.row].months)
         cell.initViews()
         cell.selectionStyle = .none
         return cell
@@ -102,24 +116,41 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
         return 90
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let vc = GroupViewController()
-//        vc.configName = " name \(indexPath.row + 1)"
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let delete = UIAction(title: "delete".localized, image: UIImage(systemName: "trash"),
+                                  attributes: .destructive) { [weak self] _ in
+                self?.handleMoveToTrash(index: indexPath.row)
+            }
+            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [delete])
+        }
+        return config
+    }
     
     //MARK: - Swipe Actions
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let delete = UIContextualAction(style: .normal, title: "Delete") { [weak self] (_, _, completionHandler) in
+        let delete = UIContextualAction(style: .destructive, title: "delete".localized) {
+            [weak self] (_, _, completionHandler) in
             self?.handleMoveToTrash(index: indexPath.row)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed
-        delete.image = UIImage(named: "ic_trash")?.withTintColor(.white)
-        let c = UISwipeActionsConfiguration(actions: [delete])
-        c.performsFirstActionWithFullSwipe = false
-        return (Database.shared.isAdmin ? c : nil)
+        delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
+        let config = UISwipeActionsConfiguration(actions: [delete])
+        config.performsFirstActionWithFullSwipe = false
+        return config
+    }
+}
+
+extension StudentListViewController: StudentListDelegate {
+    func onSuccessGetAllStudents(students: [StudentCheckModel]) {
+        self.students = students
+        reloadData()
+    }
+    
+    func onErrorGetAllStudents(error: String?) {
+        showErrorMessage(title: error)
     }
 }

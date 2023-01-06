@@ -12,16 +12,17 @@ import FirebaseCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
-    var blurStyle: UIBlurEffect.Style = .prominent //(Database.shared.userMode == .light ? .light : .dark)
-    
     let visualEffectView = UIVisualEffectView()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UserViewController()
         window?.makeKeyAndVisible()
+        UINavigationController().navigationItem.backBarButtonItem = UIBarButtonItem(title: "nazad",                                             style: .plain, target: nil, action: nil)
+//        UINavigationItem().backBarButtonItem = UIBarButtonItem(title: "nazad", style: .plain,
+//                                                               target: nil, action: nil)
         
+        checkUserMode()
         configureNavigationBar()
         
         //MARK: Firebase configs
@@ -61,6 +62,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: Methods
 
 extension AppDelegate {
+    
+    func checkUserMode() {
+        switch Database.shared.userMode {
+            case .system: window?.overrideUserInterfaceStyle = .unspecified
+            case .dark:   window?.overrideUserInterfaceStyle = .dark
+            case .light:  window?.overrideUserInterfaceStyle = .light
+        }
+    }
+    
     func showBlur() {
         if let window{
             if !visualEffectView.isDescendant(of: window) {
@@ -90,6 +100,5 @@ extension AppDelegate {
         UINavigationBar.appearance().scrollEdgeAppearance = scrollingAppearance
         UINavigationBar.appearance().compactAppearance    = scrollingAppearance
         UINavigationBar.appearance().isTranslucent        = false
-//        UINavigationBar.appearance().
     }
 }

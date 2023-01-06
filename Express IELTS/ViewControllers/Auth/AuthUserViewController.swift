@@ -99,14 +99,30 @@ class AuthUserViewController: BaseViewController {
 //            UIApplication.shared.windows.first?.rootViewController = nc
 ////            backTapped()
 //        }
+        
+        
+//        showLoading()
+//        //TODO: Remove DispatchQueue
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2){
+//            self.hideLoading()
+//            self.vibrate(for: .success)
+//            let vc = MainTabViewController()
+//            UIApplication.shared.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
+//        }
+        
+        validateUser(email: "admin@gmail.com", password: "1111")
+    }
+    
+    func validateUser(email: String, password: String) {
         showLoading()
-        //TODO: Remove DispatchQueue
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2){
-            self.hideLoading()
-            self.vibrate(for: .success)
-            let vc = MainTabViewController()
-            UIApplication.shared.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
-        }
+        FirebaseManager.shared.validateUser(email: email, password: password, success: { [weak self] in
+            self?.hideLoading()
+            self?.vibrate(for: .success)
+            UIApplication.shared.windows.first?.rootViewController = UINavigationController(rootViewController: MainTabViewController())
+        }, error: { [weak self] err in
+            self?.hideLoading()
+            self?.showErrorMessage(title: err?.localizedDescription)
+        })
     }
     
     @objc func backTapped(){

@@ -39,6 +39,7 @@ class BranchRevenueViewController: BaseViewController {
         tableView.delegate   = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
     }
 
 }

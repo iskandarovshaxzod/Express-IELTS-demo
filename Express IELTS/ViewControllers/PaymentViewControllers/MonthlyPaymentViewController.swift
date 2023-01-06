@@ -57,7 +57,7 @@ class MonthlyPaymentViewController: BaseViewController {
 
         
         totalView.updateTexts(text: "monthly_rev_all_branch".localized,  sum: "1 000 200 200")
-        branchView.updateTexts(text: "monthly_rev_a_branch".localized,   sum: "0")
+        branchView.updateTexts(text: String(format: "monthly_rev_a_branch".localized, "`Mega`"), sum: "0")
     }
     
     func animateChartUI() {

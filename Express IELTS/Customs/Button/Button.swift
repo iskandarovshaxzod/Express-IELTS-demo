@@ -10,7 +10,7 @@ import UIKit
 class Button: UIButton {
 
     init(text: String){
-        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        super.init(frame: CGRect())
         
         self.setTitle(text, for: .normal)
         self.layer.borderWidth  = 1

@@ -10,6 +10,11 @@
 "add"    = "Add";
 "delete" = "Delete";
 "edit"   = "Edit";
+"cancel" = "Cancel";
+"yes"    = "Yes";
+"no"     = "No";
+"branches" = "Branches";
+"back"     = "Back";
 
 // AUTH
 "admin"     = "Admin";
@@ -33,6 +38,7 @@
 "new_branch_mail" = "New branch's email";
 "new_branch_pass" = "New branch's password";
 "new_branch_add"  = "Add New Branch";
+"new_branch_add_info"  = "Are you sure that you want to add a new branch ?";
 
 // Adding a new teacher
 "new_teacher"      = "New Teacher";
@@ -53,9 +59,28 @@
 // Monthly payment
 "monthly_payment"        = "Monthly payment";
 "monthly_rev_all_branch" = "Total revenue of all branches";
-"monthly_rev_a_branch"   = "Total revenue of a ... branch";
+"monthly_rev_a_branch"   = "Total revenue of a %@ branch";
 
 // Settings
 "change_pass" = "Change password";
 "user_mode"   = "User mode";
 "language"    = "Language";
+
+// Change password
+"old_pass" = "Old password";
+"new_pass" = "New password";
+"enter_new_pass" = "Enter a new password";
+"update_pass"    = "Update password";
+
+// User mode
+"system" = "System";
+"dark"   = "Dark";
+"light"  = "Light";
+
+// Language
+"english" = "English";
+"russian" = "Russian";
+"uzbek"   = "Uzbek";
+
+// Make sure info
+"add_info" = "Are you sure that you want to add a %@ ?";

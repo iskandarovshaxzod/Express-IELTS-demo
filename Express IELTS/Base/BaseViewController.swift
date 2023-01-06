@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 class BaseViewController: UIViewController {
     
@@ -18,7 +19,10 @@ class BaseViewController: UIViewController {
     let spinnerView = UIView()
     let spinner     = UIActivityIndicatorView()
     
-    var keyboardHeight = 0.0
+    let animationView = UIView()
+    let animation     = AnimationView()
+    
+    var keyboardHeight   = 0.0
     var iskeyboardActive = false
 
     override func viewDidLoad() {
@@ -27,18 +31,23 @@ class BaseViewController: UIViewController {
         initViews()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardDidShowNotification, object: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "back".localized, style: .plain,
+                                                           target: nil, action: nil)
     }
     
-//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//        super.traitCollectionDidChange(previousTraitCollection)
-//        switch traitCollection.userInterfaceStyle{
-//            case .light, .unspecified:
-//                Database.shared.userMode = .light
-//            case .dark:
-//                Database.shared.userMode = .dark
-//            default: break
-//        }
-//    }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            if let scene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                switch traitCollection.userInterfaceStyle {
+                    case .dark:  scene.blurEffect = UIBlurEffect(style: .dark)
+                    case .light: scene.blurEffect = UIBlurEffect(style: .light)
+                    default: break
+                }
+            }
+//            print("system mode: ", traitCollection.userInterfaceStyle.rawValue)
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         iskeyboardActive = true
@@ -53,8 +62,11 @@ class BaseViewController: UIViewController {
     func configureNavBar(){}
     func initViews(){}
     func setUpViews(){}
-    
-    //MARK: Methods
+
+}
+
+//MARK: Methods
+extension BaseViewController {
     
     func vibrate(){
         UIDevice.vibrate()
@@ -65,7 +77,8 @@ class BaseViewController: UIViewController {
     }
 
     func showLoading(){
-        view.addSubview(loadingView)
+        window?.addSubview(loadingView)
+        
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -100,18 +113,54 @@ class BaseViewController: UIViewController {
         hideLoading()
     }
     
-    //MARK: Methods for showing ALERTS
+    func showAnimation(animationName: String, animationMode: LottieLoopMode = .loop,
+                       completion: ((Bool) -> Void)? = nil) {
+        window?.addSubview(animationView)
+        animationView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        animationView.backgroundColor          = .gray.withAlphaComponent(0.6)
+        animationView.isUserInteractionEnabled = true
+        animationView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                  action: #selector(animationViewTapped)))
+        animationView.addSubview(animation)
+        animation.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(width / 2)
+        }
+        animation.animation   = .named(animationName)
+        animation.contentMode = .scaleAspectFit
+        animation.loopMode    = animationMode
+        animation.backgroundColor    = "cl_cell_back".color
+        animation.layer.cornerRadius = 15
+        animation.play { completed in
+            completion?(completed)
+        }
+    }
     
-    func showMessage(title: String, message: String){
+    func hideAnimation() {
+        animation.stop()
+        animationView.removeFromSuperview()
+    }
+    
+    @objc func animationViewTapped() {
+        hideAnimation()
+    }
+}
+
+//MARK: Methods for showing ALERTS
+extension BaseViewController {
+    
+    func showErrorMessage(title: String? = nil, message: String? = nil){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alert, animated: true)
     }
     
-    func showSureInfo(title: String, message: String, handler: @escaping (UIAlertAction) -> ()){
+    func showSureInfo(title: String? = nil, message: String? = nil, handler: @escaping (UIAlertAction) -> ()){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: handler))
-        alert.addAction(UIAlertAction(title: "No", style: .cancel))
+        alert.addAction(UIAlertAction(title: "yes".localized, style: .destructive, handler: handler))
+        alert.addAction(UIAlertAction(title: "no".localized, style: .cancel))
         present(alert, animated: true)
     }
     
@@ -125,10 +174,13 @@ class BaseViewController: UIViewController {
                 c.addAction(UIAlertAction(title: str, style: .default, handler: handler))
             }
         }
-        c.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        c.addAction(UIAlertAction(title: "cancel".localized, style: .cancel))
         present(c, animated: true)
     }
-    
+}
+
+// MARK: Methods for Observing Keyboard State
+extension BaseViewController {
     @objc func keyboardWillShow(_ notification: Notification){
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             keyboardHeight = keyboardFrame.cgRectValue.height
@@ -138,17 +190,15 @@ class BaseViewController: UIViewController {
         }
     }
     
-    
-    
     @objc func keyboardWillHide(){
         closeKeyboard()
     }
     
-    func openKeyboard(){
-        
-    }
+    func openKeyboard(){}
     
-    func closeKeyboard(){
-        
+    func closeKeyboard(){}
+
+    func resetMainViewController() {
+        window?.rootViewController = UINavigationController(rootViewController: MainTabViewController())
     }
 }

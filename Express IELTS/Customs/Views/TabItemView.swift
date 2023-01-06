@@ -53,9 +53,17 @@ class TabItemView: UIView {
     }
     
     func changed(){
+        
         if isSelected{
-            imageView.tintColor = "cl_text_blue".color
-            label.textColor     = "cl_text_blue".color //146 146 152
+            UIView.animate(withDuration: 0.2) { [weak self] in
+                self?.imageView.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                self?.imageView.tintColor = "cl_text_blue".color
+                self?.label.textColor     = "cl_text_blue".color
+            } completion: { [weak self] _ in
+                self?.imageView.transform = CGAffineTransform.identity
+            }
+//            imageView.tintColor = "cl_text_blue".color
+//            label.textColor     = "cl_text_blue".color
         } else {
             imageView.tintColor = UIColor(red: 146/255, green: 146/255, blue: 152/255, alpha: 1.0) //.black
             label.textColor     = UIColor(red: 146/255, green: 146/255, blue: 152/255, alpha: 1.0) //.black

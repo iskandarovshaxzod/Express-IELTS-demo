@@ -19,7 +19,6 @@ extension UIDevice {
 
 
 final class HapticsManager {
-//    static let shared = HapticsManager()
     static func vibrate(for type: UINotificationFeedbackGenerator.FeedbackType) {
         DispatchQueue.main.async {
             let notification = UINotificationFeedbackGenerator()

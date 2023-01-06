@@ -24,6 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = UserViewController()
         window?.makeKeyAndVisible()
+        checkUserMode()
+        UINavigationItem().backBarButtonItem = UIBarButtonItem(title: "nazad", style: .plain,
+                                                                       target: nil, action: nil)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -63,6 +66,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 // MARK: Methods
 
 extension SceneDelegate {
+    
+    func checkUserMode() {
+        switch Database.shared.userMode {
+            case .system:
+                window?.overrideUserInterfaceStyle = .unspecified
+                blurEffect = UITraitCollection.current.userInterfaceStyle == .dark ? UIBlurEffect(style: .dark)
+                                                                                   : UIBlurEffect(style: .light)
+            case .dark:
+                window?.overrideUserInterfaceStyle = .dark
+                blurEffect = UIBlurEffect(style: .dark)
+            case .light:
+                window?.overrideUserInterfaceStyle = .light
+                blurEffect = UIBlurEffect(style: .light)
+        }
+    }
+    
     func showBlur() {
         if let window{
             if !visualEffectView.isDescendant(of: window) {

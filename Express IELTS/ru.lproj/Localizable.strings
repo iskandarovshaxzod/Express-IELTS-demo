@@ -10,6 +10,11 @@
 "add"    = "Добавлять";
 "delete" = "Удалить";
 "edit"   = "Редактировать";
+"cancel" = "Отмена";
+"yes"    = "Да";
+"no"     = "Нет";
+"branches" = "Филиали";
+"back"     = "Назад";
 
 // AUTH
 "admin"     = "Админ";
@@ -33,6 +38,7 @@
 "new_branch_mail" = "Электронная почта нового филиала";
 "new_branch_pass" = "Пароль нового филиала";
 "new_branch_add"  = "Добавить новый филиал";
+"new_branch_add_info"  = "Вы уверены, что хотите добавить новый филиал ?";
 
 // Adding a new teacher
 "new_teacher"      = "Новый учитель";
@@ -53,9 +59,28 @@
 // Monthly payment
 "monthly_payment"        = "Ежемесячно оплата";
 "monthly_rev_all_branch" = "Общий доход всех филиалов";
-"monthly_rev_a_branch"   = "Общий доход филиала ...";
+"monthly_rev_a_branch"   = "Общий доход филиала %@";
 
 // Settings
 "change_pass" = "Изменить пароль";
 "user_mode"   = "Пользовательский режим";
 "language"    = "Язык";
+
+// Change password
+"old_pass" = "Прежний пароль";
+"new_pass" = "Новый пароль";
+"enter_new_pass" = "Введите новый пароль";
+"update_pass"    = "Обновить пароль";
+
+// User mode
+"system" = "Системный";
+"dark"   = "Темный";
+"light"  = "Яркий";
+
+// Language
+"english" = "Английский";
+"russian" = "Русский";
+"uzbek"   = "Узбекский";
+
+// Make sure info
+"add_info" = "Вы уверены, что хотите добавить %@ ?";

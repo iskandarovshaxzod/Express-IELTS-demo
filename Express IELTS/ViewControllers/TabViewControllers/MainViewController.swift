@@ -7,17 +7,20 @@
 
 import UIKit
 import SnapKit
-import Lottie
 
 class MainViewController: BaseViewController {
+ 
+    let presenter = BranchListPresenter()
     
     let subView   = UIView()
     let tableView = UITableView()
     
-    var ind = 10
-
+    var branches = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setDelegate(delegate: self)
+        presenter.getAllBranches()
     }
     
     override func initViews() {
@@ -41,11 +44,16 @@ class MainViewController: BaseViewController {
     
     private func handleMoveToTrash(index: Int) {
         showActionAlert(title: "Are you sure that you want to delete a branch?", message: nil,
-                        actions: ["delete".localized, "No"]) { [weak self] action in
+                        actions: ["delete".localized]) { [weak self] action in
             if action.title == "delete".localized {
-                self?.ind -= 1
                 self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
             }
+        }
+    }
+    
+    private func reloadData() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
         }
     }
 }
@@ -53,12 +61,12 @@ class MainViewController: BaseViewController {
 extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ind
+        return branches.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-        cell.text = "branch name \(indexPath.row + 1)"
+        cell.text = branches[indexPath.row] //"branch name \(indexPath.row + 1)"
         cell.initViews()
         cell.selectionStyle = .none
         return cell
@@ -70,7 +78,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = BranchViewController()
-        vc.branchName = "Branch name \(indexPath.row + 1)"
+        Database.shared.currentBranch = branches[indexPath.row]
+        vc.branchName = branches[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -79,14 +88,24 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let delete = UIContextualAction(style: .normal, title: "Delete") { [weak self] (_, _, completionHandler) in
+        let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
             self?.handleMoveToTrash(index: indexPath.row)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed
-        delete.image = UIImage(named: "ic_trash")?.withTintColor(.white)
+        delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
         let c = UISwipeActionsConfiguration(actions: [delete])
         c.performsFirstActionWithFullSwipe = false
         return (Database.shared.isAdmin ? c : nil)
+    }
+}
+
+extension MainViewController: BranchListDelegate {
+    func onSuccessGetAllBranches(branches: [String]) {
+        self.branches = branches
+        reloadData()
+    }
+    func onErrorGetAllBranches(error: String?) {
+        showErrorMessage(title: error)
     }
 }

@@ -66,19 +66,33 @@ class ChangeSettingsViewController: BaseViewController {
     func changed(index: Int) {
         if isLan {
             switch index {
-                case 0: Database.shared.language = .english
-                case 1: Database.shared.language = .russian
-                case 2: Database.shared.language = .uzbek
+                case 0: Defaults.defaults.setValue("en", forKey: "language")
+                case 1: Defaults.defaults.setValue("ru", forKey: "language")
+                case 2: Defaults.defaults.setValue("uz", forKey: "language")
                 default: break
             }
         } else {
             switch index {
-                case 0: Database.shared.userMode = .system
-                case 1: Database.shared.userMode = .dark
-                case 2: Database.shared.userMode = .light
+                case 0: Defaults.defaults.setValue(0, forKey: "user_mode")
+                case 1: Defaults.defaults.setValue(1, forKey: "user_mode")
+                case 2: Defaults.defaults.setValue(2, forKey: "user_mode")
                 default: break
             }
         }
+        if current != index {
+            dismis()
+        }
+        current = index
+    }
+    
+    func dismis() {
+        dismiss(animated: true)
+        if !isLan {
+            if let scene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                scene.checkUserMode()
+            }
+        }
+        resetMainViewController()
     }
 }
 
@@ -104,10 +118,5 @@ extension ChangeSettingsViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         changed(index: indexPath.row)
-        if let cells = tableView.visibleCells as? [SettingsTableViewCell] {
-            cells.forEach { cell in
-                cell.isSelect = (cell.tag == indexPath.row)
-            }
-        }
     }
 }

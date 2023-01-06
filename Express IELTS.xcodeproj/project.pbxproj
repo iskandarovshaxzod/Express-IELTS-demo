@@ -19,6 +19,15 @@
 		4023A961292D45D7007FD5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4023A960292D45D7007FD5D5 /* Assets.xcassets */; };
 		4023A964292D45D7007FD5D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4023A962292D45D7007FD5D5 /* LaunchScreen.storyboard */; };
 		4023A96C292D4627007FD5D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4023A96B292D4627007FD5D5 /* GoogleService-Info.plist */; };
+		402A77FF2958702A00B91924 /* CheckCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402A77FE2958702A00B91924 /* CheckCollectionViewCell.swift */; };
+		402A78022958992800B91924 /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402A78012958992800B91924 /* CheckBoxButton.swift */; };
+		4031E57729632B070094F48D /* BranchListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4031E57629632B070094F48D /* BranchListPresenter.swift */; };
+		4031E57929632CBA0094F48D /* BranchListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4031E57829632CBA0094F48D /* BranchListDelegate.swift */; };
+		403203D229597A0900FE64CF /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403203D129597A0900FE64CF /* Defaults.swift */; };
+		4032766E29642D020077A90E /* GroupListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4032766D29642D020077A90E /* GroupListDelegate.swift */; };
+		4032767029642D1A0077A90E /* GroupListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4032766F29642D1A0077A90E /* GroupListPresenter.swift */; };
+		4032767229642F760077A90E /* StudentListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4032767129642F760077A90E /* StudentListDelegate.swift */; };
+		4032767429642F7F0077A90E /* StudentListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4032767329642F7F0077A90E /* StudentListPresenter.swift */; };
 		4037170D2941FE9E0053CCF2 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037170C2941FE9E0053CCF2 /* TextField.swift */; };
 		4037170F294200B50053CCF2 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037170E294200B50053CCF2 /* Button.swift */; };
 		4037171129421BDF0053CCF2 /* BranchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037171029421BDF0053CCF2 /* BranchViewController.swift */; };
@@ -27,9 +36,15 @@
 		4037171F29422B320053CCF2 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037171E29422B320053CCF2 /* ListTableViewCell.swift */; };
 		4037172329422FC90053CCF2 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037172229422FC90053CCF2 /* AddViewController.swift */; };
 		40371725294233A40053CCF2 /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40371724294233A40053CCF2 /* StudentListViewController.swift */; };
+		4052F9FC29641DD90002C353 /* TeacherListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052F9FB29641DD90002C353 /* TeacherListDelegate.swift */; };
+		4052F9FE29641DEB0002C353 /* TeacherListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052F9FD29641DEB0002C353 /* TeacherListPresenter.swift */; };
+		4052FA00296422200002C353 /* TeacherConfigListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052F9FF296422200002C353 /* TeacherConfigListDelegate.swift */; };
+		4052FA02296422290002C353 /* TeacherConfigListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052FA01296422290002C353 /* TeacherConfigListPresenter.swift */; };
 		405912422945A70F00620278 /* TotalRevenueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405912412945A70F00620278 /* TotalRevenueView.swift */; };
 		406996FC292F6D3E00090507 /* AuthUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FB292F6D3E00090507 /* AuthUserViewController.swift */; };
 		406996FE292F77DE00090507 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FD292F77DE00090507 /* UITextField+Extension.swift */; };
+		4080B0CE29558F9C009C22AC /* acces-denied.json in Resources */ = {isa = PBXBuildFile; fileRef = 4080B0CD29558F9C009C22AC /* acces-denied.json */; };
+		4080B0D02955901F009C22AC /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4080B0CF2955901F009C22AC /* ChangePasswordViewController.swift */; };
 		4088F962292E779F0006614C /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088F961292E779F0006614C /* FirebaseManager.swift */; };
 		40C9DE39293DF32E00CC4BFA /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE38293DF32E00CC4BFA /* MainTabViewController.swift */; };
 		40C9DE3B293DF6A700CC4BFA /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */; };
@@ -51,9 +66,14 @@
 		40E1E03029476337007ED9A2 /* HeaderMonthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E02F29476337007ED9A2 /* HeaderMonthTableViewCell.swift */; };
 		40E1E05129479326007ED9A2 /* trash-can.json in Resources */ = {isa = PBXBuildFile; fileRef = 40E1E05029479326007ED9A2 /* trash-can.json */; };
 		40E4C6C82949C240003F8A56 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E4C6C72949C240003F8A56 /* String+Extension.swift */; };
+		40E76E8B2955FE4C0088DE4C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E76E8A2955FE4C0088DE4C /* UIViewController+Extension.swift */; };
+		40E76E8F295631950088DE4C /* ChangePassCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E76E8E295631950088DE4C /* ChangePassCodeViewController.swift */; };
 		40EC8129294DEB81006C4644 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40EC812B294DEB81006C4644 /* Localizable.strings */; };
 		40EC8135294E0509006C4644 /* icons8-checkmark.json in Resources */ = {isa = PBXBuildFile; fileRef = 40EC8133294E0509006C4644 /* icons8-checkmark.json */; };
 		40EC8136294E0509006C4644 /* check.json in Resources */ = {isa = PBXBuildFile; fileRef = 40EC8134294E0509006C4644 /* check.json */; };
+		40EF2A9529688F3F0060BB84 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF2A9429688F3F0060BB84 /* UserModel.swift */; };
+		40EF2A97296895220060BB84 /* UserLoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF2A96296895220060BB84 /* UserLoginError.swift */; };
+		40F21DD62965550D00867E81 /* StudentCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F21DD52965550D00867E81 /* StudentCheckModel.swift */; };
 		40FE3789292E1A290012706F /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE3788292E1A290012706F /* UserViewController.swift */; };
 		40FE378B292E1AF50012706F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378A292E1AF50012706F /* BaseViewController.swift */; };
 		40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378C292E26BD0012706F /* PasswordViewController.swift */; };
@@ -78,6 +98,15 @@
 		4023A963292D45D7007FD5D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4023A965292D45D7007FD5D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4023A96B292D4627007FD5D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		402A77FE2958702A00B91924 /* CheckCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCollectionViewCell.swift; sourceTree = "<group>"; };
+		402A78012958992800B91924 /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
+		4031E57629632B070094F48D /* BranchListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchListPresenter.swift; sourceTree = "<group>"; };
+		4031E57829632CBA0094F48D /* BranchListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchListDelegate.swift; sourceTree = "<group>"; };
+		403203D129597A0900FE64CF /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		4032766D29642D020077A90E /* GroupListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListDelegate.swift; sourceTree = "<group>"; };
+		4032766F29642D1A0077A90E /* GroupListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListPresenter.swift; sourceTree = "<group>"; };
+		4032767129642F760077A90E /* StudentListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListDelegate.swift; sourceTree = "<group>"; };
+		4032767329642F7F0077A90E /* StudentListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListPresenter.swift; sourceTree = "<group>"; };
 		4037170C2941FE9E0053CCF2 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		4037170E294200B50053CCF2 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		4037171029421BDF0053CCF2 /* BranchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchViewController.swift; sourceTree = "<group>"; };
@@ -86,9 +115,15 @@
 		4037171E29422B320053CCF2 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		4037172229422FC90053CCF2 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		40371724294233A40053CCF2 /* StudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
+		4052F9FB29641DD90002C353 /* TeacherListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherListDelegate.swift; sourceTree = "<group>"; };
+		4052F9FD29641DEB0002C353 /* TeacherListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherListPresenter.swift; sourceTree = "<group>"; };
+		4052F9FF296422200002C353 /* TeacherConfigListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherConfigListDelegate.swift; sourceTree = "<group>"; };
+		4052FA01296422290002C353 /* TeacherConfigListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherConfigListPresenter.swift; sourceTree = "<group>"; };
 		405912412945A70F00620278 /* TotalRevenueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRevenueView.swift; sourceTree = "<group>"; };
 		406996FB292F6D3E00090507 /* AuthUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserViewController.swift; sourceTree = "<group>"; };
 		406996FD292F77DE00090507 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		4080B0CD29558F9C009C22AC /* acces-denied.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "acces-denied.json"; sourceTree = "<group>"; };
+		4080B0CF2955901F009C22AC /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		4088F961292E779F0006614C /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		40C9DE38293DF32E00CC4BFA /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
@@ -110,11 +145,16 @@
 		40E1E02F29476337007ED9A2 /* HeaderMonthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMonthTableViewCell.swift; sourceTree = "<group>"; };
 		40E1E05029479326007ED9A2 /* trash-can.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "trash-can.json"; sourceTree = "<group>"; };
 		40E4C6C72949C240003F8A56 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		40E76E8A2955FE4C0088DE4C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		40E76E8E295631950088DE4C /* ChangePassCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePassCodeViewController.swift; sourceTree = "<group>"; };
 		40EC812A294DEB81006C4644 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		40EC812D294DEBB5006C4644 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		40EC812E294DEBC8006C4644 /* uz */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uz; path = uz.lproj/Localizable.strings; sourceTree = "<group>"; };
 		40EC8133294E0509006C4644 /* icons8-checkmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "icons8-checkmark.json"; sourceTree = "<group>"; };
 		40EC8134294E0509006C4644 /* check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check.json; sourceTree = "<group>"; };
+		40EF2A9429688F3F0060BB84 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		40EF2A96296895220060BB84 /* UserLoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginError.swift; sourceTree = "<group>"; };
+		40F21DD52965550D00867E81 /* StudentCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCheckModel.swift; sourceTree = "<group>"; };
 		40FE3788292E1A290012706F /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		40FE378A292E1AF50012706F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		40FE378C292E26BD0012706F /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +193,7 @@
 			children = (
 				40E1E02F29476337007ED9A2 /* HeaderMonthTableViewCell.swift */,
 				40E1E02B29473621007ED9A2 /* MonthCollectionViewCell.swift */,
+				402A77FE2958702A00B91924 /* CheckCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -203,8 +244,9 @@
 				40FF834529448E29000ABBBE /* PieChart */,
 				40FE378E292E34970012706F /* Models */,
 				4037170A2941FE750053CCF2 /* Customs */,
-				40FE3790292E34A50012706F /* ViewControllers */,
 				40FE378F292E349F0012706F /* Protocols */,
+				4052F9FA2964107B0002C353 /* Presenters */,
+				40FE3790292E34A50012706F /* ViewControllers */,
 				4080B0C829558987009C22AC /* Database */,
 				40DE637C294C53CE001E82B0 /* Enums */,
 				40FE3793292E4D960012706F /* Extensions */,
@@ -217,23 +259,44 @@
 			path = "Express IELTS";
 			sourceTree = "<group>";
 		};
+		402A7800295898F800B91924 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				4037170E294200B50053CCF2 /* Button.swift */,
+				402A78012958992800B91924 /* CheckBoxButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
 		4037170A2941FE750053CCF2 /* Customs */ = {
 			isa = PBXGroup;
 			children = (
-				4037170B2941FE850053CCF2 /* TextFiels */,
+				402A7800295898F800B91924 /* Button */,
+				4037170B2941FE850053CCF2 /* TextField */,
 				40226DAC2940E0D800E9489D /* Cells */,
 				40226DA72940CE0A00E9489D /* Views */,
 			);
 			path = Customs;
 			sourceTree = "<group>";
 		};
-		4037170B2941FE850053CCF2 /* TextFiels */ = {
+		4037170B2941FE850053CCF2 /* TextField */ = {
 			isa = PBXGroup;
 			children = (
 				4037170C2941FE9E0053CCF2 /* TextField.swift */,
-				4037170E294200B50053CCF2 /* Button.swift */,
 			);
-			path = TextFiels;
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		4052F9FA2964107B0002C353 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				4031E57629632B070094F48D /* BranchListPresenter.swift */,
+				4052F9FD29641DEB0002C353 /* TeacherListPresenter.swift */,
+				4052FA01296422290002C353 /* TeacherConfigListPresenter.swift */,
+				4032766F29642D1A0077A90E /* GroupListPresenter.swift */,
+				4032767329642F7F0077A90E /* StudentListPresenter.swift */,
+			);
+			path = Presenters;
 			sourceTree = "<group>";
 		};
 		4080B0C729558952009C22AC /* AddViewControllers */ = {
@@ -249,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				40D2977B29423AF20084D579 /* Database.swift */,
+				403203D129597A0900FE64CF /* Defaults.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -267,12 +331,29 @@
 		4080B0CA29558A3E009C22AC /* PaymentViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */,
 				400EC15B2945E1A400F120E4 /* BranchRevenueViewController.swift */,
 				400EC15D2945E3BB00F120E4 /* TeacherRevenueViewController.swift */,
-				4011F254294B41390000B596 /* StudentsInBranchViewController.swift */,
+				40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */,
 			);
 			path = PaymentViewControllers;
+			sourceTree = "<group>";
+		};
+		4080B0CB29558ECA009C22AC /* SettingsViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				40D6AB59295441F000530577 /* ChangeSettingsViewController.swift */,
+				4080B0CF2955901F009C22AC /* ChangePasswordViewController.swift */,
+				40E76E8E295631950088DE4C /* ChangePassCodeViewController.swift */,
+			);
+			path = SettingsViewControllers;
+			sourceTree = "<group>";
+		};
+		4080B0CC29558EEE009C22AC /* StudentsViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4011F254294B41390000B596 /* StudentsInBranchViewController.swift */,
+			);
+			path = StudentsViewControllers;
 			sourceTree = "<group>";
 		};
 		4088F960292E77860006614C /* FireBase */ = {
@@ -321,6 +402,7 @@
 				40DE637D294C53D8001E82B0 /* UserMode.swift */,
 				40DE6381294C93EA001E82B0 /* Language.swift */,
 				4005E41E2953343400960A37 /* GroupSize.swift */,
+				40EF2A96296895220060BB84 /* UserLoginError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -328,6 +410,7 @@
 		40E1E04F294792B7007ED9A2 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				4080B0CD29558F9C009C22AC /* acces-denied.json */,
 				40EC8134294E0509006C4644 /* check.json */,
 				40EC8133294E0509006C4644 /* icons8-checkmark.json */,
 				40E1E05029479326007ED9A2 /* trash-can.json */,
@@ -338,6 +421,8 @@
 		40FE378E292E34970012706F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				40F21DD52965550D00867E81 /* StudentCheckModel.swift */,
+				40EF2A9429688F3F0060BB84 /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -345,6 +430,11 @@
 		40FE378F292E349F0012706F /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				4031E57829632CBA0094F48D /* BranchListDelegate.swift */,
+				4052F9FB29641DD90002C353 /* TeacherListDelegate.swift */,
+				4052F9FF296422200002C353 /* TeacherConfigListDelegate.swift */,
+				4032766D29642D020077A90E /* GroupListDelegate.swift */,
+				4032767129642F760077A90E /* StudentListDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -357,7 +447,8 @@
 				4080B0C929558A01009C22AC /* MainViewControllers */,
 				4080B0C729558952009C22AC /* AddViewControllers */,
 				4080B0CA29558A3E009C22AC /* PaymentViewControllers */,
-				40D6AB59295441F000530577 /* ChangeSettingsViewController.swift */,
+				4080B0CC29558EEE009C22AC /* StudentsViewControllers */,
+				4080B0CB29558ECA009C22AC /* SettingsViewControllers */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -381,6 +472,7 @@
 				40FF834629448E3F000ABBBE /* UIColor+Extension.swift */,
 				40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */,
 				40E4C6C72949C240003F8A56 /* String+Extension.swift */,
+				40E76E8A2955FE4C0088DE4C /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -478,6 +570,7 @@
 				40E1E05129479326007ED9A2 /* trash-can.json in Resources */,
 				4023A96C292D4627007FD5D5 /* GoogleService-Info.plist in Resources */,
 				4023A961292D45D7007FD5D5 /* Assets.xcassets in Resources */,
+				4080B0CE29558F9C009C22AC /* acces-denied.json in Resources */,
 				40EC8135294E0509006C4644 /* icons8-checkmark.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,39 +624,56 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40E76E8B2955FE4C0088DE4C /* UIViewController+Extension.swift in Sources */,
 				40371725294233A40053CCF2 /* StudentListViewController.swift in Sources */,
+				4052F9FC29641DD90002C353 /* TeacherListDelegate.swift in Sources */,
 				40C9DE3B293DF6A700CC4BFA /* TabItemView.swift in Sources */,
 				40C9DE40293DFAB500CC4BFA /* PaymentViewController.swift in Sources */,
+				403203D229597A0900FE64CF /* Defaults.swift in Sources */,
 				40D6AB5A295441F000530577 /* ChangeSettingsViewController.swift in Sources */,
 				40E1E03029476337007ED9A2 /* HeaderMonthTableViewCell.swift in Sources */,
+				4032767029642D1A0077A90E /* GroupListPresenter.swift in Sources */,
 				4037172329422FC90053CCF2 /* AddViewController.swift in Sources */,
 				40D6AB5C295442FD00530577 /* SettingsTableViewCell.swift in Sources */,
 				40D2977E294240B10084D579 /* MonthlyPaymentViewController.swift in Sources */,
 				40E1E02E294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift in Sources */,
+				40EF2A97296895220060BB84 /* UserLoginError.swift in Sources */,
 				4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */,
 				40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */,
 				40FF834929448E40000ABBBE /* UIColor+Extension.swift in Sources */,
 				405912422945A70F00620278 /* TotalRevenueView.swift in Sources */,
 				40D6AB602954432500530577 /* BaseTableViewCell.swift in Sources */,
 				40FF834B29448E40000ABBBE /* PieChart.swift in Sources */,
+				4052FA00296422200002C353 /* TeacherConfigListDelegate.swift in Sources */,
+				4031E57729632B070094F48D /* BranchListPresenter.swift in Sources */,
 				40FE3795292E4DAB0012706F /* UIDevice+Extension.swift in Sources */,
 				40C9DE3E293DFAAA00CC4BFA /* MainViewController.swift in Sources */,
+				4052F9FE29641DEB0002C353 /* TeacherListPresenter.swift in Sources */,
 				406996FE292F77DE00090507 /* UITextField+Extension.swift in Sources */,
 				4088F962292E779F0006614C /* FirebaseManager.swift in Sources */,
 				40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */,
 				40DE637E294C53D8001E82B0 /* UserMode.swift in Sources */,
+				402A78022958992800B91924 /* CheckBoxButton.swift in Sources */,
+				4052FA02296422290002C353 /* TeacherConfigListPresenter.swift in Sources */,
+				4031E57929632CBA0094F48D /* BranchListDelegate.swift in Sources */,
 				40226DA92940CE4D00E9489D /* NavView.swift in Sources */,
 				40C9DE44293DFAC800CC4BFA /* SettingsViewController.swift in Sources */,
 				4037170D2941FE9E0053CCF2 /* TextField.swift in Sources */,
+				402A77FF2958702A00B91924 /* CheckCollectionViewCell.swift in Sources */,
 				40DE6382294C93EA001E82B0 /* Language.swift in Sources */,
+				4032767429642F7F0077A90E /* StudentListPresenter.swift in Sources */,
 				40C9DE39293DF32E00CC4BFA /* MainTabViewController.swift in Sources */,
 				40FE378B292E1AF50012706F /* BaseViewController.swift in Sources */,
 				40FE3789292E1A290012706F /* UserViewController.swift in Sources */,
 				4005E41B295332C200960A37 /* StudentCheckTableViewCell.swift in Sources */,
+				40E76E8F295631950088DE4C /* ChangePassCodeViewController.swift in Sources */,
+				40F21DD62965550D00867E81 /* StudentCheckModel.swift in Sources */,
 				40D6AB622954435000530577 /* BaseCollectionViewCell.swift in Sources */,
 				40371717294222350053CCF2 /* TeacherViewController.swift in Sources */,
+				4032766E29642D020077A90E /* GroupListDelegate.swift in Sources */,
 				4037171D294229F70053CCF2 /* GroupViewController.swift in Sources */,
 				4005E41F2953343400960A37 /* GroupSize.swift in Sources */,
+				4032767229642F760077A90E /* StudentListDelegate.swift in Sources */,
 				4037170F294200B50053CCF2 /* Button.swift in Sources */,
 				4023A95A292D45D5007FD5D5 /* SceneDelegate.swift in Sources */,
 				40E1E02C29473621007ED9A2 /* MonthCollectionViewCell.swift in Sources */,
@@ -573,6 +683,8 @@
 				400EC15C2945E1A400F120E4 /* BranchRevenueViewController.swift in Sources */,
 				4037171129421BDF0053CCF2 /* BranchViewController.swift in Sources */,
 				4011F255294B41390000B596 /* StudentsInBranchViewController.swift in Sources */,
+				40EF2A9529688F3F0060BB84 /* UserModel.swift in Sources */,
+				4080B0D02955901F009C22AC /* ChangePasswordViewController.swift in Sources */,
 				40C9DE42293DFABF00CC4BFA /* StudentsViewController.swift in Sources */,
 				40E4C6C82949C240003F8A56 /* String+Extension.swift in Sources */,
 				40D2977C29423AF20084D579 /* Database.swift in Sources */,

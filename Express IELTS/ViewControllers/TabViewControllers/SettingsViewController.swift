@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Lottie
 
 class SettingsViewController: BaseViewController {
     
     let subView   = UIView()
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
     let texts = ["change_pass".localized, "user_mode".localized, "language".localized]
     let icons = ["lock", "paperclip", "paperclip"]
@@ -28,18 +29,18 @@ class SettingsViewController: BaseViewController {
         
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            make.height.equalTo(texts.count * 50)
+            make.edges.equalToSuperview()
         }
         tableView.backgroundColor = "cl_main_back".color
         tableView.delegate   = self
         tableView.dataSource = self
-        tableView.layer.cornerRadius = 10
         tableView.isScrollEnabled    = false
     }
     
+    func accessDeniedInfo() {
+        vibrate()
+        showAnimation(animationName: "acces-denied")
+    }
 }
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -64,23 +65,22 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 {
             if Database.shared.isAdmin {
-                // Let admin change password
+                navigationController?.pushViewController(ChangePasswordViewController(), animated: true)
             } else {
-                // Show some animation
+                accessDeniedInfo()
             }
         } else if indexPath.row == 1 {
             let vc = ChangeSettingsViewController()
-            vc.texts = ["System", "Dark", "Light"]
+            vc.texts = ["system".localized, "dark".localized, "light".localized]
             vc.icons = ["iphone.smartbatterycase.gen2", "moon.fill", "sun.max"]
             vc.isLan = false
             present(vc, animated: true)
         } else {
             let vc = ChangeSettingsViewController()
-            vc.texts = ["English", "Russian", "Uzbek"]
+            vc.texts = ["english".localized, "russian".localized, "uzbek".localized]
             vc.icons = ["paperclip", "paperclip", "paperclip"]
             vc.isLan = true
             present(vc, animated: true)
         }
     }
-    
 }

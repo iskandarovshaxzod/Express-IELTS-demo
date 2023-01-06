@@ -36,12 +36,14 @@ class AddViewController: BaseViewController {
         
         subView.addSubview(nameField)
         nameField.snp.updateConstraints { make in
-            make.top.equalToSuperview().offset(width / 3)
+            make.top.equalToSuperview().offset(width / 10)
             make.left.equalToSuperview().offset(30)
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
         }
-        nameField.placeholder = nameText
+        nameField.attributedPlaceholder = NSAttributedString(string: nameText,
+                  attributes: [NSAttributedString.Key.foregroundColor: "cl_text_blue".color])
+        nameField.layer.borderColor  = "cl_text_blue".color.cgColor
         
         subView.addSubview(addButton)
         addButton.snp.makeConstraints { make in
@@ -56,8 +58,65 @@ class AddViewController: BaseViewController {
     }
     
     @objc func addTapped(){
-        showSureInfo(title: "Make sure", message: "Are you sure that you want to add a new teacher config ?") { [weak self] alertAction in
-            self?.navigationController?.popViewController(animated: true)
+        if navTitle == "new_teacher".localized {
+            showSureInfo(title: String(format: "add_info".localized, navTitle)) {
+                [weak self] alertAction in
+                self?.showLoading()
+                FirebaseManager.shared.addNewTeacher(teacherName: "hello 2") { err in
+                    self?.hideLoading()
+                    if err != nil {
+                        self?.showErrorMessage(title: err?.localizedDescription)
+                    } else {
+                        // show success
+                        print("successfully added")
+                    }
+                }
+            }
+        } else if navTitle == "new_teacher_config".localized {
+            showSureInfo(title: String(format: "add_info".localized, navTitle)) {
+                [weak self] alertAction in
+                self?.showLoading()
+                FirebaseManager.shared.addNewTeacherConfig(teacherName: "hello 2", teacherConfig: "every day 2") { err in
+                    self?.hideLoading()
+                    if err != nil {
+                        self?.showErrorMessage(title: err?.localizedDescription)
+                    } else {
+                        // show success
+                        print("successfully added")
+                    }
+                }
+            }
+        } else if navTitle == "new_group".localized {
+            showSureInfo(title: String(format: "add_info".localized, navTitle)) {
+                [weak self] alertAction in
+                self?.showLoading()
+                FirebaseManager.shared.addNewGroup(teacherName: "hello 2",
+                                                   teacherConfig: "every day", groupName: "leaders") { err in
+                    self?.hideLoading()
+                    if err != nil {
+                        self?.showErrorMessage(title: err?.localizedDescription)
+                    } else {
+                        // show success
+                        print("successfully added")
+                    }
+                }
+            }
+        } else if navTitle == "new_student".localized {
+            showSureInfo(title: String(format: "add_info".localized, navTitle)) {
+                [weak self] alertAction in
+                self?.showLoading()
+                FirebaseManager.shared.addNewStudent(teacherName: "hello 2",
+                                                     teacherConfig: "every day", groupName: "leaders",
+                                                     studentName: "Iskandarov Shaxzod") { err in
+                    self?.hideLoading()
+                    if err != nil {
+                        self?.showErrorMessage(title: err?.localizedDescription)
+                    } else {
+                        // show success
+                        print("successfully added")
+                    }
+                }
+            }
         }
     }
     

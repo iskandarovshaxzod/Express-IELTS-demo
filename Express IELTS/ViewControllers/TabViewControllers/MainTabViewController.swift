@@ -46,7 +46,6 @@ class MainTabViewController: BaseViewController {
                     })
                 ]
             }
-
             var demoMenu: UIMenu {
                 return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
             }
@@ -176,10 +175,10 @@ class MainTabViewController: BaseViewController {
             }
         }
         
-        mainItem.backgroundColor     = .red
-        paymentItem.backgroundColor  = .gray
-        studentsItem.backgroundColor = .green
-        settingsItem.backgroundColor = .purple
+//        mainItem.backgroundColor     = .red
+//        paymentItem.backgroundColor  = .gray
+//        studentsItem.backgroundColor = .green
+//        settingsItem.backgroundColor = .purple
         
         changeTab()
     }

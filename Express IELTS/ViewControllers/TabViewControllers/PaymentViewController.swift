@@ -31,9 +31,10 @@ class PaymentViewController: BaseViewController {
         }
         tableView.backgroundColor = "cl_main_back".color
         tableView.register(ListTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.showsVerticalScrollIndicator = false
         tableView.delegate   = self
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
     }
 }
 
