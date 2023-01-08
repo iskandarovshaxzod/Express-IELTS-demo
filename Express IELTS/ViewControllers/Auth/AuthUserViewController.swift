@@ -10,6 +10,8 @@ import SnapKit
 
 class AuthUserViewController: BaseViewController {
     
+    let presenter = UserMethodsPresenter()
+    
     let subView = UIView()
     
     let emailLabel = UILabel()
@@ -23,6 +25,7 @@ class AuthUserViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setDelegate(delegate: self)
     }
         
     override func initViews() {
@@ -109,21 +112,21 @@ class AuthUserViewController: BaseViewController {
 //            let vc = MainTabViewController()
 //            UIApplication.shared.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
 //        }
-        
-        validateUser(email: "admin@gmail.com", password: "1111")
+        showLoading()
+        presenter.validateUser(email: "admin@gmail.com", password: "1111")
     }
     
-    func validateUser(email: String, password: String) {
-        showLoading()
-        FirebaseManager.shared.validateUser(email: email, password: password, success: { [weak self] in
-            self?.hideLoading()
-            self?.vibrate(for: .success)
-            UIApplication.shared.windows.first?.rootViewController = UINavigationController(rootViewController: MainTabViewController())
-        }, error: { [weak self] err in
-            self?.hideLoading()
-            self?.showErrorMessage(title: err?.localizedDescription)
-        })
-    }
+//    func validateUser(email: String, password: String) {
+//        FirebaseManager.shared.validateUser(email: email, password: password,
+//           success: { [weak self] in
+//            self?.hideLoading()
+//            self?.vibrate(for: .success)
+//            self?.resetMainViewController(for: 1)
+//        }, error: { [weak self] err in
+//            self?.hideLoading()
+//            self?.showErrorMessage(title: err?.localizedDescription)
+//        })
+//    }
     
     @objc func backTapped(){
         dismiss(animated: true)
@@ -148,4 +151,21 @@ class AuthUserViewController: BaseViewController {
     
     
 
+}
+
+extension AuthUserViewController: UserMethodsDelegate {
+    func onSuccessValidateUser() {
+        hideLoading()
+        vibrate(for: .success)
+        resetMainViewController(for: 1)
+    }
+    
+    func onErrorValidateUser(error: String?) {
+        hideLoading()
+        showErrorMessage(title: error)
+    }
+    
+    
+    func onSuccessChangePassword(){}
+    func onErrorChangePassword(error: String?){}
 }

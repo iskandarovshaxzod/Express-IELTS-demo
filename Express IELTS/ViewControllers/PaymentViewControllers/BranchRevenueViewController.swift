@@ -9,14 +9,18 @@ import UIKit
 
 class BranchRevenueViewController: BaseViewController {
     
-    let subView = UIView()
+    let presenter = TeacherListPresenter()
     
+    let subView   = UIView()
     let tableView = UITableView()
     
     var branchName = ""
+    var teachers   = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setDelegate(delegate: self)
+        presenter.getAllTeachers()
     }
     
     override func configureNavBar() {
@@ -42,11 +46,16 @@ class BranchRevenueViewController: BaseViewController {
         tableView.separatorStyle = .none
     }
 
+    private func reloadData() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
 }
 
 extension BranchRevenueViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return teachers.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -54,8 +63,8 @@ extension BranchRevenueViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-        cell.text = "teacher name \(indexPath.row + 1)"
+        let cell  = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
+        cell.text = teachers[indexPath.row]
         cell.initViews()
         cell.selectionStyle = .none
         return cell
@@ -63,7 +72,19 @@ extension BranchRevenueViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = TeacherRevenueViewController()
-        vc.teacherName = "teacher name \(indexPath.row + 1)"
+        Database.shared.currentTeacher = teachers[indexPath.row]
+        vc.teacherName = teachers[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension BranchRevenueViewController: TeacherListDelegate {
+    func onSuccessGetAllTeachers(teachers: [String]) {
+        self.teachers = teachers
+        reloadData()
+    }
+    
+    func onErrorGetAllTeachers(error: String?) {
+        showErrorMessage(title: error)
     }
 }

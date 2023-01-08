@@ -11,7 +11,7 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseCore
 
-struct FirebaseManager{
+class FirebaseManager{
     
     static let shared = FirebaseManager()
     
@@ -26,12 +26,19 @@ struct FirebaseManager{
         return db.collection("test")
     }
     
-    var usersRef: CollectionReference{
-        return db.collection("users")
-    }
-    
     var time: Date?{
         return updateTime()
+    }
+    
+    var users = [UserModel]()
+    var branches: [String]{
+        var branches = [String]()
+        for user in users {
+            if user.isBranch {
+                branches.append(user.name)
+            }
+        }
+        return branches
     }
     
     func updateTime() -> Date?{
@@ -83,110 +90,131 @@ extension FirebaseManager {
     func validateUser(email: String, password: String,
                       success: @escaping () -> Void,
                       error: @escaping (Error?) -> Void) {
-//        auth.signIn(withEmail: email, password: password) { res, err in
-//            if err != nil {
-//                error(err)
-//            } else {
-//                success(res)
-//            }
-//        }
-        var users = [UserModel]()
         
-        usersRef.getDocuments { snapShot, err in
+        expressRef.whereField("isShow", isEqualTo: true).getDocuments { [weak self] snapShot, err in
             if err != nil {
                 error(err)
             } else {
                 snapShot?.documents.forEach{ doc in
-                    users.append(UserModel(name:  doc.documentID,
-                                           email: doc.data()["email"] as? String ?? "",
-                                           password: doc.data()["password"] as? String ?? ""))
+                    self?.users.append(UserModel(name: doc.documentID,
+                                           email:    doc.data()["email"] as? String ?? "",
+                                           password: doc.data()["password"] as? String ?? "",
+                                           isBranch: doc.data()["isBranch"] as? Bool ?? true))
                 }
                 
-                if let user = users.first(where: {$0.email == email && $0.password == password}) {
+                if let _ = self?.users.first(where: {$0.email == email && $0.password == password}) {
                     success()
                 } else {
                     error(UserLoginError.notFound)
                 }
             }
         }
-        
-        
     }
     
-    func changePassword(){
-        
+    func changePassword(for user: String, password: String,
+                        success: @escaping () -> Void,
+                        error: @escaping (Error?) -> Void){
+        expressRef.document(user).updateData(["password" : password]) { err in
+            if err != nil {
+                error(err)
+            } else {
+                success()
+            }
+        }
     }
 }
 
-// MARK: Extension for Adding methods
+// MARK: Extension for `Adding` methods
 extension FirebaseManager {
-    func addNewBranch(email: String, password: String, handler: @escaping (Error?) -> Void) {
-        auth.createUser(withEmail: email + "@gmail.com", password: password) { res, err in
-            if err != nil{
-                handler(err)
+    func addNewBranch(email: String, password: String,
+                      success: @escaping () -> Void,
+                      error: @escaping (Error?) -> Void) {
+        expressRef.document(email).setData(["email" : email + "@gmail.com",
+                                            "isBranch" : true,
+                                            "isShow" : true,
+                                            "password" : password]) { err in
+            if err != nil {
+                error(err)
             } else {
-                expressRef.document(email).setData(["isShow" : true]){ err in
-                    handler(err)
-                }
+                success()
             }
         }
     }
     
-    func addNewTeacher(teacherName: String, handlder: @escaping (Error?) -> Void) {
+    func addNewTeacher(teacherName: String,
+                       success: @escaping () -> Void,
+                       error: @escaping (Error?) -> Void) {
         expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)")
         .setData(["isShow" : true]) { err in
-            handlder(err)
+            if err != nil {
+                error(err)
+            } else {
+                success()
+            }
         }
     }
     
-    func addNewTeacherConfig(teacherName: String, teacherConfig: String, handlder: @escaping (Error?) -> Void) {
-        expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)/configs/\(teacherConfig)")
-            .setData(["isShow" : true]) { err in
-                handlder(err)
-            }
-    }
-    
-    func addNewGroup(teacherName: String, teacherConfig: String, groupName: String, handlder: @escaping (Error?) -> Void) {
-        expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)/configs/\(teacherConfig)/groups/\(groupName)")
-            .setData(["isShow" : true]) { err in
-                handlder(err)
-            }
-    }
-    
-    func addNewStudent(teacherName: String, teacherConfig: String, groupName: String, studentName: String,
-                       handlder: @escaping (Error?) -> Void) {
-        expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)/configs/\(teacherConfig)/groups/\(groupName)/students/\(studentName)")
+    func addNewTeacherConfig(configName: String,
+                             success: @escaping () -> Void,
+                             error: @escaping (Error?) -> Void) {
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(configName)")
             .setData(["isShow" : true]) { err in
                 if err != nil {
-                    handlder(err)
+                    error(err)
                 } else {
-                    expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)/configs/\(teacherConfig)/groups/\(groupName)/students/\(studentName)/months/month 1").setData([
-                            "1" : 0,
-                            "2" : 0,
-                            "3" : 0,
-                            "4" : 0,
-                            "5" : 0,
-                            "6" : 0,
-                            "7" : 0,
-                            "8" : 0,
-                            "9" : 0,
-                            "10" : 0,
-                            "11" : 0,
-                            "12" : 0,
-                        ]) { err in
-                            handlder(err)
-                            }
+                    success()
+                }
+            }
+    }
+    
+    func addNewGroup(groupName: String,
+                     success: @escaping () -> Void,
+                     error: @escaping (Error?) -> Void) {
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(groupName)")
+            .setData(["isShow" : true]) { err in
+                if err != nil {
+                    error(err)
+                } else {
+                    success()
+                }
+            }
+    }
+    
+    func addNewStudent(studentName: String,
+                       success: @escaping () -> Void,
+                       error: @escaping (Error?) -> Void) {
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(Database.shared.currentGroup)/students/\(studentName)")
+            .setData(["isShow" : true]) { [weak self] err in
+                if err != nil {
+                    error(err)
+                } else {
+//                    self?.expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)/configs/\(teacherConfig)/groups/\(groupName)/students/\(studentName)/months/month 1").setData([
+//                            "1" : 0,
+//                            "2" : 0,
+//                            "3" : 0,
+//                            "4" : 0,
+//                            "5" : 0,
+//                            "6" : 0,
+//                            "7" : 0,
+//                            "8" : 0,
+//                            "9" : 0,
+//                            "10" : 0,
+//                            "11" : 0,
+//                            "12" : 0,
+//                        ]) { err in
+//                            error(err)
+//                            }
                 }
             }
     }
 }
 
-// MARK: Extension for Getting methods
+// MARK: Extension for `Getting` methods
 extension FirebaseManager {
     func getAllBranches(success: @escaping ([String]) -> Void,
                         error:   @escaping (String?) -> Void) {
         var branches = [String]()
-        expressRef.whereField("isShow", isEqualTo: true).getDocuments { snapShot, err in
+        expressRef.whereField("isShow", isEqualTo: true).whereField("isBranch", isEqualTo: true).getDocuments { snapShot, err in
             if err != nil {
                 error(err?.localizedDescription)
             } else {
@@ -214,11 +242,10 @@ extension FirebaseManager {
         }
     }
     
-    func getAllTeacherConfigs(teacherName: String,
-                              success: @escaping ([String]) -> Void,
+    func getAllTeacherConfigs(success: @escaping ([String]) -> Void,
                               error:   @escaping (String?) -> Void) {
         var configs = [String]()
-        expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)").collection("configs")
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)").collection("configs")
         .whereField("isShow", isEqualTo: true).getDocuments { snapShot, err in
             if err != nil {
                 error(err?.localizedDescription)
@@ -231,11 +258,10 @@ extension FirebaseManager {
         }
     }
     
-    func getAllGroups(teacherName: String, configName: String,
-                      success: @escaping ([String]) -> Void,
+    func getAllGroups(success: @escaping ([String]) -> Void,
                       error:   @escaping (String?) -> Void) {
         var groups = [String]()
-        expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)/configs/\(configName)").collection("groups").whereField("isShow", isEqualTo: true).getDocuments { snapShot, err in
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)").collection("groups").whereField("isShow", isEqualTo: true).getDocuments { snapShot, err in
             if err != nil {
                 error(err?.localizedDescription)
             } else {
@@ -247,20 +273,19 @@ extension FirebaseManager {
         }
     }
     
-    func getAllStudentsOfGroup(teacherName: String, configName: String, groupName: String,
-                      success: @escaping ([StudentCheckModel]) -> Void,
-                      error:   @escaping (String?) -> Void) {
+    func getAllStudentsOfGroup(success: @escaping ([StudentCheckModel]) -> Void,
+                               error:   @escaping (String?) -> Void) {
 
         var months   = [EachMonthModel]()
         var students = [StudentCheckModel]()
         
-        expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)/configs/\(configName)/groups/\(groupName)").collection("students").whereField("isShow", isEqualTo: true).getDocuments { snapShot, err in
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(Database.shared.currentGroup)").collection("students").whereField("isShow", isEqualTo: true).getDocuments { [weak self] snapShot, err in
             if err != nil {
                 error(err?.localizedDescription)
             } else {
                 snapShot?.documents.forEach { student in
                     months.removeAll()
-                    expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)/configs/\(configName)/groups/\(groupName)/students/\(student.documentID)").collection("months").getDocuments { snapShot, err in
+                    self?.expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(Database.shared.currentGroup)/students/\(student.documentID)").collection("months").getDocuments { snapShot, err in
                         if err != nil {
                             error(err?.localizedDescription)
                             return
@@ -277,6 +302,27 @@ extension FirebaseManager {
                 }
                 print("entering")
                 success(students)
+            }
+        }
+    }
+}
+
+// MARK: Extension for `Payment` methods
+extension FirebaseManager {
+    func getAllReceipts(monthName: String,
+                      success: @escaping ([ReceiptModel]) -> Void,
+                      error:   @escaping (String?) -> Void) {
+        var receipts = [ReceiptModel]()
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/monthly_payments/\(monthName)").collection("receipts").getDocuments { snapShot, err in
+            if err != nil {
+                error(err?.localizedDescription)
+            } else {
+                snapShot?.documents.forEach { doc in
+                    receipts.append(ReceiptModel(name: doc.documentID,
+                                    paymentTime: doc.data()["payment_time"] as? [String : Timestamp] ??
+                                                 ["" : Timestamp()]))
+                }
+                success(receipts)
             }
         }
     }

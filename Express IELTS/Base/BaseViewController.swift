@@ -198,7 +198,9 @@ extension BaseViewController {
     
     func closeKeyboard(){}
 
-    func resetMainViewController() {
-        window?.rootViewController = UINavigationController(rootViewController: MainTabViewController())
+    func resetMainViewController(for index: Int) {
+        let vc = MainTabViewController()
+        vc.currentTab = index
+        window?.rootViewController = UINavigationController(rootViewController: vc)
     }
 }

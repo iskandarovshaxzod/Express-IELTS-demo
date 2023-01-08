@@ -8,6 +8,8 @@
 import UIKit
 
 class AddViewController: BaseViewController {
+    
+    let presenter = AddMethodsPresenter()
 
     let subView = UIView()
     
@@ -20,6 +22,7 @@ class AddViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setDelegate(delegate: self)
     }
     
     override func configureNavBar() {
@@ -58,64 +61,17 @@ class AddViewController: BaseViewController {
     }
     
     @objc func addTapped(){
-        if navTitle == "new_teacher".localized {
-            showSureInfo(title: String(format: "add_info".localized, navTitle)) {
-                [weak self] alertAction in
-                self?.showLoading()
-                FirebaseManager.shared.addNewTeacher(teacherName: "hello 2") { err in
-                    self?.hideLoading()
-                    if err != nil {
-                        self?.showErrorMessage(title: err?.localizedDescription)
-                    } else {
-                        // show success
-                        print("successfully added")
-                    }
-                }
-            }
-        } else if navTitle == "new_teacher_config".localized {
-            showSureInfo(title: String(format: "add_info".localized, navTitle)) {
-                [weak self] alertAction in
-                self?.showLoading()
-                FirebaseManager.shared.addNewTeacherConfig(teacherName: "hello 2", teacherConfig: "every day 2") { err in
-                    self?.hideLoading()
-                    if err != nil {
-                        self?.showErrorMessage(title: err?.localizedDescription)
-                    } else {
-                        // show success
-                        print("successfully added")
-                    }
-                }
-            }
-        } else if navTitle == "new_group".localized {
-            showSureInfo(title: String(format: "add_info".localized, navTitle)) {
-                [weak self] alertAction in
-                self?.showLoading()
-                FirebaseManager.shared.addNewGroup(teacherName: "hello 2",
-                                                   teacherConfig: "every day", groupName: "leaders") { err in
-                    self?.hideLoading()
-                    if err != nil {
-                        self?.showErrorMessage(title: err?.localizedDescription)
-                    } else {
-                        // show success
-                        print("successfully added")
-                    }
-                }
-            }
-        } else if navTitle == "new_student".localized {
-            showSureInfo(title: String(format: "add_info".localized, navTitle)) {
-                [weak self] alertAction in
-                self?.showLoading()
-                FirebaseManager.shared.addNewStudent(teacherName: "hello 2",
-                                                     teacherConfig: "every day", groupName: "leaders",
-                                                     studentName: "Iskandarov Shaxzod") { err in
-                    self?.hideLoading()
-                    if err != nil {
-                        self?.showErrorMessage(title: err?.localizedDescription)
-                    } else {
-                        // show success
-                        print("successfully added")
-                    }
-                }
+        showSureInfo(title: String(format: "add_info".localized, navTitle)) {
+            [weak self] alertAction in
+            self?.showLoading()
+            if self?.navTitle == "new_teacher".localized {
+                self?.presenter.addNewTeacher(teacherName: "teacher name")
+            } else if self?.navTitle == "new_teacher_config".localized {
+                self?.presenter.addNewTeacherConfig(configName: "config name")
+            } else if self?.navTitle == "new_group".localized {
+                self?.presenter.addNewGroup(groupName: "group name")
+            } else if self?.navTitle == "new_student".localized {
+                self?.presenter.addNewStudent(studentName: "student name")
             }
         }
     }
@@ -124,4 +80,27 @@ class AddViewController: BaseViewController {
         nameField.resignFirstResponder()
     }
 
+}
+
+extension AddViewController: AddMethodsDelegate {
+    func onSuccessAddNewTeacher() {
+        hideLoading()
+    }
+    
+    func onSuccessAddNewTeacherConfig() {
+        hideLoading()
+    }
+    
+    func onSuccessAddNewGroup() {
+        hideLoading()
+    }
+    
+    func onSuccessAddNewStudent() {
+        hideLoading()
+    }
+    
+    func onErrorAddNew(error: String?) {
+        hideLoading()
+        showErrorMessage(title: error)
+    }
 }

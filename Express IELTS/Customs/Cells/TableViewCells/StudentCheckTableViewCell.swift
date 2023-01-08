@@ -87,8 +87,12 @@ class StudentCheckTableViewCell: UITableViewCell {
             make.right.equalToSuperview().offset(-10)
         }
         view2.backgroundColor = .brightLilac
+        view2.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
     }
 
+    @objc func viewTapped() {
+        
+    }
 }
 
 extension StudentCheckTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {

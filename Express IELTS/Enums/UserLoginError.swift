@@ -15,7 +15,7 @@ extension UserLoginError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .notFound:
-            return NSLocalizedString("There is no account that match with your email and password",
+            return NSLocalizedString("There is no account that matches with your email and password",
                                      comment: "")
         }
     }

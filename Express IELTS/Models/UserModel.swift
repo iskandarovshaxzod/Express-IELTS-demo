@@ -8,7 +8,8 @@
 import Foundation
 
 struct UserModel {
-    let name: String
-    let email: String
+    let name:     String
+    let email:    String
     let password: String
+    let isBranch: Bool
 }

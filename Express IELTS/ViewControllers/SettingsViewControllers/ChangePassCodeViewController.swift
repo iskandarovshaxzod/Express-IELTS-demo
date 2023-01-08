@@ -9,6 +9,8 @@ import UIKit
 
 class ChangePassCodeViewController: BaseViewController {
     
+    let presenter = UserMethodsPresenter()
+    
     let subView = UIView()
     
     let oldPassLabel = UILabel()
@@ -21,13 +23,15 @@ class ChangePassCodeViewController: BaseViewController {
     let eyeButton    = UIButton()
     
     var isSecure = true
+    var user: UserModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setDelegate(delegate: self)
     }
 
     override func configureNavBar() {
-        
+        title = user?.name.capitalized
     }
     
     override func initViews() {
@@ -93,7 +97,8 @@ class ChangePassCodeViewController: BaseViewController {
     }
     
     @objc func updateTapped(){
-        
+        showLoading()
+        presenter.changePassword(email: user?.name ?? "admin", password: "aaaa")
     }
     
     @objc func viewTapped(){
@@ -122,7 +127,23 @@ class ChangePassCodeViewController: BaseViewController {
             oldPassField.text = "****"
         } else {
             eyeButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-            oldPassField.text = "2222"
+            oldPassField.text = user?.password
         }
     }
+}
+
+extension ChangePassCodeViewController: UserMethodsDelegate {
+    func onSuccessChangePassword() {
+        hideLoading()
+        // TODO: show success animation
+    }
+    
+    func onErrorChangePassword(error: String?) {
+        hideLoading()
+        showErrorMessage(title: error)
+    }
+    
+    func onSuccessValidateUser(){}
+    
+    func onErrorValidateUser(error: String?){}
 }

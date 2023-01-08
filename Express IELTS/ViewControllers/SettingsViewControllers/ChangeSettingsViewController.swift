@@ -86,13 +86,14 @@ class ChangeSettingsViewController: BaseViewController {
     }
     
     func dismis() {
-        dismiss(animated: true)
         if !isLan {
             if let scene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
                 scene.checkUserMode()
             }
         }
-        resetMainViewController()
+        dismiss(animated: true) { [weak self] in
+            self?.resetMainViewController(for: 4)
+        }
     }
 }
 

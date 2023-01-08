@@ -18,9 +18,8 @@ class StudentListPresenter {
         self.delegate = delegate
     }
     
-    func getAllStudents(teacherName: String, configName: String, groupName: String) {
-        FirebaseManager.shared.getAllStudentsOfGroup(teacherName: teacherName, configName: configName,
-                                                     groupName: groupName) { [weak self] students in
+    func getAllStudents() {
+        FirebaseManager.shared.getAllStudentsOfGroup() { [weak self] students in
             self?.delegate?.onSuccessGetAllStudents(students: students)
         } error: { [weak self] err in
             self?.delegate?.onErrorGetAllStudents(error: err)

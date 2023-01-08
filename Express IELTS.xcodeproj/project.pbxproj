@@ -19,6 +19,8 @@
 		4023A961292D45D7007FD5D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4023A960292D45D7007FD5D5 /* Assets.xcassets */; };
 		4023A964292D45D7007FD5D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4023A962292D45D7007FD5D5 /* LaunchScreen.storyboard */; };
 		4023A96C292D4627007FD5D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4023A96B292D4627007FD5D5 /* GoogleService-Info.plist */; };
+		40259B1229693DBE00D6CB60 /* SkeletonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40259B1129693DBE00D6CB60 /* SkeletonTableViewCell.swift */; };
+		40259B1429694F7900D6CB60 /* SkeletonViewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40259B1329694F7900D6CB60 /* SkeletonViewsTableViewCell.swift */; };
 		402A77FF2958702A00B91924 /* CheckCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402A77FE2958702A00B91924 /* CheckCollectionViewCell.swift */; };
 		402A78022958992800B91924 /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402A78012958992800B91924 /* CheckBoxButton.swift */; };
 		4031E57729632B070094F48D /* BranchListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4031E57629632B070094F48D /* BranchListPresenter.swift */; };
@@ -46,12 +48,19 @@
 		4080B0CE29558F9C009C22AC /* acces-denied.json in Resources */ = {isa = PBXBuildFile; fileRef = 4080B0CD29558F9C009C22AC /* acces-denied.json */; };
 		4080B0D02955901F009C22AC /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4080B0CF2955901F009C22AC /* ChangePasswordViewController.swift */; };
 		4088F962292E779F0006614C /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088F961292E779F0006614C /* FirebaseManager.swift */; };
+		4099D0C42969671D00C219BA /* TeacherPaymentListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4099D0C32969671D00C219BA /* TeacherPaymentListDelegate.swift */; };
+		4099D0C62969675500C219BA /* TeacherPaymentListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4099D0C52969675500C219BA /* TeacherPaymentListPresenter.swift */; };
+		4099D0C82969709B00C219BA /* ReceiptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4099D0C72969709B00C219BA /* ReceiptModel.swift */; };
 		40C9DE39293DF32E00CC4BFA /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE38293DF32E00CC4BFA /* MainTabViewController.swift */; };
 		40C9DE3B293DF6A700CC4BFA /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */; };
 		40C9DE3E293DFAAA00CC4BFA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE3D293DFAAA00CC4BFA /* MainViewController.swift */; };
 		40C9DE40293DFAB500CC4BFA /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE3F293DFAB500CC4BFA /* PaymentViewController.swift */; };
 		40C9DE42293DFABF00CC4BFA /* StudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE41293DFABF00CC4BFA /* StudentsViewController.swift */; };
 		40C9DE44293DFAC800CC4BFA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C9DE43293DFAC800CC4BFA /* SettingsViewController.swift */; };
+		40CEDD6A296B23F00027C6C3 /* UserMethodsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CEDD69296B23F00027C6C3 /* UserMethodsDelegate.swift */; };
+		40CEDD6C296B23FC0027C6C3 /* UserMethodsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CEDD6B296B23FC0027C6C3 /* UserMethodsPresenter.swift */; };
+		40CEDD6E296B2C6B0027C6C3 /* AddMethodsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CEDD6D296B2C6B0027C6C3 /* AddMethodsDelegate.swift */; };
+		40CEDD70296B2C7C0027C6C3 /* AddMethodsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CEDD6F296B2C7C0027C6C3 /* AddMethodsPresenter.swift */; };
 		40D2977C29423AF20084D579 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D2977B29423AF20084D579 /* Database.swift */; };
 		40D2977E294240B10084D579 /* MonthlyPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */; };
 		40D6AB5A295441F000530577 /* ChangeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D6AB59295441F000530577 /* ChangeSettingsViewController.swift */; };
@@ -98,6 +107,8 @@
 		4023A963292D45D7007FD5D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4023A965292D45D7007FD5D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4023A96B292D4627007FD5D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		40259B1129693DBE00D6CB60 /* SkeletonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonTableViewCell.swift; sourceTree = "<group>"; };
+		40259B1329694F7900D6CB60 /* SkeletonViewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonViewsTableViewCell.swift; sourceTree = "<group>"; };
 		402A77FE2958702A00B91924 /* CheckCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCollectionViewCell.swift; sourceTree = "<group>"; };
 		402A78012958992800B91924 /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		4031E57629632B070094F48D /* BranchListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchListPresenter.swift; sourceTree = "<group>"; };
@@ -125,12 +136,19 @@
 		4080B0CD29558F9C009C22AC /* acces-denied.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "acces-denied.json"; sourceTree = "<group>"; };
 		4080B0CF2955901F009C22AC /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		4088F961292E779F0006614C /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		4099D0C32969671D00C219BA /* TeacherPaymentListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherPaymentListDelegate.swift; sourceTree = "<group>"; };
+		4099D0C52969675500C219BA /* TeacherPaymentListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherPaymentListPresenter.swift; sourceTree = "<group>"; };
+		4099D0C72969709B00C219BA /* ReceiptModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptModel.swift; sourceTree = "<group>"; };
 		40C9DE38293DF32E00CC4BFA /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
 		40C9DE3D293DFAAA00CC4BFA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		40C9DE3F293DFAB500CC4BFA /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		40C9DE41293DFABF00CC4BFA /* StudentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsViewController.swift; sourceTree = "<group>"; };
 		40C9DE43293DFAC800CC4BFA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		40CEDD69296B23F00027C6C3 /* UserMethodsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMethodsDelegate.swift; sourceTree = "<group>"; };
+		40CEDD6B296B23FC0027C6C3 /* UserMethodsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMethodsPresenter.swift; sourceTree = "<group>"; };
+		40CEDD6D296B2C6B0027C6C3 /* AddMethodsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMethodsDelegate.swift; sourceTree = "<group>"; };
+		40CEDD6F296B2C7C0027C6C3 /* AddMethodsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMethodsPresenter.swift; sourceTree = "<group>"; };
 		40D2977B29423AF20084D579 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPaymentViewController.swift; sourceTree = "<group>"; };
 		40D6AB59295441F000530577 /* ChangeSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSettingsViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +202,8 @@
 				4037171E29422B320053CCF2 /* ListTableViewCell.swift */,
 				4005E41A295332C200960A37 /* StudentCheckTableViewCell.swift */,
 				40D6AB5B295442FD00530577 /* SettingsTableViewCell.swift */,
+				40259B1129693DBE00D6CB60 /* SkeletonTableViewCell.swift */,
+				40259B1329694F7900D6CB60 /* SkeletonViewsTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -243,9 +263,9 @@
 				40E1E04F294792B7007ED9A2 /* Animations */,
 				40FF834529448E29000ABBBE /* PieChart */,
 				40FE378E292E34970012706F /* Models */,
-				4037170A2941FE750053CCF2 /* Customs */,
 				40FE378F292E349F0012706F /* Protocols */,
 				4052F9FA2964107B0002C353 /* Presenters */,
+				4037170A2941FE750053CCF2 /* Customs */,
 				40FE3790292E34A50012706F /* ViewControllers */,
 				4080B0C829558987009C22AC /* Database */,
 				40DE637C294C53CE001E82B0 /* Enums */,
@@ -290,11 +310,14 @@
 		4052F9FA2964107B0002C353 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				40CEDD6B296B23FC0027C6C3 /* UserMethodsPresenter.swift */,
 				4031E57629632B070094F48D /* BranchListPresenter.swift */,
 				4052F9FD29641DEB0002C353 /* TeacherListPresenter.swift */,
 				4052FA01296422290002C353 /* TeacherConfigListPresenter.swift */,
 				4032766F29642D1A0077A90E /* GroupListPresenter.swift */,
 				4032767329642F7F0077A90E /* StudentListPresenter.swift */,
+				4099D0C52969675500C219BA /* TeacherPaymentListPresenter.swift */,
+				40CEDD6F296B2C7C0027C6C3 /* AddMethodsPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -423,6 +446,7 @@
 			children = (
 				40F21DD52965550D00867E81 /* StudentCheckModel.swift */,
 				40EF2A9429688F3F0060BB84 /* UserModel.swift */,
+				4099D0C72969709B00C219BA /* ReceiptModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -430,11 +454,14 @@
 		40FE378F292E349F0012706F /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				40CEDD69296B23F00027C6C3 /* UserMethodsDelegate.swift */,
 				4031E57829632CBA0094F48D /* BranchListDelegate.swift */,
 				4052F9FB29641DD90002C353 /* TeacherListDelegate.swift */,
 				4052F9FF296422200002C353 /* TeacherConfigListDelegate.swift */,
 				4032766D29642D020077A90E /* GroupListDelegate.swift */,
 				4032767129642F760077A90E /* StudentListDelegate.swift */,
+				4099D0C32969671D00C219BA /* TeacherPaymentListDelegate.swift */,
+				40CEDD6D296B2C6B0027C6C3 /* AddMethodsDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -631,7 +658,9 @@
 				40C9DE40293DFAB500CC4BFA /* PaymentViewController.swift in Sources */,
 				403203D229597A0900FE64CF /* Defaults.swift in Sources */,
 				40D6AB5A295441F000530577 /* ChangeSettingsViewController.swift in Sources */,
+				40CEDD6A296B23F00027C6C3 /* UserMethodsDelegate.swift in Sources */,
 				40E1E03029476337007ED9A2 /* HeaderMonthTableViewCell.swift in Sources */,
+				40259B1229693DBE00D6CB60 /* SkeletonTableViewCell.swift in Sources */,
 				4032767029642D1A0077A90E /* GroupListPresenter.swift in Sources */,
 				4037172329422FC90053CCF2 /* AddViewController.swift in Sources */,
 				40D6AB5C295442FD00530577 /* SettingsTableViewCell.swift in Sources */,
@@ -639,7 +668,9 @@
 				40E1E02E294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift in Sources */,
 				40EF2A97296895220060BB84 /* UserLoginError.swift in Sources */,
 				4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */,
+				40259B1429694F7900D6CB60 /* SkeletonViewsTableViewCell.swift in Sources */,
 				40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */,
+				4099D0C82969709B00C219BA /* ReceiptModel.swift in Sources */,
 				40FF834929448E40000ABBBE /* UIColor+Extension.swift in Sources */,
 				405912422945A70F00620278 /* TotalRevenueView.swift in Sources */,
 				40D6AB602954432500530577 /* BaseTableViewCell.swift in Sources */,
@@ -650,6 +681,7 @@
 				40C9DE3E293DFAAA00CC4BFA /* MainViewController.swift in Sources */,
 				4052F9FE29641DEB0002C353 /* TeacherListPresenter.swift in Sources */,
 				406996FE292F77DE00090507 /* UITextField+Extension.swift in Sources */,
+				4099D0C62969675500C219BA /* TeacherPaymentListPresenter.swift in Sources */,
 				4088F962292E779F0006614C /* FirebaseManager.swift in Sources */,
 				40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */,
 				40DE637E294C53D8001E82B0 /* UserMode.swift in Sources */,
@@ -659,6 +691,8 @@
 				40226DA92940CE4D00E9489D /* NavView.swift in Sources */,
 				40C9DE44293DFAC800CC4BFA /* SettingsViewController.swift in Sources */,
 				4037170D2941FE9E0053CCF2 /* TextField.swift in Sources */,
+				40CEDD6C296B23FC0027C6C3 /* UserMethodsPresenter.swift in Sources */,
+				40CEDD6E296B2C6B0027C6C3 /* AddMethodsDelegate.swift in Sources */,
 				402A77FF2958702A00B91924 /* CheckCollectionViewCell.swift in Sources */,
 				40DE6382294C93EA001E82B0 /* Language.swift in Sources */,
 				4032767429642F7F0077A90E /* StudentListPresenter.swift in Sources */,
@@ -671,6 +705,7 @@
 				40D6AB622954435000530577 /* BaseCollectionViewCell.swift in Sources */,
 				40371717294222350053CCF2 /* TeacherViewController.swift in Sources */,
 				4032766E29642D020077A90E /* GroupListDelegate.swift in Sources */,
+				4099D0C42969671D00C219BA /* TeacherPaymentListDelegate.swift in Sources */,
 				4037171D294229F70053CCF2 /* GroupViewController.swift in Sources */,
 				4005E41F2953343400960A37 /* GroupSize.swift in Sources */,
 				4032767229642F760077A90E /* StudentListDelegate.swift in Sources */,
@@ -687,6 +722,7 @@
 				4080B0D02955901F009C22AC /* ChangePasswordViewController.swift in Sources */,
 				40C9DE42293DFABF00CC4BFA /* StudentsViewController.swift in Sources */,
 				40E4C6C82949C240003F8A56 /* String+Extension.swift in Sources */,
+				40CEDD70296B2C7C0027C6C3 /* AddMethodsPresenter.swift in Sources */,
 				40D2977C29423AF20084D579 /* Database.swift in Sources */,
 				406996FC292F6D3E00090507 /* AuthUserViewController.swift in Sources */,
 			);

@@ -14,8 +14,10 @@ class MainViewController: BaseViewController {
     
     let subView   = UIView()
     let tableView = UITableView()
+    let refresh   = UIRefreshControl()
     
-    var branches = [String]()
+    var branches = FirebaseManager.shared.branches
+    var loaded   = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +38,13 @@ class MainViewController: BaseViewController {
         }
         tableView.backgroundColor = "cl_main_back".color
         tableView.register(ListTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(SkeletonTableViewCell.self, forCellReuseIdentifier: "skeleton")
         tableView.delegate   = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
+        tableView.addSubview(refresh)
+        refresh.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
     }
     
     private func handleMoveToTrash(index: Int) {
@@ -52,24 +57,43 @@ class MainViewController: BaseViewController {
     }
     
     private func reloadData() {
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
+        if loaded {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                self?.tableView.reloadData()
+            }
+            loaded = true
         }
+        refresh.endRefreshing()
+    }
+    
+    @objc func refreshTable() {
+        presenter.getAllBranches()
     }
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return branches.count
+        return loaded ? branches.count : 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-        cell.text = branches[indexPath.row] //"branch name \(indexPath.row + 1)"
-        cell.initViews()
-        cell.selectionStyle = .none
-        return cell
+        if loaded {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
+            cell.text = branches[indexPath.row]
+            cell.initViews()
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "skeleton", for: indexPath) as! SkeletonTableViewCell
+            cell.initViews()
+            cell.selectionStyle = .none
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -102,7 +126,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
 
 extension MainViewController: BranchListDelegate {
     func onSuccessGetAllBranches(branches: [String]) {
-        self.branches = branches
+//        self.branches = branches
         reloadData()
     }
     func onErrorGetAllBranches(error: String?) {

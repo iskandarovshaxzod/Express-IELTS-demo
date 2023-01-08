@@ -64,13 +64,11 @@ class AddBranchViewController: BaseViewController {
     @objc func addTapped(){
         showSureInfo(title: "new_branch_add_info".localized) { [weak self] alertAction in
             self?.showLoading()
-            FirebaseManager.shared.addNewBranch(email: "novza", password: "123456") { err in
+            FirebaseManager.shared.addNewBranch(email: "novza_test", password: "123456") {
                 self?.hideLoading()
-                if err != nil {
-                    self?.showErrorMessage(title: err?.localizedDescription)
-                } else {
-                    self?.navigationController?.popViewController(animated: true)
-                }
+            } error: { err in
+                self?.hideLoading()
+                self?.showErrorMessage(title: err?.localizedDescription)
             }
         }
     }

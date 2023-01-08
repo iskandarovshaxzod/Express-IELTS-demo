@@ -7,9 +7,19 @@
 
 import UIKit
 
+protocol HeaderMonthChanged {
+    func monthChanged(to month: String)
+}
+
 class HeaderMonthView: UIView {
     
     let subView = UIView()
+    
+    var delegate: HeaderMonthChanged?
+    
+    var lastCell = UICollectionViewCell()
+    
+    var months = ["December", "November"]
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -54,13 +64,24 @@ class HeaderMonthView: UIView {
 
 extension HeaderMonthView: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return months.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MonthCollectionViewCell
-        cell.text = "November\(indexPath.row+1) 2022"
+        cell.text = months[indexPath.row]
         cell.initViews()
+        lastCell = cell
         return cell
+    }
+    
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print("scoll", collectionView.visibleCells.count)
+        if let cell = collectionView.visibleCells.first as? MonthCollectionViewCell, cell != lastCell {
+            lastCell = cell
+            print(cell.label.text ?? "")
+            delegate?.monthChanged(to: cell.label.text ?? "December")
+        }
     }
 }

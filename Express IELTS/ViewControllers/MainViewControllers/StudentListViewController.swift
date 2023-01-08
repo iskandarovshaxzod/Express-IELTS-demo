@@ -13,17 +13,18 @@ class StudentListViewController: BaseViewController {
     
     let subView   = UIView()
     let monthView = HeaderMonthView()
-    
     let tableView = UITableView()
+    let refresh   = UIRefreshControl()
     
     var groupName = ""
-    var students = [StudentCheckModel]()
-    var canEdit = false
+    var students  = [StudentCheckModel]()
+    var canEdit   = false
+    var loaded    = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        presenter.getAllStudents(teacherName: "hello 2", configName: "every day", groupName: groupName)
+        presenter.getAllStudents()
     }
     
     override func configureNavBar() {
@@ -68,10 +69,17 @@ class StudentListViewController: BaseViewController {
         }
         tableView.backgroundColor = "cl_main_back".color
         tableView.register(StudentCheckTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(SkeletonViewsTableViewCell.self, forCellReuseIdentifier: "skeleton")
         tableView.delegate   = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .singleLine
+        tableView.addSubview(refresh)
+        refresh.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
+    }
+    
+    @objc func refreshTable() {
+        presenter.getAllStudents()
     }
     
     @objc func addTapped() {
@@ -92,24 +100,39 @@ class StudentListViewController: BaseViewController {
     }
     
     private func reloadData(){
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
+        if loaded {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                self?.tableView.reloadData()
+            }
+            loaded = true
         }
+        refresh.endRefreshing()
     }
 }
 
 extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return students.count
+        return loaded ? students.count : 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StudentCheckTableViewCell
-        cell.nameLabel.text = students[indexPath.row].studentName
-        print(students[indexPath.row].months)
-        cell.initViews()
-        cell.selectionStyle = .none
-        return cell
+        if loaded {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StudentCheckTableViewCell
+            cell.nameLabel.text = students[indexPath.row].studentName
+            print(students[indexPath.row].months)
+            cell.initViews()
+            cell.selectionStyle = .none
+            return cell
+        }  else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "skeleton", for: indexPath) as! SkeletonViewsTableViewCell
+            cell.initViews()
+            cell.selectionStyle = .none
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

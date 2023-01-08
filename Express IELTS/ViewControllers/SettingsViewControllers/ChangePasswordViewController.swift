@@ -12,7 +12,7 @@ class ChangePasswordViewController: BaseViewController {
     let subView   = UIView()
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
-    var branches = ["mega", "novza", "sergeli"]
+    lazy var users: [[UserModel]] = sortedUsers()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +38,23 @@ class ChangePasswordViewController: BaseViewController {
         tableView.dataSource = self
     }
 
+    func sortedUsers() -> [[UserModel]] {
+        var users = [[UserModel](), [UserModel]()]
+        FirebaseManager.shared.users.forEach { user in
+            if user.isBranch {
+                users[1].append(user)
+            } else {
+                users[0].append(user)
+            }
+        }
+        return users
+    }
 }
 
 extension ChangePasswordViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return users.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -51,7 +62,7 @@ extension ChangePasswordViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : branches.count
+        return users[section].count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -60,7 +71,7 @@ extension ChangePasswordViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text  = (indexPath.section == 0 ? "admin".localized : branches[indexPath.row])
+        cell.textLabel?.text  = users[indexPath.section][indexPath.row].name.capitalized
         cell.backgroundColor  = "cl_cell_back".color
         cell.imageView?.image = UIImage(systemName: indexPath.section == 0 ? "person.circle" : "bookmark.circle")
         cell.accessoryType    = .disclosureIndicator
@@ -70,7 +81,7 @@ extension ChangePasswordViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = ChangePassCodeViewController()
-        vc.title = (indexPath.section == 0 ? "admin".localized : branches[indexPath.row])
+        vc.user = users[indexPath.section][indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
 }

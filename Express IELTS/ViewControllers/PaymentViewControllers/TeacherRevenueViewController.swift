@@ -10,15 +10,19 @@ import UIKit
 
 class TeacherRevenueViewController: BaseViewController {
     
+    let presenter = TeacherPaymentListPresenter()
+    
     let subView   = UIView()
     let monthView = HeaderMonthView()
-    
     let tableView = UITableView()
     
     var teacherName = ""
+    var receipts    = [ReceiptModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setDelegate(delegate: self)
+        presenter.getAllPayments(monthName: "December")
     }
     
     override func configureNavBar() {
@@ -36,6 +40,7 @@ class TeacherRevenueViewController: BaseViewController {
         monthView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
         }
+        monthView.delegate = self
         
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -48,12 +53,17 @@ class TeacherRevenueViewController: BaseViewController {
         tableView.showsVerticalScrollIndicator = false
     }
 
+    func reloadData() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
 }
 
 extension TeacherRevenueViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return receipts.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -62,8 +72,29 @@ extension TeacherRevenueViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = "hello world" + "\(indexPath.row + 1)"
+        cell.textLabel?.text = receipts[indexPath.row].name + "\(receipts[indexPath.row].paymentTime)"
         cell.backgroundColor = "cl_cell_back".color
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension TeacherRevenueViewController: TeacherPaymentListDelegate {
+    func onSuccessGetAllPayment(receipts: [ReceiptModel]) {
+        self.receipts = receipts
+        reloadData()
+    }
+    
+    func onErrorGetAllStudents(error: String?) {
+        showErrorMessage(title: error)
+    }
+}
+
+extension TeacherRevenueViewController: HeaderMonthChanged {
+    func monthChanged(to month: String) {
+        presenter.getAllPayments(monthName: month)
     }
 }

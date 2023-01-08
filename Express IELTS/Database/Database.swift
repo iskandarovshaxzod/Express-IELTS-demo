@@ -12,6 +12,9 @@ struct Database {
     static var shared = Database()
     var isAdmin       = false
     var currentBranch = ""
+    var currentTeacher = ""
+    var currentConfig  = ""
+    var currentGroup   = ""
 
     var language: Language {
         get{
