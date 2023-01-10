@@ -26,5 +26,4 @@ class TextField: UITextField {
         self.attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: "cl_text_blue".color])
         self.setLeftPadding(inset: 10)
     }
-
 }

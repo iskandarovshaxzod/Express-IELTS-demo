@@ -47,7 +47,7 @@ class AddBranchViewController: BaseViewController {
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
         }
-        
+        passfield.keyboardType = .numberPad
 
         subView.addSubview(addButton)
         addButton.snp.makeConstraints { make in
@@ -60,15 +60,38 @@ class AddBranchViewController: BaseViewController {
         addButton.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
 
     }
+    
+    func check() -> Bool {
+        guard let emailText = emailfield.text, let passText = passfield.text else {
+            return false
+        }
+        
+        if emailText.isEmpty || passText.isEmpty {
+            vibrate(for: .error)
+            if emailText.isEmpty {
+                emailfield.shake(duration: 0.5, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
+            }
+            if passText.isEmpty {
+                passfield.shake(duration: 0.5,  values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
+            }
+            return false
+        }
+        
+        return true
+    }
 
     @objc func addTapped(){
-        showSureInfo(title: "new_branch_add_info".localized) { [weak self] alertAction in
-            self?.showLoading()
-            FirebaseManager.shared.addNewBranch(email: "novza_test", password: "123456") {
-                self?.hideLoading()
-            } error: { err in
-                self?.hideLoading()
-                self?.showErrorMessage(title: err?.localizedDescription)
+        if check() {
+            showSureInfo(title: "new_branch_add_info".localized) { [weak self] alertAction in
+                self?.showLoading()
+                FirebaseManager.shared.addNewBranch(email:    self?.emailfield.text?.lowercased() ?? "",
+                                                    password: self?.passfield.text ?? "") {
+                    self?.hideLoading()
+                    self?.dismiss()
+                } error: { err in
+                    self?.hideLoading()
+                    self?.showErrorMessage(title: err?.localizedDescription)
+                }
             }
         }
     }
@@ -76,6 +99,10 @@ class AddBranchViewController: BaseViewController {
     @objc func viewTapped(){
         emailfield.resignFirstResponder()
         passfield.resignFirstResponder()
+    }
+    
+    func dismiss() {
+        navigationController?.popViewController(animated: true)
     }
 
 }

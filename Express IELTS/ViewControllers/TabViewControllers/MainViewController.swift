@@ -43,16 +43,29 @@ class MainViewController: BaseViewController {
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
+        tableView.allowsMultipleSelectionDuringEditing = true
         tableView.addSubview(refresh)
         refresh.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
     }
     
-    private func handleMoveToTrash(index: Int) {
+    private func handleMoveToTrash(index: IndexPath) {
         showActionAlert(title: "Are you sure that you want to delete a branch?", message: nil,
                         actions: ["delete".localized]) { [weak self] action in
             if action.title == "delete".localized {
-                self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
+                self?.showLoading()
+                self?.deleteBranch(index: index)
             }
+        }
+    }
+    
+    func deleteBranch(index: IndexPath) {
+        FirebaseManager.shared.deleteBranch(branchName: branches[index.row]) { [weak self] in
+            self?.hideLoading()
+            self?.branches.remove(at: index.row)
+            self?.tableView.deleteRows(at: [index], with: .left)
+        } error: { [weak self] err in
+            self?.hideLoading()
+            self?.showErrorMessage(title: err)
         }
     }
     
@@ -84,7 +97,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = branches[indexPath.row]
+            cell.text = branches[indexPath.row].capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -101,10 +114,16 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = BranchViewController()
-        Database.shared.currentBranch = branches[indexPath.row]
-        vc.branchName = branches[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+        if let _ = tableView.cellForRow(at: indexPath) as? ListTableViewCell {
+            let vc = BranchViewController()
+            Database.shared.currentBranch = branches[indexPath.row]
+            vc.branchName = branches[indexPath.row].capitalized
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
     }
     
     
@@ -113,7 +132,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
-            self?.handleMoveToTrash(index: indexPath.row)
+            self?.handleMoveToTrash(index: indexPath)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed

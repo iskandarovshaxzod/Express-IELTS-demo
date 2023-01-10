@@ -24,13 +24,6 @@ class StudentListPresenter {
         } error: { [weak self] err in
             self?.delegate?.onErrorGetAllStudents(error: err)
         }
-
-        
-//        getAllGroups(teacherName: teacherName, configName: configName) { [weak self] groups in
-//            self?.delegate?.onSuccessGetAllGroups(groups: groups)
-//        } error: { [weak self] err in
-//            self?.delegate?.onErrorGetAllGroups(error: err)
-//        }
     }
 }
 

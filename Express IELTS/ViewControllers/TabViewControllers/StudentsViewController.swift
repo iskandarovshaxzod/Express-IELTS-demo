@@ -73,7 +73,7 @@ extension StudentsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = branches[indexPath.row]
+            cell.text = branches[indexPath.row].capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -91,7 +91,7 @@ extension StudentsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = StudentsInBranchViewController()
-        vc.branchName = branches[indexPath.row]
+        vc.branchName = branches[indexPath.row].capitalized
         navigationController?.pushViewController(vc, animated: true)
     }
 }

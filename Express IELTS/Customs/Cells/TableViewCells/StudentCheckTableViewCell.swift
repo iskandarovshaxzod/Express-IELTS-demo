@@ -7,16 +7,22 @@
 
 import UIKit
 
+protocol PaidDelegate {
+    func pay(for student: String)
+}
+
 class StudentCheckTableViewCell: UITableViewCell {
+    
+    var delegate: PaidDelegate?
     
     let subView    = UIView()
     let scrollView = UIScrollView()
-    
+    let nameLabel  = UILabel()
     let view1 = UIView()
     let view2 = UIView()
     
-    let nameLabel = UILabel()
     var days = [String: Int]()
+    var name = ""
     var size = 12
     
     lazy var collectionView: UICollectionView = {
@@ -62,7 +68,7 @@ class StudentCheckTableViewCell: UITableViewCell {
         }
         nameLabel.numberOfLines = 0
         nameLabel.textAlignment = .center
-        
+        nameLabel.text = name
         
         subView.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
@@ -91,7 +97,7 @@ class StudentCheckTableViewCell: UITableViewCell {
     }
 
     @objc func viewTapped() {
-        
+        delegate?.pay(for: name)
     }
 }
 

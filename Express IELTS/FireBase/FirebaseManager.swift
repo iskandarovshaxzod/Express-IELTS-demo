@@ -26,6 +26,14 @@ class FirebaseManager{
         return db.collection("test")
     }
     
+    var studentData: [String : Int] {
+        var data = [String : Int]()
+        for i in 1...(Database.shared.currentGroupType.rawValue) {
+            data["\(i)"] = 0
+        }
+        return data
+    }
+    
     var time: Date?{
         return updateTime()
     }
@@ -105,7 +113,7 @@ extension FirebaseManager {
                 if let _ = self?.users.first(where: {$0.email == email && $0.password == password}) {
                     success()
                 } else {
-                    error(UserLoginError.notFound)
+                    error(Errors.userNotFound)
                 }
             }
         }
@@ -167,11 +175,12 @@ extension FirebaseManager {
             }
     }
     
-    func addNewGroup(groupName: String,
+    func addNewGroup(groupName: String, groupType: GroupType,
                      success: @escaping () -> Void,
                      error: @escaping (Error?) -> Void) {
         expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(groupName)")
-            .setData(["isShow" : true]) { err in
+            .setData(["isShow"    : true,
+                      "groupType" : groupType.rawValue]) { err in
                 if err != nil {
                     error(err)
                 } else {
@@ -188,22 +197,14 @@ extension FirebaseManager {
                 if err != nil {
                     error(err)
                 } else {
-//                    self?.expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)/configs/\(teacherConfig)/groups/\(groupName)/students/\(studentName)/months/month 1").setData([
-//                            "1" : 0,
-//                            "2" : 0,
-//                            "3" : 0,
-//                            "4" : 0,
-//                            "5" : 0,
-//                            "6" : 0,
-//                            "7" : 0,
-//                            "8" : 0,
-//                            "9" : 0,
-//                            "10" : 0,
-//                            "11" : 0,
-//                            "12" : 0,
-//                        ]) { err in
-//                            error(err)
-//                            }
+                    self?.expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(Database.shared.currentGroup)/students/\(studentName)/months/month 1")
+                        .setData(self?.studentData ?? ["" : 0]) { err in
+                            if err != nil {
+                                error(err)
+                            } else {
+                                success()
+                            }
+                    }
                 }
             }
     }
@@ -258,15 +259,16 @@ extension FirebaseManager {
         }
     }
     
-    func getAllGroups(success: @escaping ([String]) -> Void,
+    func getAllGroups(success: @escaping ([GroupModel]) -> Void,
                       error:   @escaping (String?) -> Void) {
-        var groups = [String]()
+        var groups = [GroupModel]()
         expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)").collection("groups").whereField("isShow", isEqualTo: true).getDocuments { snapShot, err in
             if err != nil {
                 error(err?.localizedDescription)
             } else {
                 snapShot?.documents.forEach { doc in
-                    groups.append(doc.documentID)
+                    groups.append(GroupModel(name: doc.documentID,
+                    groupType: GroupType(rawValue: doc.data()["groupType"] as? Int ?? 12) ?? .twelve))
                 }
                 success(groups)
             }
@@ -278,8 +280,8 @@ extension FirebaseManager {
 
         var months   = [EachMonthModel]()
         var students = [StudentCheckModel]()
-        
-        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(Database.shared.currentGroup)").collection("students").whereField("isShow", isEqualTo: true).getDocuments { [weak self] snapShot, err in
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(Database.shared.currentGroup)").collection("students").whereField("isShow", isEqualTo: true)
+            .getDocuments { [weak self] snapShot, err in
             if err != nil {
                 error(err?.localizedDescription)
             } else {
@@ -297,10 +299,12 @@ extension FirebaseManager {
                             }
                             students.append(StudentCheckModel(studentName: student.documentID,
                                                               months: months))
+                            print(students.count)
+                            success(students)
                         }
                     }
                 }
-                print("entering")
+//                print("entering")
                 success(students)
             }
         }
@@ -326,4 +330,85 @@ extension FirebaseManager {
             }
         }
     }
+    
+    func addReceipt(studentName: String, sum: String,
+                    success: @escaping () -> Void,
+                    error:   @escaping (String?) -> Void) {
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/monthly_payments/\("November")/receipts/\(studentName)")
+            .setData([sum : FieldValue.serverTimestamp()], merge: true) { err in
+                if err != nil {
+                    error(err?.localizedDescription)
+                } else {
+                    success()
+                }
+            }
+    }
+}
+
+// MARK: Extension for `DELETE` methods
+extension FirebaseManager {
+    func deleteBranch(branchName: String,
+                success: @escaping () -> Void,
+                error:   @escaping (String?) -> Void) {
+        expressRef.document(branchName).updateData(["isShow" : false]) { err in
+            if err != nil {
+                error(err?.localizedDescription)
+            } else {
+                success()
+            }
+        }
+    }
+    
+    func deleteTeacher(teacherName: String,
+                       success: @escaping () -> Void,
+                       error:   @escaping (String?) -> Void) {
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(teacherName)")
+            .updateData(["isShow" : false]) { err in
+            if err != nil {
+                error(err?.localizedDescription)
+            } else {
+                success()
+            }
+        }
+    }
+    
+    func deleteTeacherConfig(configName: String,
+                             success: @escaping () -> Void,
+                             error:   @escaping (String?) -> Void) {
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(configName)")
+            .updateData(["isShow" : false]) { err in
+            if err != nil {
+                error(err?.localizedDescription)
+            } else {
+                success()
+            }
+        }
+    }
+    
+    func deleteGroup(groupName: String,
+                     success: @escaping () -> Void,
+                     error:   @escaping (String?) -> Void) {
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(groupName)")
+            .updateData(["isShow" : false]) { err in
+            if err != nil {
+                error(err?.localizedDescription)
+            } else {
+                success()
+            }
+        }
+    }
+    
+    func deleteStudent(studentName: String,
+                     success: @escaping () -> Void,
+                     error:   @escaping (String?) -> Void) {
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(Database.shared.currentGroup)/students/\(studentName)")
+            .updateData(["isShow" : false]) { err in
+            if err != nil {
+                error(err?.localizedDescription)
+            } else {
+                success()
+            }
+        }
+    }
+    
 }

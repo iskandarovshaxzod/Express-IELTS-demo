@@ -29,7 +29,7 @@ class StudentListViewController: BaseViewController {
     
     override func configureNavBar() {
         title = groupName
-        
+        print("number: \(students.count)")
         var menuItems: [UIAction] {
             return [
                 UIAction(title: "new_student".localized, image: UIImage(systemName: "plus.app"),
@@ -90,12 +90,25 @@ class StudentListViewController: BaseViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 
-    private func handleMoveToTrash(index: Int) {
+    private func handleMoveToTrash(index: IndexPath) {
         showActionAlert(title: "Are you sure that you want to delete a branch?",
                         message: nil, actions: ["delete".localized]){ [weak self] action in
             if action.title == "delete".localized {
-                self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
+                self?.showLoading()
+                self?.deleteStudent(index: index)
             }
+        }
+    }
+    
+    func deleteStudent(index: IndexPath) {
+        
+        FirebaseManager.shared.deleteStudent(studentName: students[index.row].studentName) { [weak self] in
+            self?.hideLoading()
+            self?.students.remove(at: index.row)
+            self?.tableView.deleteRows(at: [index], with: .left)
+        } error: { [weak self] err in
+            self?.hideLoading()
+            self?.showErrorMessage(title: err)
         }
     }
     
@@ -122,8 +135,8 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StudentCheckTableViewCell
-            cell.nameLabel.text = students[indexPath.row].studentName
-            print(students[indexPath.row].months)
+            cell.name = students[indexPath.row].studentName.capitalized
+            cell.delegate = self
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -143,7 +156,7 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
         let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let delete = UIAction(title: "delete".localized, image: UIImage(systemName: "trash"),
                                   attributes: .destructive) { [weak self] _ in
-                self?.handleMoveToTrash(index: indexPath.row)
+                self?.handleMoveToTrash(index: indexPath)
             }
             return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [delete])
         }
@@ -156,7 +169,7 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
         
         let delete = UIContextualAction(style: .destructive, title: "delete".localized) {
             [weak self] (_, _, completionHandler) in
-            self?.handleMoveToTrash(index: indexPath.row)
+            self?.handleMoveToTrash(index: indexPath)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed
@@ -169,11 +182,26 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
 
 extension StudentListViewController: StudentListDelegate {
     func onSuccessGetAllStudents(students: [StudentCheckModel]) {
+        print("number: ...")
         self.students = students
         reloadData()
     }
     
     func onErrorGetAllStudents(error: String?) {
         showErrorMessage(title: error)
+    }
+}
+
+extension StudentListViewController: PaidDelegate {
+    func pay(for student: String) {
+        showAlertWithTextField(title: student, message: "Enter a sum") { text in
+            FirebaseManager.shared.addReceipt(studentName: student, sum: text) { [weak self] in
+                print("success")
+            } error: { [weak self] err in
+                self?.showErrorMessage(title: err)
+            }
+        } error: { [weak self] err in
+            self?.showErrorMessage(title: err)
+        }
     }
 }

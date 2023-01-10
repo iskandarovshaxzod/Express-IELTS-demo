@@ -16,7 +16,7 @@ class GroupViewController: BaseViewController {
     let refresh   = UIRefreshControl()
     
     var configName = ""
-    var groups = [String]()
+    var groups = [GroupModel]()
     var loaded = true
 
     override func viewDidLoad() {
@@ -80,12 +80,24 @@ class GroupViewController: BaseViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func handleMoveToTrash(index: Int) {
+    private func handleMoveToTrash(index: IndexPath) {
         showActionAlert(title: "Are you sure that you want to delete a branch?", message: nil,
                         actions: ["delete".localized]){ [weak self] action in
             if action.title == "delete".localized {
-                self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
+                self?.showLoading()
+                self?.deleteGroup(index: index)
             }
+        }
+    }
+    
+    func deleteGroup(index: IndexPath) {
+        FirebaseManager.shared.deleteGroup(groupName: groups[index.row].name) { [weak self] in
+            self?.hideLoading()
+            self?.groups.remove(at: index.row)
+            self?.tableView.deleteRows(at: [index], with: .left)
+        } error: { [weak self] err in
+            self?.hideLoading()
+            self?.showErrorMessage(title: err)
         }
     }
     
@@ -112,7 +124,7 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = groups[indexPath.row]
+            cell.text = groups[indexPath.row].name.capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -130,8 +142,9 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = StudentListViewController()
-        Database.shared.currentGroup = groups[indexPath.row]
-        vc.groupName = groups[indexPath.row]
+        Database.shared.currentGroupType = groups[indexPath.row].groupType
+        Database.shared.currentGroup     = groups[indexPath.row].name
+        vc.groupName = groups[indexPath.row].name.capitalized
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -139,7 +152,7 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
-            self?.handleMoveToTrash(index: indexPath.row)
+            self?.handleMoveToTrash(index: indexPath)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed
@@ -151,7 +164,7 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension GroupViewController: GroupListDelegate {
-    func onSuccessGetAllGroups(groups: [String]) {
+    func onSuccessGetAllGroups(groups: [GroupModel]) {
         self.groups = groups
         reloadData()
     }

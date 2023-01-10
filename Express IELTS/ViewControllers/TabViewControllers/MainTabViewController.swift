@@ -42,7 +42,8 @@ class MainTabViewController: BaseViewController {
                     }),
                     UIAction(title: "edit".localized, image: UIImage(systemName: "pencil"),
                              handler: { [weak self] (_) in
-                        print("hello 2")
+                                 self?.mainController.tableView.isEditing = true
+                        
                     })
                 ]
             }

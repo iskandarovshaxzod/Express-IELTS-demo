@@ -80,12 +80,24 @@ class TeacherViewController: BaseViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func handleMoveToTrash(index: Int) {
+    private func handleMoveToTrash(index: IndexPath) {
         showActionAlert(title: "Are you sure that you want to delete a branch?", message: nil,
                         actions: ["delete".localized]){ [weak self] action in
             if action.title == "delete".localized {
-                self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
+                self?.showLoading()
+                self?.deleteTeacherConfig(index: index)
             }
+        }
+    }
+    
+    func deleteTeacherConfig(index: IndexPath) {
+        FirebaseManager.shared.deleteTeacherConfig(configName: configs[index.row]) { [weak self] in
+            self?.hideLoading()
+            self?.configs.remove(at: index.row)
+            self?.tableView.deleteRows(at: [index], with: .left)
+        } error: { [weak self] err in
+            self?.hideLoading()
+            self?.showErrorMessage(title: err)
         }
     }
     
@@ -113,7 +125,7 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = configs[indexPath.row]
+            cell.text = configs[indexPath.row].capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -132,7 +144,7 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = GroupViewController()
         Database.shared.currentConfig = configs[indexPath.row]
-        vc.configName = configs[indexPath.row]
+        vc.configName = configs[indexPath.row].capitalized
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -140,7 +152,7 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
-            self?.handleMoveToTrash(index: indexPath.row)
+            self?.handleMoveToTrash(index: indexPath)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed

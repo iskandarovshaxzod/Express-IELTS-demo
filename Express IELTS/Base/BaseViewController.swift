@@ -76,14 +76,14 @@ extension BaseViewController {
         HapticsManager.vibrate(for: type)
     }
 
-    func showLoading(){
+    func showLoading(stopWhenTapped: Bool = false){
         window?.addSubview(loadingView)
         
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         loadingView.backgroundColor = .gray.withAlphaComponent(0.6)
-        loadingView.isUserInteractionEnabled = true
+        loadingView.isUserInteractionEnabled = stopWhenTapped
         loadingView.addGestureRecognizer(UITapGestureRecognizer(target: self,
                                                                 action: #selector(loadingViewTapped)))
         
@@ -148,7 +148,7 @@ extension BaseViewController {
     }
 }
 
-//MARK: Methods for showing ALERTS
+//MARK: Methods for showing `ALERTS`
 extension BaseViewController {
     
     func showErrorMessage(title: String? = nil, message: String? = nil){
@@ -157,9 +157,30 @@ extension BaseViewController {
         present(alert, animated: true)
     }
     
-    func showSureInfo(title: String? = nil, message: String? = nil, handler: @escaping (UIAlertAction) -> ()){
+    func showSureInfo(title: String? = nil, message: String? = nil,
+                      handler: @escaping (UIAlertAction) -> ()){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "yes".localized, style: .destructive, handler: handler))
+        alert.addAction(UIAlertAction(title: "no".localized,  style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    func showAlertWithTextField(title: String? = nil, message: String? = nil,
+                       success: @escaping (String) -> Void,
+                       error :  @escaping (String) -> Void){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "summa" + "/" + "summa"
+        }
+        alert.addAction(UIAlertAction(title: "yes".localized, style: .destructive,
+                                      handler: { [weak alert] action in
+            guard let text = alert?.textFields?[0].text else { return }
+            if text.contains("/"), text.last != "/" {
+                success(text)
+            } else {
+                error(Errors.invalidSum.localizedDescription)
+            }
+        }))
         alert.addAction(UIAlertAction(title: "no".localized, style: .cancel))
         present(alert, animated: true)
     }

@@ -46,7 +46,6 @@ class StudentsInBranchViewController: BaseViewController {
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
     }
-
 }
 
 extension StudentsInBranchViewController: UITableViewDelegate, UITableViewDataSource {

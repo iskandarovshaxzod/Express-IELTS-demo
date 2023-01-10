@@ -15,6 +15,7 @@ struct Database {
     var currentTeacher = ""
     var currentConfig  = ""
     var currentGroup   = ""
+    var currentGroupType: GroupType = .twelve
 
     var language: Language {
         get{

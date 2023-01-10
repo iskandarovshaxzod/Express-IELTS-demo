@@ -12,6 +12,8 @@
 		400EC15C2945E1A400F120E4 /* BranchRevenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400EC15B2945E1A400F120E4 /* BranchRevenueViewController.swift */; };
 		400EC15E2945E3BB00F120E4 /* TeacherRevenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400EC15D2945E3BB00F120E4 /* TeacherRevenueViewController.swift */; };
 		4011F255294B41390000B596 /* StudentsInBranchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4011F254294B41390000B596 /* StudentsInBranchViewController.swift */; };
+		401FC10B296C12510061C11E /* StudentReceiptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401FC10A296C12510061C11E /* StudentReceiptViewController.swift */; };
+		401FC10D296C27320061C11E /* GroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401FC10C296C27320061C11E /* GroupType.swift */; };
 		40226DA92940CE4D00E9489D /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40226DA82940CE4C00E9489D /* NavView.swift */; };
 		40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40226DAA2940DEA500E9489D /* AddBranchViewController.swift */; };
 		4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023A957292D45D5007FD5D5 /* AppDelegate.swift */; };
@@ -38,6 +40,8 @@
 		4037171F29422B320053CCF2 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037171E29422B320053CCF2 /* ListTableViewCell.swift */; };
 		4037172329422FC90053CCF2 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037172229422FC90053CCF2 /* AddViewController.swift */; };
 		40371725294233A40053CCF2 /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40371724294233A40053CCF2 /* StudentListViewController.swift */; };
+		404B436B296C7B1000D9D887 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B436A296C7B1000D9D887 /* UIButton+Extension.swift */; };
+		404B436D296C8CDB00D9D887 /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B436C296C8CDB00D9D887 /* GroupModel.swift */; };
 		4052F9FC29641DD90002C353 /* TeacherListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052F9FB29641DD90002C353 /* TeacherListDelegate.swift */; };
 		4052F9FE29641DEB0002C353 /* TeacherListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052F9FD29641DEB0002C353 /* TeacherListPresenter.swift */; };
 		4052FA00296422200002C353 /* TeacherConfigListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052F9FF296422200002C353 /* TeacherConfigListDelegate.swift */; };
@@ -81,7 +85,7 @@
 		40EC8135294E0509006C4644 /* icons8-checkmark.json in Resources */ = {isa = PBXBuildFile; fileRef = 40EC8133294E0509006C4644 /* icons8-checkmark.json */; };
 		40EC8136294E0509006C4644 /* check.json in Resources */ = {isa = PBXBuildFile; fileRef = 40EC8134294E0509006C4644 /* check.json */; };
 		40EF2A9529688F3F0060BB84 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF2A9429688F3F0060BB84 /* UserModel.swift */; };
-		40EF2A97296895220060BB84 /* UserLoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF2A96296895220060BB84 /* UserLoginError.swift */; };
+		40EF2A97296895220060BB84 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF2A96296895220060BB84 /* Errors.swift */; };
 		40F21DD62965550D00867E81 /* StudentCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F21DD52965550D00867E81 /* StudentCheckModel.swift */; };
 		40FE3789292E1A290012706F /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE3788292E1A290012706F /* UserViewController.swift */; };
 		40FE378B292E1AF50012706F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378A292E1AF50012706F /* BaseViewController.swift */; };
@@ -98,6 +102,8 @@
 		400EC15B2945E1A400F120E4 /* BranchRevenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchRevenueViewController.swift; sourceTree = "<group>"; };
 		400EC15D2945E3BB00F120E4 /* TeacherRevenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherRevenueViewController.swift; sourceTree = "<group>"; };
 		4011F254294B41390000B596 /* StudentsInBranchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsInBranchViewController.swift; sourceTree = "<group>"; };
+		401FC10A296C12510061C11E /* StudentReceiptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentReceiptViewController.swift; sourceTree = "<group>"; };
+		401FC10C296C27320061C11E /* GroupType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupType.swift; sourceTree = "<group>"; };
 		40226DA82940CE4C00E9489D /* NavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
 		40226DAA2940DEA500E9489D /* AddBranchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBranchViewController.swift; sourceTree = "<group>"; };
 		4023A954292D45D4007FD5D5 /* Express IELTS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Express IELTS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +132,8 @@
 		4037171E29422B320053CCF2 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		4037172229422FC90053CCF2 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		40371724294233A40053CCF2 /* StudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
+		404B436A296C7B1000D9D887 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		404B436C296C8CDB00D9D887 /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
 		4052F9FB29641DD90002C353 /* TeacherListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherListDelegate.swift; sourceTree = "<group>"; };
 		4052F9FD29641DEB0002C353 /* TeacherListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherListPresenter.swift; sourceTree = "<group>"; };
 		4052F9FF296422200002C353 /* TeacherConfigListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherConfigListDelegate.swift; sourceTree = "<group>"; };
@@ -171,7 +179,7 @@
 		40EC8133294E0509006C4644 /* icons8-checkmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "icons8-checkmark.json"; sourceTree = "<group>"; };
 		40EC8134294E0509006C4644 /* check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check.json; sourceTree = "<group>"; };
 		40EF2A9429688F3F0060BB84 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		40EF2A96296895220060BB84 /* UserLoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginError.swift; sourceTree = "<group>"; };
+		40EF2A96296895220060BB84 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		40F21DD52965550D00867E81 /* StudentCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCheckModel.swift; sourceTree = "<group>"; };
 		40FE3788292E1A290012706F /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		40FE378A292E1AF50012706F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -357,6 +365,7 @@
 				400EC15B2945E1A400F120E4 /* BranchRevenueViewController.swift */,
 				400EC15D2945E3BB00F120E4 /* TeacherRevenueViewController.swift */,
 				40D2977D294240B10084D579 /* MonthlyPaymentViewController.swift */,
+				401FC10A296C12510061C11E /* StudentReceiptViewController.swift */,
 			);
 			path = PaymentViewControllers;
 			sourceTree = "<group>";
@@ -425,7 +434,8 @@
 				40DE637D294C53D8001E82B0 /* UserMode.swift */,
 				40DE6381294C93EA001E82B0 /* Language.swift */,
 				4005E41E2953343400960A37 /* GroupSize.swift */,
-				40EF2A96296895220060BB84 /* UserLoginError.swift */,
+				40EF2A96296895220060BB84 /* Errors.swift */,
+				401FC10C296C27320061C11E /* GroupType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -447,6 +457,7 @@
 				40F21DD52965550D00867E81 /* StudentCheckModel.swift */,
 				40EF2A9429688F3F0060BB84 /* UserModel.swift */,
 				4099D0C72969709B00C219BA /* ReceiptModel.swift */,
+				404B436C296C8CDB00D9D887 /* GroupModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -500,6 +511,7 @@
 				40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */,
 				40E4C6C72949C240003F8A56 /* String+Extension.swift */,
 				40E76E8A2955FE4C0088DE4C /* UIViewController+Extension.swift */,
+				404B436A296C7B1000D9D887 /* UIButton+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -666,7 +678,7 @@
 				40D6AB5C295442FD00530577 /* SettingsTableViewCell.swift in Sources */,
 				40D2977E294240B10084D579 /* MonthlyPaymentViewController.swift in Sources */,
 				40E1E02E294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift in Sources */,
-				40EF2A97296895220060BB84 /* UserLoginError.swift in Sources */,
+				40EF2A97296895220060BB84 /* Errors.swift in Sources */,
 				4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */,
 				40259B1429694F7900D6CB60 /* SkeletonViewsTableViewCell.swift in Sources */,
 				40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */,
@@ -686,6 +698,7 @@
 				40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */,
 				40DE637E294C53D8001E82B0 /* UserMode.swift in Sources */,
 				402A78022958992800B91924 /* CheckBoxButton.swift in Sources */,
+				404B436D296C8CDB00D9D887 /* GroupModel.swift in Sources */,
 				4052FA02296422290002C353 /* TeacherConfigListPresenter.swift in Sources */,
 				4031E57929632CBA0094F48D /* BranchListDelegate.swift in Sources */,
 				40226DA92940CE4D00E9489D /* NavView.swift in Sources */,
@@ -696,6 +709,7 @@
 				402A77FF2958702A00B91924 /* CheckCollectionViewCell.swift in Sources */,
 				40DE6382294C93EA001E82B0 /* Language.swift in Sources */,
 				4032767429642F7F0077A90E /* StudentListPresenter.swift in Sources */,
+				401FC10D296C27320061C11E /* GroupType.swift in Sources */,
 				40C9DE39293DF32E00CC4BFA /* MainTabViewController.swift in Sources */,
 				40FE378B292E1AF50012706F /* BaseViewController.swift in Sources */,
 				40FE3789292E1A290012706F /* UserViewController.swift in Sources */,
@@ -719,11 +733,13 @@
 				4037171129421BDF0053CCF2 /* BranchViewController.swift in Sources */,
 				4011F255294B41390000B596 /* StudentsInBranchViewController.swift in Sources */,
 				40EF2A9529688F3F0060BB84 /* UserModel.swift in Sources */,
+				404B436B296C7B1000D9D887 /* UIButton+Extension.swift in Sources */,
 				4080B0D02955901F009C22AC /* ChangePasswordViewController.swift in Sources */,
 				40C9DE42293DFABF00CC4BFA /* StudentsViewController.swift in Sources */,
 				40E4C6C82949C240003F8A56 /* String+Extension.swift in Sources */,
 				40CEDD70296B2C7C0027C6C3 /* AddMethodsPresenter.swift in Sources */,
 				40D2977C29423AF20084D579 /* Database.swift in Sources */,
+				401FC10B296C12510061C11E /* StudentReceiptViewController.swift in Sources */,
 				406996FC292F6D3E00090507 /* AuthUserViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

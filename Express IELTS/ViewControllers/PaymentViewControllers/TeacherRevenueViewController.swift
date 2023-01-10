@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class TeacherRevenueViewController: BaseViewController {
     
     let presenter = TeacherPaymentListPresenter()
@@ -79,6 +78,9 @@ extension TeacherRevenueViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let vc = StudentReceiptViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: false)
     }
 }
 

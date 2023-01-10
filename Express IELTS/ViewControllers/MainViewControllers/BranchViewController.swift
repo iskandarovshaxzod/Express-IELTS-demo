@@ -80,12 +80,24 @@ class BranchViewController: BaseViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func handleMoveToTrash(index: Int) {
+    private func handleMoveToTrash(index: IndexPath) {
         showActionAlert(title: "Are you sure that you want to delete a branch?", message: nil,
                         actions: ["delete".localized]){ [weak self] action in
             if action.title == "delete".localized {
-                self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
+                self?.showLoading()
+                self?.deleteTeacher(index: index)
             }
+        }
+    }
+    
+    func deleteTeacher(index: IndexPath) {
+        FirebaseManager.shared.deleteTeacher(teacherName: teachers[index.row]) { [weak self] in
+            self?.hideLoading()
+            self?.teachers.remove(at: index.row)
+            self?.tableView.deleteRows(at: [index], with: .left)
+        } error: { [weak self] err in
+            self?.hideLoading()
+            self?.showErrorMessage(title: err)
         }
     }
     
@@ -117,7 +129,7 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = teachers[indexPath.row]
+            cell.text = teachers[indexPath.row].capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -133,7 +145,7 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = TeacherViewController()
         Database.shared.currentTeacher = teachers[indexPath.row]
-        vc.teacherName = teachers[indexPath.row]
+        vc.teacherName = teachers[indexPath.row].capitalized
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -142,7 +154,7 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
-            self?.handleMoveToTrash(index: indexPath.row)
+            self?.handleMoveToTrash(index: indexPath)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed

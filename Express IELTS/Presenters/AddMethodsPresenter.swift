@@ -32,8 +32,9 @@ class AddMethodsPresenter {
         })
     }
     
-    func addNewGroup(groupName: String) {
-        FirebaseManager.shared.addNewGroup(groupName: groupName, success: { [weak self] in
+    func addNewGroup(groupName: String, groupType: GroupType) {
+        FirebaseManager.shared.addNewGroup(groupName: groupName, groupType: groupType,
+        success: { [weak self] in
             self?.delegate?.onSuccessAddNewGroup()
         }, error: { [weak self] err in
             self?.delegate?.onErrorAddNew(error: err?.localizedDescription)

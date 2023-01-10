@@ -64,7 +64,7 @@ extension BranchRevenueViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-        cell.text = teachers[indexPath.row]
+        cell.text = teachers[indexPath.row].capitalized
         cell.initViews()
         cell.selectionStyle = .none
         return cell
@@ -73,7 +73,7 @@ extension BranchRevenueViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = TeacherRevenueViewController()
         Database.shared.currentTeacher = teachers[indexPath.row]
-        vc.teacherName = teachers[indexPath.row]
+        vc.teacherName = teachers[indexPath.row].capitalized
         navigationController?.pushViewController(vc, animated: true)
     }
 }
