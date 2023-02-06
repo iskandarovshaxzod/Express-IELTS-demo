@@ -138,6 +138,7 @@ class AddViewController: BaseViewController {
     }
     
     func dismiss() {
+        hideAnimation()
         navigationController?.popViewController(animated: true)
     }
 }
@@ -145,26 +146,33 @@ class AddViewController: BaseViewController {
 extension AddViewController: AddMethodsDelegate {
     func onSuccessAddNewTeacher() {
         hideLoading()
-        dismiss()
+        showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] _ in
+            self?.dismiss()
+        }
     }
     
     func onSuccessAddNewTeacherConfig() {
         hideLoading()
-        dismiss()
+        showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] _ in
+            self?.dismiss()
+        }
     }
     
     func onSuccessAddNewGroup() {
         hideLoading()
-        dismiss()
+        showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] _ in
+            self?.dismiss()
+        }
     }
     
     func onSuccessAddNewStudent() {
         hideLoading()
-        dismiss()
+        showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] _ in
+            self?.dismiss()
+        }
     }
     
     func onErrorAddNew(error: String?) {
-        print(error)
         hideLoading()
         showErrorMessage(title: error)
     }

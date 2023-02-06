@@ -130,12 +130,20 @@ class ChangePassCodeViewController: BaseViewController {
             oldPassField.text = user?.password
         }
     }
+    
+    func dismiss() {
+        hideAnimation()
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 extension ChangePassCodeViewController: UserMethodsDelegate {
     func onSuccessChangePassword() {
         hideLoading()
-        // TODO: show success animation
+        showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] completed in
+//            print(completed)
+            self?.dismiss()
+        }
     }
     
     func onErrorChangePassword(error: String?) {

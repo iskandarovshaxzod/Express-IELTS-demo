@@ -25,8 +25,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = UserViewController()
         window?.makeKeyAndVisible()
         checkUserMode()
-        UINavigationItem().backBarButtonItem = UIBarButtonItem(title: "nazad", style: .plain,
-                                                                       target: nil, action: nil)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

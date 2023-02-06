@@ -126,7 +126,7 @@ extension BaseViewController {
         animationView.addSubview(animation)
         animation.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(width / 2)
+            make.width.height.equalTo(100)//equalTo(width / 2)
         }
         animation.animation   = .named(animationName)
         animation.contentMode = .scaleAspectFit

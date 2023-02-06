@@ -47,6 +47,9 @@
 		4052FA00296422200002C353 /* TeacherConfigListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052F9FF296422200002C353 /* TeacherConfigListDelegate.swift */; };
 		4052FA02296422290002C353 /* TeacherConfigListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052FA01296422290002C353 /* TeacherConfigListPresenter.swift */; };
 		405912422945A70F00620278 /* TotalRevenueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405912412945A70F00620278 /* TotalRevenueView.swift */; };
+		405DFC11296E97A300EEC824 /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = 405DFC10296E97A300EEC824 /* success.json */; };
+		405DFC13296EA52B00EEC824 /* AllStudentListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405DFC12296EA52B00EEC824 /* AllStudentListDelegate.swift */; };
+		405DFC15296EA53E00EEC824 /* AllStudentListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405DFC14296EA53E00EEC824 /* AllStudentListPresenter.swift */; };
 		406996FC292F6D3E00090507 /* AuthUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FB292F6D3E00090507 /* AuthUserViewController.swift */; };
 		406996FE292F77DE00090507 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FD292F77DE00090507 /* UITextField+Extension.swift */; };
 		4080B0CE29558F9C009C22AC /* acces-denied.json in Resources */ = {isa = PBXBuildFile; fileRef = 4080B0CD29558F9C009C22AC /* acces-denied.json */; };
@@ -73,17 +76,15 @@
 		40D6AB622954435000530577 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D6AB612954435000530577 /* BaseCollectionViewCell.swift */; };
 		40DE637E294C53D8001E82B0 /* UserMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DE637D294C53D8001E82B0 /* UserMode.swift */; };
 		40DE6382294C93EA001E82B0 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DE6381294C93EA001E82B0 /* Language.swift */; };
+		40E044CD298EA3F2004BFF2A /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E044CC298EA3F2004BFF2A /* APIManager.swift */; };
 		40E1E02A294731B7007ED9A2 /* HeaderMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E029294731B7007ED9A2 /* HeaderMonthView.swift */; };
 		40E1E02C29473621007ED9A2 /* MonthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E02B29473621007ED9A2 /* MonthCollectionViewCell.swift */; };
 		40E1E02E294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */; };
 		40E1E03029476337007ED9A2 /* HeaderMonthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E1E02F29476337007ED9A2 /* HeaderMonthTableViewCell.swift */; };
-		40E1E05129479326007ED9A2 /* trash-can.json in Resources */ = {isa = PBXBuildFile; fileRef = 40E1E05029479326007ED9A2 /* trash-can.json */; };
 		40E4C6C82949C240003F8A56 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E4C6C72949C240003F8A56 /* String+Extension.swift */; };
 		40E76E8B2955FE4C0088DE4C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E76E8A2955FE4C0088DE4C /* UIViewController+Extension.swift */; };
 		40E76E8F295631950088DE4C /* ChangePassCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E76E8E295631950088DE4C /* ChangePassCodeViewController.swift */; };
 		40EC8129294DEB81006C4644 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40EC812B294DEB81006C4644 /* Localizable.strings */; };
-		40EC8135294E0509006C4644 /* icons8-checkmark.json in Resources */ = {isa = PBXBuildFile; fileRef = 40EC8133294E0509006C4644 /* icons8-checkmark.json */; };
-		40EC8136294E0509006C4644 /* check.json in Resources */ = {isa = PBXBuildFile; fileRef = 40EC8134294E0509006C4644 /* check.json */; };
 		40EF2A9529688F3F0060BB84 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF2A9429688F3F0060BB84 /* UserModel.swift */; };
 		40EF2A97296895220060BB84 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF2A96296895220060BB84 /* Errors.swift */; };
 		40F21DD62965550D00867E81 /* StudentCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F21DD52965550D00867E81 /* StudentCheckModel.swift */; };
@@ -139,6 +140,9 @@
 		4052F9FF296422200002C353 /* TeacherConfigListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherConfigListDelegate.swift; sourceTree = "<group>"; };
 		4052FA01296422290002C353 /* TeacherConfigListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherConfigListPresenter.swift; sourceTree = "<group>"; };
 		405912412945A70F00620278 /* TotalRevenueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRevenueView.swift; sourceTree = "<group>"; };
+		405DFC10296E97A300EEC824 /* success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
+		405DFC12296EA52B00EEC824 /* AllStudentListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStudentListDelegate.swift; sourceTree = "<group>"; };
+		405DFC14296EA53E00EEC824 /* AllStudentListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStudentListPresenter.swift; sourceTree = "<group>"; };
 		406996FB292F6D3E00090507 /* AuthUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserViewController.swift; sourceTree = "<group>"; };
 		406996FD292F77DE00090507 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		4080B0CD29558F9C009C22AC /* acces-denied.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "acces-denied.json"; sourceTree = "<group>"; };
@@ -165,19 +169,17 @@
 		40D6AB612954435000530577 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		40DE637D294C53D8001E82B0 /* UserMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMode.swift; sourceTree = "<group>"; };
 		40DE6381294C93EA001E82B0 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		40E044CC298EA3F2004BFF2A /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		40E1E029294731B7007ED9A2 /* HeaderMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMonthView.swift; sourceTree = "<group>"; };
 		40E1E02B29473621007ED9A2 /* MonthCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCollectionViewCell.swift; sourceTree = "<group>"; };
 		40E1E02D294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+Extension.swift"; sourceTree = "<group>"; };
 		40E1E02F29476337007ED9A2 /* HeaderMonthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMonthTableViewCell.swift; sourceTree = "<group>"; };
-		40E1E05029479326007ED9A2 /* trash-can.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "trash-can.json"; sourceTree = "<group>"; };
 		40E4C6C72949C240003F8A56 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		40E76E8A2955FE4C0088DE4C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		40E76E8E295631950088DE4C /* ChangePassCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePassCodeViewController.swift; sourceTree = "<group>"; };
 		40EC812A294DEB81006C4644 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		40EC812D294DEBB5006C4644 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		40EC812E294DEBC8006C4644 /* uz */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uz; path = uz.lproj/Localizable.strings; sourceTree = "<group>"; };
-		40EC8133294E0509006C4644 /* icons8-checkmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "icons8-checkmark.json"; sourceTree = "<group>"; };
-		40EC8134294E0509006C4644 /* check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check.json; sourceTree = "<group>"; };
 		40EF2A9429688F3F0060BB84 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		40EF2A96296895220060BB84 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		40F21DD52965550D00867E81 /* StudentCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCheckModel.swift; sourceTree = "<group>"; };
@@ -278,7 +280,7 @@
 				4080B0C829558987009C22AC /* Database */,
 				40DE637C294C53CE001E82B0 /* Enums */,
 				40FE3793292E4D960012706F /* Extensions */,
-				4088F960292E77860006614C /* FireBase */,
+				4088F960292E77860006614C /* API */,
 				40FE3792292E34E70012706F /* AppConfigs */,
 				40EC812B294DEB81006C4644 /* Localizable.strings */,
 				4023A965292D45D7007FD5D5 /* Info.plist */,
@@ -326,6 +328,7 @@
 				4032767329642F7F0077A90E /* StudentListPresenter.swift */,
 				4099D0C52969675500C219BA /* TeacherPaymentListPresenter.swift */,
 				40CEDD6F296B2C7C0027C6C3 /* AddMethodsPresenter.swift */,
+				405DFC14296EA53E00EEC824 /* AllStudentListPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -388,12 +391,13 @@
 			path = StudentsViewControllers;
 			sourceTree = "<group>";
 		};
-		4088F960292E77860006614C /* FireBase */ = {
+		4088F960292E77860006614C /* API */ = {
 			isa = PBXGroup;
 			children = (
 				4088F961292E779F0006614C /* FirebaseManager.swift */,
+				40E044CC298EA3F2004BFF2A /* APIManager.swift */,
 			);
-			path = FireBase;
+			path = API;
 			sourceTree = "<group>";
 		};
 		40C9DE37293DF2C600CC4BFA /* Auth */ = {
@@ -444,9 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				4080B0CD29558F9C009C22AC /* acces-denied.json */,
-				40EC8134294E0509006C4644 /* check.json */,
-				40EC8133294E0509006C4644 /* icons8-checkmark.json */,
-				40E1E05029479326007ED9A2 /* trash-can.json */,
+				405DFC10296E97A300EEC824 /* success.json */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -473,6 +475,7 @@
 				4032767129642F760077A90E /* StudentListDelegate.swift */,
 				4099D0C32969671D00C219BA /* TeacherPaymentListDelegate.swift */,
 				40CEDD6D296B2C6B0027C6C3 /* AddMethodsDelegate.swift */,
+				405DFC12296EA52B00EEC824 /* AllStudentListDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -603,14 +606,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40EC8136294E0509006C4644 /* check.json in Resources */,
 				40EC8129294DEB81006C4644 /* Localizable.strings in Resources */,
 				4023A964292D45D7007FD5D5 /* LaunchScreen.storyboard in Resources */,
-				40E1E05129479326007ED9A2 /* trash-can.json in Resources */,
 				4023A96C292D4627007FD5D5 /* GoogleService-Info.plist in Resources */,
 				4023A961292D45D7007FD5D5 /* Assets.xcassets in Resources */,
 				4080B0CE29558F9C009C22AC /* acces-denied.json in Resources */,
-				40EC8135294E0509006C4644 /* icons8-checkmark.json in Resources */,
+				405DFC11296E97A300EEC824 /* success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +692,7 @@
 				4031E57729632B070094F48D /* BranchListPresenter.swift in Sources */,
 				40FE3795292E4DAB0012706F /* UIDevice+Extension.swift in Sources */,
 				40C9DE3E293DFAAA00CC4BFA /* MainViewController.swift in Sources */,
+				405DFC15296EA53E00EEC824 /* AllStudentListPresenter.swift in Sources */,
 				4052F9FE29641DEB0002C353 /* TeacherListPresenter.swift in Sources */,
 				406996FE292F77DE00090507 /* UITextField+Extension.swift in Sources */,
 				4099D0C62969675500C219BA /* TeacherPaymentListPresenter.swift in Sources */,
@@ -719,6 +721,7 @@
 				40D6AB622954435000530577 /* BaseCollectionViewCell.swift in Sources */,
 				40371717294222350053CCF2 /* TeacherViewController.swift in Sources */,
 				4032766E29642D020077A90E /* GroupListDelegate.swift in Sources */,
+				40E044CD298EA3F2004BFF2A /* APIManager.swift in Sources */,
 				4099D0C42969671D00C219BA /* TeacherPaymentListDelegate.swift in Sources */,
 				4037171D294229F70053CCF2 /* GroupViewController.swift in Sources */,
 				4005E41F2953343400960A37 /* GroupSize.swift in Sources */,
@@ -732,6 +735,7 @@
 				400EC15C2945E1A400F120E4 /* BranchRevenueViewController.swift in Sources */,
 				4037171129421BDF0053CCF2 /* BranchViewController.swift in Sources */,
 				4011F255294B41390000B596 /* StudentsInBranchViewController.swift in Sources */,
+				405DFC13296EA52B00EEC824 /* AllStudentListDelegate.swift in Sources */,
 				40EF2A9529688F3F0060BB84 /* UserModel.swift in Sources */,
 				404B436B296C7B1000D9D887 /* UIButton+Extension.swift in Sources */,
 				4080B0D02955901F009C22AC /* ChangePasswordViewController.swift in Sources */,

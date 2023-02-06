@@ -101,7 +101,6 @@ class StudentListViewController: BaseViewController {
     }
     
     func deleteStudent(index: IndexPath) {
-        
         FirebaseManager.shared.deleteStudent(studentName: students[index.row].studentName) { [weak self] in
             self?.hideLoading()
             self?.students.remove(at: index.row)
@@ -181,8 +180,11 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension StudentListViewController: StudentListDelegate {
-    func onSuccessGetAllStudents(students: [StudentCheckModel]) {
-        print("number: ...")
+    func onSuccessGetAllStudents(students: [String]) {
+        presenter.getAllStudentsData(students: students)
+    }
+    
+    func onSuccessGetAllStudentsData(students: [StudentCheckModel]) {
         self.students = students
         reloadData()
     }
@@ -194,10 +196,12 @@ extension StudentListViewController: StudentListDelegate {
 
 extension StudentListViewController: PaidDelegate {
     func pay(for student: String) {
-        showAlertWithTextField(title: student, message: "Enter a sum") { text in
+        showAlertWithTextField(title: student, message: "Enter a sum") { [weak self] text in
+            self?.showLoading()
             FirebaseManager.shared.addReceipt(studentName: student, sum: text) { [weak self] in
-                print("success")
+                self?.hideLoading()
             } error: { [weak self] err in
+                self?.hideLoading()
                 self?.showErrorMessage(title: err)
             }
         } error: { [weak self] err in

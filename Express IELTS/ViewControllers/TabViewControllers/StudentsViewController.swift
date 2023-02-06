@@ -91,7 +91,8 @@ extension StudentsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = StudentsInBranchViewController()
-        vc.branchName = branches[indexPath.row].capitalized
+        Database.shared.currentBranch = branches[indexPath.row]
+        vc.branchName = branches[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
 }

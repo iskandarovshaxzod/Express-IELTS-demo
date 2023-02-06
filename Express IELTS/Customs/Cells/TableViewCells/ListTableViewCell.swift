@@ -9,21 +9,22 @@ import UIKit
 
 class ListTableViewCell: UITableViewCell {
     
+    let hView   = UIView()
     let subView = UIView()
     let label   = UILabel()
     
     var text = ""
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        initViews()
-    }
 
     func initViews(){
         
         contentView.backgroundColor = "cl_main_back".color
+        contentView.addSubview(hView)
+        hView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        hView.backgroundColor = "cl_main_back".color
         
-        addSubview(subView)
+        hView.addSubview(subView)
         subView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(30)
             make.right.equalToSuperview().offset(-30)

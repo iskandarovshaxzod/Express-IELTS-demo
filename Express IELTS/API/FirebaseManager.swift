@@ -275,39 +275,57 @@ extension FirebaseManager {
         }
     }
     
-    func getAllStudentsOfGroup(success: @escaping ([StudentCheckModel]) -> Void,
+    func getAllStudentsOfGroup(success: @escaping ([String]) -> Void,
                                error:   @escaping (String?) -> Void) {
-
-        var months   = [EachMonthModel]()
         var students = [StudentCheckModel]()
+        var s = [String]()
+        
         expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(Database.shared.currentGroup)").collection("students").whereField("isShow", isEqualTo: true)
-            .getDocuments { [weak self] snapShot, err in
-            if err != nil {
-                error(err?.localizedDescription)
-            } else {
-                snapShot?.documents.forEach { student in
-                    months.removeAll()
-                    self?.expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(Database.shared.currentGroup)/students/\(student.documentID)").collection("months").getDocuments { snapShot, err in
-                        if err != nil {
-                            error(err?.localizedDescription)
-                            return
-                        } else {
-                            snapShot?.documents.forEach { doc in
-                                months.append(EachMonthModel(monthName: doc.documentID,
-                                                             days: doc.data() as? [String : Int]))
-                                print("adding")
-                            }
-                            students.append(StudentCheckModel(studentName: student.documentID,
-                                                              months: months))
-                            print(students.count)
-                            success(students)
-                        }
+            .getDocuments() { snapShot, err in
+                if err != nil {
+                    error(err?.localizedDescription)
+                } else {
+                    snapShot?.documents.forEach { doc in
+                        self.expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(Database.shared.currentGroup)/students/\(doc.documentID)/months/\("month 1")")
+                            
                     }
                 }
-//                print("entering")
-                success(students)
-            }
         }
+    }
+    
+    func gets(students: [String],
+              success: @escaping ([StudentCheckModel]) -> Void,
+              error:   @escaping (String?) -> Void) {
+
+        var studentsData = [StudentCheckModel]()
+        
+        students.forEach { student in
+            expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/configs/\(Database.shared.currentConfig)/groups/\(Database.shared.currentGroup)/students/\(student)/months/\("month 1")")
+                .getDocument { snapShot, err in
+                    studentsData.append(StudentCheckModel(studentName: student,
+                                                          days: snapShot?.data() as? [String : Int]))
+                }
+        }
+        
+        success(studentsData)
+    }
+    
+    func getAllStudentsOfBranch(monthName: String,
+                                success: @escaping ([String]) -> Void,
+                                error:   @escaping (String?) -> Void) {
+        var students = [String]()
+        expressRef.document("\(Database.shared.currentBranch)/months/\(monthName)").collection("students")
+            .getDocuments { snapShot, err in
+                print(err?.localizedDescription)
+                if err != nil {
+                    error(err?.localizedDescription)
+                } else {
+                    snapShot?.documents.forEach{ doc in
+                        students.append(doc.documentID)
+                    }
+                    success(students)
+                }
+            }
     }
 }
 
@@ -334,12 +352,19 @@ extension FirebaseManager {
     func addReceipt(studentName: String, sum: String,
                     success: @escaping () -> Void,
                     error:   @escaping (String?) -> Void) {
-        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/monthly_payments/\("November")/receipts/\(studentName)")
-            .setData([sum : FieldValue.serverTimestamp()], merge: true) { err in
+        expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/monthly_payments/\("November")")
+            .setData([String: Any]()) { [weak self] err in
                 if err != nil {
                     error(err?.localizedDescription)
                 } else {
-                    success()
+                    self?.expressRef.document("\(Database.shared.currentBranch)/teachers/\(Database.shared.currentTeacher)/monthly_payments/\("November")/receipts/\(studentName)")
+                        .setData([sum : FieldValue.serverTimestamp()], merge: true) { err in
+                            if err != nil {
+                                error(err?.localizedDescription)
+                            } else {
+                                success()
+                            }
+                        }
                 }
             }
     }

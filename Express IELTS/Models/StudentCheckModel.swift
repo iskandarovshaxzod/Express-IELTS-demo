@@ -9,7 +9,7 @@ import UIKit
 
 struct StudentCheckModel {
     let studentName: String
-    let months: [EachMonthModel]
+    let days: [String : Int]?
 }
 
 struct EachMonthModel {

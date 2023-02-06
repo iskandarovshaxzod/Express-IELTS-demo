@@ -25,5 +25,13 @@ class StudentListPresenter {
             self?.delegate?.onErrorGetAllStudents(error: err)
         }
     }
+    
+    func getAllStudentsData(students: [String]) {
+        FirebaseManager.shared.gets(students: students) { [weak self] data in
+            self?.delegate?.onSuccessGetAllStudentsData(students: data)
+        } error: { [weak self] err in
+            self?.delegate?.onErrorGetAllStudents(error: err)
+        }
+    }
 }
 

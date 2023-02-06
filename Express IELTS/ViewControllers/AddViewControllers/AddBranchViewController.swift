@@ -85,9 +85,11 @@ class AddBranchViewController: BaseViewController {
             showSureInfo(title: "new_branch_add_info".localized) { [weak self] alertAction in
                 self?.showLoading()
                 FirebaseManager.shared.addNewBranch(email:    self?.emailfield.text?.lowercased() ?? "",
-                                                    password: self?.passfield.text ?? "") {
+                                                    password: self?.passfield.text?.lowercased()  ?? "") {
                     self?.hideLoading()
-                    self?.dismiss()
+                    self?.showAnimation(animationName: "success", animationMode: .playOnce) { _ in
+                        self?.dismiss()
+                    }
                 } error: { err in
                     self?.hideLoading()
                     self?.showErrorMessage(title: err?.localizedDescription)
@@ -102,6 +104,7 @@ class AddBranchViewController: BaseViewController {
     }
     
     func dismiss() {
+        hideAnimation()
         navigationController?.popViewController(animated: true)
     }
 

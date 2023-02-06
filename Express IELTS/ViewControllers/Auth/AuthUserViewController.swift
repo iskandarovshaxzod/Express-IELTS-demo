@@ -82,6 +82,25 @@ class AuthUserViewController: BaseViewController {
         btnSubmit.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
     }
     
+    func check() -> Bool {
+        guard let emailText = emailfield.text, let passText = passfield.text else {
+            return false
+        }
+        
+        if emailText.isEmpty || passText.isEmpty {
+            vibrate(for: .error)
+            if emailText.isEmpty {
+                emailfield.shake(duration: 0.5, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
+            }
+            if passText.isEmpty {
+                passfield.shake(duration: 0.5,  values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
+            }
+            return false
+        }
+        
+        return true
+    }
+    
     @objc func submitTapped(){
 //        guard let email = emailfield.text, !email.isEmpty else {
 //            showMessage(title: "Error", message: "You didn't enter email")

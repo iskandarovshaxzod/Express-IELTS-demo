@@ -86,6 +86,11 @@ class MainViewController: BaseViewController {
     @objc func refreshTable() {
         presenter.getAllBranches()
     }
+    
+    func onEdit() {
+        tableView.allowsMultipleSelectionDuringEditing = true
+        tableView.setEditing(true, animated: true)
+    }
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate{
@@ -114,11 +119,15 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let _ = tableView.cellForRow(at: indexPath) as? ListTableViewCell {
-            let vc = BranchViewController()
-            Database.shared.currentBranch = branches[indexPath.row]
-            vc.branchName = branches[indexPath.row].capitalized
-            navigationController?.pushViewController(vc, animated: true)
+        if tableView.isEditing {
+            
+        } else {
+            if let _ = tableView.cellForRow(at: indexPath) as? ListTableViewCell {
+                let vc = BranchViewController()
+                Database.shared.currentBranch = branches[indexPath.row]
+                vc.branchName = branches[indexPath.row].capitalized
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     

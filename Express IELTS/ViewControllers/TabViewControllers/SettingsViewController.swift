@@ -14,7 +14,7 @@ class SettingsViewController: BaseViewController {
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
     let texts = ["change_pass".localized, "user_mode".localized, "language".localized]
-    let icons = ["lock", "paperclip", "paperclip"]
+    let icons = ["lock", "square.2.layers.3d.top.filled", "textformat"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +78,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let vc = ChangeSettingsViewController()
             vc.texts = ["english".localized, "russian".localized, "uzbek".localized]
-            vc.icons = ["paperclip", "paperclip", "paperclip"]
+            vc.icons = ["1.square", "2.square", "3.square"]
             vc.isLan = true
             present(vc, animated: true)
         }
