@@ -20,7 +20,8 @@ class AuthUserViewController: BaseViewController {
     let emailfield = TextField(placeHolder: "email".localized)
     let passfield  = TextField(placeHolder: "password".localized)
     
-    let btnBack = UIButton()
+    let btnBack   = UIButton()
+    let eyeButton = UIButton()
     let btnSubmit = Button(text: "enter".localized)
     
     override func viewDidLoad() {
@@ -70,6 +71,18 @@ class AuthUserViewController: BaseViewController {
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
         }
+        passfield.isSecureTextEntry = true
+        passfield.clearButtonMode = .never
+        passfield.rightView = eyeButton
+        passfield.rightViewMode = .whileEditing
+        
+        eyeButton.snp.makeConstraints { make in
+            make.width.height.equalTo(50)
+        }
+//        eyeButton.backgroundColor = .red
+        eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
+        eyeButton.addTarget(self, action: #selector(eyeTapped), for: .touchUpInside)
+        
         
         subView.addSubview(btnSubmit)
         btnSubmit.snp.makeConstraints { make in
@@ -154,6 +167,24 @@ class AuthUserViewController: BaseViewController {
     @objc func viewTapped(){
         emailfield.resignFirstResponder()
         passfield.resignFirstResponder()
+    }
+    
+    @objc func eyeTapped() {
+        
+        passfield.isSecureTextEntry.toggle()
+        eyeButton.setImage(passfield.isSecureTextEntry ?
+                           UIImage(systemName: "eye") :
+                           UIImage(systemName: "eye.slash"), for: .normal)
+        
+//        UIView.animate(withDuration: 0.25) { [weak self] in
+//            self?.eyeButton.transform = CGAffineTransform(scaleX: 0.35, y: 0.35)
+//        } completion: { [weak self] _ in
+//            self?.eyeButton.setImage((self?.passfield.isSecureTextEntry ?? true) ?
+//                                     UIImage(systemName: "eye.slash") :
+//                                     UIImage(systemName: "eye"), for: .normal)
+//            self?.eyeButton.transform = CGAffineTransform.identity
+//            self?.passfield.isSecureTextEntry.toggle()
+//        }
     }
     
 //    override func closeKeyboard() {

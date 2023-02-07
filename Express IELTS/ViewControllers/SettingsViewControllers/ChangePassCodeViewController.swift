@@ -56,14 +56,14 @@ class ChangePassCodeViewController: BaseViewController {
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
         }
-        oldPassField.isEnabled = false
-        oldPassField.text = "****"
+//        oldPassField.isEnabled = false
+        oldPassField.isSecureTextEntry = true
+        oldPassField.text = user?.password
         oldPassField.font = oldPassField.font?.withSize(20)
+        oldPassField.rightView = eyeButton
+        oldPassField.rightViewMode = .always
         
-        subView.addSubview(eyeButton)
         eyeButton.snp.makeConstraints { make in
-            make.centerY.equalTo(oldPassField)
-            make.right.equalToSuperview().offset(-30)
             make.width.height.equalTo(50)
         }
         eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
@@ -107,28 +107,10 @@ class ChangePassCodeViewController: BaseViewController {
     }
     
     @objc func eyeTapped() {
-        isSecure.toggle()
-        
-//        UIView.animate(withDuration: 0.35) { [weak self] in
-//            self?.eyeButton.transform = CGAffineTransform(scaleX: 0.35, y: 0.35)
-//        } completion: { [weak self] _ in
-//            if self?.isSecure ?? true {
-//                self?.eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
-//                self?.oldPassField.text = "****"
-//            } else {
-//                self?.eyeButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-//                self?.oldPassField.text = "2222"
-//            }
-//            self?.eyeButton.transform = CGAffineTransform.identity
-//        }
-        
-        if isSecure {
-            eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
-            oldPassField.text = "****"
-        } else {
-            eyeButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-            oldPassField.text = user?.password
-        }
+        oldPassField.isSecureTextEntry.toggle()
+        eyeButton.setImage(oldPassField.isSecureTextEntry ?
+                           UIImage(systemName: "eye") :
+                           UIImage(systemName: "eye.slash"), for: .normal)
     }
     
     func dismiss() {

@@ -151,6 +151,7 @@
 		4099D0C32969671D00C219BA /* TeacherPaymentListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherPaymentListDelegate.swift; sourceTree = "<group>"; };
 		4099D0C52969675500C219BA /* TeacherPaymentListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherPaymentListPresenter.swift; sourceTree = "<group>"; };
 		4099D0C72969709B00C219BA /* ReceiptModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptModel.swift; sourceTree = "<group>"; };
+		40C1F6AB299237300086E2D6 /* Express IELTS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Express IELTS.entitlements"; sourceTree = "<group>"; };
 		40C9DE38293DF32E00CC4BFA /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		40C9DE3A293DF6A700CC4BFA /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
 		40C9DE3D293DFAAA00CC4BFA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +270,7 @@
 		4023A956292D45D5007FD5D5 /* Express IELTS */ = {
 			isa = PBXGroup;
 			children = (
+				40C1F6AB299237300086E2D6 /* Express IELTS.entitlements */,
 				40D6AB5D2954430E00530577 /* Base */,
 				40E1E04F294792B7007ED9A2 /* Animations */,
 				40FF834529448E29000ABBBE /* PieChart */,
@@ -895,6 +897,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = "Express IELTS/Express IELTS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8QLM8W63CU;
@@ -928,6 +931,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = "Express IELTS/Express IELTS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8QLM8W63CU;
