@@ -14,6 +14,7 @@ class TeacherRevenueViewController: BaseViewController {
     let subView   = UIView()
     let monthView = HeaderMonthView()
     let tableView = UITableView()
+    let segment   = UISegmentedControl(items: ["By teacher", "By group"])
     
     var teacherName = ""
     var receipts    = [ReceiptModel]()
@@ -41,9 +42,24 @@ class TeacherRevenueViewController: BaseViewController {
         }
         monthView.delegate = self
         
+        subView.addSubview(segment)
+        segment.snp.makeConstraints { make in
+            make.top.equalTo(monthView.snp.bottom)
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-10)
+            make.height.equalTo(36)
+        }
+        segment.selectedSegmentIndex = 0
+        segment.selectedSegmentTintColor = "cl_text_blue".color
+        
+        segment.setTitleTextAttributes([.foregroundColor: "cl_text_blue".color], for: .normal)
+        segment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        segment.layer.borderWidth = 2
+        segment.layer.borderColor = "cl_text_blue".color.cgColor
+        
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(monthView.snp.bottom)
+            make.top.equalTo(segment.snp.bottom)
             make.left.bottom.right.equalToSuperview()
         }
         tableView.backgroundColor = "cl_main_back".color
@@ -80,6 +96,7 @@ extension TeacherRevenueViewController: UITableViewDelegate, UITableViewDataSour
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = StudentReceiptViewController()
         vc.modalPresentationStyle = .overFullScreen
+        vc.text = "Payment Dates"
         present(vc, animated: false)
     }
 }

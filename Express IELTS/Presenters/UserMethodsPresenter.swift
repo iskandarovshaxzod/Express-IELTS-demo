@@ -26,7 +26,7 @@ class UserMethodsPresenter {
     }
     
     func changePassword(email: String, password: String) {
-        FirebaseManager.shared.changePassword(for: email, password: password) { [weak self] in
+        FirebaseManager.shared.changePassword(for: email+"hello", password: password) { [weak self] in
             self?.delegate?.onSuccessChangePassword()
         } error: { [weak self] err in
             self?.delegate?.onErrorChangePassword(error: err?.localizedDescription)

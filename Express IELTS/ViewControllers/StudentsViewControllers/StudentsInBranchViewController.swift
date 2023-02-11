@@ -74,6 +74,14 @@ extension StudentsInBranchViewController: UITableViewDelegate, UITableViewDataSo
         cell.backgroundColor = "cl_cell_back".color
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let vc = StudentReceiptViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.text = "Student Info"
+        present(vc, animated: false)
+    }
 }
 
 extension StudentsInBranchViewController: AllStudentListDelegate {

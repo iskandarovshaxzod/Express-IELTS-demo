@@ -74,6 +74,7 @@
 		40D6AB5C295442FD00530577 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D6AB5B295442FD00530577 /* SettingsTableViewCell.swift */; };
 		40D6AB602954432500530577 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D6AB5F2954432500530577 /* BaseTableViewCell.swift */; };
 		40D6AB622954435000530577 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D6AB612954435000530577 /* BaseCollectionViewCell.swift */; };
+		40DE26522997937A00BB4062 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DE26512997937A00BB4062 /* InfoTableViewCell.swift */; };
 		40DE637E294C53D8001E82B0 /* UserMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DE637D294C53D8001E82B0 /* UserMode.swift */; };
 		40DE6382294C93EA001E82B0 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DE6381294C93EA001E82B0 /* Language.swift */; };
 		40E044CD298EA3F2004BFF2A /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E044CC298EA3F2004BFF2A /* APIManager.swift */; };
@@ -168,6 +169,7 @@
 		40D6AB5B295442FD00530577 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		40D6AB5F2954432500530577 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		40D6AB612954435000530577 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		40DE26512997937A00BB4062 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 		40DE637D294C53D8001E82B0 /* UserMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMode.swift; sourceTree = "<group>"; };
 		40DE6381294C93EA001E82B0 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		40E044CC298EA3F2004BFF2A /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				40D6AB5B295442FD00530577 /* SettingsTableViewCell.swift */,
 				40259B1129693DBE00D6CB60 /* SkeletonTableViewCell.swift */,
 				40259B1329694F7900D6CB60 /* SkeletonViewsTableViewCell.swift */,
+				40DE26512997937A00BB4062 /* InfoTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -687,6 +690,7 @@
 				40226DAB2940DEA500E9489D /* AddBranchViewController.swift in Sources */,
 				4099D0C82969709B00C219BA /* ReceiptModel.swift in Sources */,
 				40FF834929448E40000ABBBE /* UIColor+Extension.swift in Sources */,
+				40DE26522997937A00BB4062 /* InfoTableViewCell.swift in Sources */,
 				405912422945A70F00620278 /* TotalRevenueView.swift in Sources */,
 				40D6AB602954432500530577 /* BaseTableViewCell.swift in Sources */,
 				40FF834B29448E40000ABBBE /* PieChart.swift in Sources */,
