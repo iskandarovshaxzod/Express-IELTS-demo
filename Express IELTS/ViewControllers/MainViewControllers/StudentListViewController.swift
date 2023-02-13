@@ -160,7 +160,7 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
 //        }
 //        return config
 //    }
-//    
+//
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let delete = UIAction(title: "delete".localized, image: UIImage(systemName: "trash"),
