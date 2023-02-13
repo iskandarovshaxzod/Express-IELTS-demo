@@ -90,9 +90,11 @@ extension StudentsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = StudentsInBranchViewController()
-        vc.branch = branches[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+        if let _ = tableView.cellForRow(at: indexPath) as? ListTableViewCell {
+            let vc = StudentsInBranchViewController()
+            vc.branch = branches[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 

@@ -15,14 +15,14 @@ class StudentCheckTableViewCell: UITableViewCell {
     
     var delegate: PaidDelegate?
     
-    let subView    = UIView()
     let scrollView = UIScrollView()
+    let subView    = UIView()
+    let view1      = UIView()
+    let view2      = UIView()
     let nameLabel  = UILabel()
-    let view1 = UIView()
-    let view2 = UIView()
+    let payLabel   = UILabel()
     
-    var days = [String: Int]()
-    var name = ""
+    var student: StudentWithAttendance?
     var size = 12
     
     lazy var collectionView: UICollectionView = {
@@ -60,6 +60,7 @@ class StudentCheckTableViewCell: UITableViewCell {
             make.width.equalTo(200)
         }
         view1.backgroundColor = .blue
+        view1.layer.cornerRadius = 5
         
         view1.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
@@ -68,7 +69,8 @@ class StudentCheckTableViewCell: UITableViewCell {
         }
         nameLabel.numberOfLines = 0
         nameLabel.textAlignment = .center
-        nameLabel.text = name
+        nameLabel.textColor = .white
+        nameLabel.text = student?.student.studentName.capitalized
         
         subView.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
@@ -94,10 +96,20 @@ class StudentCheckTableViewCell: UITableViewCell {
         }
         view2.backgroundColor = .brightLilac
         view2.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
+        
+        view2.addSubview(payLabel)
+        payLabel.snp.makeConstraints { make in
+            make.left.top.equalToSuperview().offset(5)
+            make.right.bottom.equalToSuperview().offset(-5)
+        }
+        payLabel.numberOfLines = 0
+        payLabel.textAlignment = .center
+        payLabel.textColor = .white
+        payLabel.text = "pay" + "\(student?.paymentStatus)"
     }
 
     @objc func viewTapped() {
-        delegate?.pay(for: name)
+//        delegate?.pay(for: name)
     }
 }
 

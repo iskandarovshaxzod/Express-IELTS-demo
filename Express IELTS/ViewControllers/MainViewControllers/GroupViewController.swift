@@ -17,7 +17,7 @@ class GroupViewController: BaseViewController {
     let refresh   = UIRefreshControl()
     
     var group: Group?
-    var students  = [Student]()
+    var students  = [StudentWithAttendance]()
     var canEdit   = false
     var loaded    = false
     var index     = IndexPath()
@@ -25,7 +25,7 @@ class GroupViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        
+        presenter.getAllGroupStudents(groupID: group?.id?.description ?? "", year: 2023, month: 2)
     }
     
     override func configureNavBar() {
@@ -80,7 +80,7 @@ class GroupViewController: BaseViewController {
     }
     
     @objc func refreshTable() {
-        
+        presenter.getAllGroupStudents(groupID: group?.id?.description ?? "", year: 2023, month: 2)
     }
     
     @objc func addTapped() {
@@ -99,7 +99,7 @@ class GroupViewController: BaseViewController {
             if action.title == "delete".localized {
                 self?.showLoading()
                 self?.index = index
-                self?.presenter.deleteStudent(studentID: self?.students[index.row].id?.description ?? "")
+                self?.presenter.deleteStudent(studentID: self?.students[index.row].student.id?.description ?? "")
             }
         }
     }
@@ -127,7 +127,8 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StudentCheckTableViewCell
-            cell.name = students[indexPath.row].studentName.capitalized
+            cell.student = students[indexPath.row]
+            cell.size = Int(group?.groupType ?? "12") ?? 12
             cell.delegate = self
             cell.initViews()
             cell.selectionStyle = .none
@@ -173,9 +174,14 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension GroupViewController: StudentListDelegate {
-    func onSuccessGetAllBranchStudents(students: [Student]) {
-        
+    func onSuccessGetAllGroupStudents(students: [StudentWithAttendance]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.students = students
+            self?.reloadData()
+        }
     }
+    
+    func onSuccessGetAllBranchStudents(students: [Student]) { }
     
     func onSuccessDeleteStudent() {
         hideLoading()

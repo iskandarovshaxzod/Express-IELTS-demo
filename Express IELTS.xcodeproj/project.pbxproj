@@ -51,6 +51,7 @@
 		4052FA02296422290002C353 /* TeacherConfigListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052FA01296422290002C353 /* TeacherConfigListPresenter.swift */; };
 		405912422945A70F00620278 /* TotalRevenueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405912412945A70F00620278 /* TotalRevenueView.swift */; };
 		405DFC11296E97A300EEC824 /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = 405DFC10296E97A300EEC824 /* success.json */; };
+		406440E7299A6C6A00660A7E /* StudentWithAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406440E6299A6C6A00660A7E /* StudentWithAttendance.swift */; };
 		406996FC292F6D3E00090507 /* AuthUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FB292F6D3E00090507 /* AuthUserViewController.swift */; };
 		406996FE292F77DE00090507 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406996FD292F77DE00090507 /* UITextField+Extension.swift */; };
 		4080B0CE29558F9C009C22AC /* acces-denied.json in Resources */ = {isa = PBXBuildFile; fileRef = 4080B0CD29558F9C009C22AC /* acces-denied.json */; };
@@ -153,6 +154,7 @@
 		4052FA01296422290002C353 /* TeacherConfigListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherConfigListPresenter.swift; sourceTree = "<group>"; };
 		405912412945A70F00620278 /* TotalRevenueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRevenueView.swift; sourceTree = "<group>"; };
 		405DFC10296E97A300EEC824 /* success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
+		406440E6299A6C6A00660A7E /* StudentWithAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentWithAttendance.swift; sourceTree = "<group>"; };
 		406996FB292F6D3E00090507 /* AuthUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserViewController.swift; sourceTree = "<group>"; };
 		406996FD292F77DE00090507 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		4080B0CD29558F9C009C22AC /* acces-denied.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "acces-denied.json"; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 				40E0B77D2998014800B707D0 /* Attendance.swift */,
 				40E0B77F2998018E00B707D0 /* Payment.swift */,
 				4006FEF8299947BD00132E7E /* DateTime.swift */,
+				406440E6299A6C6A00660A7E /* StudentWithAttendance.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				40D6AB5C295442FD00530577 /* SettingsTableViewCell.swift in Sources */,
 				40D2977E294240B10084D579 /* MonthlyPaymentViewController.swift in Sources */,
 				40E1E02E294742DD007ED9A2 /* UICollectionViewFlowLayout+Extension.swift in Sources */,
+				406440E7299A6C6A00660A7E /* StudentWithAttendance.swift in Sources */,
 				40EF2A97296895220060BB84 /* Errors.swift in Sources */,
 				4023A958292D45D5007FD5D5 /* AppDelegate.swift in Sources */,
 				4006FF0029994EF300132E7E /* TeacherID.swift in Sources */,

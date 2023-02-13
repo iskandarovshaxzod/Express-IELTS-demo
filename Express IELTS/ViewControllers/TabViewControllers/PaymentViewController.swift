@@ -16,13 +16,19 @@ class PaymentViewController: BaseViewController {
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
     
-    var branches = [Branch]()
-    var loaded   = false
+    var branches = Database.branches
+    var loaded   = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
 //        presenter.setDelegate(delegate: self)
         presenter.getAllBranches()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if loaded {
+            branches = Database.branches
+        }
     }
     
     override func initViews() {

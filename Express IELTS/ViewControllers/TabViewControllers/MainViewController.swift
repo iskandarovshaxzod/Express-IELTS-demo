@@ -146,8 +146,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
 extension MainViewController: BranchListDelegate {
     
     func onSuccessGetAllBranches(branches: [Branch]) {
-        hideLoading()
+        Database.branches = branches
         DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
             self?.branches = branches
             self?.reloadData()
         }
@@ -160,7 +161,9 @@ extension MainViewController: BranchListDelegate {
     }
     
     func onError(error: String?) {
-        hideLoading()
-        showErrorMessage(title: error)
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showErrorMessage(title: error)
+        }
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 protocol StudentListDelegate {
+    func onSuccessGetAllGroupStudents(students: [StudentWithAttendance])
     func onSuccessGetAllBranchStudents(students: [Student])
     func onSuccessDeleteStudent()
     func onError(error: String?)

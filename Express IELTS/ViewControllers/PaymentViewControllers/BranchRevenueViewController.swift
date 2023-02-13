@@ -15,12 +15,12 @@ class BranchRevenueViewController: BaseViewController {
     let tableView = UITableView()
     
     var branch: Branch?
-    var teachers   = [Teacher]()
+    var teachers   = Database.teachers
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.setDelegate(delegate: self)
-//        presenter.getAllTeachers()
+//        presenter.setDelegate(delegate: self)
+        presenter.getAllTeachers(branchID: branch?.id?.description ?? "")
     }
     
     override func configureNavBar() {
@@ -78,10 +78,11 @@ extension BranchRevenueViewController: UITableViewDelegate, UITableViewDataSourc
 }
 
 extension BranchRevenueViewController: TeacherListDelegate {
-    
     func onSuccessGetAllTeachers(teachers: [Teacher]) {
-//        self.teachers = teachers
-//        reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.teachers = teachers
+            self?.reloadData()
+        }
     }
     
     func onSuccessDeleteTeacher() {}

@@ -115,6 +115,7 @@ class AuthUserViewController: BaseViewController {
     }
     
     @objc func submitTapped(){
+        resetMainViewController(for: 1)
 //        guard let email = emailfield.text, !email.isEmpty else {
 //            showMessage(title: "Error", message: "You didn't enter email")
 //            return
@@ -144,8 +145,8 @@ class AuthUserViewController: BaseViewController {
 //            let vc = MainTabViewController()
 //            UIApplication.shared.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
 //        }
-        showLoading()
-        presenter.validateUser(email: "admin@gmail.com", password: "1111")
+//        showLoading()
+//        presenter.validateUser(email: "admin@gmail.com", password: "1111")
     }
     
 //    func validateUser(email: String, password: String) {

@@ -85,6 +85,7 @@ extension StudentsInBranchViewController: UITableViewDelegate, UITableViewDataSo
 }
 
 extension StudentsInBranchViewController: StudentListDelegate {
+    
     func onSuccessGetAllBranchStudents(students: [Student]) {
         DispatchQueue.main.async { [weak self] in
             self?.students = students
@@ -92,11 +93,12 @@ extension StudentsInBranchViewController: StudentListDelegate {
         }
     }
     
-    func onSuccessDeleteStudent() {}
-    
     func onError(error: String?) {
         showErrorMessage(title: error)
     }
+    
+    func onSuccessGetAllGroupStudents(students: [StudentWithAttendance]) {}
+    func onSuccessDeleteStudent() {}
 }
 
 extension StudentsInBranchViewController: HeaderMonthChanged {

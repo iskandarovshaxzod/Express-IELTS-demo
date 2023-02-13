@@ -18,6 +18,8 @@ struct Database {
     static var teacherID = ""
     static var configID  = ""
     static var groupID   = ""
+    static var branches  = [Branch]()
+    static var teachers  = [Teacher]()
     
     var language: Language {
         get{

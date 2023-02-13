@@ -19,6 +19,20 @@ class StudentListPresenter {
         self.delegate = delegate
     }
     
+    func getAllGroupStudents(groupID: String, year: Int, month: Int) {
+        let url = URL(string: Constants.BASE_URL + Constants.STUDENT_GROUP_LIST + groupID)!
+        let date = DateTime(year: year, month: month)
+        APIManager.shared.performRequest(url: url, method: .post, body: date, parameters: nil) {
+            [weak self] (result: Result<[StudentWithAttendance], Error>) in
+            switch result {
+            case .success(let students):
+                self?.delegate?.onSuccessGetAllGroupStudents(students: students)
+            case .failure(let error):
+                self?.delegate?.onError(error: error.localizedDescription)
+            }
+        }
+    }
+    
     func getAllBranchStudents(branchID: String, year: Int, month: Int) {
         let url = URL(string: Constants.BASE_URL + Constants.STUDENT_BRANCH_LIST + branchID)!
         let date = DateTime(year: year, month: month)
