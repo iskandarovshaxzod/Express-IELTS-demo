@@ -15,18 +15,19 @@ class TeacherViewController: BaseViewController {
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
     
-    var teacherName = ""
-    var configs = [String]()
+    var teacher: Teacher?
+    var configs = [Config]()
     var loaded  = true
+    var index   = IndexPath()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        presenter.getAllTeacherConfigs()
+        presenter.getAllTeacherConfigs(teacherID: teacher?.id?.description ?? "")
     }
 
     override func configureNavBar() {
-        title = teacherName
+        title = teacher?.teacherName
         
         var menuItems: [UIAction] {
             return [
@@ -69,14 +70,14 @@ class TeacherViewController: BaseViewController {
     }
     
     @objc func refreshTable() {
-        presenter.getAllTeacherConfigs()
+        presenter.getAllTeacherConfigs(teacherID: teacher?.id?.description ?? "")
     }
     
     @objc func addTapped() {
-        let vc = AddViewController()
+        let vc = aAddViewController()
         vc.navTitle   = "new_teacher_config".localized
-        vc.buttonText = "add".localized
-        vc.nameText   = "new_teacher_config_name".localized
+        vc.addBtnText = "add".localized
+        vc.firstFieldText   = "new_teacher_config_name".localized
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -85,19 +86,9 @@ class TeacherViewController: BaseViewController {
                         actions: ["delete".localized]){ [weak self] action in
             if action.title == "delete".localized {
                 self?.showLoading()
-                self?.deleteTeacherConfig(index: index)
+                self?.index = index
+                self?.presenter.deleteConfig(configID: self?.configs[index.row].id?.description ?? "")
             }
-        }
-    }
-    
-    func deleteTeacherConfig(index: IndexPath) {
-        FirebaseManager.shared.deleteTeacherConfig(configName: configs[index.row]) { [weak self] in
-            self?.hideLoading()
-            self?.configs.remove(at: index.row)
-            self?.tableView.deleteRows(at: [index], with: .left)
-        } error: { [weak self] err in
-            self?.hideLoading()
-            self?.showErrorMessage(title: err)
         }
     }
     
@@ -125,7 +116,7 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = configs[indexPath.row].capitalized
+            cell.text = configs[indexPath.row].configName.capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -142,9 +133,8 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = GroupViewController()
-        Database.shared.currentConfig = configs[indexPath.row]
-        vc.configName = configs[indexPath.row].capitalized
+        let vc = ConfigViewController()
+        vc.config = configs[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -177,12 +167,20 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension TeacherViewController: TeacherConfigListDelegate {
-    func onSuccessGetAllTeacherConfigs(configs: [String]) {
-        self.configs = configs
-        reloadData()
+    func onSuccessGetAllTeacherConfigs(configs: [Config]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.configs = configs
+            self?.reloadData()
+        }
     }
     
-    func onErrorGetAllTeacherConfigs(error: String?) {
+    func onSuccessDeleteConfig() {
+        hideLoading()
+        configs.remove(at: index.row)
+        tableView.deleteRows(at: [index], with: .left)
+    }
+    
+    func onError(error: String?) {
         showErrorMessage(title: error)
     }
 }

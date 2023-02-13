@@ -23,7 +23,7 @@ class MainTabViewController: BaseViewController {
     var studentsController = StudentsViewController()
     var settingsController = SettingsViewController()
 
-    var isAdmin = Database.shared.isAdmin
+    var isAdmin = Database.isAdmin
     var currentTab = 1
     
     override func viewDidLoad() {
@@ -53,7 +53,7 @@ class MainTabViewController: BaseViewController {
                 
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "ellipsis"), primaryAction: nil, menu: demoMenu)
     
-            if !Database.shared.isAdmin{
+            if !Database.isAdmin{
                 navigationItem.rightBarButtonItem = nil
             }
 //            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "logo"),
@@ -215,7 +215,12 @@ class MainTabViewController: BaseViewController {
     }
     
     func addTapped(){
-        navigationController?.pushViewController(AddBranchViewController(), animated: true)
+        let vc = aAddViewController()
+        vc.navTitle   = "new_branch".localized
+        vc.addBtnText = "new_branch_add".localized
+        vc.firstFieldText   = "new_branch_mail".localized
+        vc.secondFieldText  = "new_branch_pass".localized
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     @objc func add(){}

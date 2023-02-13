@@ -15,12 +15,12 @@ class StudentsViewController: BaseViewController {
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
     
-    var branches = [String]()
+    var branches = [Branch]()
     var loaded   = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.setDelegate(delegate: self)
+//        presenter.setDelegate(delegate: self)
         presenter.getAllBranches()
     }
     
@@ -73,7 +73,7 @@ extension StudentsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = branches[indexPath.row].capitalized
+            cell.text = branches[indexPath.row].branchName.capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -90,20 +90,21 @@ extension StudentsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = StudentsInBranchViewController()
-        Database.shared.currentBranch = branches[indexPath.row]
-        vc.branchName = branches[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+        if let _ = tableView.cellForRow(at: indexPath) as? ListTableViewCell {
+            let vc = StudentsInBranchViewController()
+            vc.branch = branches[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
-extension StudentsViewController: BranchListDelegate {
-    func onSuccessGetAllBranches(branches: [String]) {
-        self.branches = branches
-        reloadData()
-    }
-    
-    func onErrorGetAllBranches(error: String?) {
-        showErrorMessage(title: error)
-    }
-}
+//extension StudentsViewController: BranchListDelegate {
+//    func onSuccessGetAllBranches(branches: [String]) {
+//        self.branches = branches
+//        reloadData()
+//    }
+//
+//    func onErrorGetAllBranches(error: String?) {
+//        showErrorMessage(title: error)
+//    }
+//}

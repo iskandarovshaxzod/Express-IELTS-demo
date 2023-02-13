@@ -8,8 +8,6 @@
 import UIKit
 
 class AddViewController: BaseViewController {
-    
-    let presenter = AddMethodsPresenter()
 
     let subView   = UIView()
     let nameField = TextField(placeHolder: "")
@@ -23,7 +21,6 @@ class AddViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.setDelegate(delegate: self)
     }
     
     override func configureNavBar() {
@@ -118,17 +115,6 @@ class AddViewController: BaseViewController {
         if check() {
             showSureInfo(title: String(format: "add_info".localized, navTitle)) {
                 [weak self] alertAction in
-                self?.showLoading()
-                if self?.navTitle        == "new_teacher".localized {
-                    self?.presenter.addNewTeacher(teacherName: self?.nameField.text?.lowercased() ?? "")
-                } else if self?.navTitle == "new_teacher_config".localized {
-                    self?.presenter.addNewTeacherConfig(configName: self?.nameField.text?.lowercased() ?? "")
-                } else if self?.navTitle == "new_group".localized {
-                    self?.presenter.addNewGroup(groupName: self?.nameField.text?.lowercased() ?? "",
-                                                groupType: self?.groupType ?? .twelve)
-                } else if self?.navTitle == "new_student".localized {
-                    self?.presenter.addNewStudent(studentName: self?.nameField.text?.lowercased() ?? "")
-                }
             }
         }
     }
@@ -140,40 +126,5 @@ class AddViewController: BaseViewController {
     func dismiss() {
         hideAnimation()
         navigationController?.popViewController(animated: true)
-    }
-}
-
-extension AddViewController: AddMethodsDelegate {
-    func onSuccessAddNewTeacher() {
-        hideLoading()
-        showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] _ in
-            self?.dismiss()
-        }
-    }
-    
-    func onSuccessAddNewTeacherConfig() {
-        hideLoading()
-        showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] _ in
-            self?.dismiss()
-        }
-    }
-    
-    func onSuccessAddNewGroup() {
-        hideLoading()
-        showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] _ in
-            self?.dismiss()
-        }
-    }
-    
-    func onSuccessAddNewStudent() {
-        hideLoading()
-        showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] _ in
-            self?.dismiss()
-        }
-    }
-    
-    func onErrorAddNew(error: String?) {
-        hideLoading()
-        showErrorMessage(title: error)
     }
 }

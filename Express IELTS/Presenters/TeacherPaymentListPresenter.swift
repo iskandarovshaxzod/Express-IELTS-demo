@@ -11,17 +11,37 @@ class TeacherPaymentListPresenter {
     
     typealias PresenterDelegate = TeacherPaymentListDelegate & UIViewController
     
+    var body: Payment? = nil
     weak var delegate: PresenterDelegate?
     
     func setDelegate(delegate: PresenterDelegate) {
         self.delegate = delegate
     }
     
-    func getAllPayments(monthName: String) {
-        FirebaseManager.shared.getAllReceipts(monthName: monthName) { [weak self] receipts in
-            self?.delegate?.onSuccessGetAllPayment(receipts: receipts)
-        } error: { [weak self] err in
-            self?.delegate?.onErrorGetAllStudents(error: err)
+    func addTeacherPayment(payment: Payment) {
+        let url = URL(string: Constants.BASE_URL + Constants.PAYMENT_ADD)!
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .post, body: payment, parameters: nil) {
+            [weak self] result in
+            switch result {
+            case .success(let responsse):
+                self?.delegate?.onSuccessAddNewTeacherPayment()
+            case .failure(let error):
+                self?.delegate?.onError(error: error.localizedDescription)
+            }
+        }
+    }
+    
+    func getAllTeacherPayments(teacherID: String, year: Int, month: Int) {
+        let url = URL(string: Constants.BASE_URL + Constants.PAYMENT_TEACHER_LIST + teacherID)!
+        let date = DateTime(year: year, month: month)
+        APIManager.shared.performRequest(url: url, method: .get, body: date, parameters: nil) {
+        [weak self] (result: Result<[Payment], Error>) in
+            switch result {
+            case .success(let receipts):
+                self?.delegate?.onSuccessGetAllTeacherPayments(receipts: receipts)
+            case .failure(let error):
+                self?.delegate?.onError(error: error.localizedDescription)
+            }
         }
     }
 }

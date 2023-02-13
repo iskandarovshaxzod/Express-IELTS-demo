@@ -9,23 +9,23 @@ import UIKit
 
 class StudentsInBranchViewController: BaseViewController {
     
-    let presenter = AllStudentListPresenter()
+    let presenter = StudentListPresenter()
     
     let subView   = UIView()
     let monthView = HeaderMonthView()
     let tableView = UITableView()
     
-    var students   = [String]()
-    var branchName = ""
+    var branch: Branch?
+    var students   = [Student]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        presenter.getAllStudents(monthName: "November")
+        presenter.getAllBranchStudents(branchID: branch?.id?.description ?? "", year: 2023, month: 2)
     }
     
     override func configureNavBar() {
-        title = branchName.capitalized
+        title = branch?.branchName.capitalized
     }
     
     override func initViews() {
@@ -70,7 +70,7 @@ extension StudentsInBranchViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = students[indexPath.row]
+        cell.textLabel?.text = students[indexPath.row].studentName.capitalized
         cell.backgroundColor = "cl_cell_back".color
         return cell
     }
@@ -84,19 +84,25 @@ extension StudentsInBranchViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
-extension StudentsInBranchViewController: AllStudentListDelegate {
-    func onSuccessGetAllStudents(students: [String]) {
-        self.students = students
-        reloadData()
+extension StudentsInBranchViewController: StudentListDelegate {
+    
+    func onSuccessGetAllBranchStudents(students: [Student]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.students = students
+            self?.reloadData()
+        }
     }
     
-    func onErrorGetAllStudents(error: String?) {
+    func onError(error: String?) {
         showErrorMessage(title: error)
     }
+    
+    func onSuccessGetAllGroupStudents(students: [StudentWithAttendance]) {}
+    func onSuccessDeleteStudent() {}
 }
 
 extension StudentsInBranchViewController: HeaderMonthChanged {
     func monthChanged(to month: String) {
-        presenter.getAllStudents(monthName: month)
+        
     }
 }

@@ -15,18 +15,19 @@ class BranchViewController: BaseViewController {
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
     
-    var branchName = ""
-    var teachers   = [String]()
-    var loaded     = true
+    var branch: Branch?
+    var teachers = [Teacher]()
+    var loaded   = true
+    var index    = IndexPath()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        presenter.getAllTeachers()
+        presenter.getAllTeachers(branchID: branch?.id?.description ?? "")
     }
     
     override func configureNavBar() {
-        title = branchName
+        title = branch?.branchName.capitalized
         
         var menuItems: [UIAction] {
             return [
@@ -69,14 +70,14 @@ class BranchViewController: BaseViewController {
     }
     
     @objc func refreshTable() {
-        presenter.getAllTeachers()
+        presenter.getAllTeachers(branchID: branch?.id?.description ?? "")
     }
     
     @objc func addTapped(){
-        let vc = AddViewController()
+        let vc = aAddViewController()
         vc.navTitle   = "new_teacher".localized
-        vc.buttonText = "add".localized
-        vc.nameText   = "new_teacher_name".localized
+        vc.addBtnText = "add".localized
+        vc.firstFieldText   = "new_teacher_name".localized
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -85,20 +86,21 @@ class BranchViewController: BaseViewController {
                         actions: ["delete".localized]){ [weak self] action in
             if action.title == "delete".localized {
                 self?.showLoading()
-                self?.deleteTeacher(index: index)
+                self?.index = index
+                self?.presenter.deleteTeacher(teacherID: self?.teachers[index.row].id?.description ?? "")
             }
         }
     }
     
     func deleteTeacher(index: IndexPath) {
-        FirebaseManager.shared.deleteTeacher(teacherName: teachers[index.row]) { [weak self] in
-            self?.hideLoading()
-            self?.teachers.remove(at: index.row)
-            self?.tableView.deleteRows(at: [index], with: .left)
-        } error: { [weak self] err in
-            self?.hideLoading()
-            self?.showErrorMessage(title: err)
-        }
+//        FirebaseManager.shared.deleteTeacher(teacherName: teachers[index.row]) { [weak self] in
+//            self?.hideLoading()
+//            self?.teachers.remove(at: index.row)
+//            self?.tableView.deleteRows(at: [index], with: .left)
+//        } error: { [weak self] err in
+//            self?.hideLoading()
+//            self?.showErrorMessage(title: err)
+//        }
     }
     
     private func reloadData() {
@@ -129,7 +131,7 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = teachers[indexPath.row].capitalized
+            cell.text = teachers[indexPath.row].teacherName.capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -144,8 +146,7 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = TeacherViewController()
-        Database.shared.currentTeacher = teachers[indexPath.row]
-        vc.teacherName = teachers[indexPath.row].capitalized
+        vc.teacher = teachers[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -179,12 +180,20 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension BranchViewController: TeacherListDelegate {
-    func onSuccessGetAllTeachers(teachers: [String]) {
-        self.teachers = teachers
-        reloadData()
+    func onSuccessGetAllTeachers(teachers: [Teacher]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.teachers = teachers
+            self?.reloadData()
+        }
     }
     
-    func onErrorGetAllTeachers(error: String?) {
+    func onSuccessDeleteTeacher() {
+        hideLoading()
+        teachers.remove(at: index.row)
+        tableView.deleteRows(at: [index], with: .left)
+    }
+    
+    func onError(error: String?) {
         showErrorMessage(title: error)
     }
 }

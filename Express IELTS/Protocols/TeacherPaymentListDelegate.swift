@@ -8,6 +8,7 @@
 import Foundation
 
 protocol TeacherPaymentListDelegate {
-    func onSuccessGetAllPayment(receipts: [ReceiptModel])
-    func onErrorGetAllStudents(error: String?)
+    func onSuccessGetAllTeacherPayments(receipts: [Payment])
+    func onSuccessAddNewTeacherPayment()
+    func onError(error: String?)
 }

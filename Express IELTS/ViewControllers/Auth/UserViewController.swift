@@ -70,9 +70,9 @@ class UserViewController: BaseViewController {
     @objc func tapped(_ button: UIButton){
         button.layer.borderColor = UIColor.red.withAlphaComponent(0.6).cgColor
         let vc = AuthUserViewController()
-        Database.shared.isAdmin = false
+        Database.isAdmin = false
         if button == adminBtn{
-            Database.shared.isAdmin = true
+            Database.isAdmin = true
         }
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
