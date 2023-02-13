@@ -52,7 +52,7 @@ class AuthUserViewController: BaseViewController {
             make.top.equalToSuperview().offset(width / 4)
             make.centerX.equalToSuperview()
         }
-        userLabel.text = (Database.shared.isAdmin ? "admin".localized : "reception".localized)
+        userLabel.text = (Database.isAdmin ? "admin".localized : "reception".localized)
         userLabel.font = userLabel.font.withSize(50)
         userLabel.textColor = "cl_text_blue".color
         

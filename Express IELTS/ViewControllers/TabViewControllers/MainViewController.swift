@@ -16,8 +16,9 @@ class MainViewController: BaseViewController {
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
     
-    var branches = FirebaseManager.shared.branches
+    var branches = [Branch]()
     var loaded   = false
+    var index    = IndexPath()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,19 +54,9 @@ class MainViewController: BaseViewController {
                         actions: ["delete".localized]) { [weak self] action in
             if action.title == "delete".localized {
                 self?.showLoading()
-                self?.deleteBranch(index: index)
+                self?.index = index
+                self?.presenter.deleteBranch(branchID: self?.branches[index.row].id?.description ?? "")
             }
-        }
-    }
-    
-    func deleteBranch(index: IndexPath) {
-        FirebaseManager.shared.deleteBranch(branchName: branches[index.row]) { [weak self] in
-            self?.hideLoading()
-            self?.branches.remove(at: index.row)
-            self?.tableView.deleteRows(at: [index], with: .left)
-        } error: { [weak self] err in
-            self?.hideLoading()
-            self?.showErrorMessage(title: err)
         }
     }
     
@@ -102,7 +93,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = branches[indexPath.row].capitalized
+            cell.text = branches[indexPath.row].branchName.capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -124,8 +115,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
         } else {
             if let _ = tableView.cellForRow(at: indexPath) as? ListTableViewCell {
                 let vc = BranchViewController()
-                Database.shared.currentBranch = branches[indexPath.row]
-                vc.branchName = branches[indexPath.row].capitalized
+                vc.branch  = branches[indexPath.row]
                 navigationController?.pushViewController(vc, animated: true)
             }
         }
@@ -140,7 +130,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
+        let delete = UIContextualAction(style: .normal, title: "delete".localized) {
+            [weak self] (_, _, completionHandler) in
             self?.handleMoveToTrash(index: indexPath)
             completionHandler(true)
         }
@@ -148,16 +139,28 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
         delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
         let c = UISwipeActionsConfiguration(actions: [delete])
         c.performsFirstActionWithFullSwipe = false
-        return (Database.shared.isAdmin ? c : nil)
+        return (Database.isAdmin ? c : nil)
     }
 }
 
 extension MainViewController: BranchListDelegate {
-    func onSuccessGetAllBranches(branches: [String]) {
-//        self.branches = branches
-        reloadData()
+    
+    func onSuccessGetAllBranches(branches: [Branch]) {
+        hideLoading()
+        DispatchQueue.main.async { [weak self] in
+            self?.branches = branches
+            self?.reloadData()
+        }
     }
-    func onErrorGetAllBranches(error: String?) {
+    
+    func onSuccessDeleteBranch() {
+        hideLoading()
+        branches.remove(at: index.row)
+        tableView.deleteRows(at: [index], with: .left)
+    }
+    
+    func onError(error: String?) {
+        hideLoading()
         showErrorMessage(title: error)
     }
 }

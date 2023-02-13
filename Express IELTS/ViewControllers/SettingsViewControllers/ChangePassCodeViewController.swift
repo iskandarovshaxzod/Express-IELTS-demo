@@ -23,7 +23,6 @@ class ChangePassCodeViewController: BaseViewController {
     let eyeButton    = UIButton()
     
     var isSecure = true
-    var user: UserModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +30,7 @@ class ChangePassCodeViewController: BaseViewController {
     }
 
     override func configureNavBar() {
-        title = user?.name.capitalized
+        title = "title"
     }
     
     override func initViews() {
@@ -56,9 +55,8 @@ class ChangePassCodeViewController: BaseViewController {
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
         }
-//        oldPassField.isEnabled = false
         oldPassField.isSecureTextEntry = true
-        oldPassField.text = user?.password
+        oldPassField.text = "user's old password"
         oldPassField.font = oldPassField.font?.withSize(20)
         oldPassField.rightView = eyeButton
         oldPassField.rightViewMode = .always
@@ -98,7 +96,7 @@ class ChangePassCodeViewController: BaseViewController {
     
     @objc func updateTapped(){
         showLoading()
-        presenter.changePassword(email: user?.name ?? "admin", password: "aaaa")
+//        presenter.changePassword
     }
     
     @objc func viewTapped(){

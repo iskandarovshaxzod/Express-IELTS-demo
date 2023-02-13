@@ -14,17 +14,17 @@ class BranchRevenueViewController: BaseViewController {
     let subView   = UIView()
     let tableView = UITableView()
     
-    var branchName = ""
-    var teachers   = [String]()
+    var branch: Branch?
+    var teachers   = [Teacher]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        presenter.getAllTeachers()
+//        presenter.getAllTeachers()
     }
     
     override func configureNavBar() {
-        title = branchName
+        title = branch?.branchName.capitalized
     }
     
     override func initViews() {
@@ -64,7 +64,7 @@ extension BranchRevenueViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-        cell.text = teachers[indexPath.row].capitalized
+        cell.text = teachers[indexPath.row].teacherName.capitalized
         cell.initViews()
         cell.selectionStyle = .none
         return cell
@@ -72,19 +72,21 @@ extension BranchRevenueViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = TeacherRevenueViewController()
-        Database.shared.currentTeacher = teachers[indexPath.row]
-        vc.teacherName = teachers[indexPath.row].capitalized
+        vc.teacher = teachers[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension BranchRevenueViewController: TeacherListDelegate {
-    func onSuccessGetAllTeachers(teachers: [String]) {
-        self.teachers = teachers
-        reloadData()
+    
+    func onSuccessGetAllTeachers(teachers: [Teacher]) {
+//        self.teachers = teachers
+//        reloadData()
     }
     
-    func onErrorGetAllTeachers(error: String?) {
+    func onSuccessDeleteTeacher() {}
+
+    func onError(error: String?) {
         showErrorMessage(title: error)
     }
 }

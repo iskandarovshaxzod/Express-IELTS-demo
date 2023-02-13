@@ -1,5 +1,5 @@
 //
-//  TeacherViewController.swift
+//  GroupViewController.swift
 //  Express IELTS
 //
 //  Created by Iskandarov shaxzod on 08.12.2022.
@@ -7,31 +7,31 @@
 
 import UIKit
 
-class TeacherViewController: BaseViewController {
+class ConfigViewController: BaseViewController {
     
-    let presenter = TeacherConfigListPresenter()
+    let presenter = GroupListPresenter()
     
     let subView   = UIView()
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
     
-    var teacher: Teacher?
-    var configs = [Config]()
-    var loaded  = true
-    var index   = IndexPath()
+    var config: Config?
+    var groups = [Group]()
+    var loaded = true
+    var index  = IndexPath()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        presenter.getAllTeacherConfigs(teacherID: teacher?.id?.description ?? "")
+        presenter.getAllGroups(configID: config?.id?.description ?? "")
     }
-
+    
     override func configureNavBar() {
-        title = teacher?.teacherName
+        title = config?.configName
         
         var menuItems: [UIAction] {
             return [
-                UIAction(title: "new_teacher_config".localized, image: UIImage(systemName: "plus.app"),
+                UIAction(title: "new_group".localized, image: UIImage(systemName: "plus.app"),
                          handler: { [weak self] (_) in
                     self?.addTapped()
                 }),
@@ -46,7 +46,7 @@ class TeacherViewController: BaseViewController {
         }
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "ellipsis"), primaryAction: nil, menu: demoMenu)
     }
-    
+
     override func initViews() {
         view.addSubview(subView)
         subView.snp.makeConstraints { make in
@@ -70,14 +70,14 @@ class TeacherViewController: BaseViewController {
     }
     
     @objc func refreshTable() {
-        presenter.getAllTeacherConfigs(teacherID: teacher?.id?.description ?? "")
+        presenter.getAllGroups(configID: config?.id?.description ?? "")
     }
     
     @objc func addTapped() {
         let vc = aAddViewController()
-        vc.navTitle   = "new_teacher_config".localized
+        vc.navTitle   = "new_group".localized
         vc.addBtnText = "add".localized
-        vc.firstFieldText   = "new_teacher_config_name".localized
+        vc.firstFieldText  = "new_group_name".localized
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -87,9 +87,20 @@ class TeacherViewController: BaseViewController {
             if action.title == "delete".localized {
                 self?.showLoading()
                 self?.index = index
-                self?.presenter.deleteConfig(configID: self?.configs[index.row].id?.description ?? "")
+                self?.presenter.deleteGroup(groupID: self?.groups[index.row].id?.description ?? "")
             }
         }
+    }
+    
+    func deleteGroup(index: IndexPath) {
+//        FirebaseManager.shared.deleteGroup(groupName: groups[index.row].name) { [weak self] in
+//            self?.hideLoading()
+//            self?.groups.remove(at: index.row)
+//            self?.tableView.deleteRows(at: [index], with: .left)
+//        } error: { [weak self] err in
+//            self?.hideLoading()
+//            self?.showErrorMessage(title: err)
+//        }
     }
     
     private func reloadData(){
@@ -107,16 +118,15 @@ class TeacherViewController: BaseViewController {
     }
 }
 
-extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
-    
+extension ConfigViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return loaded ? configs.count : 5
+        return loaded ? groups.count : 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = configs[indexPath.row].configName.capitalized
+            cell.text = groups[indexPath.row].groupName.capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -133,8 +143,8 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = ConfigViewController()
-        vc.config = configs[indexPath.row]
+        let vc = GroupViewController()
+        vc.group = groups[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -147,23 +157,23 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
         }
         delete.backgroundColor = .systemRed
         delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
-        let configs = UISwipeActionsConfiguration(actions: [delete])
-        configs.performsFirstActionWithFullSwipe = false
-        return configs
+        let config = UISwipeActionsConfiguration(actions: [delete])
+        config.performsFirstActionWithFullSwipe = false
+        return config
     }
 }
 
-extension TeacherViewController: TeacherConfigListDelegate {
-    func onSuccessGetAllTeacherConfigs(configs: [Config]) {
+extension ConfigViewController: GroupListDelegate {
+    func onSuccessGetAllGroups(groups: [Group]) {
         DispatchQueue.main.async { [weak self] in
-            self?.configs = configs
+            self?.groups = groups
             self?.reloadData()
         }
     }
     
-    func onSuccessDeleteConfig() {
+    func onSuccesDeleteGroup() {
         hideLoading()
-        configs.remove(at: index.row)
+        groups.remove(at: index.row)
         tableView.deleteRows(at: [index], with: .left)
     }
     

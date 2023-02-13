@@ -16,12 +16,12 @@ class PaymentViewController: BaseViewController {
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
     
-    var branches = [String]()
+    var branches = [Branch]()
     var loaded   = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.setDelegate(delegate: self)
+//        presenter.setDelegate(delegate: self)
         presenter.getAllBranches()
     }
     
@@ -74,7 +74,7 @@ extension PaymentViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = branches[indexPath.row].capitalized
+            cell.text = branches[indexPath.row].branchName.capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -96,8 +96,7 @@ extension PaymentViewController: UITableViewDelegate, UITableViewDataSource{
             navigationController?.pushViewController(MonthlyPaymentViewController(), animated: true)
         } else {
             let vc = BranchRevenueViewController()
-            Database.shared.currentBranch = branches[indexPath.row]
-            vc.branchName = branches[indexPath.row].capitalized
+            vc.branch = branches[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
 //        if indexPath.row == 4 {
@@ -110,13 +109,6 @@ extension PaymentViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-extension PaymentViewController: BranchListDelegate {
-    func onSuccessGetAllBranches(branches: [String]) {
-        self.branches = branches + ["All branches"]
-        reloadData()
-    }
-    
-    func onErrorGetAllBranches(error: String?) {
-        showErrorMessage(title: error)
-    }
-}
+//extension PaymentViewController: BranchListDelegate {
+//
+//}

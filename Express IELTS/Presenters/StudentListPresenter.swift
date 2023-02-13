@@ -12,25 +12,37 @@ class StudentListPresenter {
     
     typealias PresenterDelegate = StudentListDelegate & UIViewController
     
+    var body: Student? = nil
     weak var delegate: PresenterDelegate?
     
     func setDelegate(delegate: PresenterDelegate) {
         self.delegate = delegate
     }
     
-    func getAllStudents() {
-        FirebaseManager.shared.getAllStudentsOfGroup() { [weak self] students in
-            self?.delegate?.onSuccessGetAllStudents(students: students)
-        } error: { [weak self] err in
-            self?.delegate?.onErrorGetAllStudents(error: err)
+    func getAllBranchStudents(branchID: String, year: Int, month: Int) {
+        let url = URL(string: Constants.BASE_URL + Constants.STUDENT_BRANCH_LIST + branchID)!
+        let date = DateTime(year: year, month: month)
+        APIManager.shared.performRequest(url: url, method: .post, body: date, parameters: nil) {
+            [weak self] (result: Result<[Student], Error>) in
+            switch result {
+            case .success(let students):
+                self?.delegate?.onSuccessGetAllBranchStudents(students: students)
+            case .failure(let error):
+                self?.delegate?.onError(error: error.localizedDescription)
+            }
         }
     }
     
-    func getAllStudentsData(students: [String]) {
-        FirebaseManager.shared.gets(students: students) { [weak self] data in
-            self?.delegate?.onSuccessGetAllStudentsData(students: data)
-        } error: { [weak self] err in
-            self?.delegate?.onErrorGetAllStudents(error: err)
+    func deleteStudent(studentID: String) {
+        let url = URL(string: Constants.BASE_URL + Constants.STUDENT_DELETE + studentID)!
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .delete, body: body, parameters: nil) {
+            [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.delegate?.onSuccessDeleteStudent()
+            case .failure(let error):
+                self?.delegate?.onError(error: error.localizedDescription)
+            }
         }
     }
 }

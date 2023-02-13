@@ -11,17 +11,23 @@ class AddBranchViewController: BaseViewController {
     
     let subView = UIView()
     
-    let emailfield = TextField(placeHolder: "new_branch_mail".localized)
-    let passfield  = TextField(placeHolder: "new_branch_pass".localized)
+    let emailfield = TextField(placeHolder: "a") //"new_branch_mail".localized)
+    let passfield  = TextField(placeHolder: "a") //new_branch_pass".localized)
 
-    let addButton  = Button(text: "new_branch_add".localized)
+    let addButton  = Button(text: "")
+    
+//    var delegate:
+    var emailText = ""
+    var passText  = ""
+    var addText   = ""
+    var navTitle  = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     override func configureNavBar() {
-        title = "new_branch".localized
+        title = navTitle
     }
 
     override func initViews() {
@@ -39,7 +45,8 @@ class AddBranchViewController: BaseViewController {
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
         }
-
+        emailfield.placeholder = emailText
+        
         subView.addSubview(passfield)
         passfield.snp.updateConstraints { make in
             make.top.equalTo(emailfield.snp.bottom).offset(30)
@@ -48,6 +55,7 @@ class AddBranchViewController: BaseViewController {
             make.height.equalTo(50)
         }
         passfield.keyboardType = .numberPad
+        passfield.placeholder  = passText
 
         subView.addSubview(addButton)
         addButton.snp.makeConstraints { make in
@@ -58,6 +66,7 @@ class AddBranchViewController: BaseViewController {
         }
         addButton.layer.cornerRadius = 30
         addButton.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
+        addButton.setTitle(addText, for: .normal)
 
     }
     
@@ -84,16 +93,16 @@ class AddBranchViewController: BaseViewController {
         if check() {
             showSureInfo(title: "new_branch_add_info".localized) { [weak self] alertAction in
                 self?.showLoading()
-                FirebaseManager.shared.addNewBranch(email:    self?.emailfield.text?.lowercased() ?? "",
-                                                    password: self?.passfield.text?.lowercased()  ?? "") {
-                    self?.hideLoading()
-                    self?.showAnimation(animationName: "success", animationMode: .playOnce) { _ in
-                        self?.dismiss()
-                    }
-                } error: { err in
-                    self?.hideLoading()
-                    self?.showErrorMessage(title: err?.localizedDescription)
-                }
+//                FirebaseManager.shared.addNewBranch(email:    self?.emailfield.text?.lowercased() ?? "",
+//                                                    password: self?.passfield.text?.lowercased()  ?? "") {
+//                    self?.hideLoading()
+//                    self?.showAnimation(animationName: "success", animationMode: .playOnce) { _ in
+//                        self?.dismiss()
+//                    }
+//                } error: { err in
+//                    self?.hideLoading()
+//                    self?.showErrorMessage(title: err?.localizedDescription)
+//                }
             }
         }
     }

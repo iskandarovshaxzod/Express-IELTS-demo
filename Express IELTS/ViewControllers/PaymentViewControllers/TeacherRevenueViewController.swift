@@ -16,17 +16,17 @@ class TeacherRevenueViewController: BaseViewController {
     let tableView = UITableView()
     let segment   = UISegmentedControl(items: ["By teacher", "By group"])
     
-    var teacherName = ""
-    var receipts    = [ReceiptModel]()
+    var teacher: Teacher?
+    var receipts  = [Payment]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        presenter.getAllPayments(monthName: "December")
+        presenter.getAllTeacherPayments(teacherID: teacher?.id?.description ?? "", year: 2023, month: 2)
     }
     
     override func configureNavBar() {
-        title = teacherName
+        title = teacher?.teacherName.capitalized
     }
     
     override func initViews() {
@@ -87,7 +87,7 @@ extension TeacherRevenueViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = receipts[indexPath.row].name + "\(receipts[indexPath.row].paymentTime)"
+        cell.textLabel?.text = receipts[indexPath.row].date
         cell.backgroundColor = "cl_cell_back".color
         return cell
     }
@@ -102,18 +102,22 @@ extension TeacherRevenueViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 extension TeacherRevenueViewController: TeacherPaymentListDelegate {
-    func onSuccessGetAllPayment(receipts: [ReceiptModel]) {
-        self.receipts = receipts
-        reloadData()
+    func onSuccessGetAllTeacherPayments(receipts: [Payment]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.receipts = receipts
+            self?.reloadData()
+        }
     }
     
-    func onErrorGetAllStudents(error: String?) {
+    func onSuccessAddNewTeacherPayment() {}
+    
+    func onError(error: String?) {
         showErrorMessage(title: error)
     }
 }
 
 extension TeacherRevenueViewController: HeaderMonthChanged {
     func monthChanged(to month: String) {
-        presenter.getAllPayments(monthName: month)
+        
     }
 }

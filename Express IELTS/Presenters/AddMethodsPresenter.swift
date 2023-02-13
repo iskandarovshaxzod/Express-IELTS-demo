@@ -10,42 +10,76 @@ import UIKit
 class AddMethodsPresenter {
     typealias PresenterDelegate = AddMethodsDelegate & UIViewController
     
+    let body: Branch? = nil
     weak var delegate: PresenterDelegate?
     
     func setDelegate(delegate: PresenterDelegate) {
         self.delegate = delegate
     }
     
-    func addNewTeacher(teacherName: String) {
-        FirebaseManager.shared.addNewTeacher(teacherName: teacherName, success: { [weak self] in
-            self?.delegate?.onSuccessAddNewTeacher()
-        }, error: { [weak self] err in
-            self?.delegate?.onErrorAddNew(error: err?.localizedDescription)
-        })
+    func addBranch(stringURL: String, body: Branch) {
+        let url = URL(string: stringURL)!
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .post, body: body, parameters: nil) {
+            [weak self] response in
+            switch response{
+            case .success(let response):
+                self?.delegate?.onSuccessAddNew()
+            case .failure(let error):
+                self?.delegate?.onErrorAddNew(error: error.localizedDescription)
+            }
+        }
     }
     
-    func addNewTeacherConfig(configName: String) {
-        FirebaseManager.shared.addNewTeacherConfig(configName: configName, success: { [weak self] in
-            self?.delegate?.onSuccessAddNewTeacherConfig()
-        }, error: { [weak self] err in
-            self?.delegate?.onErrorAddNew(error: err?.localizedDescription)
-        })
+    func addTeacher(stringURL: String, body: Teacher) {
+        let url = URL(string: stringURL)!
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .post, body: body, parameters: nil) {
+            [weak self] response in
+            switch response{
+            case .success(let response):
+                self?.delegate?.onSuccessAddNew()
+            case .failure(let error):
+                self?.delegate?.onErrorAddNew(error: error.localizedDescription)
+            }
+        }
     }
     
-    func addNewGroup(groupName: String, groupType: GroupType) {
-        FirebaseManager.shared.addNewGroup(groupName: groupName, groupType: groupType,
-        success: { [weak self] in
-            self?.delegate?.onSuccessAddNewGroup()
-        }, error: { [weak self] err in
-            self?.delegate?.onErrorAddNew(error: err?.localizedDescription)
-        })
+    func addTeacherConfig(stringURL: String, body: Config) {
+        let url = URL(string: stringURL)!
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .post, body: body, parameters: nil) {
+            [weak self] response in
+            switch response{
+            case .success(let response):
+                self?.delegate?.onSuccessAddNew()
+            case .failure(let error):
+                self?.delegate?.onErrorAddNew(error: error.localizedDescription)
+            }
+        }
     }
     
-    func addNewStudent(studentName: String) {
-        FirebaseManager.shared.addNewStudent(studentName: studentName, success: { [weak self] in
-            self?.delegate?.onSuccessAddNewStudent()
-        }, error: { [weak self] err in
-            self?.delegate?.onErrorAddNew(error: err?.localizedDescription)
-        })
+    func addGroup(stringURL: String, body: Group) {
+        let url = URL(string: stringURL)!
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .post, body: body, parameters: nil) {
+            [weak self] response in
+            switch response{
+            case .success(let response):
+                self?.delegate?.onSuccessAddNew()
+            case .failure(let error):
+                self?.delegate?.onErrorAddNew(error: error.localizedDescription)
+            }
+        }
     }
+    
+    func addStudent(stringURL: String, body: Student) {
+        let url = URL(string: stringURL)!
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .post, body: body, parameters: nil) {
+            [weak self] response in
+            switch response{
+            case .success(let response):
+                self?.delegate?.onSuccessAddNew()
+            case .failure(let error):
+                self?.delegate?.onErrorAddNew(error: error.localizedDescription)
+            }
+        }
+    }
+    
 }

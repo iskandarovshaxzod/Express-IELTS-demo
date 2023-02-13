@@ -8,7 +8,7 @@
 import Foundation
 
 protocol StudentListDelegate {
-    func onSuccessGetAllStudents(students: [String])
-    func onSuccessGetAllStudentsData(students: [StudentCheckModel])
-    func onErrorGetAllStudents(error: String?)
+    func onSuccessGetAllBranchStudents(students: [Student])
+    func onSuccessDeleteStudent()
+    func onError(error: String?)
 }

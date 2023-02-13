@@ -15,7 +15,7 @@ extension UITextField{
     }
     
     // Using CAMediaTimingFunction
-    func shake(duration: TimeInterval, values: [CGFloat]) {
+    func shake(duration: TimeInterval, values: [CGFloat] = [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0]) {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = duration

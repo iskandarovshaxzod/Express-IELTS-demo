@@ -8,9 +8,6 @@
 import Foundation
 
 protocol AddMethodsDelegate {
-    func onSuccessAddNewTeacher()
-    func onSuccessAddNewTeacherConfig()
-    func onSuccessAddNewGroup()
-    func onSuccessAddNewStudent()
+    func onSuccessAddNew()
     func onErrorAddNew(error: String?)
 }
