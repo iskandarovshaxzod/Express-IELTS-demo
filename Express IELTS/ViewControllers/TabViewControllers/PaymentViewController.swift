@@ -112,7 +112,7 @@ extension PaymentViewController: UITableViewDelegate, UITableViewDataSource{
 
 extension PaymentViewController: BranchListDelegate {
     func onSuccessGetAllBranches(branches: [String]) {
-        self.branches = branches + ["All branches"]
+        self.branches = branches + ["all_branches".localized]
         reloadData()
     }
     

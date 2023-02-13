@@ -15,6 +15,9 @@
 "no"     = "No";
 "branches" = "Branches";
 "back"     = "Back";
+"teacher"  = "Teacher";
+"student"  = "Student";
+"branch"   = "Branch";
 
 // AUTH
 "admin"     = "Admin";
@@ -32,6 +35,7 @@
 // Nav titles
 "all_payment"  = "All Payment";
 "all_students" = "All Students";
+"all_branches"  = "All Branches";
 
 // Adding a new branch
 "new_branch"      = "New Branch";
@@ -83,4 +87,20 @@
 "uzbek"   = "Uzbek";
 
 // Make sure info
-"add_info" = "Are you sure that you want to add a %@ ?";
+"add_info"    = "Are you sure that you want to add a %@ ?";
+"delete_info" = "Are you sure that you want to delete a %@?";
+
+
+//Months
+"january"   = "January";
+"february"  = "February";
+"march"     = "March";
+"april"     = "April";
+"may"       = "May";
+"june"      = "June";
+"july"      = "July";
+"august"    = "August";
+"september" = "September";
+"october"   = "October";
+"november"  = "November";
+"december"  = "December";

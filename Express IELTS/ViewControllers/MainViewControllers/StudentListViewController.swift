@@ -91,7 +91,7 @@ class StudentListViewController: BaseViewController {
     }
 
     private func handleMoveToTrash(index: IndexPath) {
-        showActionAlert(title: "Are you sure that you want to delete a branch?",
+        showActionAlert(title: String(format: "delete_info".localized,"student".localized),
                         message: nil, actions: ["delete".localized]){ [weak self] action in
             if action.title == "delete".localized {
                 self?.showLoading()
@@ -150,7 +150,17 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
-    
+//    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+//        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+//            let edit = UIAction(title: "edit".localized, image: UIImage(systemName: "square.and.pencil.circle"),
+//                                  attributes: .destructive) { [weak self] _ in
+//                self?.handleMoveToTrash(index: indexPath)
+//            }
+//            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [edit])
+//        }
+//        return config
+//    }
+//    
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let delete = UIAction(title: "delete".localized, image: UIImage(systemName: "trash"),

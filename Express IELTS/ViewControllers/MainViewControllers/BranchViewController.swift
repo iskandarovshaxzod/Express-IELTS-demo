@@ -81,7 +81,7 @@ class BranchViewController: BaseViewController {
     }
     
     private func handleMoveToTrash(index: IndexPath) {
-        showActionAlert(title: "Are you sure that you want to delete a branch?", message: nil,
+        showActionAlert(title: String(format: "delete_info".localized, "teacher".localized), message: nil,
                         actions: ["delete".localized]){ [weak self] action in
             if action.title == "delete".localized {
                 self?.showLoading()
@@ -150,7 +150,7 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     //MARK: - Swipe Actions
-    
+    //left swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
@@ -160,6 +160,19 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
         delete.backgroundColor = .systemRed
         delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
         let config = UISwipeActionsConfiguration(actions: [delete])
+        config.performsFirstActionWithFullSwipe = false
+        return config
+    }
+    //right swipe
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let add = UIContextualAction(style: .normal, title: "edit".localized) { [weak self] (_, _, completionHandler) in
+            self?.handleMoveToTrash(index: indexPath)
+            completionHandler(true)
+        }
+        add.backgroundColor = .systemGreen
+        add.image = UIImage(systemName: "square.and.pencil.circle")?.withTintColor(.white)
+        let config = UISwipeActionsConfiguration(actions: [add])
         config.performsFirstActionWithFullSwipe = false
         return config
     }
