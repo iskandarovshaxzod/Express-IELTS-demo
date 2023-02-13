@@ -114,7 +114,3 @@ extension PaymentViewController: UITableViewDelegate, UITableViewDataSource{
 //        }
     }
 }
-
-//extension PaymentViewController: BranchListDelegate {
-//
-//}

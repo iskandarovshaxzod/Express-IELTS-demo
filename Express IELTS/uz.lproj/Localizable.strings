@@ -14,7 +14,12 @@
 "yes"    = "Ha";
 "no"     = "Yo'q";
 "branches" = "Filiallar";
+"branch"   = "Filial";
 "back"     = "Orqaga";
+"teacher"  = "Ustoz";
+"student"  = "Talaba";
+"group"    = "Gruh";
+
 
 // AUTH
 "admin"     = "Admin";
@@ -31,7 +36,9 @@
 
 // Nav titles
 "all_payment"  = "Barcha to'lovlar";
-"all_students" = "Barcha studentlar";
+"all_students" = "Barcha talabalar";
+"all_branches" = "Вarcha filiallar";
+
 
 // Adding a new branch
 "new_branch"      = "Yangi filial";
@@ -83,4 +90,20 @@
 "uzbek"   = "O'zbekcha";
 
 // Make sure info
-"add_info" = "%@ ni qo'shmoqchi ekanligingizga ishonchingiz komilmi ?";
+"add_info"    = "%@ ni qo'shmoqchi ekanligingizga ishonchingiz komilmi ?";
+"delete_info" = "%@ ni o'chirmoqchi ekanligingizga ishonchingiz komilmi ?";
+
+//Months
+"january"   = "Yanvar";
+"february"  = "Fevral";
+"march"     = "Mart";
+"april"     = "Aprel";
+"may"       = "May";
+"june"      = "Iyun";
+"july"      = "Iyul";
+"august"    = "Avgust";
+"september" = "Sentabr";
+"october"   = "Oktabr";
+"november"  = "Noyabr";
+"december"  = "Dekabr";
+

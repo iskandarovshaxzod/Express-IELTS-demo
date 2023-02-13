@@ -948,7 +948,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Express IELTS/Express IELTS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8QLM8W63CU;
+				DEVELOPMENT_TEAM = A4G2GT96YJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Express IELTS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -961,7 +961,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "demo.Express-IELTS";
+				PRODUCT_BUNDLE_IDENTIFIER = "demo.Express-IELTS123";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -982,7 +982,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Express IELTS/Express IELTS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8QLM8W63CU;
+				DEVELOPMENT_TEAM = A4G2GT96YJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Express IELTS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -995,7 +995,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "demo.Express-IELTS";
+				PRODUCT_BUNDLE_IDENTIFIER = "demo.Express-IELTS123";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

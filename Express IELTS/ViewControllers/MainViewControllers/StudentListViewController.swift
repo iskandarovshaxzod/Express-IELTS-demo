@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GroupViewController: BaseViewController {
+class StudentListViewController: BaseViewController {
     
     let presenter = StudentListPresenter()
     
@@ -16,20 +16,19 @@ class GroupViewController: BaseViewController {
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
     
-    var group: Group?
-    var students  = [StudentWithAttendance]()
+    var groupName = ""
+    var students  = [StudentCheckModel]()
     var canEdit   = false
     var loaded    = false
-    var index     = IndexPath()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        presenter.getAllGroupStudents(groupID: group?.id?.description ?? "", year: 2023, month: 2)
+        presenter.getAllStudents()
     }
     
     override func configureNavBar() {
-        title = group?.groupName.capitalized
+        title = groupName
         print("number: \(students.count)")
         var menuItems: [UIAction] {
             return [
@@ -80,26 +79,35 @@ class GroupViewController: BaseViewController {
     }
     
     @objc func refreshTable() {
-        presenter.getAllGroupStudents(groupID: group?.id?.description ?? "", year: 2023, month: 2)
+        presenter.getAllStudents()
     }
     
     @objc func addTapped() {
-        let vc = aAddViewController()
+        let vc = AddViewController()
         vc.navTitle   = "new_student".localized
-        vc.addBtnText = "add".localized
-        vc.firstFieldText   = "new_student_name".localized
-        vc.secondFieldText  = "Phone number"
+        vc.buttonText = "add".localized
+        vc.nameText   = "new_student_name".localized
         navigationController?.pushViewController(vc, animated: true)
     }
 
     private func handleMoveToTrash(index: IndexPath) {
-        showActionAlert(title:String(format: "delete_info".localized, "group".localized), message: nil,
-                        actions: ["delete".localized]){ [weak self] action in
+        showActionAlert(title: String(format: "delete_info".localized,"student".localized),
+                        message: nil, actions: ["delete".localized]){ [weak self] action in
             if action.title == "delete".localized {
                 self?.showLoading()
-                self?.index = index
-                self?.presenter.deleteStudent(studentID: self?.students[index.row].student.id?.description ?? "")
+                self?.deleteStudent(index: index)
             }
+        }
+    }
+    
+    func deleteStudent(index: IndexPath) {
+        FirebaseManager.shared.deleteStudent(studentName: students[index.row].studentName) { [weak self] in
+            self?.hideLoading()
+            self?.students.remove(at: index.row)
+            self?.tableView.deleteRows(at: [index], with: .left)
+        } error: { [weak self] err in
+            self?.hideLoading()
+            self?.showErrorMessage(title: err)
         }
     }
     
@@ -118,7 +126,7 @@ class GroupViewController: BaseViewController {
     }
 }
 
-extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
+extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return loaded ? students.count : 5
     }
@@ -126,8 +134,7 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StudentCheckTableViewCell
-            cell.student = students[indexPath.row]
-            cell.size = Int(group?.groupType ?? "12") ?? 12
+            cell.name = students[indexPath.row].studentName.capitalized
             cell.delegate = self
             cell.initViews()
             cell.selectionStyle = .none
@@ -143,7 +150,17 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
-    
+//    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+//        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+//            let edit = UIAction(title: "edit".localized, image: UIImage(systemName: "square.and.pencil.circle"),
+//                                  attributes: .destructive) { [weak self] _ in
+//                self?.handleMoveToTrash(index: indexPath)
+//            }
+//            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [edit])
+//        }
+//        return config
+//    }
+//    
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let delete = UIAction(title: "delete".localized, image: UIImage(systemName: "trash"),
@@ -157,7 +174,6 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
     
     //MARK: - Swipe Actions
     
-    //left swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .destructive, title: "delete".localized) {
@@ -171,55 +187,35 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
         config.performsFirstActionWithFullSwipe = false
         return config
     }
-    //right swipe
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let add = UIContextualAction(style: .normal, title: "edit".localized) {
-            [weak self] (_, _, completionHandler) in
-            self?.handleMoveToTrash(index: indexPath)
-            completionHandler(true)
-        }
-        add.backgroundColor = .systemGreen
-        add.image = UIImage(systemName: "square.and.pencil.circle")?.withTintColor(.white)
-        let config = UISwipeActionsConfiguration(actions: [add])
-        config.performsFirstActionWithFullSwipe = false
-        return config
-    }
 }
 
-extension GroupViewController: StudentListDelegate {
-    func onSuccessGetAllGroupStudents(students: [StudentWithAttendance]) {
-        DispatchQueue.main.async { [weak self] in
-            self?.students = students
-            self?.reloadData()
-        }
+extension StudentListViewController: StudentListDelegate {
+    func onSuccessGetAllStudents(students: [String]) {
+        presenter.getAllStudentsData(students: students)
     }
     
-    func onSuccessGetAllBranchStudents(students: [Student]) { }
-    
-    func onSuccessDeleteStudent() {
-        hideLoading()
-        students.remove(at: index.row)
-        tableView.deleteRows(at: [index], with: .left)
+    func onSuccessGetAllStudentsData(students: [StudentCheckModel]) {
+        self.students = students
+        reloadData()
     }
     
-    func onError(error: String?) {
+    func onErrorGetAllStudents(error: String?) {
         showErrorMessage(title: error)
     }
 }
 
-extension GroupViewController: PaidDelegate {
+extension StudentListViewController: PaidDelegate {
     func pay(for student: String) {
-//        showAlertWithTextField(title: student, message: "Enter a sum") { [weak self] text in
-//            self?.showLoading()
-//            FirebaseManager.shared.addReceipt(studentName: student, sum: text) { [weak self] in
-//                self?.hideLoading()
-//            } error: { [weak self] err in
-//                self?.hideLoading()
-//                self?.showErrorMessage(title: err)
-//            }
-//        } error: { [weak self] err in
-//            self?.showErrorMessage(title: err)
-//        }
+        showAlertWithTextField(title: student, message: "Enter a sum") { [weak self] text in
+            self?.showLoading()
+            FirebaseManager.shared.addReceipt(studentName: student, sum: text) { [weak self] in
+                self?.hideLoading()
+            } error: { [weak self] err in
+                self?.hideLoading()
+                self?.showErrorMessage(title: err)
+            }
+        } error: { [weak self] err in
+            self?.showErrorMessage(title: err)
+        }
     }
 }

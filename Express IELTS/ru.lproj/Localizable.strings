@@ -15,10 +15,14 @@
 "no"     = "Нет";
 "branches" = "Филиали";
 "back"     = "Назад";
+"teacher"  = "Учитель";
+"student"  = "Студент";
+"group"    = "Группа";
+"branch"   = "Филиал";
 
 // AUTH
 "admin"     = "Админ";
-"reception" = "Reception";
+"reception" = "Администрация";
 "email"     = "Email";
 "password"  = "Пароль";
 "enter"     = "Войти";
@@ -32,6 +36,7 @@
 // Nav titles
 "all_payment"  = "Все Платежи";
 "all_students" = "Все Cтуденты";
+"all_branches" = "Все филиалы";
 
 // Adding a new branch
 "new_branch"      = "Новый Филиал";
@@ -83,4 +88,20 @@
 "uzbek"   = "Узбекский";
 
 // Make sure info
-"add_info" = "Вы уверены, что хотите добавить %@ ?";
+"add_info"    = "Вы уверены, что хотите добавить %@ ?";
+"delete_info" = "Вы уверены, что хотите удалить %@ ?";
+
+
+//Months
+"january"   = "Январь";
+"february"  = "Февраль";
+"march"     = "Март";
+"april"     = "Апрель";
+"may"       = "Май";
+"june"      = "Июнь";
+"july"      = "Июль";
+"august"    = "Август";
+"september" = "Сентябрь";
+"october"   = "Октябрь";
+"november"  = "Ноябрь";
+"december"  = "Декабрь";
