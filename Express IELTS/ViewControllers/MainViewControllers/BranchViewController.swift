@@ -200,8 +200,8 @@ extension BranchViewController: TeacherListDelegate {
     func onSuccessDeleteTeacher() {
         DispatchQueue.main.async { [weak self] in
             self?.hideLoading()
-            self?.teachers.remove(at: index.row)
-            self?.tableView.deleteRows(at: [index], with: .left)
+            self?.teachers.remove(at: self?.index.row ?? 0)
+            self?.tableView.deleteRows(at: [self?.index ?? IndexPath()], with: .left)
         }
     }
     

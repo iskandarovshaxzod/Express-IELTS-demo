@@ -95,7 +95,8 @@ class GroupViewController: BaseViewController {
     private func handleMoveToTrash(index: IndexPath) {
         showActionAlert(title:String(format: "delete_info".localized, "group".localized), message: nil,
                         actions: ["delete".localized]){ [weak self] action in
-            if action.title == "delete".localized {
+
+               if action.title == "delete".localized {
                 self?.showLoading()
                 self?.index = index
                 self?.presenter.deleteStudent(studentID: self?.students[index.row].student.id?.description ?? "")
@@ -150,11 +151,18 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
                                   attributes: .destructive) { [weak self] _ in
                 self?.handleMoveToTrash(index: indexPath)
             }
+<<<<<<< HEAD
             let edit = UIAction(title: "edit".localized, image: UIImage(systemName: "trash")) {
                 [weak self] _ in
                 
             }
             return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [edit, delete])
+=======
+            let edit = UIAction(title: "edit".localized, image: UIImage(systemName: "square.and.pencil.circle")
+                                 ) { [weak self] _ in
+            }
+            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [delete])
+>>>>>>> origin/sunnat_branch
         }
         return config
     }

@@ -45,7 +45,14 @@ class StudentsViewController: BaseViewController {
         tableView.addSubview(refresh)
         refresh.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
     }
-    
+    private func callNumber(phoneNumber:String) {
+        if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL)) {
+                application.open(phoneCallURL, options: [:], completionHandler: nil)
+            }
+        }
+    }
     @objc func refreshTable() {
         presenter.getAllBranches()
     }
@@ -95,6 +102,19 @@ extension StudentsViewController: UITableViewDelegate, UITableViewDataSource {
             vc.branch = branches[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    // Phone number
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let call = UIAction(title: "call".localized, image: UIImage(systemName: "phone"),
+                                  attributes: .destructive) { [weak self] _ in
+                //func call
+                self?.callNumber(phoneNumber: "998933774012")
+            }
+            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [call])
+        }
+        return config
     }
 }
 

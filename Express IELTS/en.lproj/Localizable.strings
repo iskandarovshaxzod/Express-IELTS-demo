@@ -18,6 +18,7 @@
 "teacher"  = "Teacher";
 "student"  = "Student";
 "branch"   = "Branch";
+"call"     = "Call";
 
 // AUTH
 "admin"     = "Admin";
