@@ -34,10 +34,6 @@ class ConfigViewController: BaseViewController {
                 UIAction(title: "new_group".localized, image: UIImage(systemName: "plus.app"),
                          handler: { [weak self] (_) in
                     self?.addTapped()
-                }),
-                UIAction(title: "edit".localized, image: UIImage(systemName: "pencil"),
-                         handler: { [weak self] (_) in
-                    print("hello 2")
                 })
             ]
         }
@@ -77,7 +73,7 @@ class ConfigViewController: BaseViewController {
         let vc = aAddViewController()
         vc.navTitle   = "new_group".localized
         vc.addBtnText = "add".localized
-        vc.firstFieldText  = "new_group_name".localized
+        vc.firstFieldPlaceholder = "new_group_name".localized
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -90,17 +86,6 @@ class ConfigViewController: BaseViewController {
                 self?.presenter.deleteGroup(groupID: self?.groups[index.row].id?.description ?? "")
             }
         }
-    }
-    
-    func deleteGroup(index: IndexPath) {
-//        FirebaseManager.shared.deleteGroup(groupName: groups[index.row].name) { [weak self] in
-//            self?.hideLoading()
-//            self?.groups.remove(at: index.row)
-//            self?.tableView.deleteRows(at: [index], with: .left)
-//        } error: { [weak self] err in
-//            self?.hideLoading()
-//            self?.showErrorMessage(title: err)
-//        }
     }
     
     private func reloadData(){
@@ -144,12 +129,13 @@ extension ConfigViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = GroupViewController()
+        Database.shared.groupID = groups[indexPath.row].id?.description ?? ""
         vc.group = groups[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: - Swipe Actions
-    
+    //Left swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
             self?.handleMoveToTrash(index: indexPath)
@@ -158,6 +144,21 @@ extension ConfigViewController: UITableViewDelegate, UITableViewDataSource{
         delete.backgroundColor = .systemRed
         delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
         let config = UISwipeActionsConfiguration(actions: [delete])
+        config.performsFirstActionWithFullSwipe = false
+        return config
+    }
+    
+    //Right swipe
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let add = UIContextualAction(style: .normal, title: "edit".localized) {
+            [weak self] (_, _, completionHandler) in
+            
+            completionHandler(true)
+        }
+        add.backgroundColor = .systemGreen
+        add.image = UIImage(systemName: "square.and.pencil.circle")?.withTintColor(.white)
+        let config = UISwipeActionsConfiguration(actions: [add])
         config.performsFirstActionWithFullSwipe = false
         return config
     }
@@ -172,9 +173,11 @@ extension ConfigViewController: GroupListDelegate {
     }
     
     func onSuccesDeleteGroup() {
-        hideLoading()
-        groups.remove(at: index.row)
-        tableView.deleteRows(at: [index], with: .left)
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.groups.remove(at: self?.index.row ?? 0)
+            self?.tableView.deleteRows(at: [self?.index ?? IndexPath()], with: .left)
+        }
     }
     
     func onError(error: String?) {

@@ -12,14 +12,14 @@ struct Database {
     
     private init() {}
     
-    static var shared    = Database()
-    static var isAdmin   = false
-    static var branchID  = ""
-    static var teacherID = ""
-    static var configID  = ""
-    static var groupID   = ""
-    static var branches  = [Branch]()
-    static var teachers  = [Teacher]()
+    static var shared = Database()
+    var isAdmin   = false
+    var branchID  = ""
+    var teacherID = ""
+    var configID  = ""
+    var groupID   = ""
+    var branches  = [Branch]()
+    var teachers  = [Teacher]()
     
     var language: Language {
         get{

@@ -8,7 +8,12 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "https://5198-213-230-114-44.eu.ngrok.io/"
+    static let BASE_URL = "https://8d71-213-230-114-44.eu.ngrok.io/"
+    
+    //USER
+    static let USER_AUTH        = "user/auth"
+    static let USER_LIST        = "user/list"
+    static let USER_CHANGE_PASS = "user/change/password/"
     
     //ATTENDANCE
     static let ATTENDANCE_ADD    = "attendance/add"
@@ -18,7 +23,6 @@ struct Constants {
     //BRANCH
     static let BRANCH_ADD         = "branch/add"
     static let BRANCH_LIST        = "branch/list"
-    static let BRANCH_CHANGE_PASS = "branch/changePassword/"
     static let BRANCH_DELETE      = "branch/delete/"
     
     //CONFIG

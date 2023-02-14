@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol PaidDelegate {
-    func pay(for student: String)
+    func pay(for student: Student)
 }
 
 class StudentCheckTableViewCell: UITableViewCell {
@@ -17,8 +18,9 @@ class StudentCheckTableViewCell: UITableViewCell {
     
     let scrollView = UIScrollView()
     let subView    = UIView()
-    let view1      = UIView()
-    let view2      = UIView()
+    let nameView   = UIView()
+    let payView    = UIView()
+    let statusView = UIView()
     let nameLabel  = UILabel()
     let payLabel   = UILabel()
     
@@ -52,17 +54,17 @@ class StudentCheckTableViewCell: UITableViewCell {
         }
         subView.backgroundColor = .greenyBlue
         
-        subView.addSubview(view1)
-        view1.snp.makeConstraints { make in
+        subView.addSubview(nameView)
+        nameView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(10)
             make.bottom.equalToSuperview().offset(-10)
             make.width.equalTo(200)
         }
-        view1.backgroundColor = .blue
-        view1.layer.cornerRadius = 5
+        nameView.backgroundColor = .blue
+        nameView.layer.cornerRadius = 5
         
-        view1.addSubview(nameLabel)
+        nameView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.left.top.equalToSuperview().offset(5)
             make.right.bottom.equalToSuperview().offset(-5)
@@ -74,7 +76,7 @@ class StudentCheckTableViewCell: UITableViewCell {
         
         subView.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.left.equalTo(view1.snp.right).offset(20)
+            make.left.equalTo(nameView.snp.right).offset(20)
             make.top.equalToSuperview().offset(10)
             make.bottom.equalToSuperview().offset(-10)
             make.width.equalTo(size * 60 + (size-1)*20)
@@ -86,30 +88,39 @@ class StudentCheckTableViewCell: UITableViewCell {
         collectionView.isScrollEnabled = false
         collectionView.showsHorizontalScrollIndicator = false
         
-        subView.addSubview(view2)
-        view2.snp.makeConstraints { make in
+        subView.addSubview(payView)
+        payView.snp.makeConstraints { make in
             make.left.equalTo(collectionView.snp.right).offset(20)
             make.top.equalToSuperview().offset(10)
             make.bottom.equalToSuperview().offset(-10)
             make.width.equalTo(100)
             make.right.equalToSuperview().offset(-10)
         }
-        view2.backgroundColor = .brightLilac
-        view2.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
+        payView.backgroundColor = .yellow
+        payView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(payViewTapped)))
         
-        view2.addSubview(payLabel)
+        payView.addSubview(statusView)
+        statusView.snp.makeConstraints { make in
+            make.left.top.bottom.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(student?.paymentStatus ?? 0.0)
+        }
+        statusView.backgroundColor = .green
+        
+        payView.addSubview(payLabel)
         payLabel.snp.makeConstraints { make in
             make.left.top.equalToSuperview().offset(5)
             make.right.bottom.equalToSuperview().offset(-5)
         }
         payLabel.numberOfLines = 0
         payLabel.textAlignment = .center
-        payLabel.textColor = .white
-        payLabel.text = "pay" + "\(student?.paymentStatus)"
+        payLabel.textColor     = .white
+        payLabel.text = (student?.paymentStatus ?? 0.0 < 1.0 ? "Pay" : "Paid")
     }
 
-    @objc func viewTapped() {
-//        delegate?.pay(for: name)
+    @objc func payViewTapped() {
+        if let student = student?.student {
+            delegate?.pay(for: student)
+        }
     }
 }
 

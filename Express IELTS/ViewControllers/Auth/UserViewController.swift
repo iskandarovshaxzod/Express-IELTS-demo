@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import FirebaseFirestore
 
 class UserViewController: BaseViewController {
 
@@ -70,9 +69,9 @@ class UserViewController: BaseViewController {
     @objc func tapped(_ button: UIButton){
         button.layer.borderColor = UIColor.red.withAlphaComponent(0.6).cgColor
         let vc = AuthUserViewController()
-        Database.isAdmin = false
+        Database.shared.isAdmin = false
         if button == adminBtn{
-            Database.isAdmin = true
+            Database.shared.isAdmin = true
         }
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)

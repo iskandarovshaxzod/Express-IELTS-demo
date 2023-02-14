@@ -23,7 +23,7 @@ class MainTabViewController: BaseViewController {
     var studentsController = StudentsViewController()
     var settingsController = SettingsViewController()
 
-    var isAdmin = Database.isAdmin
+    var isAdmin = Database.shared.isAdmin
     var currentTab = 1
     
     override func viewDidLoad() {
@@ -40,11 +40,6 @@ class MainTabViewController: BaseViewController {
                              handler: { [weak self] (_) in
                         self?.addTapped()
                     }),
-                    UIAction(title: "edit".localized, image: UIImage(systemName: "pencil"),
-                             handler: { [weak self] (_) in
-                                 self?.mainController.onEdit()
-                        
-                    })
                 ]
             }
             var demoMenu: UIMenu {
@@ -53,7 +48,7 @@ class MainTabViewController: BaseViewController {
                 
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "ellipsis"), primaryAction: nil, menu: demoMenu)
     
-            if !Database.isAdmin{
+            if !Database.shared.isAdmin{
                 navigationItem.rightBarButtonItem = nil
             }
 //            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "logo"),
@@ -218,8 +213,8 @@ class MainTabViewController: BaseViewController {
         let vc = aAddViewController()
         vc.navTitle   = "new_branch".localized
         vc.addBtnText = "new_branch_add".localized
-        vc.firstFieldText   = "new_branch_mail".localized
-        vc.secondFieldText  = "new_branch_pass".localized
+        vc.firstFieldPlaceholder   = "new_branch_mail".localized
+        vc.secondFieldPlaceholder  = "new_branch_pass".localized
         navigationController?.pushViewController(vc, animated: true)
     }
 

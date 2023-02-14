@@ -9,13 +9,16 @@ import UIKit
 
 class ChangePasswordViewController: BaseViewController {
     
+    let presenter = UserMethodsPresenter()
+    
     let subView   = UIView()
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
-    
+    var users = [[User]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setDelegate(delegate: self)
     }
     
     override func configureNavBar() {
@@ -42,7 +45,7 @@ class ChangePasswordViewController: BaseViewController {
 extension ChangePasswordViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return users.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -50,16 +53,16 @@ extension ChangePasswordViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return users[section].count
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text  = "name of admin and branches"
+        cell.textLabel?.text  = users[indexPath.section][indexPath.row].login.localized
         cell.backgroundColor  = "cl_cell_back".color
         cell.imageView?.image = UIImage(systemName: indexPath.section == 0 ? "person.circle" : "bookmark.circle")
         cell.accessoryType    = .disclosureIndicator
@@ -69,7 +72,25 @@ extension ChangePasswordViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = ChangePassCodeViewController()
-//        vc.user = users[indexPath.section][indexPath.row]
+        vc.user = users[indexPath.section][indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
+}
+
+extension ChangePasswordViewController: UserMethodsDelegate {
+    func onSuccessGetAllUsers(users: [[User]]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.users = users
+            self?.tableView.reloadData()
+        }
+    }
+    
+    func onError(error: String?) {
+        DispatchQueue.main.async { [weak self] in
+            self?.showErrorMessage(title: error)
+        }
+    }
+    
+    func onSuccessValidateUser() {}
+    func onSuccessChangePassword() {}
 }

@@ -13,15 +13,16 @@ class ChangePassCodeViewController: BaseViewController {
     
     let subView = UIView()
     
-    let oldPassLabel = UILabel()
-    let newPassLabel = UILabel()
+    let userNameLabel = UILabel()
+    let newPassLabel  = UILabel()
     
-    let oldPassField = TextField(placeHolder: "")
-    let newPassField = TextField(placeHolder: "enter_new_pass".localized)
+    let userNameField = TextField(placeHolder: "")
+    let newPassField  = TextField(placeHolder: "enter_new_pass".localized)
     
     let updateButton = Button(text: "update_pass".localized)
     let eyeButton    = UIButton()
     
+    var user: User?
     var isSecure = true
     
     override func viewDidLoad() {
@@ -30,7 +31,7 @@ class ChangePassCodeViewController: BaseViewController {
     }
 
     override func configureNavBar() {
-        title = "title"
+        title = user?.login.capitalized
     }
     
     override func initViews() {
@@ -41,35 +42,27 @@ class ChangePassCodeViewController: BaseViewController {
         subView.backgroundColor = "cl_main_back".color
         subView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTapped)))
         
-        subView.addSubview(oldPassLabel)
-        oldPassLabel.snp.makeConstraints { make in
+        subView.addSubview(userNameLabel)
+        userNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(width / 10)
             make.left.equalToSuperview().offset(30)
         }
-        oldPassLabel.text = "old_pass".localized
+        userNameLabel.text = "UserName"
         
-        subView.addSubview(oldPassField)
-        oldPassField.snp.makeConstraints { make in
-            make.top.equalTo(oldPassLabel.snp.bottom).offset(10)
+        subView.addSubview(userNameField)
+        userNameField.snp.makeConstraints { make in
+            make.top.equalTo(userNameLabel.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(30)
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
         }
-        oldPassField.isSecureTextEntry = true
-        oldPassField.text = "user's old password"
-        oldPassField.font = oldPassField.font?.withSize(20)
-        oldPassField.rightView = eyeButton
-        oldPassField.rightViewMode = .always
-        
-        eyeButton.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
-        }
-        eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
-        eyeButton.addTarget(self, action: #selector(eyeTapped), for: .touchUpInside)
+        userNameField.text = user?.login
+        userNameField.isEnabled = (user?.login != "admin")
+//        userNameField.font = userNameField.font?.withSize(20)
         
         subView.addSubview(newPassLabel)
         newPassLabel.snp.makeConstraints { make in
-            make.top.equalTo(oldPassField.snp.bottom).offset(30)
+            make.top.equalTo(userNameField.snp.bottom).offset(30)
             make.left.equalToSuperview().offset(30)
         }
         newPassLabel.text = "new_pass".localized
@@ -81,7 +74,16 @@ class ChangePassCodeViewController: BaseViewController {
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
         }
-        newPassField.font = oldPassField.font?.withSize(20)
+        newPassField.font      = userNameField.font?.withSize(20)
+        newPassField.rightView = eyeButton
+        newPassField.rightViewMode     = .always
+        newPassField.isSecureTextEntry = true
+        
+        eyeButton.snp.makeConstraints { make in
+            make.width.height.equalTo(50)
+        }
+        eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
+        eyeButton.addTarget(self, action: #selector(eyeTapped), for: .touchUpInside)
         
         subView.addSubview(updateButton)
         updateButton.snp.makeConstraints { make in
@@ -94,19 +96,40 @@ class ChangePassCodeViewController: BaseViewController {
         updateButton.addTarget(self, action: #selector(updateTapped), for: .touchUpInside)
     }
     
+    func check() -> Bool {
+        guard let userNameText = userNameField.text, let passText = newPassField.text else {
+            return false
+        }
+        if userNameText.isEmpty || passText.isEmpty {
+            vibrate(for: .error)
+            if userNameText.isEmpty {
+                userNameField.shake(duration: 0.5)
+            }
+            if passText.isEmpty {
+                newPassField.shake(duration: 0.5)
+            }
+            return false
+        }
+        return true
+    }
+    
     @objc func updateTapped(){
-        showLoading()
-//        presenter.changePassword
+        if check() {
+            showLoading()
+            presenter.changePassword(login:    userNameField.text?.lowercased() ?? "",
+                                     password: newPassField.text?.lowercased()  ?? "",
+                                     userID:   user?.password ?? "")
+        }
     }
     
     @objc func viewTapped(){
-        oldPassField.resignFirstResponder()
+        userNameField.resignFirstResponder()
         newPassField.resignFirstResponder()
     }
     
     @objc func eyeTapped() {
-        oldPassField.isSecureTextEntry.toggle()
-        eyeButton.setImage(oldPassField.isSecureTextEntry ?
+        newPassField.isSecureTextEntry.toggle()
+        eyeButton.setImage(newPassField.isSecureTextEntry ?
                            UIImage(systemName: "eye") :
                            UIImage(systemName: "eye.slash"), for: .normal)
     }
@@ -119,19 +142,21 @@ class ChangePassCodeViewController: BaseViewController {
 
 extension ChangePassCodeViewController: UserMethodsDelegate {
     func onSuccessChangePassword() {
-        hideLoading()
-        showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] completed in
-//            print(completed)
-            self?.dismiss()
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showAnimation(animationName: "success", animationMode: .playOnce) { completed in
+                self?.dismiss()
+            }
         }
     }
     
-    func onErrorChangePassword(error: String?) {
-        hideLoading()
-        showErrorMessage(title: error)
+    func onError(error: String?) {
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showErrorMessage(title: error)
+        }
     }
     
-    func onSuccessValidateUser(){}
-    
-    func onErrorValidateUser(error: String?){}
+    func onSuccessGetAllUsers(users: [[User]]) {}
+    func onSuccessValidateUser() {}
 }

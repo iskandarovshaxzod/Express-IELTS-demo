@@ -9,7 +9,8 @@ import UIKit
 
 class aAddViewController: BaseViewController {
     
-    let presenter = AddMethodsPresenter()
+    let addPresenter  = AddMethodsPresenter()
+//    let editPresenter = AddMethodsPresenter()
     
     let subView     = UIView()
     let firstField  = TextField(placeHolder: "firstField")
@@ -20,17 +21,19 @@ class aAddViewController: BaseViewController {
     var navTitle   = ""
     var addBtnText = ""
     var groupType: GroupType?
-    var firstFieldText = ""
+    var firstFieldText: String?
     var secondFieldText: String?
+    var firstFieldPlaceholder = ""
+    var secondFieldPlaceholder: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePicker()
-        presenter.setDelegate(delegate: self)
+        addPresenter.setDelegate(delegate: self)
     }
     
     override func configureNavBar() {
-        title = ""
+        title = navTitle
     }
     
     override func initViews() {
@@ -48,7 +51,8 @@ class aAddViewController: BaseViewController {
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
         }
-        firstField.text = firstFieldText
+        firstField.placeholder = firstFieldPlaceholder
+//        firstField.text =
         
         subView.addSubview(secondField)
         secondField.snp.updateConstraints { make in
@@ -58,8 +62,8 @@ class aAddViewController: BaseViewController {
             make.height.equalTo(50)
         }
         secondField.keyboardType = .numberPad
-        secondField.text     = secondFieldText
-        secondField.isHidden = (secondFieldText == nil)
+        secondField.placeholder  = secondFieldPlaceholder
+        secondField.isHidden = (secondFieldPlaceholder == nil)
         
         subView.addSubview(picker)
         picker.snp.makeConstraints { make in
@@ -94,30 +98,30 @@ class aAddViewController: BaseViewController {
                 if self?.navTitle        == "new_branch".localized {
                     let branch = Branch(branchName: self?.firstField.text ?? "",
                                   password:   self?.secondField.text ?? "")
-                    self?.presenter.addBranch(stringURL: Constants.BASE_URL + Constants.BRANCH_ADD,
+                    self?.addPresenter.addBranch(stringURL: Constants.BASE_URL + Constants.BRANCH_ADD,
                                               body: branch)
                 } else if self?.navTitle == "new_teacher".localized {
                     let teacher = Teacher(teacherName: self?.firstField.text ?? "",
-                                          branch: BranchID(id: UUID(uuidString: Database.branchID)))
-                    self?.presenter.addTeacher(stringURL: Constants.BASE_URL + Constants.TEACHER_ADD,
+                                          branch: BranchID(id: UUID(uuidString: Database.shared.branchID)))
+                    self?.addPresenter.addTeacher(stringURL: Constants.BASE_URL + Constants.TEACHER_ADD,
                                                body: teacher)
                 } else if self?.navTitle == "new_teacher_config".localized {
                     let config = Config(configName: self?.firstField.text ?? "",
-                                        teacher: TeacherID(id: UUID(uuidString: Database.teacherID)))
-                    self?.presenter.addTeacherConfig(stringURL: Constants.BASE_URL + Constants.CONFIG_ADD,
+                                        teacher: TeacherID(id: UUID(uuidString: Database.shared.teacherID)))
+                    self?.addPresenter.addTeacherConfig(stringURL: Constants.BASE_URL + Constants.CONFIG_ADD,
                                                     body: config)
                 } else if self?.navTitle == "new_group".localized {
                     let group = Group(groupName: self?.firstField.text ?? "",
                                       groupType: "twelve",
-                                      config: ConfigID(id: UUID(uuidString: Database.configID)))
-                    self?.presenter.addGroup(stringURL: Constants.BASE_URL + Constants.GROUP_ADD,
+                                      config: ConfigID(id: UUID(uuidString: Database.shared.configID)))
+                    self?.addPresenter.addGroup(stringURL: Constants.BASE_URL + Constants.GROUP_ADD,
                                              body: group)
                 } else if self?.navTitle == "new_student".localized {
                     let student = Student(studentName: self?.firstField.text ?? "",
                                           phoneNumber: self?.secondField.text ?? "",
-                                          group: GroupID(id: UUID(uuidString: Database.groupID)),
-                                          branch: BranchID(id: UUID(uuidString: Database.branchID)))
-                    self?.presenter.addStudent(stringURL: Constants.BASE_URL + Constants.STUDENT_ADD,
+                                          group: GroupID(id: UUID(uuidString: Database.shared.groupID)),
+                                          branch: BranchID(id: UUID(uuidString: Database.shared.branchID)))
+                    self?.addPresenter.addStudent(stringURL: Constants.BASE_URL + Constants.STUDENT_ADD,
                                         body: student)
                 }
             }
@@ -139,13 +143,13 @@ class aAddViewController: BaseViewController {
             return false
         }
         
-        if firstText.isEmpty || (secondFieldText != nil && secondField.text?.isEmpty ?? false) ||
+        if firstText.isEmpty || (secondFieldPlaceholder != nil && secondField.text?.isEmpty ?? false) ||
             (navTitle == "new_group".localized && groupType == nil) {
             vibrate(for: .error)
             if firstText.isEmpty {
                 firstField.shake(duration: 0.5)
             }
-            if (secondFieldText != nil && secondField.text?.isEmpty ?? false) {
+            if (secondFieldPlaceholder != nil && secondField.text?.isEmpty ?? false) {
                 secondField.shake(duration: 0.5)
             }
             if navTitle == "new_group".localized && groupType == nil {
@@ -179,13 +183,18 @@ class aAddViewController: BaseViewController {
 
 extension aAddViewController: AddMethodsDelegate {
     func onSuccessAddNew() {
-        hideLoading()
-        showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] _ in
-            self?.dismiss()
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showAnimation(animationName: "success", animationMode: .playOnce) { [weak self] _ in
+                self?.dismiss()
+            }
         }
     }
     
     func onErrorAddNew(error: String?) {
-        showErrorMessage(title: error)
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showErrorMessage(title: error)
+        }
     }
 }

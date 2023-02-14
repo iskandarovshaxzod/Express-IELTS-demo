@@ -60,6 +60,11 @@ class MainViewController: BaseViewController {
         }
     }
     
+    private func handleEdit(index: IndexPath) {
+        let vc = aAddViewController()
+        
+    }
+    
     private func reloadData() {
         if loaded {
             DispatchQueue.main.async { [weak self] in
@@ -115,6 +120,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
         } else {
             if let _ = tableView.cellForRow(at: indexPath) as? ListTableViewCell {
                 let vc = BranchViewController()
+                Database.shared.branchID = branches[indexPath.row].id?.description ?? ""
                 vc.branch  = branches[indexPath.row]
                 navigationController?.pushViewController(vc, animated: true)
             }
@@ -128,7 +134,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     
     //MARK: - Swipe Actions
     
-       //left swipe
+    //left swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .normal, title: "delete".localized) {
@@ -140,27 +146,27 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
         delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
         let c = UISwipeActionsConfiguration(actions: [delete])
         c.performsFirstActionWithFullSwipe = false
-        return (Database.isAdmin ? c : nil)
+        return (Database.shared.isAdmin ? c : nil)
     }
-       //right swipe
+    //right swipe
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let add = UIContextualAction(style: .normal, title: "edit".localized) { [weak self] (_, _, completionHandler) in
-            self?.handleMoveToTrash(index: indexPath)
+        let edit = UIContextualAction(style: .normal, title: "edit".localized) {
+            [weak self] (_, _, completionHandler) in
+            self?.handleEdit(index: indexPath)
             completionHandler(true)
         }
-        add.backgroundColor = .systemGreen
-        add.image = UIImage(systemName: "square.and.pencil.circle")?.withTintColor(.white)
-        let config = UISwipeActionsConfiguration(actions: [add])
+        edit.backgroundColor = .systemGreen
+        edit.image = UIImage(systemName: "square.and.pencil.circle")?.withTintColor(.white)
+        let config = UISwipeActionsConfiguration(actions: [edit])
         config.performsFirstActionWithFullSwipe = false
-        return config
+        return (Database.shared.isAdmin ? config : nil)
     }
 }
 
 extension MainViewController: BranchListDelegate {
     
     func onSuccessGetAllBranches(branches: [Branch]) {
-        Database.branches = branches
+        Database.shared.branches = branches
         DispatchQueue.main.async { [weak self] in
             self?.hideLoading()
             self?.branches = branches

@@ -161,25 +161,48 @@ extension BaseViewController {
                       handler: @escaping (UIAlertAction) -> ()){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "yes".localized, style: .destructive, handler: handler))
-        alert.addAction(UIAlertAction(title: "no".localized,  style: .cancel))
+        alert.addAction(UIAlertAction(title:  "no".localized,  style: .cancel))
         present(alert, animated: true)
     }
     
     func showAlertWithTextField(title: String? = nil, message: String? = nil,
-                       success: @escaping (String) -> Void,
+                                placeholders: [String]? = nil, texts: [String]? = nil,
+                                keyboardType: UIKeyboardType = .default,
+                       success: @escaping ([String]) -> Void,
                        error :  @escaping (String) -> Void){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addTextField { textField in
-            textField.placeholder = "summa" + "/" + "summa"
+        
+        if let placeholders {
+            placeholders.forEach { placeholder in
+                alert.addTextField { textField in
+                    textField.placeholder  = placeholder
+                    textField.keyboardType = keyboardType
+                }
+            }
         }
+        
+        if let texts {
+            texts.forEach { text in
+                alert.addTextField { textField in
+                    textField.text = text
+                    textField.keyboardType = keyboardType
+                }
+            }
+        }
+        
+
         alert.addAction(UIAlertAction(title: "yes".localized, style: .destructive,
                                       handler: { [weak alert] action in
-            guard let text = alert?.textFields?[0].text else { return }
-            if text.contains("/"), text.last != "/" {
-                success(text)
-            } else {
-                error(Errors.invalidSum.localizedDescription)
+            var arr = [String]()
+            alert?.textFields?.forEach{ textField in
+                if let text = textField.text, !text.isEmpty {
+                    arr.append(text)
+                } else {
+                    error("Empty")
+                    return
+                }
             }
+            success(arr)
         }))
         alert.addAction(UIAlertAction(title: "no".localized, style: .cancel))
         present(alert, animated: true)

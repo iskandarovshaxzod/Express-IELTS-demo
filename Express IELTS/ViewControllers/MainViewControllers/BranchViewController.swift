@@ -34,10 +34,6 @@ class BranchViewController: BaseViewController {
                 UIAction(title: "new_teacher".localized, image: UIImage(systemName: "plus.app"),
                          handler: { [weak self] (_) in
                     self?.addTapped()
-                }),
-                UIAction(title: "edit".localized, image: UIImage(systemName: "pencil"),
-                         handler: { [weak self] (_) in
-                    print("hello 2")
                 })
             ]
         }
@@ -77,7 +73,7 @@ class BranchViewController: BaseViewController {
         let vc = aAddViewController()
         vc.navTitle   = "new_teacher".localized
         vc.addBtnText = "add".localized
-        vc.firstFieldText   = "new_teacher_name".localized
+        vc.firstFieldPlaceholder  = "new_teacher_name".localized
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -90,6 +86,16 @@ class BranchViewController: BaseViewController {
                 self?.presenter.deleteTeacher(teacherID: self?.teachers[index.row].id?.description ?? "")
             }
         }
+    }
+    
+    func handleEdit(index: IndexPath) {
+        showAlertWithTextField(title: "edit teacher", texts: [teachers[index.row].teacherName]) {
+            [weak self] texts in
+            
+        } error: { [weak self] err in
+            self?.onError(error: err)
+        }
+
     }
     
     func deleteTeacher(index: IndexPath) {
@@ -146,12 +152,14 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = TeacherViewController()
+        Database.shared.teacherID = teachers[indexPath.row].id?.description ?? ""
         vc.teacher = teachers[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: - Swipe Actions
-    //left swipe
+   
+    //Left swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
@@ -164,11 +172,12 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
         config.performsFirstActionWithFullSwipe = false
         return config
     }
-    //right swipe
+    //Right swipe
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let add = UIContextualAction(style: .normal, title: "edit".localized) { [weak self] (_, _, completionHandler) in
-            self?.handleMoveToTrash(index: indexPath)
+        let add = UIContextualAction(style: .normal, title: "edit".localized) {
+            [weak self] (_, _, completionHandler) in
+            self?.handleEdit(index: indexPath)
             completionHandler(true)
         }
         add.backgroundColor = .systemGreen
@@ -182,18 +191,23 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
 extension BranchViewController: TeacherListDelegate {
     func onSuccessGetAllTeachers(teachers: [Teacher]) {
         DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
             self?.teachers = teachers
             self?.reloadData()
         }
     }
     
     func onSuccessDeleteTeacher() {
-        hideLoading()
-        teachers.remove(at: index.row)
-        tableView.deleteRows(at: [index], with: .left)
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.teachers.remove(at: index.row)
+            self?.tableView.deleteRows(at: [index], with: .left)
+        }
     }
     
     func onError(error: String?) {
-        showErrorMessage(title: error)
+        DispatchQueue.main.async { [weak self] in
+            self?.showErrorMessage(title: error)
+        }
     }
 }

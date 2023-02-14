@@ -30,7 +30,7 @@ class GroupViewController: BaseViewController {
     
     override func configureNavBar() {
         title = group?.groupName.capitalized
-        print("number: \(students.count)")
+        
         var menuItems: [UIAction] {
             return [
                 UIAction(title: "new_student".localized, image: UIImage(systemName: "plus.app"),
@@ -87,8 +87,8 @@ class GroupViewController: BaseViewController {
         let vc = aAddViewController()
         vc.navTitle   = "new_student".localized
         vc.addBtnText = "add".localized
-        vc.firstFieldText   = "new_student_name".localized
-        vc.secondFieldText  = "Phone number"
+        vc.firstFieldPlaceholder  = "new_student_name".localized
+        vc.secondFieldPlaceholder = "Phone number"
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -150,39 +150,12 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
                                   attributes: .destructive) { [weak self] _ in
                 self?.handleMoveToTrash(index: indexPath)
             }
-            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [delete])
+            let edit = UIAction(title: "edit".localized, image: UIImage(systemName: "trash")) {
+                [weak self] _ in
+                
+            }
+            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [edit, delete])
         }
-        return config
-    }
-    
-    //MARK: - Swipe Actions
-    
-    //left swipe
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let delete = UIContextualAction(style: .destructive, title: "delete".localized) {
-            [weak self] (_, _, completionHandler) in
-            self?.handleMoveToTrash(index: indexPath)
-            completionHandler(true)
-        }
-        delete.backgroundColor = .systemRed
-        delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
-        let config = UISwipeActionsConfiguration(actions: [delete])
-        config.performsFirstActionWithFullSwipe = false
-        return config
-    }
-    //right swipe
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let add = UIContextualAction(style: .normal, title: "edit".localized) {
-            [weak self] (_, _, completionHandler) in
-            self?.handleMoveToTrash(index: indexPath)
-            completionHandler(true)
-        }
-        add.backgroundColor = .systemGreen
-        add.image = UIImage(systemName: "square.and.pencil.circle")?.withTintColor(.white)
-        let config = UISwipeActionsConfiguration(actions: [add])
-        config.performsFirstActionWithFullSwipe = false
         return config
     }
 }
@@ -195,6 +168,12 @@ extension GroupViewController: StudentListDelegate {
         }
     }
     
+    func onSuccessPayForStudent() {
+        DispatchQueue.main.async { [weak self] in
+            
+        }
+    }
+    
     func onSuccessGetAllBranchStudents(students: [Student]) { }
     
     func onSuccessDeleteStudent() {
@@ -204,22 +183,24 @@ extension GroupViewController: StudentListDelegate {
     }
     
     func onError(error: String?) {
-        showErrorMessage(title: error)
+        DispatchQueue.main.async { [weak self] in
+            self?.showErrorMessage(title: error)
+        }
     }
 }
 
 extension GroupViewController: PaidDelegate {
-    func pay(for student: String) {
-//        showAlertWithTextField(title: student, message: "Enter a sum") { [weak self] text in
-//            self?.showLoading()
-//            FirebaseManager.shared.addReceipt(studentName: student, sum: text) { [weak self] in
-//                self?.hideLoading()
-//            } error: { [weak self] err in
-//                self?.hideLoading()
-//                self?.showErrorMessage(title: err)
-//            }
-//        } error: { [weak self] err in
-//            self?.showErrorMessage(title: err)
-//        }
+    func pay(for student: Student) {
+        showAlertWithTextField(title: "enter sum", message: "message for you",
+                               placeholders: ["current", "max"], keyboardType: .numberPad) {
+            [weak self] sums in
+            let paid = Double(sums[0]) ?? 0.0
+            let max  = Double(sums[1]) ?? 0.0
+            self?.presenter.payForStudent(paidSum: paid, maxSum: max, student: student,
+                                          teacherID: Database.shared.teacherID,
+                                          groupID: Database.shared.groupID)
+        } error: { [weak self] err in
+            self?.onError(error: err)
+        }
     }
 }

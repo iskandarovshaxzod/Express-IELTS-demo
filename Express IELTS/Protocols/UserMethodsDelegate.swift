@@ -9,7 +9,7 @@ import Foundation
 
 protocol UserMethodsDelegate {
     func onSuccessValidateUser()
-    func onErrorValidateUser(error: String?)
     func onSuccessChangePassword()
-    func onErrorChangePassword(error: String?)
+    func onSuccessGetAllUsers(users: [[User]])
+    func onError(error: String?)
 }

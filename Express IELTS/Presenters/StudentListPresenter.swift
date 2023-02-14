@@ -59,5 +59,21 @@ class StudentListPresenter {
             }
         }
     }
+    
+    func payForStudent(paidSum: Double, maxSum: Double,student: Student, teacherID: String, groupID: String) {
+        let payment = Payment(paidSum: paidSum, maxSum: maxSum,
+                              student: StudentID(id: UUID(uuidString: student.id?.description ?? "") ?? UUID()),
+                              teacher: TeacherID(id: UUID(uuidString: teacherID)),
+                              group:   GroupID(id:   UUID(uuidString: groupID)))
+        let url = URL(string: Constants.BASE_URL + Constants.PAYMENT_ADD)!
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .post, body: payment, parameters: nil) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.delegate?.onSuccessPayForStudent()
+            case .failure(let error):
+                self?.delegate?.onError(error: error.localizedDescription)
+            }
+        }
+    }
 }
 

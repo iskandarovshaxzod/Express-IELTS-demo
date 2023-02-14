@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,9 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         checkUserMode()
         configureNavigationBar()
-        
-        //MARK: Firebase configs
-        FirebaseApp.configure()
         
         return true
     }

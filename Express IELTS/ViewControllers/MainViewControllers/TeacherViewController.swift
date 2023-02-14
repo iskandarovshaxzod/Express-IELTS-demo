@@ -34,10 +34,6 @@ class TeacherViewController: BaseViewController {
                 UIAction(title: "new_teacher_config".localized, image: UIImage(systemName: "plus.app"),
                          handler: { [weak self] (_) in
                     self?.addTapped()
-                }),
-                UIAction(title: "edit".localized, image: UIImage(systemName: "pencil"),
-                         handler: { [weak self] (_) in
-                    print("hello 2")
                 })
             ]
         }
@@ -77,7 +73,7 @@ class TeacherViewController: BaseViewController {
         let vc = aAddViewController()
         vc.navTitle   = "new_teacher_config".localized
         vc.addBtnText = "add".localized
-        vc.firstFieldText   = "new_teacher_config_name".localized
+        vc.firstFieldPlaceholder  = "new_teacher_config_name".localized
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -134,12 +130,14 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ConfigViewController()
+        Database.shared.configID = configs[indexPath.row].id?.description ?? ""
         vc.config = configs[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: - Swipe Actions
-    //left swipe
+    
+    //Left swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
             self?.handleMoveToTrash(index: indexPath)
@@ -151,7 +149,7 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
         configs.performsFirstActionWithFullSwipe = false
         return configs
     }
-    //right swap
+    //Right swipe
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let add = UIContextualAction(style: .normal, title: "edit".localized) { [weak self] (_, _, completionHandler) in
