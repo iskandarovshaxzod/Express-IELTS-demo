@@ -150,24 +150,19 @@ extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
-//    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-//        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-//            let edit = UIAction(title: "edit".localized, image: UIImage(systemName: "square.and.pencil.circle"),
-//                                  attributes: .destructive) { [weak self] _ in
-//                self?.handleMoveToTrash(index: indexPath)
-//            }
-//            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [edit])
-//        }
-//        return config
-//    }
-//
+
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            
             let delete = UIAction(title: "delete".localized, image: UIImage(systemName: "trash"),
                                   attributes: .destructive) { [weak self] _ in
                 self?.handleMoveToTrash(index: indexPath)
             }
-            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [delete])
+            let edit = UIAction(title: "edit".localized, image: UIImage(systemName: "square.and.pencil.circle")
+                                             ) { [weak self] _ in
+                        
+            }
+            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [edit,delete])
         }
         return config
     }

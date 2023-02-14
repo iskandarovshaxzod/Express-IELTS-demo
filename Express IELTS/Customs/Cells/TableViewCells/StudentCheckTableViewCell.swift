@@ -107,7 +107,8 @@ class StudentCheckTableViewCell: UITableViewCell {
         payLabel.textColor = .white
         payLabel.text = "pay" + "\(student?.paymentStatus)"
     }
-
+   
+    
     @objc func viewTapped() {
 //        delegate?.pay(for: name)
     }

@@ -152,6 +152,9 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
                                   attributes: .destructive) { [weak self] _ in
                 self?.handleMoveToTrash(index: indexPath)
             }
+            let edit = UIAction(title: "edit".localized, image: UIImage(systemName: "square.and.pencil.circle")
+                                 ) { [weak self] _ in
+            }
             return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [delete])
         }
         return config
