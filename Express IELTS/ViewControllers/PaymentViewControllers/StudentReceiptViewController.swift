@@ -14,18 +14,12 @@ class StudentReceiptViewController: BaseViewController {
     let dateLabel = UILabel()
     let hView     = UIView()
     
-    var text     = ""
-    var textsDic = ["": ""]
-    var itemCount = 5
+    var canCall = false
+    var text  = ""
+    var texts = Array<(String, String)>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.snp.updateConstraints { make in
-            make.height.equalTo(min(50 * itemCount, Int(height)-250))
-        }
     }
     
     override func initViews() {
@@ -65,7 +59,7 @@ class StudentReceiptViewController: BaseViewController {
             make.left.equalToSuperview().offset(5)
             make.right.equalToSuperview().offset(-5)
             make.bottom.equalToSuperview().offset(-5)
-            make.height.equalTo(0)
+            make.height.equalTo(min(50 * texts.count, Int(height)-250))
         }
         tableView.showsVerticalScrollIndicator = false
         tableView.register(InfoTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -81,16 +75,23 @@ class StudentReceiptViewController: BaseViewController {
 
 extension StudentReceiptViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemCount
+        return texts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InfoTableViewCell
-        cell.leftText  = "2023-10-02 12:50"
-        cell.rightText = "500 000 sum"
+        cell.leftText  = texts[indexPath.row].0
+        cell.rightText = texts[indexPath.row].1
         cell.initViews()
-        cell.selectionStyle = .none
+        cell.selectionStyle = (canCall ? .default : .none)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == 2 {
+            callNumber(phoneNumber: texts[2].1)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -117,7 +117,7 @@ extension TeacherRevenueViewController: TeacherPaymentListDelegate {
 }
 
 extension TeacherRevenueViewController: HeaderMonthChanged {
-    func monthChanged(to month: String) {
+    func monthChanged(to month: Months) {
         
     }
 }

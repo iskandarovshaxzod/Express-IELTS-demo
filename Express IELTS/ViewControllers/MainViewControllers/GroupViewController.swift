@@ -91,6 +91,28 @@ class GroupViewController: BaseViewController {
         vc.secondFieldPlaceholder = "Phone number"
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func handleCall(index: IndexPath) {
+        callNumber(phoneNumber: students[index.row].student.phoneNumber)
+    }
+    
+    func handleEdit(index: IndexPath) {
+        showAlertWithTextField(title: "edit teacher",
+                               texts: [students[index.row].student.studentName.capitalized,
+                                       students[index.row].student.phoneNumber]) {
+            [weak self] texts in
+            
+            if texts.count > 1 {
+                self?.showLoading()
+                self?.presenter.updateStudent(studentID: self?.students[index.row]
+                                              .student.id?.description ?? "",
+                                              name: texts[0],
+                                              phoneNumber: texts[1])
+            }
+        } error: { [weak self] err in
+            self?.onError(error: err)
+        }
+    }
 
     private func handleMoveToTrash(index: IndexPath) {
         showActionAlert(title:String(format: "delete_info".localized, "group".localized), message: nil,
@@ -116,6 +138,15 @@ class GroupViewController: BaseViewController {
             loaded = true
         }
         refresh.endRefreshing()
+    }
+    
+    func showSucess() {
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showAnimation(animationName: "success", animationMode: .playOnce) { _ in
+                self?.hideAnimation()
+            }
+        }
     }
 }
 
@@ -147,28 +178,33 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            
+            let call = UIAction(title: "call".localized,
+                                image: UIImage(systemName: "phone")) {
+                [weak self] _ in
+                self?.handleCall(index: indexPath)
+            }
+            let edit = UIAction(title: "edit".localized,
+                                image: UIImage(systemName: "square.and.pencil.circle")) {
+                [weak self] _ in
+                self?.handleEdit(index: indexPath)
+            }
             let delete = UIAction(title: "delete".localized, image: UIImage(systemName: "trash"),
-                                  attributes: .destructive) { [weak self] _ in
+                                  attributes: .destructive) {
+                [weak self] _ in
                 self?.handleMoveToTrash(index: indexPath)
             }
-<<<<<<< HEAD
-            let edit = UIAction(title: "edit".localized, image: UIImage(systemName: "trash")) {
-                [weak self] _ in
-                
-            }
-            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [edit, delete])
-=======
-            let edit = UIAction(title: "edit".localized, image: UIImage(systemName: "square.and.pencil.circle")
-                                 ) { [weak self] _ in
-            }
-            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [delete])
->>>>>>> origin/sunnat_branch
+            
+            
+            return UIMenu(title: "", image: nil, identifier: nil, options: [],
+                          children: [call, edit, delete])
         }
         return config
     }
 }
 
 extension GroupViewController: StudentListDelegate {
+    
     func onSuccessGetAllGroupStudents(students: [StudentWithAttendance]) {
         DispatchQueue.main.async { [weak self] in
             self?.students = students
@@ -177,17 +213,19 @@ extension GroupViewController: StudentListDelegate {
     }
     
     func onSuccessPayForStudent() {
-        DispatchQueue.main.async { [weak self] in
-            
-        }
+        showSucess()
     }
     
-    func onSuccessGetAllBranchStudents(students: [Student]) { }
+    func onSuccessUpdateStudent() {
+        showSucess()
+    }
     
     func onSuccessDeleteStudent() {
-        hideLoading()
-        students.remove(at: index.row)
-        tableView.deleteRows(at: [index], with: .left)
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.students.remove(at: self?.index.row ?? 0)
+            self?.tableView.deleteRows(at: [self?.index ?? IndexPath()], with: .left)
+        }
     }
     
     func onError(error: String?) {
@@ -195,6 +233,8 @@ extension GroupViewController: StudentListDelegate {
             self?.showErrorMessage(title: error)
         }
     }
+    
+    func onSuccessGetAllBranchStudents(students: [Student]) { }
 }
 
 extension GroupViewController: PaidDelegate {
@@ -204,9 +244,10 @@ extension GroupViewController: PaidDelegate {
             [weak self] sums in
             let paid = Double(sums[0]) ?? 0.0
             let max  = Double(sums[1]) ?? 0.0
+            self?.showLoading()
             self?.presenter.payForStudent(paidSum: paid, maxSum: max, student: student,
                                           teacherID: Database.shared.teacherID,
-                                          groupID: Database.shared.groupID)
+                                          groupID:   Database.shared.groupID)
         } error: { [weak self] err in
             self?.onError(error: err)
         }

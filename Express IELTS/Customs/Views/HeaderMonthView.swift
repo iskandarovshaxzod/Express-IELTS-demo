@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HeaderMonthChanged {
-    func monthChanged(to month: String)
+    func monthChanged(to month: Months)
 }
 
 class HeaderMonthView: UIView {
@@ -19,7 +19,13 @@ class HeaderMonthView: UIView {
     
     var lastCell = UICollectionViewCell()
     
-    var months = ["December", "November"]
+    var months = Database.shared.months
+    var monthNames = ["january".localized,   "february".localized,
+                      "march".localized,     "april".localized,
+                      "may".localized,       "june".localized,
+                      "july".localized,      "august".localized,
+                      "september".localized, "october".localized,
+                      "november".localized,  "december".localized]
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -69,7 +75,7 @@ extension HeaderMonthView: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MonthCollectionViewCell
-        cell.text = months[indexPath.row]
+        cell.text = "\(monthNames[months[indexPath.row].month-1]) \(months[indexPath.row].year)"
         cell.initViews()
         lastCell = cell
         return cell
@@ -78,10 +84,12 @@ extension HeaderMonthView: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         print("scoll", collectionView.visibleCells.count)
-        if let cell = collectionView.visibleCells.first as? MonthCollectionViewCell, cell != lastCell {
+        if let cell = collectionView.visibleCells.first as? MonthCollectionViewCell,
+            cell != lastCell {
             lastCell = cell
             print(cell.label.text ?? "")
-            delegate?.monthChanged(to: cell.label.text ?? "December")
+//            delegate?.monthChanged(to: cell.)
+            //delegate?.monthChanged(to: cell.label.text ?? "December")
         }
     }
 }

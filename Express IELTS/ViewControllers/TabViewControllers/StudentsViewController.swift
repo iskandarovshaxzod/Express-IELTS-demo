@@ -20,7 +20,7 @@ class StudentsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        presenter.setDelegate(delegate: self)
+        presenter.setDelegate(delegate: self)
         presenter.getAllBranches()
     }
     
@@ -45,14 +45,7 @@ class StudentsViewController: BaseViewController {
         tableView.addSubview(refresh)
         refresh.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
     }
-    private func callNumber(phoneNumber:String) {
-        if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
-            let application:UIApplication = UIApplication.shared
-            if (application.canOpenURL(phoneCallURL)) {
-                application.open(phoneCallURL, options: [:], completionHandler: nil)
-            }
-        }
-    }
+    
     @objc func refreshTable() {
         presenter.getAllBranches()
     }
@@ -103,28 +96,23 @@ extension StudentsViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
-    // Phone number
-    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-            let call = UIAction(title: "call".localized, image: UIImage(systemName: "phone"),
-                                  attributes: .destructive) { [weak self] _ in
-                //func call
-                self?.callNumber(phoneNumber: "998933774012")
-            }
-            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: [call])
-        }
-        return config
-    }
 }
 
-//extension StudentsViewController: BranchListDelegate {
-//    func onSuccessGetAllBranches(branches: [String]) {
-//        self.branches = branches
-//        reloadData()
-//    }
-//
-//    func onErrorGetAllBranches(error: String?) {
-//        showErrorMessage(title: error)
-//    }
-//}
+extension StudentsViewController: BranchListDelegate {
+    
+    func onSuccessGetAllBranches(branches: [Branch]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.branches = branches
+            self?.reloadData()
+        }
+    }
+    
+    func onError(error: String?) {
+        DispatchQueue.main.async { [weak self] in
+            self?.showErrorMessage(title: error)
+        }
+    }
+    
+    func onSuccessDeleteBranch() {}
+    func onSuccessUpdateBranch() {}
+}

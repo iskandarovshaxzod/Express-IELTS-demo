@@ -16,18 +16,13 @@ class PaymentViewController: BaseViewController {
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
     
-    var branches = Database.shared.branches
-    var loaded   = true
+    var branches = [Branch]()
+    var loaded   = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if loaded {
-            branches = Database.shared.branches
-        }
+        presenter.getAllBranches()
     }
     
     override func initViews() {
@@ -96,7 +91,6 @@ extension PaymentViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if indexPath.row == branches.count - 1 {
             navigationController?.pushViewController(MonthlyPaymentViewController(), animated: true)
         } else {
@@ -108,10 +102,14 @@ extension PaymentViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension PaymentViewController: BranchListDelegate {
+    
     func onSuccessGetAllBranches(branches: [Branch]) {
-        Database.shared.branches = branches
         DispatchQueue.main.async { [weak self] in
             self?.branches = branches
+            if !branches.isEmpty {
+                self?.branches += [Branch(branchName: "All Branches",
+                                          password: "")]
+            }
             self?.reloadData()
         }
     }
@@ -123,4 +121,5 @@ extension PaymentViewController: BranchListDelegate {
     }
     
     func onSuccessDeleteBranch() {}
+    func onSuccessUpdateBranch() {}
 }

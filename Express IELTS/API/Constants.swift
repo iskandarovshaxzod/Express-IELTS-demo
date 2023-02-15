@@ -8,12 +8,13 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "https://8d71-213-230-114-44.eu.ngrok.io/"
+    static let BASE_URL = "https://d806-84-54-66-181.eu.ngrok.io/"
     
     //USER
     static let USER_AUTH        = "user/auth"
     static let USER_LIST        = "user/list"
     static let USER_CHANGE_PASS = "user/change/password/"
+    static let USER_CHANGE_NAME = "user/change/name/"
     
     //ATTENDANCE
     static let ATTENDANCE_ADD    = "attendance/add"
@@ -28,13 +29,13 @@ struct Constants {
     //CONFIG
     static let CONFIG_ADD    = "config/add"
     static let CONFIG_LIST   = "config/list/"
-    static let CONFIG_UPDATE = ""
+    static let CONFIG_UPDATE = "config/update/"
     static let CONFIG_DELETE = "config/delete/"
     
     //GROUP
     static let GROUP_ADD    = "group/add"
     static let GROUP_LIST   = "group/list/"
-    static let GROUP_UPDATE = ""
+    static let GROUP_UPDATE = "group/update/"
     static let GROUP_DELETE = "group/delete/"
     
     //PAYMENT
@@ -46,10 +47,14 @@ struct Constants {
     static let STUDENT_BRANCH_LIST = "student/branchList/"
     static let STUDENT_GROUP_LIST  = "student/groupList/"
     static let STUDENT_DELETE      = "student/delete/"
+    static let STUDENT_UPDATE      = "student/update/"
     
     //TEACHER
     static let TEACHER_ADD         = "teacher/add"
     static let TEACHER_LIST        = "teacher/list/"
-    static let TEACHER_UPDATE      = ""
+    static let TEACHER_UPDATE      = "teacher/update/"
     static let TEACHER_DELETE      = "teacher/delete/"
+    
+    //MONTHS
+    static let MONTH_LIST          = "month/list"
 }

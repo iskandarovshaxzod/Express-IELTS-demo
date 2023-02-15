@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 
 extension String {
+    
+    var color: UIColor {
+        return UIColor(named: self) ?? .white
+    }
+    
     var localized: String {
         if let path = Bundle.main.path(forResource: Database.shared.language.rawValue, ofType: "lproj"){
             if let bundle = Bundle(path: path){
@@ -18,7 +23,14 @@ extension String {
         return ""
     }
     
-    var color: UIColor {
-        return UIColor(named: self) ?? .white
+    var date: String {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date: Date? = dateFormatterGet.date(from: self)
+        
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMM dd, yyyy"
+        return dateFormatterPrint.string(from: date!)
     }
+    
 }

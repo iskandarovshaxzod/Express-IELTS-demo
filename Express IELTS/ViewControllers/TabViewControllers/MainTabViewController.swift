@@ -9,6 +9,8 @@ import UIKit
 
 class MainTabViewController: BaseViewController {
     
+    let presenter = MonthListPresenter()
+    
     var subView  = UIView()
     let tabView  = UIView()
     let lineView = UIView()
@@ -28,6 +30,8 @@ class MainTabViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setDelegate(delegate: self)
+        presenter.getAllMonths()
     }
     
     override func configureNavBar() {
@@ -219,4 +223,19 @@ class MainTabViewController: BaseViewController {
     }
 
     @objc func add(){}
+}
+
+
+extension MainTabViewController: MonthListDelegate {
+    func onSuccessGetAllMonths(months: [Months]) {
+        print("months: ", months)
+        Database.shared.months = months
+        print("datMonths: ", Database.shared.months)
+    }
+    
+    func onError(error: String?) {
+        DispatchQueue.main.async { [weak self] in
+            self?.showErrorMessage(title: error)
+        }
+    }
 }

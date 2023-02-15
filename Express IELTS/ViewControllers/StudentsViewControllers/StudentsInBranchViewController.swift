@@ -22,7 +22,14 @@ class StudentsInBranchViewController: BaseViewController {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
         presenter.getAllBranchStudents(branchID: branch?.id?.description ?? "", year: 2023, month: 2)
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showLoading()
+    }
+    
     
     override func configureNavBar() {
         title = branch?.branchName.capitalized
@@ -79,7 +86,12 @@ extension StudentsInBranchViewController: UITableViewDelegate, UITableViewDataSo
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = StudentReceiptViewController()
         vc.modalPresentationStyle = .overFullScreen
-        vc.text = "Student Info"
+        vc.texts = [
+            ("Joined Date", "\(students[indexPath.row].joinedDate?.date ?? "")"),
+            ("Left Date", "\(students[indexPath.row].leftDate?.date ?? "Active")"),
+            ("Phone Number", "\(students[indexPath.row].phoneNumber)")
+        ]
+        vc.canCall = true
         present(vc, animated: false)
     }
 }
@@ -88,21 +100,27 @@ extension StudentsInBranchViewController: StudentListDelegate {
     
     func onSuccessGetAllBranchStudents(students: [Student]) {
         DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
             self?.students = students
             self?.reloadData()
         }
     }
     
     func onError(error: String?) {
-        showErrorMessage(title: error)
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showErrorMessage(title: error)
+        }
     }
     
     func onSuccessGetAllGroupStudents(students: [StudentWithAttendance]) {}
     func onSuccessDeleteStudent() {}
+    func onSuccessUpdateStudent() {}
+    func onSuccessPayForStudent() {}
 }
 
 extension StudentsInBranchViewController: HeaderMonthChanged {
-    func monthChanged(to month: String) {
+    func monthChanged(to month: Months) {
         
     }
 }

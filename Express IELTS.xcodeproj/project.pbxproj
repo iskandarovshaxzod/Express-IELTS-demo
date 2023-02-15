@@ -98,6 +98,9 @@
 		40E76E8F295631950088DE4C /* ChangePassCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E76E8E295631950088DE4C /* ChangePassCodeViewController.swift */; };
 		40EC8129294DEB81006C4644 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40EC812B294DEB81006C4644 /* Localizable.strings */; };
 		40EF2A97296895220060BB84 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF2A96296895220060BB84 /* Errors.swift */; };
+		40F91C99299CBE1700F5C7F9 /* Months.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F91C98299CBE1700F5C7F9 /* Months.swift */; };
+		40F91C9B299CBEF800F5C7F9 /* MonthListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F91C9A299CBEF800F5C7F9 /* MonthListDelegate.swift */; };
+		40F91C9D299CBF1700F5C7F9 /* MonthListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F91C9C299CBF1700F5C7F9 /* MonthListPresenter.swift */; };
 		40FE3789292E1A290012706F /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE3788292E1A290012706F /* UserViewController.swift */; };
 		40FE378B292E1AF50012706F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378A292E1AF50012706F /* BaseViewController.swift */; };
 		40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FE378C292E26BD0012706F /* PasswordViewController.swift */; };
@@ -204,6 +207,9 @@
 		40EC812D294DEBB5006C4644 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		40EC812E294DEBC8006C4644 /* uz */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uz; path = uz.lproj/Localizable.strings; sourceTree = "<group>"; };
 		40EF2A96296895220060BB84 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		40F91C98299CBE1700F5C7F9 /* Months.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Months.swift; sourceTree = "<group>"; };
+		40F91C9A299CBEF800F5C7F9 /* MonthListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthListDelegate.swift; sourceTree = "<group>"; };
+		40F91C9C299CBF1700F5C7F9 /* MonthListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthListPresenter.swift; sourceTree = "<group>"; };
 		40FE3788292E1A290012706F /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		40FE378A292E1AF50012706F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		40FE378C292E26BD0012706F /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
@@ -362,6 +368,7 @@
 				4032767329642F7F0077A90E /* StudentListPresenter.swift */,
 				4099D0C52969675500C219BA /* TeacherPaymentListPresenter.swift */,
 				40CEDD6F296B2C7C0027C6C3 /* AddMethodsPresenter.swift */,
+				40F91C9C299CBF1700F5C7F9 /* MonthListPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -501,6 +508,7 @@
 				4006FEF8299947BD00132E7E /* DateTime.swift */,
 				406440E6299A6C6A00660A7E /* StudentWithAttendance.swift */,
 				40621287299B5B7800F7087B /* User.swift */,
+				40F91C98299CBE1700F5C7F9 /* Months.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -516,6 +524,7 @@
 				4032767129642F760077A90E /* StudentListDelegate.swift */,
 				4099D0C32969671D00C219BA /* TeacherPaymentListDelegate.swift */,
 				40CEDD6D296B2C6B0027C6C3 /* AddMethodsDelegate.swift */,
+				40F91C9A299CBEF800F5C7F9 /* MonthListDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -716,6 +725,7 @@
 				40E1E03029476337007ED9A2 /* HeaderMonthTableViewCell.swift in Sources */,
 				40259B1229693DBE00D6CB60 /* SkeletonTableViewCell.swift in Sources */,
 				4032767029642D1A0077A90E /* GroupListPresenter.swift in Sources */,
+				40F91C9B299CBEF800F5C7F9 /* MonthListDelegate.swift in Sources */,
 				4037172329422FC90053CCF2 /* AddViewController.swift in Sources */,
 				40E0B7762997FBD100B707D0 /* Teacher.swift in Sources */,
 				40D6AB5C295442FD00530577 /* SettingsTableViewCell.swift in Sources */,
@@ -742,11 +752,13 @@
 				4099D0C62969675500C219BA /* TeacherPaymentListPresenter.swift in Sources */,
 				40A9083F2998D596008324F5 /* Constants.swift in Sources */,
 				40FE378D292E26BD0012706F /* PasswordViewController.swift in Sources */,
+				40F91C9D299CBF1700F5C7F9 /* MonthListPresenter.swift in Sources */,
 				40DE637E294C53D8001E82B0 /* UserMode.swift in Sources */,
 				402A78022958992800B91924 /* CheckBoxButton.swift in Sources */,
 				4052FA02296422290002C353 /* TeacherConfigListPresenter.swift in Sources */,
 				4031E57929632CBA0094F48D /* BranchListDelegate.swift in Sources */,
 				40226DA92940CE4D00E9489D /* NavView.swift in Sources */,
+				40F91C99299CBE1700F5C7F9 /* Months.swift in Sources */,
 				40C9DE44293DFAC800CC4BFA /* SettingsViewController.swift in Sources */,
 				4037170D2941FE9E0053CCF2 /* TextField.swift in Sources */,
 				40CEDD6C296B23FC0027C6C3 /* UserMethodsPresenter.swift in Sources */,

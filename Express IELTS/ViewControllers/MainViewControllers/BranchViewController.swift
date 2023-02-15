@@ -89,24 +89,14 @@ class BranchViewController: BaseViewController {
     }
     
     func handleEdit(index: IndexPath) {
-        showAlertWithTextField(title: "edit teacher", texts: [teachers[index.row].teacherName]) {
+        showAlertWithTextField(title: "edit teacher",
+                               texts: [teachers[index.row].teacherName.capitalized]) {
             [weak self] texts in
-            
+            self?.showLoading()
+            self?.presenter.updateTeacher(teacherID: self?.teachers[index.row].id?.description ?? "", name: texts.first ?? "")
         } error: { [weak self] err in
             self?.onError(error: err)
         }
-
-    }
-    
-    func deleteTeacher(index: IndexPath) {
-//        FirebaseManager.shared.deleteTeacher(teacherName: teachers[index.row]) { [weak self] in
-//            self?.hideLoading()
-//            self?.teachers.remove(at: index.row)
-//            self?.tableView.deleteRows(at: [index], with: .left)
-//        } error: { [weak self] err in
-//            self?.hideLoading()
-//            self?.showErrorMessage(title: err)
-//        }
     }
     
     private func reloadData() {
@@ -161,7 +151,6 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
    
     //Left swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
         let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
             self?.handleMoveToTrash(index: indexPath)
             completionHandler(true)
@@ -189,11 +178,21 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension BranchViewController: TeacherListDelegate {
+    
     func onSuccessGetAllTeachers(teachers: [Teacher]) {
         DispatchQueue.main.async { [weak self] in
             self?.hideLoading()
             self?.teachers = teachers
             self?.reloadData()
+        }
+    }
+    
+    func onSuccessUpdateTeacher() {
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showAnimation(animationName: "success", animationMode: .playOnce) { _ in
+                self?.hideAnimation()
+            }
         }
     }
     
@@ -207,6 +206,7 @@ extension BranchViewController: TeacherListDelegate {
     
     func onError(error: String?) {
         DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
             self?.showErrorMessage(title: error)
         }
     }

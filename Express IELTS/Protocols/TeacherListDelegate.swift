@@ -9,6 +9,7 @@ import Foundation
 
 protocol TeacherListDelegate {
     func onSuccessGetAllTeachers(teachers: [Teacher])
+    func onSuccessUpdateTeacher()
     func onSuccessDeleteTeacher()
     func onError(error: String?)
 }

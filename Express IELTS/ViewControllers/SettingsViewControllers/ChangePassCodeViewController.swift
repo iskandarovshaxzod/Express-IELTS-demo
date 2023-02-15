@@ -23,7 +23,6 @@ class ChangePassCodeViewController: BaseViewController {
     let eyeButton    = UIButton()
     
     var user: User?
-    var isSecure = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +55,7 @@ class ChangePassCodeViewController: BaseViewController {
             make.right.equalToSuperview().offset(-30)
             make.height.equalTo(50)
         }
-        userNameField.text = user?.login
+        userNameField.text = user?.login.capitalized
         userNameField.isEnabled = (user?.login != "admin")
 //        userNameField.font = userNameField.font?.withSize(20)
         

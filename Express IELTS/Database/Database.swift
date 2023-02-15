@@ -20,6 +20,7 @@ struct Database {
     var groupID   = ""
     var branches  = [Branch]()
     var teachers  = [Teacher]()
+    var months    = [Months]()
     
     var language: Language {
         get{

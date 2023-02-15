@@ -9,6 +9,7 @@ import Foundation
 
 protocol BranchListDelegate {
     func onSuccessGetAllBranches(branches: [Branch])
+    func onSuccessUpdateBranch()
     func onSuccessDeleteBranch()
     func onError(error: String?)
 }

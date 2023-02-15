@@ -9,6 +9,7 @@ import Foundation
 
 protocol TeacherConfigListDelegate {
     func onSuccessGetAllTeacherConfigs(configs: [Config])
+    func onSuccessUpdateConfig()
     func onSuccessDeleteConfig()
     func onError(error: String?)
 }

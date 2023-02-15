@@ -9,6 +9,7 @@ import Foundation
 
 protocol GroupListDelegate {
     func onSuccessGetAllGroups(groups: [Group])
+    func onSuccesUpdateGroup()
     func onSuccesDeleteGroup()
     func onError(error: String?)
 }

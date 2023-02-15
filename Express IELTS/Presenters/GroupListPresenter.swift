@@ -32,6 +32,20 @@ class GroupListPresenter {
         }
     }
     
+    func updateGroup(groupID: String, name: String) {
+        let url = URL(string: Constants.BASE_URL + Constants.GROUP_UPDATE + groupID)!
+        let user = User(login: name, password: "")
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .put, body: user, parameters: nil) {
+            [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.delegate?.onSuccesUpdateGroup()
+            case .failure(let error):
+                self?.delegate?.onError(error: error.localizedDescription)
+            }
+        }
+    }
+    
     func deleteGroup(groupID: String) {
         let url = URL(string: Constants.BASE_URL + Constants.GROUP_DELETE + groupID)!
         APIManager.shared.performRequestWithHTTPResponse(url: url, method: .delete, body: body, parameters: nil) {

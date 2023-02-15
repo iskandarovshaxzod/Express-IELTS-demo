@@ -43,4 +43,19 @@ class TeacherListPresenter {
             }
         }
     }
+    
+    func updateTeacher(teacherID: String, name: String) {
+        let url = URL(string: Constants.BASE_URL + Constants.TEACHER_UPDATE + teacherID)!
+        let user = User(login: name, password: "")
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .put, body: user, parameters: nil) {
+            [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.delegate?.onSuccessUpdateTeacher()
+            case .failure(let error):
+                self?.delegate?.onError(error: error.localizedDescription)
+            }
+        }
+    }
+    
 }

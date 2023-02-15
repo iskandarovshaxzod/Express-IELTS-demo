@@ -43,6 +43,20 @@ class BranchListPresenter {
 //        }
 //    }
     
+    func updateBranch(branchID: String, login: String) {
+        let url = URL(string: Constants.BASE_URL + Constants.USER_CHANGE_NAME + branchID)!
+        let branch = User(login: login, password: "12345")
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .put, body: branch, parameters: nil) {
+            [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.delegate?.onSuccessUpdateBranch()
+            case .failure(let error):
+                self?.delegate?.onError(error: error.localizedDescription)
+            }
+        }
+    }
+    
     func deleteBranch(branchID: String) {
         let url = URL(string: Constants.BASE_URL + Constants.BRANCH_DELETE + branchID)!
         APIManager.shared.performRequestWithHTTPResponse(url: url, method: .delete, body: body, parameters: nil) {

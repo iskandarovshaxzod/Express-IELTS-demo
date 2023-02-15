@@ -33,6 +33,20 @@ class StudentListPresenter {
         }
     }
     
+    func updateStudent(studentID: String, name: String, phoneNumber: String) {
+        let url = URL(string: Constants.BASE_URL + Constants.STUDENT_UPDATE + studentID)!
+        let user = User(login: name, password: phoneNumber)
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .put, body: user, parameters: nil) {
+            [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.delegate?.onSuccessUpdateStudent()
+            case .failure(let error):
+                self?.delegate?.onError(error: error.localizedDescription)
+            }
+        }
+    }
+    
     func getAllBranchStudents(branchID: String, year: Int, month: Int) {
         let url = URL(string: Constants.BASE_URL + Constants.STUDENT_BRANCH_LIST + branchID)!
         let date = DateTime(year: year, month: month)

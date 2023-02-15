@@ -19,6 +19,7 @@ class ChangePasswordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
+        presenter.getAllUsers()
     }
     
     override func configureNavBar() {
@@ -62,7 +63,7 @@ extension ChangePasswordViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text  = users[indexPath.section][indexPath.row].login.localized
+        cell.textLabel?.text  = users[indexPath.section][indexPath.row].login.capitalized
         cell.backgroundColor  = "cl_cell_back".color
         cell.imageView?.image = UIImage(systemName: indexPath.section == 0 ? "person.circle" : "bookmark.circle")
         cell.accessoryType    = .disclosureIndicator

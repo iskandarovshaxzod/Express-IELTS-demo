@@ -78,6 +78,7 @@ extension BranchRevenueViewController: UITableViewDelegate, UITableViewDataSourc
 }
 
 extension BranchRevenueViewController: TeacherListDelegate {
+
     func onSuccessGetAllTeachers(teachers: [Teacher]) {
         DispatchQueue.main.async { [weak self] in
             self?.teachers = teachers
@@ -89,5 +90,6 @@ extension BranchRevenueViewController: TeacherListDelegate {
         showErrorMessage(title: error)
     }
     
+    func onSuccessUpdateTeacher() {}
     func onSuccessDeleteTeacher() {}
 }

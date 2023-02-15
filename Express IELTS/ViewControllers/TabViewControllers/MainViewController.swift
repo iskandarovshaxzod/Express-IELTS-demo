@@ -61,8 +61,14 @@ class MainViewController: BaseViewController {
     }
     
     private func handleEdit(index: IndexPath) {
-        let vc = aAddViewController()
-        
+        showAlertWithTextField(title: "edit branch",
+                               texts: [branches[index.row].branchName.capitalized]) {
+            [weak self] texts in
+            self?.showLoading()
+            self?.presenter.updateBranch(branchID: self?.branches[index.row].id?.description ?? "",                                login: texts.first ?? "")
+        } error: { [weak self] err in
+            self?.onError(error: err)
+        }
     }
     
     private func reloadData() {
@@ -164,6 +170,14 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
 }
 
 extension MainViewController: BranchListDelegate {
+    func onSuccessUpdateBranch() {
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showAnimation(animationName: "success", animationMode: .playOnce) { _ in
+                self?.hideAnimation()
+            }
+        }
+    }
     
     func onSuccessGetAllBranches(branches: [Branch]) {
         Database.shared.branches = branches
@@ -175,9 +189,11 @@ extension MainViewController: BranchListDelegate {
     }
     
     func onSuccessDeleteBranch() {
-        hideLoading()
-        branches.remove(at: index.row)
-        tableView.deleteRows(at: [index], with: .left)
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.branches.remove(at: self?.index.row ?? 0)
+            self?.tableView.deleteRows(at: [self?.index ?? IndexPath()], with: .left)
+        }
     }
     
     func onError(error: String?) {

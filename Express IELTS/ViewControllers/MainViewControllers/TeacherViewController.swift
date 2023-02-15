@@ -27,7 +27,7 @@ class TeacherViewController: BaseViewController {
     }
 
     override func configureNavBar() {
-        title = teacher?.teacherName
+        title = teacher?.teacherName.capitalized
         
         var menuItems: [UIAction] {
             return [
@@ -75,6 +75,18 @@ class TeacherViewController: BaseViewController {
         vc.addBtnText = "add".localized
         vc.firstFieldPlaceholder  = "new_teacher_config_name".localized
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func handleEdit(index: IndexPath) {
+        showAlertWithTextField(title: "edit teacher",
+                               texts: [configs[index.row].configName.capitalized]) {
+            [weak self] texts in
+            self?.showLoading()
+            self?.presenter.updateConfig(configID: self?.configs[index.row].id?.description ?? "",
+                                         name: texts.first ?? "")
+        } error: { [weak self] err in
+            self?.onError(error: err)
+        }
     }
     
     private func handleMoveToTrash(index: IndexPath) {
@@ -153,7 +165,7 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let add = UIContextualAction(style: .normal, title: "edit".localized) { [weak self] (_, _, completionHandler) in
-            self?.handleMoveToTrash(index: indexPath)
+            self?.handleEdit(index: indexPath)
             completionHandler(true)
         }
         add.backgroundColor = .systemGreen
@@ -165,6 +177,7 @@ extension TeacherViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension TeacherViewController: TeacherConfigListDelegate {
+    
     func onSuccessGetAllTeacherConfigs(configs: [Config]) {
         DispatchQueue.main.async { [weak self] in
             self?.configs = configs
@@ -172,13 +185,27 @@ extension TeacherViewController: TeacherConfigListDelegate {
         }
     }
     
+    func onSuccessUpdateConfig() {
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showAnimation(animationName: "success", animationMode: .playOnce) { _ in
+                self?.hideAnimation()
+            }
+        }
+    }
+    
     func onSuccessDeleteConfig() {
-        hideLoading()
-        configs.remove(at: index.row)
-        tableView.deleteRows(at: [index], with: .left)
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.configs.remove(at: self?.index.row ?? 0)
+            self?.tableView.deleteRows(at: [self?.index ?? IndexPath()], with: .left)
+        }
     }
     
     func onError(error: String?) {
-        showErrorMessage(title: error)
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showErrorMessage(title: error)
+        }
     }
 }

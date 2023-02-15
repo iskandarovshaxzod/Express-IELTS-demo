@@ -77,6 +77,18 @@ class ConfigViewController: BaseViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    func handleEdit(index: IndexPath) {
+        showAlertWithTextField(title: "edit teacher",
+                               texts: [groups[index.row].groupName.capitalized]) {
+            [weak self] texts in
+            self?.showLoading()
+            self?.presenter.updateGroup(groupID: self?.groups[index.row].id?.description ?? "",
+                                        name: texts.first ?? "")
+        } error: { [weak self] err in
+            self?.onError(error: err)
+        }
+    }
+    
     private func handleMoveToTrash(index: IndexPath) {
         showActionAlert(title: "Are you sure that you want to delete a branch?", message: nil,
                         actions: ["delete".localized]){ [weak self] action in
@@ -150,25 +162,34 @@ extension ConfigViewController: UITableViewDelegate, UITableViewDataSource{
     
     //Right swipe
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let add = UIContextualAction(style: .normal, title: "edit".localized) {
+        let edit = UIContextualAction(style: .normal, title: "edit".localized) {
             [weak self] (_, _, completionHandler) in
-            
+            self?.handleEdit(index: indexPath)
             completionHandler(true)
         }
-        add.backgroundColor = .systemGreen
-        add.image = UIImage(systemName: "square.and.pencil.circle")?.withTintColor(.white)
-        let config = UISwipeActionsConfiguration(actions: [add])
+        edit.backgroundColor = .systemGreen
+        edit.image = UIImage(systemName: "square.and.pencil.circle")?.withTintColor(.white)
+        let config = UISwipeActionsConfiguration(actions: [edit])
         config.performsFirstActionWithFullSwipe = false
         return config
     }
 }
 
 extension ConfigViewController: GroupListDelegate {
+    
     func onSuccessGetAllGroups(groups: [Group]) {
         DispatchQueue.main.async { [weak self] in
             self?.groups = groups
             self?.reloadData()
+        }
+    }
+    
+    func onSuccesUpdateGroup() {
+        DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
+            self?.showAnimation(animationName: "success", animationMode: .playOnce) { _ in
+                self?.hideAnimation()
+            }
         }
     }
     
@@ -181,6 +202,8 @@ extension ConfigViewController: GroupListDelegate {
     }
     
     func onError(error: String?) {
-        showErrorMessage(title: error)
+        DispatchQueue.main.async { [weak self] in
+            self?.showErrorMessage(title: error)
+        }
     }
 }

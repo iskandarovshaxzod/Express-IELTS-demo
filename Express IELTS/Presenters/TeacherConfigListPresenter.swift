@@ -31,6 +31,20 @@ class TeacherConfigListPresenter {
         }
     }
     
+    func updateConfig(configID: String, name: String) {
+        let url = URL(string: Constants.BASE_URL + Constants.CONFIG_UPDATE + configID)!
+        let user = User(login: name, password: "12345")
+        APIManager.shared.performRequestWithHTTPResponse(url: url, method: .put, body: user, parameters: nil) {
+            [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.delegate?.onSuccessUpdateConfig()
+            case .failure(let error):
+                self?.delegate?.onError(error: error.localizedDescription)
+            }
+        }
+    }
+    
     func deleteConfig(configID: String) {
         let url = URL(string: Constants.BASE_URL + Constants.CONFIG_DELETE + configID)!
         APIManager.shared.performRequestWithHTTPResponse(url: url, method: .delete, body: body, parameters: nil) {
