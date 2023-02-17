@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GroupViewController: BaseViewController {
+class StudentListViewController: BaseViewController {
     
     let presenter = StudentListPresenter()
     
@@ -15,15 +15,15 @@ class GroupViewController: BaseViewController {
     let monthView = HeaderMonthView()
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
+    let noDataImg = UIImageView()
     
     var group: Group?
     var students  = [StudentWithAttendance]()
-    var canEdit   = false
     var loaded    = false
     var index     = IndexPath()
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         presenter.setDelegate(delegate: self)
         presenter.getAllGroupStudents(groupID: group?.id?.description ?? "", year: 2023, month: 2)
     }
@@ -37,10 +37,14 @@ class GroupViewController: BaseViewController {
                          handler: { [weak self] (_) in
                     self?.addTapped()
                 }),
-                UIAction(title: canEdit ? "done" : "edit".localized,
-                         image: canEdit ? UIImage(systemName: "checkmark") : UIImage(systemName: "pencil"),
+                UIAction(title: Database.shared.canCheck ? "done" : "edit".localized,
+                         image: Database.shared.canCheck ? UIImage(systemName: "checkmark") :
+                                                           UIImage(systemName: "pencil"),
                          handler: { [weak self] (_) in
-                             self?.canEdit.toggle()
+                             if Database.shared.canCheck {
+                                 
+                             }
+                             Database.shared.canCheck.toggle()
                              self?.configureNavBar()
                 })
             ]
@@ -62,6 +66,15 @@ class GroupViewController: BaseViewController {
         monthView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
         }
+        
+        subView.addSubview(noDataImg)
+        noDataImg.snp.makeConstraints { make in
+            make.top.equalTo(monthView.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+        noDataImg.image       = UIImage(named: "no_data")
+        noDataImg.contentMode = .scaleAspectFit
+        noDataImg.isHidden    = true
         
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -150,7 +163,7 @@ class GroupViewController: BaseViewController {
     }
 }
 
-extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
+extension StudentListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return loaded ? students.count : 5
     }
@@ -194,8 +207,6 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
                 [weak self] _ in
                 self?.handleMoveToTrash(index: indexPath)
             }
-            
-            
             return UIMenu(title: "", image: nil, identifier: nil, options: [],
                           children: [call, edit, delete])
         }
@@ -203,7 +214,7 @@ extension GroupViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-extension GroupViewController: StudentListDelegate {
+extension StudentListViewController: StudentListDelegate {
     
     func onSuccessGetAllGroupStudents(students: [StudentWithAttendance]) {
         DispatchQueue.main.async { [weak self] in
@@ -230,6 +241,7 @@ extension GroupViewController: StudentListDelegate {
     
     func onError(error: String?) {
         DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
             self?.showErrorMessage(title: error)
         }
     }
@@ -237,7 +249,7 @@ extension GroupViewController: StudentListDelegate {
     func onSuccessGetAllBranchStudents(students: [Student]) { }
 }
 
-extension GroupViewController: PaidDelegate {
+extension StudentListViewController: PaidDelegate {
     func pay(for student: Student) {
         showAlertWithTextField(title: "enter sum", message: "message for you",
                                placeholders: ["current", "max"], keyboardType: .numberPad) {

@@ -1,5 +1,5 @@
 //
-//  BranchViewController.swift
+//  TeacherViewController.swift
 //  Express IELTS
 //
 //  Created by Iskandarov shaxzod on 08.12.2022.
@@ -7,31 +7,32 @@
 
 import UIKit
 
-class BranchViewController: BaseViewController {
+class ConfigListViewController: BaseViewController {
     
-    let presenter = TeacherListPresenter()
+    let presenter = TeacherConfigListPresenter()
     
     let subView   = UIView()
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
+    let noDataImg = UIImageView()
     
-    var branch: Branch?
-    var teachers = [Teacher]()
-    var loaded   = true
-    var index    = IndexPath()
+    var teacher: Teacher?
+    var configs = [Config]()
+    var loaded  = true
+    var index   = IndexPath()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        presenter.getAllTeachers(branchID: branch?.id?.description ?? "")
+        presenter.getAllTeacherConfigs(teacherID: teacher?.id?.description ?? "")
     }
-    
+
     override func configureNavBar() {
-        title = branch?.branchName.capitalized
+        title = teacher?.teacherName.capitalized
         
         var menuItems: [UIAction] {
             return [
-                UIAction(title: "new_teacher".localized, image: UIImage(systemName: "plus.app"),
+                UIAction(title: "new_teacher_config".localized, image: UIImage(systemName: "plus.app"),
                          handler: { [weak self] (_) in
                     self?.addTapped()
                 })
@@ -50,6 +51,14 @@ class BranchViewController: BaseViewController {
         }
         subView.backgroundColor = "cl_main_back".color
         
+        subView.addSubview(noDataImg)
+        noDataImg.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        noDataImg.image       = UIImage(named: "no_data")
+        noDataImg.contentMode = .scaleAspectFit
+        noDataImg.isHidden    = true
+        
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -66,40 +75,41 @@ class BranchViewController: BaseViewController {
     }
     
     @objc func refreshTable() {
-        presenter.getAllTeachers(branchID: branch?.id?.description ?? "")
+        presenter.getAllTeacherConfigs(teacherID: teacher?.id?.description ?? "")
     }
     
-    @objc func addTapped(){
+    @objc func addTapped() {
         let vc = aAddViewController()
-        vc.navTitle   = "new_teacher".localized
+        vc.navTitle   = "new_teacher_config".localized
         vc.addBtnText = "add".localized
-        vc.firstFieldPlaceholder  = "new_teacher_name".localized
+        vc.firstFieldPlaceholder  = "new_teacher_config_name".localized
         navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    private func handleMoveToTrash(index: IndexPath) {
-        showActionAlert(title: String(format: "delete_info".localized, "teacher".localized), message: nil,
-                        actions: ["delete".localized]){ [weak self] action in
-            if action.title == "delete".localized {
-                self?.showLoading()
-                self?.index = index
-                self?.presenter.deleteTeacher(teacherID: self?.teachers[index.row].id?.description ?? "")
-            }
-        }
     }
     
     func handleEdit(index: IndexPath) {
         showAlertWithTextField(title: "edit teacher",
-                               texts: [teachers[index.row].teacherName.capitalized]) {
+                               texts: [configs[index.row].configName.capitalized]) {
             [weak self] texts in
             self?.showLoading()
-            self?.presenter.updateTeacher(teacherID: self?.teachers[index.row].id?.description ?? "", name: texts.first ?? "")
+            self?.presenter.updateConfig(configID: self?.configs[index.row].id?.description ?? "",
+                                         name: texts.first ?? "")
         } error: { [weak self] err in
             self?.onError(error: err)
         }
     }
     
-    private func reloadData() {
+    private func handleMoveToTrash(index: IndexPath) {
+        showActionAlert(title: String(format: "delete_info".localized, "config"), message: nil,
+                        actions: ["delete".localized]){ [weak self] action in
+            if action.title == "delete".localized {
+                self?.showLoading()
+                self?.index = index
+                self?.presenter.deleteConfig(configID: self?.configs[index.row].id?.description ?? "")
+            }
+        }
+    }
+    
+    private func reloadData(){
         loaded = true
         if loaded {
             DispatchQueue.main.async { [weak self] in
@@ -114,20 +124,16 @@ class BranchViewController: BaseViewController {
     }
 }
 
-extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
+extension ConfigListViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return loaded ? teachers.count : 5
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return loaded ? configs.count : 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = teachers[indexPath.row].teacherName.capitalized
+            cell.text = configs[indexPath.row].configName.capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -139,16 +145,19 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let vc = TeacherViewController()
-        Database.shared.teacherID = teachers[indexPath.row].id?.description ?? ""
-        vc.teacher = teachers[indexPath.row]
+        let vc = GroupListViewController()
+        Database.shared.configID = configs[indexPath.row].id?.description ?? ""
+        vc.config = configs[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: - Swipe Actions
-   
+    
     //Left swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
@@ -157,15 +166,14 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
         }
         delete.backgroundColor = .systemRed
         delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
-        let config = UISwipeActionsConfiguration(actions: [delete])
-        config.performsFirstActionWithFullSwipe = false
-        return config
+        let configs = UISwipeActionsConfiguration(actions: [delete])
+        configs.performsFirstActionWithFullSwipe = false
+        return configs
     }
     //Right swipe
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let add = UIContextualAction(style: .normal, title: "edit".localized) {
-            [weak self] (_, _, completionHandler) in
+        let add = UIContextualAction(style: .normal, title: "edit".localized) { [weak self] (_, _, completionHandler) in
             self?.handleEdit(index: indexPath)
             completionHandler(true)
         }
@@ -177,17 +185,16 @@ extension BranchViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-extension BranchViewController: TeacherListDelegate {
+extension ConfigListViewController: TeacherConfigListDelegate {
     
-    func onSuccessGetAllTeachers(teachers: [Teacher]) {
+    func onSuccessGetAllTeacherConfigs(configs: [Config]) {
         DispatchQueue.main.async { [weak self] in
-            self?.hideLoading()
-            self?.teachers = teachers
+            self?.configs = configs
             self?.reloadData()
         }
     }
     
-    func onSuccessUpdateTeacher() {
+    func onSuccessUpdateConfig() {
         DispatchQueue.main.async { [weak self] in
             self?.hideLoading()
             self?.showAnimation(animationName: "success", animationMode: .playOnce) { _ in
@@ -196,10 +203,10 @@ extension BranchViewController: TeacherListDelegate {
         }
     }
     
-    func onSuccessDeleteTeacher() {
+    func onSuccessDeleteConfig() {
         DispatchQueue.main.async { [weak self] in
             self?.hideLoading()
-            self?.teachers.remove(at: self?.index.row ?? 0)
+            self?.configs.remove(at: self?.index.row ?? 0)
             self?.tableView.deleteRows(at: [self?.index ?? IndexPath()], with: .left)
         }
     }

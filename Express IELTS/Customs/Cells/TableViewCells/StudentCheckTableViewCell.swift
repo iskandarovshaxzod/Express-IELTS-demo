@@ -12,7 +12,7 @@ protocol PaidDelegate {
     func pay(for student: Student)
 }
 
-class StudentCheckTableViewCell: UITableViewCell {
+class StudentCheckTableViewCell: BaseTableViewCell {
     
     var delegate: PaidDelegate?
     
@@ -37,86 +37,100 @@ class StudentCheckTableViewCell: UITableViewCell {
                                               collectionViewLayout: layout)
         return collectionView
     }()
+    
+    var isRendered = false
 
     func initViews() {
-        addSubview(scrollView)
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        if !isRendered{
+            isRendered = true
+            addSubview(scrollView)
+            scrollView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            scrollView.backgroundColor = "cl_main_back".color
+            scrollView.bounces = false
+            scrollView.showsHorizontalScrollIndicator = false
+            
+            scrollView.addSubview(subView)
+            subView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+                make.height.equalTo(90)
+            }
+            subView.backgroundColor = .greenyBlue
+            
+            subView.addSubview(nameView)
+            nameView.snp.makeConstraints { make in
+                make.left.equalToSuperview().offset(20)
+                make.top.equalToSuperview().offset(10)
+                make.bottom.equalToSuperview().offset(-10)
+                make.width.equalTo(200)
+            }
+            nameView.backgroundColor = .blue
+            nameView.layer.cornerRadius = 5
+            
+            nameView.addSubview(nameLabel)
+            nameLabel.snp.makeConstraints { make in
+                make.left.top.equalToSuperview().offset(5)
+                make.right.bottom.equalToSuperview().offset(-5)
+            }
+            nameLabel.numberOfLines = 0
+            nameLabel.textAlignment = .center
+            nameLabel.textColor = .white
+            
+            subView.addSubview(collectionView)
+            collectionView.snp.makeConstraints { make in
+                make.left.equalTo(nameView.snp.right).offset(20)
+                make.top.equalToSuperview().offset(10)
+                make.bottom.equalToSuperview().offset(-10)
+                make.width.equalTo(size * 60 + (size-1)*20)
+            }
+            collectionView.register(CheckCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+            collectionView.delegate   = self
+            collectionView.dataSource = self
+            collectionView.backgroundColor = .gray
+            collectionView.isScrollEnabled = false
+            collectionView.showsHorizontalScrollIndicator = false
+            
+            subView.addSubview(payView)
+            payView.snp.makeConstraints { make in
+                make.left.equalTo(collectionView.snp.right).offset(20)
+                make.top.equalToSuperview().offset(10)
+                make.bottom.equalToSuperview().offset(-10)
+                make.width.equalTo(100)
+                make.right.equalToSuperview().offset(-10)
+            }
+            payView.backgroundColor    = .red
+            payView.layer.cornerRadius = 5
+            payView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(payViewTapped)))
+            
+            payView.addSubview(statusView)
+            statusView.snp.makeConstraints { make in
+                make.left.top.bottom.equalToSuperview()
+                make.width.equalTo(0)
+            }
+            statusView.backgroundColor = .systemGreen
+            
+            payView.addSubview(payLabel)
+            payLabel.snp.makeConstraints { make in
+                make.left.top.equalToSuperview().offset(5)
+                make.right.bottom.equalToSuperview().offset(-5)
+            }
+            payLabel.numberOfLines = 0
+            payLabel.textAlignment = .center
+            payLabel.textColor     = .white
         }
-        scrollView.backgroundColor = "cl_main_back".color
-        scrollView.bounces = false
-        scrollView.showsHorizontalScrollIndicator = false
-        
-        scrollView.addSubview(subView)
-        subView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.height.equalTo(90)
-        }
-        subView.backgroundColor = .greenyBlue
-        
-        subView.addSubview(nameView)
-        nameView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview().offset(-10)
-            make.width.equalTo(200)
-        }
-        nameView.backgroundColor = .blue
-        nameView.layer.cornerRadius = 5
-        
-        nameView.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints { make in
-            make.left.top.equalToSuperview().offset(5)
-            make.right.bottom.equalToSuperview().offset(-5)
-        }
-        nameLabel.numberOfLines = 0
-        nameLabel.textAlignment = .center
-        nameLabel.textColor = .white
-        nameLabel.text = student?.student.studentName.capitalized
-        
-        subView.addSubview(collectionView)
-        collectionView.snp.makeConstraints { make in
-            make.left.equalTo(nameView.snp.right).offset(20)
-            make.top.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview().offset(-10)
-            make.width.equalTo(size * 60 + (size-1)*20)
-        }
-        collectionView.register(CheckCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.delegate   = self
-        collectionView.dataSource = self
-        collectionView.backgroundColor = .gray
-        collectionView.isScrollEnabled = false
-        collectionView.showsHorizontalScrollIndicator = false
-        
-        subView.addSubview(payView)
-        payView.snp.makeConstraints { make in
-            make.left.equalTo(collectionView.snp.right).offset(20)
-            make.top.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview().offset(-10)
-            make.width.equalTo(100)
-            make.right.equalToSuperview().offset(-10)
-        }
-        payView.backgroundColor = .yellow
-        payView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(payViewTapped)))
-        
-        payView.addSubview(statusView)
-        statusView.snp.makeConstraints { make in
-            make.left.top.bottom.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(student?.paymentStatus ?? 0.0)
-        }
-        statusView.backgroundColor = .green
-        
-        payView.addSubview(payLabel)
-        payLabel.snp.makeConstraints { make in
-            make.left.top.equalToSuperview().offset(5)
-            make.right.bottom.equalToSuperview().offset(-5)
-        }
-        payLabel.numberOfLines = 0
-        payLabel.textAlignment = .center
-        payLabel.textColor     = .white
-        payLabel.text = (student?.paymentStatus ?? 0.0 < 1.0 ? "Pay" : "Paid")
+        updateViews()
     }
 
+    func updateViews() {
+        statusView.snp.updateConstraints { make in
+            make.width.equalTo(100 * (student?.paymentStatus ?? 0.0))
+        }
+        nameLabel.text = student?.student.studentName.capitalized
+        payLabel.text = (student?.paymentStatus ?? 0.0 < 1.0 ? "Pay" : "Paid")
+        statusView.layer.cornerRadius = student?.paymentStatus ?? 0.0 == 1.0 ? 5 : 0
+    }
+    
     @objc func payViewTapped() {
         if let student = student?.student {
             delegate?.pay(for: student)
@@ -132,9 +146,13 @@ extension StudentCheckTableViewCell: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
                                                                         as! CheckCollectionViewCell
-//        cell.isChecked = 
+//        cell.isChecked =
         cell.initViews()
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 }

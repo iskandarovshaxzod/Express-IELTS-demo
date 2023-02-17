@@ -19,7 +19,6 @@ class Button: UIButton {
         self.setTitleColor(.red.withAlphaComponent(0.5), for: .highlighted)
         self.addTarget(self, action: #selector(startHighlight), for: .touchDown)
         self.addTarget(self, action: #selector(stopHighlight), for: .touchUpOutside)
-//        self.addTarget(self, action: #selector(onClick), for: .touchUpInside)
     }
     
     @objc func startHighlight() {
@@ -28,12 +27,6 @@ class Button: UIButton {
     @objc func stopHighlight() {
         self.layer.borderColor = UIColor.red.cgColor
     }
-    
-//    @objc func onClick(){
-//        click
-//    }
-//
-////    func click(){}
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

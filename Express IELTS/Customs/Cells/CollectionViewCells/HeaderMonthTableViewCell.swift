@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HeaderMonthTableViewCell: UITableViewCell {
+class HeaderMonthTableViewCell: BaseCollectionViewCell {
 
     let subView = UIView()
     

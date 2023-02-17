@@ -15,6 +15,7 @@ class PaymentViewController: BaseViewController {
     let subView   = UIView()
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
+    let noDataImg = UIImageView()
     
     var branches = [Branch]()
     var loaded   = false
@@ -31,6 +32,14 @@ class PaymentViewController: BaseViewController {
             make.edges.equalToSuperview()
         }
         subView.backgroundColor = "cl_main_back".color
+        
+        subView.addSubview(noDataImg)
+        noDataImg.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        noDataImg.image       = UIImage(named: "no_data")
+        noDataImg.contentMode = .scaleAspectFit
+        noDataImg.isHidden    = true
         
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in

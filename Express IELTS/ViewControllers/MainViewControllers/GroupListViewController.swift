@@ -1,37 +1,63 @@
 //
-//  MainViewController.swift
+//  GroupViewController.swift
 //  Express IELTS
 //
-//  Created by Iskandarov shaxzod on 05.12.2022.
+//  Created by Iskandarov shaxzod on 08.12.2022.
 //
 
 import UIKit
-import SnapKit
 
-class MainViewController: BaseViewController {
- 
-    let presenter = BranchListPresenter()
+class GroupListViewController: BaseViewController {
+    
+    let presenter = GroupListPresenter()
     
     let subView   = UIView()
     let tableView = UITableView()
     let refresh   = UIRefreshControl()
+    let noDataImg = UIImageView()
     
-    var branches = [Branch]()
-    var loaded   = false
-    var index    = IndexPath()
-    
+    var config: Config?
+    var groups = [Group]()
+    var loaded = true
+    var index  = IndexPath()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        presenter.getAllBranches()
+        presenter.getAllGroups(configID: config?.id?.description ?? "")
     }
     
+    override func configureNavBar() {
+        title = config?.configName
+        
+        var menuItems: [UIAction] {
+            return [
+                UIAction(title: "new_group".localized, image: UIImage(systemName: "plus.app"),
+                         handler: { [weak self] (_) in
+                    self?.addTapped()
+                })
+            ]
+        }
+        var demoMenu: UIMenu {
+            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
+        }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image: UIImage(systemName: "ellipsis"), primaryAction: nil, menu: demoMenu)
+    }
+
     override func initViews() {
         view.addSubview(subView)
         subView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         subView.backgroundColor = "cl_main_back".color
+        
+        subView.addSubview(noDataImg)
+        noDataImg.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        noDataImg.image       = UIImage(named: "no_data")
+        noDataImg.contentMode = .scaleAspectFit
+        noDataImg.isHidden    = true
         
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -44,34 +70,47 @@ class MainViewController: BaseViewController {
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
-        tableView.allowsMultipleSelectionDuringEditing = true
         tableView.addSubview(refresh)
         refresh.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
     }
     
-    private func handleMoveToTrash(index: IndexPath) {
-        showActionAlert(title: String(format: "delete_info".localized, "branch".localized), message: nil,
-                        actions: ["delete".localized]) { [weak self] action in
-            if action.title == "delete".localized {
-                self?.showLoading()
-                self?.index = index
-                self?.presenter.deleteBranch(branchID: self?.branches[index.row].id?.description ?? "")
-            }
-        }
+    @objc func refreshTable() {
+        presenter.getAllGroups(configID: config?.id?.description ?? "")
     }
     
-    private func handleEdit(index: IndexPath) {
-        showAlertWithTextField(title: "edit branch",
-                               texts: [branches[index.row].branchName.capitalized]) {
+    @objc func addTapped() {
+        let vc = aAddViewController()
+        vc.navTitle   = "new_group".localized
+        vc.addBtnText = "add".localized
+        vc.firstFieldPlaceholder = "new_group_name".localized
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func handleEdit(index: IndexPath) {
+        showAlertWithTextField(title: "edit teacher",
+                               texts: [groups[index.row].groupName.capitalized]) {
             [weak self] texts in
             self?.showLoading()
-            self?.presenter.updateBranch(branchID: self?.branches[index.row].id?.description ?? "",                                login: texts.first ?? "")
+            self?.presenter.updateGroup(groupID: self?.groups[index.row].id?.description ?? "",
+                                        name: texts.first ?? "")
         } error: { [weak self] err in
             self?.onError(error: err)
         }
     }
     
-    private func reloadData() {
+    private func handleMoveToTrash(index: IndexPath) {
+        showActionAlert(title: "Are you sure that you want to delete a branch?", message: nil,
+                        actions: ["delete".localized]){ [weak self] action in
+            if action.title == "delete".localized {
+                self?.showLoading()
+                self?.index = index
+                self?.presenter.deleteGroup(groupID: self?.groups[index.row].id?.description ?? "")
+            }
+        }
+    }
+    
+    private func reloadData(){
+        loaded = true
         if loaded {
             DispatchQueue.main.async { [weak self] in
                 self?.tableView.reloadData()
@@ -80,31 +119,20 @@ class MainViewController: BaseViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                 self?.tableView.reloadData()
             }
-            loaded = true
         }
         refresh.endRefreshing()
     }
-    
-    @objc func refreshTable() {
-        presenter.getAllBranches()
-    }
-    
-    func onEdit() {
-        tableView.allowsMultipleSelectionDuringEditing = true
-        tableView.setEditing(true, animated: true)
-    }
 }
 
-extension MainViewController: UITableViewDataSource, UITableViewDelegate{
-    
+extension GroupListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return loaded ? branches.count : 5
+        return loaded ? groups.count : 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if loaded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-            cell.text = branches[indexPath.row].branchName.capitalized
+            cell.text = groups[indexPath.row].groupName.capitalized
             cell.initViews()
             cell.selectionStyle = .none
             return cell
@@ -121,40 +149,28 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.isEditing {
-            
-        } else {
-            if let _ = tableView.cellForRow(at: indexPath) as? ListTableViewCell {
-                let vc = BranchViewController()
-                Database.shared.branchID = branches[indexPath.row].id?.description ?? ""
-                vc.branch  = branches[indexPath.row]
-                navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+        let vc = StudentListViewController()
+        Database.shared.groupID = groups[indexPath.row].id?.description ?? ""
+        vc.group = groups[indexPath.row]
+        Database.shared.canCheck = false
+        navigationController?.pushViewController(vc, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
-    }
-    
     
     //MARK: - Swipe Actions
-    
-    //left swipe
+    //Left swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let delete = UIContextualAction(style: .normal, title: "delete".localized) {
-            [weak self] (_, _, completionHandler) in
+        let delete = UIContextualAction(style: .normal, title: "delete".localized) { [weak self] (_, _, completionHandler) in
             self?.handleMoveToTrash(index: indexPath)
             completionHandler(true)
         }
         delete.backgroundColor = .systemRed
         delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
-        let c = UISwipeActionsConfiguration(actions: [delete])
-        c.performsFirstActionWithFullSwipe = false
-        return (Database.shared.isAdmin ? c : nil)
+        let config = UISwipeActionsConfiguration(actions: [delete])
+        config.performsFirstActionWithFullSwipe = false
+        return config
     }
-    //right swipe
+    
+    //Right swipe
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = UIContextualAction(style: .normal, title: "edit".localized) {
             [weak self] (_, _, completionHandler) in
@@ -165,12 +181,20 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
         edit.image = UIImage(systemName: "square.and.pencil.circle")?.withTintColor(.white)
         let config = UISwipeActionsConfiguration(actions: [edit])
         config.performsFirstActionWithFullSwipe = false
-        return (Database.shared.isAdmin ? config : nil)
+        return config
     }
 }
 
-extension MainViewController: BranchListDelegate {
-    func onSuccessUpdateBranch() {
+extension GroupListViewController: GroupListDelegate {
+    
+    func onSuccessGetAllGroups(groups: [Group]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.groups = groups
+            self?.reloadData()
+        }
+    }
+    
+    func onSuccesUpdateGroup() {
         DispatchQueue.main.async { [weak self] in
             self?.hideLoading()
             self?.showAnimation(animationName: "success", animationMode: .playOnce) { _ in
@@ -179,26 +203,16 @@ extension MainViewController: BranchListDelegate {
         }
     }
     
-    func onSuccessGetAllBranches(branches: [Branch]) {
-        Database.shared.branches = branches
+    func onSuccesDeleteGroup() {
         DispatchQueue.main.async { [weak self] in
             self?.hideLoading()
-            self?.branches = branches
-            self?.reloadData()
-        }
-    }
-    
-    func onSuccessDeleteBranch() {
-        DispatchQueue.main.async { [weak self] in
-            self?.hideLoading()
-            self?.branches.remove(at: self?.index.row ?? 0)
+            self?.groups.remove(at: self?.index.row ?? 0)
             self?.tableView.deleteRows(at: [self?.index ?? IndexPath()], with: .left)
         }
     }
     
     func onError(error: String?) {
         DispatchQueue.main.async { [weak self] in
-            self?.hideLoading()
             self?.showErrorMessage(title: error)
         }
     }

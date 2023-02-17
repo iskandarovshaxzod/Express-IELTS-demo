@@ -8,15 +8,15 @@
 import Foundation
 
 struct Attendance: Codable {
-    let id:   UUID
-    let date: String
+    let id:   UUID?
+    let date: String?
     let isPresent: Bool
     let student:   StudentID
     
-    init(id: UUID, date: String, isPresent: Bool, student: StudentID) {
-        self.id = id
+    init(id: UUID? = nil, date: String? = nil, isPresent: Bool, student: StudentID) {
+        self.id   = id
         self.date = date
         self.isPresent = isPresent
-        self.student = student
+        self.student   = student
     }
 }

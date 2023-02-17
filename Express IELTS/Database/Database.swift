@@ -11,9 +11,10 @@ import UIKit
 struct Database {
     
     private init() {}
-    
     static var shared = Database()
+    
     var isAdmin   = false
+    var canCheck  = false
     var branchID  = ""
     var teacherID = ""
     var configID  = ""

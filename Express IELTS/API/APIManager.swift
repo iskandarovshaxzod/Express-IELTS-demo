@@ -64,6 +64,7 @@ class APIManager {
                 }
                 completion(.success(decoded))
             } catch {
+                print("error:->", error)
                 completion(.failure(error))
             }
         }.resume()

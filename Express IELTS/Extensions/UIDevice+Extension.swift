@@ -5,10 +5,9 @@
 //  Created by Iskandarov shaxzod on 23.11.2022.
 //
 
-import AVFoundation
-import AudioToolbox
-import Foundation
 import UIKit
+import AVFoundation
+import Foundation
 import CoreHaptics
 
 extension UIDevice {

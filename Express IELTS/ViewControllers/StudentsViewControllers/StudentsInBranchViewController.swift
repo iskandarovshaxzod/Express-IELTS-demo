@@ -14,6 +14,7 @@ class StudentsInBranchViewController: BaseViewController {
     let subView   = UIView()
     let monthView = HeaderMonthView()
     let tableView = UITableView()
+    let noDataImg = UIImageView()
     
     var branch: Branch?
     var students   = [Student]()
@@ -46,6 +47,15 @@ class StudentsInBranchViewController: BaseViewController {
         monthView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
         }
+        
+        subView.addSubview(noDataImg)
+        noDataImg.snp.makeConstraints { make in
+            make.top.equalTo(monthView.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+        noDataImg.image       = UIImage(named: "no_data")
+        noDataImg.contentMode = .scaleAspectFit
+        noDataImg.isHidden    = true
         
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in

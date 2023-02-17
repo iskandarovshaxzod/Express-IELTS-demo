@@ -30,7 +30,10 @@ extension String {
         
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.dateFormat = "MMM dd, yyyy"
-        return dateFormatterPrint.string(from: date!)
+        if let date{
+            return dateFormatterPrint.string(from: date)
+        }
+        return ""
     }
     
 }

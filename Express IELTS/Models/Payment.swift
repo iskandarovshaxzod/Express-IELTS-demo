@@ -13,16 +13,16 @@ struct Payment: Codable {
     let paidSum: Double
     let maxSum:  Double
     let student: StudentID
-    let teacher: TeacherID
+    let byTeacher: TeacherID
     let group:   GroupID
     
-    init(id: UUID? = nil, date: String? = nil, paidSum: Double, maxSum: Double, student: StudentID, teacher: TeacherID, group: GroupID) {
+    init(id: UUID? = nil, date: String? = nil, paidSum: Double, maxSum: Double, student: StudentID, byTeacher: TeacherID, group: GroupID) {
         self.id = id
         self.date = date
         self.paidSum = paidSum
         self.maxSum = maxSum
         self.student = student
-        self.teacher = teacher
+        self.byTeacher = byTeacher
         self.group = group
     }
 }

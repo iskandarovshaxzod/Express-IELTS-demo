@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListTableViewCell: UITableViewCell {
+class ListTableViewCell: BaseTableViewCell {
     
     let hView   = UIView()
     let subView = UIView()
@@ -33,10 +33,6 @@ class ListTableViewCell: UITableViewCell {
         }
         subView.layer.cornerRadius  = 20
         subView.backgroundColor     = "cl_cell_back".color
-//        subView.layer.shadowColor   = UIColor(red: 2/255, green: 3/255, blue: 148/255, alpha: 1.0).cgColor
-//        subView.layer.shadowOpacity = 0.6
-//        subView.layer.shadowOffset  = .zero
-//        subView.layer.shadowRadius  = 2
 
         subView.addSubview(label)
         label.snp.makeConstraints { make in

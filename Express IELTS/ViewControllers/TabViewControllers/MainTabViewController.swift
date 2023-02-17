@@ -20,7 +20,7 @@ class MainTabViewController: BaseViewController {
     let studentsItem = TabItemView(image: UIImage(named: "ic_students"), lbl: "students".localized)
     let settingsItem = TabItemView(image: UIImage(named: "ic_settings"), lbl: "settings".localized)
     
-    var mainController     = MainViewController()
+    var mainController     = BranchListViewController()
     var paymentController  = PaymentViewController()
     var studentsController = StudentsViewController()
     var settingsController = SettingsViewController()

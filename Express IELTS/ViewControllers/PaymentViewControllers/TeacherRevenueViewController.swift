@@ -11,18 +11,23 @@ class TeacherRevenueViewController: BaseViewController {
     
     let presenter = TeacherPaymentListPresenter()
     
-    let subView   = UIView()
-    let monthView = HeaderMonthView()
-    let tableView = UITableView()
-    let segment   = UISegmentedControl(items: ["By teacher", "By group"])
+    let subView    = UIView()
+    let hView      = UIView()
+    let monthView  = HeaderMonthView()
+    let tableView  = UITableView()
+    let noDataImg  = UIImageView()
+    let segment    = UISegmentedControl(items: ["By teacher",
+                                               "By group"])
     
     var teacher: Teacher?
-    var receipts  = [Payment]()
+    var payments    = [TeacherPayments]()
+    var allReceipts = [Payment]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setDelegate(delegate: self)
-        presenter.getAllTeacherPayments(teacherID: teacher?.id?.description ?? "", year: 2023, month: 2)
+        presenter.getAllTeacherPayments(teacherID: teacher?.id?.description ?? "",
+                                        year: 2023, month: 2)
     }
     
     override func configureNavBar() {
@@ -30,6 +35,7 @@ class TeacherRevenueViewController: BaseViewController {
     }
     
     override func initViews() {
+        
         view.addSubview(subView)
         subView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -51,11 +57,21 @@ class TeacherRevenueViewController: BaseViewController {
         }
         segment.selectedSegmentIndex = 0
         segment.selectedSegmentTintColor = "cl_text_blue".color
-        
         segment.setTitleTextAttributes([.foregroundColor: "cl_text_blue".color], for: .normal)
         segment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         segment.layer.borderWidth = 2
         segment.layer.borderColor = "cl_text_blue".color.cgColor
+        segment.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
+        
+        subView.addSubview(noDataImg)
+        noDataImg.snp.makeConstraints { make in
+            make.top.equalTo(segment.snp.bottom)
+            make.left.bottom.right.equalToSuperview()
+        }
+        noDataImg.image       = UIImage(named: "no_data")
+        noDataImg.contentMode = .scaleAspectFit
+        noDataImg.isHidden    = true
+        
         
         subView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -67,6 +83,10 @@ class TeacherRevenueViewController: BaseViewController {
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
     }
+    
+    @objc func segmentChanged() {
+        reloadData()
+    }
 
     func reloadData() {
         DispatchQueue.main.async { [weak self] in
@@ -77,8 +97,20 @@ class TeacherRevenueViewController: BaseViewController {
 
 extension TeacherRevenueViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return segment.selectedSegmentIndex == 0 ? 1 : payments.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return receipts.count
+        return segment.selectedSegmentIndex == 0 ? allReceipts.count : payments.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 15
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return segment.selectedSegmentIndex == 1 ? payments[section].group.groupName.capitalized : ""
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -87,7 +119,7 @@ extension TeacherRevenueViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = receipts[indexPath.row].date
+        cell.textLabel?.text = segment.selectedSegmentIndex == 0 ? "\(allReceipts[indexPath.row].student)" : payments[indexPath.row].group.groupName.capitalized
         cell.backgroundColor = "cl_cell_back".color
         return cell
     }
@@ -102,10 +134,13 @@ extension TeacherRevenueViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 extension TeacherRevenueViewController: TeacherPaymentListDelegate {
-    func onSuccessGetAllTeacherPayments(receipts: [Payment]) {
+    func onSuccessGetAllTeacherPayments(payments: [TeacherPayments], allReceipts: [Payment]) {
         DispatchQueue.main.async { [weak self] in
-            self?.receipts = receipts
+            self?.payments    = payments
+            self?.allReceipts = allReceipts
             self?.reloadData()
+            print(payments.count)
+            print(allReceipts.count)
         }
     }
     

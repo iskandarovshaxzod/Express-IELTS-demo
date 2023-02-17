@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MonthCollectionViewCell: UICollectionViewCell {
+class MonthCollectionViewCell: BaseCollectionViewCell {
     let subView = UIView()
     let label   = UILabel()
     

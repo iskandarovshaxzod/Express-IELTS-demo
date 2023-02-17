@@ -7,12 +7,12 @@
 
 import UIKit
 
-class CheckCollectionViewCell: UICollectionViewCell {
+class CheckCollectionViewCell: BaseCollectionViewCell {
     
     let subView  = UIView()
     let checkBtn = CheckBoxButton()
     
-    var isChecked = true
+    var isChecked = false
 
     func initViews(){
         
@@ -37,16 +37,18 @@ class CheckCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func checkTapped() {
-        isChecked.toggle()
-        UIView.animate(withDuration: 0.4) { [weak self] in
-            self?.checkBtn.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
-        } completion: { [weak self] _ in
-            if self?.isChecked ?? true {
-                self?.checkBtn.setImage(UIImage(named: "check"), for: .normal)
-            } else {
-                self?.checkBtn.setImage(nil, for: .normal)
+        if Database.shared.canCheck {
+            isChecked.toggle()
+            UIView.animate(withDuration: 0.4) { [weak self] in
+                self?.checkBtn.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+            } completion: { [weak self] _ in
+                if self?.isChecked ?? true {
+                    self?.checkBtn.setImage(UIImage(named: "check"), for: .normal)
+                } else {
+                    self?.checkBtn.setImage(nil, for: .normal)
+                }
+                self?.checkBtn.transform = CGAffineTransform.identity
             }
-            self?.checkBtn.transform = CGAffineTransform.identity
         }
     }
 }

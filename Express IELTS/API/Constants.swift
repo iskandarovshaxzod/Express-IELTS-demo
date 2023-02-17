@@ -8,7 +8,7 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "https://d806-84-54-66-181.eu.ngrok.io/"
+    static let BASE_URL = "/"
     
     //USER
     static let USER_AUTH        = "user/auth"
@@ -40,7 +40,7 @@ struct Constants {
     
     //PAYMENT
     static let PAYMENT_ADD          = "payment/add"
-    static let PAYMENT_TEACHER_LIST = "payment/teacherList"
+    static let PAYMENT_TEACHER_LIST = "payment/teacher/list/"
     
     //STUDENT
     static let STUDENT_ADD         = "student/add"
